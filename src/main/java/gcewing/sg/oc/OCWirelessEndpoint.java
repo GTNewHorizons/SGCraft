@@ -6,13 +6,12 @@
 
 package gcewing.sg.oc;
 
-import li.cil.oc.api.Network;
-import li.cil.oc.api.network.Packet;
-import li.cil.oc.api.network.WirelessEndpoint;
-
 import net.minecraft.world.*;
 
 import gcewing.sg.*;
+import li.cil.oc.api.Network;
+import li.cil.oc.api.network.Packet;
+import li.cil.oc.api.network.WirelessEndpoint;
 
 public class OCWirelessEndpoint implements WirelessEndpoint {
 
