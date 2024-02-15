@@ -21,6 +21,9 @@ import gcewing.sg.BaseModClient.ITexture;
 
 public class BaseModel implements IModel {
 
+    private Vector3 p = new Vector3(0, 0, 0);
+    private Vector3 n = new Vector3(0, 0, 0);
+
     public double[] bounds;
     public Face[] faces;
     public double[][] boxes;
@@ -72,7 +75,6 @@ public class BaseModel implements IModel {
     }
 
     public void render(Trans3 t, IRenderTarget renderer, ITexture... textures) {
-        Vector3 p = null, n = null;
         for (Face face : faces) {
             int k = face.texture;
             if (k >= textures.length) k = textures.length - 1;
@@ -87,10 +89,10 @@ public class BaseModel implements IModel {
                 for (int i = 0; i < 3; i++) {
                     int j = tri[i];
                     double[] c = face.vertices[j];
-                    p = t.p(c[0], c[1], c[2]);
-                    n = t.v(c[3], c[4], c[5]);
-                    renderer.setNormal(n);
-                    renderer.addVertex(p, c[6], c[7]);
+                    t.p(c[0], c[1], c[2], this.p);
+                    t.v(c[3], c[4], c[5], this.n);
+                    renderer.setNormal(this.n);
+                    renderer.addVertex(this.p, c[6], c[7]);
                 }
                 renderer.endFace();
             }
