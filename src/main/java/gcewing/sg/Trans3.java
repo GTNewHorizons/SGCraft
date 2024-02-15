@@ -23,7 +23,7 @@ public class Trans3 {
     public static Trans3 ident = new Trans3(Vector3.zero);
     public static Trans3 blockCenter = new Trans3(Vector3.blockCenter);
 
-    public static Trans3 sideTurnRotations[][] = new Trans3[6][4];
+    public static Trans3[][] sideTurnRotations = new Trans3[6][4];
     static {
         for (int side = 0; side < 6; side++) for (int turn = 0; turn < 4; turn++)
             sideTurnRotations[side][turn] = new Trans3(Vector3.zero, Matrix3.sideTurnRotations[side][turn]);
@@ -127,6 +127,18 @@ public class Trans3 {
         return p(new Vector3(x, y, z));
     }
 
+    public void p(double x, double y, double z, Vector3 result) {
+        result.x = x * scaling * rotation.m[0][0] + y * scaling * rotation.m[0][1]
+                + z * scaling * rotation.m[0][2]
+                + offset.x;
+        result.y = x * scaling * rotation.m[1][0] + y * scaling * rotation.m[1][1]
+                + z * scaling * rotation.m[1][2]
+                + offset.y;
+        result.z = x * scaling * rotation.m[2][0] + y * scaling * rotation.m[2][1]
+                + z * scaling * rotation.m[2][2]
+                + offset.z;
+    }
+
     public Vector3 p(Vector3 u) {
         return offset.add(rotation.mul(u.mul(scaling)));
     }
@@ -141,6 +153,12 @@ public class Trans3 {
 
     public Vector3 v(double x, double y, double z) {
         return v(new Vector3(x, y, z));
+    }
+
+    public void v(double x, double y, double z, Vector3 result) {
+        result.x = x * scaling * rotation.m[0][0] + y * scaling * rotation.m[0][1] + z * scaling * rotation.m[0][2];
+        result.y = x * scaling * rotation.m[1][0] + y * scaling * rotation.m[1][1] + z * scaling * rotation.m[1][2];
+        result.z = x * scaling * rotation.m[2][0] + y * scaling * rotation.m[2][1] + z * scaling * rotation.m[2][2];
     }
 
     public Vector3 iv(double x, double y, double z) {

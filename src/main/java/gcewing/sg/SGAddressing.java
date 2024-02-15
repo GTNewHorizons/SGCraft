@@ -56,9 +56,6 @@ public class SGAddressing {
     public final static int minCoord = -maxCoord;
     public final static int coordRange = maxCoord - minCoord + 1;
     public final static int minDirectDimension = -648;
-    // public final static int minDimension = -648;
-    // public final static int maxDimension = 647;
-    // public final static int dimensionRange = maxDimension - minDimension + 1;
     public final static int maxDimensionIndex = 1295;
     public final static int dimensionRange = maxDimensionIndex + 1;
     final static String padding = "---------";
@@ -176,12 +173,19 @@ public class SGAddressing {
 
     protected static SGBaseTE getBaseTE(int chunkX, int chunkZ, int dimension) {
         World toWorld = getWorld(dimension);
-        if (toWorld != null) {
-            Chunk chunk = toWorld.getChunkFromChunkCoords(chunkX, chunkZ);
-            if (chunk != null) for (Object te : chunk.chunkTileEntityMap.values()) {
-                if (te instanceof SGBaseTE) return (SGBaseTE) te;
-            }
+        if (toWorld == null) {
+            return null;
         }
+
+        Chunk chunk = toWorld.getChunkFromChunkCoords(chunkX, chunkZ);
+        if (chunk == null) {
+            return null;
+        }
+
+        for (Object te : chunk.chunkTileEntityMap.values()) {
+            if (te instanceof SGBaseTE) return (SGBaseTE) te;
+        }
+
         return null;
     }
 

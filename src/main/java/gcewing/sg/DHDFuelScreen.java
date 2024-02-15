@@ -28,7 +28,7 @@ public class DHDFuelScreen extends SGScreen {
     public static DHDFuelScreen create(EntityPlayer player, World world, BlockPos pos) {
         DHDTE te = DHDTE.at(world, pos);
         if (te != null) return new DHDFuelScreen(player, te);
-        else return null;
+        return null;
     }
 
     public DHDFuelScreen(EntityPlayer player, DHDTE te) {
@@ -44,11 +44,11 @@ public class DHDFuelScreen extends SGScreen {
         int cx = xSize / 2;
         setTextColor(0x004c66);
         drawCenteredString(screenTitle, cx, 8);
-        if (this.te.numFuelSlots > 0) drawString("Fuel", 150, 96);
+        if (DHDTE.numFuelSlots > 0) drawString("Fuel", 150, 96);
     }
 
     void drawFuelGauge() {
-        int level = (int) (fuelGaugeHeight * te.energyInBuffer / te.maxEnergyBuffer);
+        int level = (int) (fuelGaugeHeight * te.energyInBuffer / DHDTE.maxEnergyBuffer);
         if (level > fuelGaugeHeight) level = fuelGaugeHeight;
         GL11.glEnable(GL11.GL_BLEND);
         drawTexturedRect(
