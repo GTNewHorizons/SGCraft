@@ -9,18 +9,14 @@ package gcewing.sg;
 import static gcewing.sg.Vector3.getDirectionVec;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
-import static java.lang.Math.round;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3;
 
 public class Trans3 {
 
-    public static Trans3 ident = new Trans3(Vector3.zero);
     public static Trans3 blockCenter = new Trans3(Vector3.blockCenter);
 
     public static Trans3[][] sideTurnRotations = new Trans3[6][4];
@@ -33,13 +29,6 @@ public class Trans3 {
         return new Trans3(Vector3.blockCenter(pos));
     }
 
-    public static Trans3 sideTurn(int side, int turn) {
-        return sideTurnRotations[side][turn];
-    }
-
-    public static Trans3 sideTurn(double x, double y, double z, int side, int turn) {
-        return sideTurn(new Vector3(x, y, z), side, turn);
-    }
 
     public static Trans3 blockCenterSideTurn(int side, int turn) {
         return sideTurn(Vector3.blockCenter, side, turn);
@@ -88,17 +77,6 @@ public class Trans3 {
         return new Trans3(offset, rotation.mul(m), scaling);
     }
 
-    public Trans3 rotX(double deg) {
-        return rotate(Matrix3.rotX(deg));
-    }
-
-    public Trans3 rotY(double deg) {
-        return rotate(Matrix3.rotY(deg));
-    }
-
-    public Trans3 rotZ(double deg) {
-        return rotate(Matrix3.rotZ(deg));
-    }
 
     public Trans3 scale(double s) {
         return new Trans3(offset, rotation, scaling * s);
@@ -189,9 +167,6 @@ public class Trans3 {
         return rotation.imul(u).mul(1.0 / scaling);
     }
 
-    public Vector3 iv(Vec3 u) {
-        return iv(u.xCoord, u.yCoord, u.zCoord);
-    }
 
     public AxisAlignedBB t(AxisAlignedBB box) {
         return boxEnclosing(p(box.minX, box.minY, box.minZ), p(box.maxX, box.maxY, box.maxZ));
@@ -201,13 +176,6 @@ public class Trans3 {
         return boxEnclosing(p(p0), p(p1));
     }
 
-    public static int turnFor(Entity e, int side) {
-        if (side > 1) return 0;
-        int rot = (int) round(e.rotationYaw / 90);
-        if (side == 0) rot = 2 - rot;
-        else rot = 2 + rot;
-        return rot & 0x3;
-    }
 
     public static AxisAlignedBB boxEnclosing(Vector3 p, Vector3 q) {
         return AxisAlignedBB.getBoundingBox(
@@ -227,9 +195,6 @@ public class Trans3 {
         return iv(f).facing();
     }
 
-    public void addBox(Vector3 p0, Vector3 p1, List list) {
-        addBox(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, list);
-    }
 
     public void addBox(double x0, double y0, double z0, double x1, double y1, double z1, List list) {
         AxisAlignedBB box = boxEnclosing(p(x0, y0, z0), p(x1, y1, z1));
