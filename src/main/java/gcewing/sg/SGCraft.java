@@ -40,7 +40,7 @@ import gcewing.sg.oc.OCIntegration;
         modid = Info.modID,
         name = Info.modName,
         version = Info.versionNumber,
-        dependencies = "after:OpenComputers",
+        dependencies = "after:OpenComputers;"+" required-after:gtnhlib@[0.2.4,);",
         acceptableRemoteVersions = Info.versionBounds)
 public class SGCraft extends BaseMod<SGCraftClient> {
 
