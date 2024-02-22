@@ -30,6 +30,7 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
 import gcewing.sg.BaseMod.IBlock;
+import org.joml.Vector3i;
 
 public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
 
@@ -37,8 +38,8 @@ public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
     public Ticket chunkTicket;
     protected boolean updateChunk;
 
-    public BlockPos getPos() {
-        return new BlockPos(xCoord, yCoord, zCoord);
+    public Vector3i getPos() {
+        return new Vector3i(xCoord, yCoord, zCoord);
     }
 
     public int getX() {
@@ -70,7 +71,7 @@ public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
     }
 
     public Trans3 localToGlobalTransformation(Vector3 origin) {
-        BlockPos pos = getPos();
+        Vector3i pos = getPos();
         IBlockState state = getWorldBlockState(worldObj, pos);
         Block block = state.getBlock();
         if (block instanceof IBlock) {

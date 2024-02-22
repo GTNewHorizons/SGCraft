@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 
 import gcewing.sg.BaseMod.IItem;
 import gcewing.sg.BaseMod.ModelSpec;
+import org.joml.Vector3i;
 
 public class BaseItem extends Item implements IItem {
 
@@ -39,10 +40,10 @@ public class BaseItem extends Item implements IItem {
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
             float hitX, float hitY, float hitZ) {
-        return onItemUse(stack, player, world, new BlockPos(x, y, z), facings[side], hitX, hitY, hitZ);
+        return onItemUse(stack, player, world, new Vector3i(x, y, z), facings[side], hitX, hitY, hitZ);
     }
 
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side,
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, Vector3i pos, EnumFacing side,
             float hitX, float hitY, float hitZ) {
         return false;
     }

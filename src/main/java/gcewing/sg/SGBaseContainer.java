@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.world.World;
+import org.joml.Vector3i;
 
 public class SGBaseContainer extends BaseContainer {
 
@@ -17,7 +18,7 @@ public class SGBaseContainer extends BaseContainer {
 
     SGBaseTE te;
 
-    public static SGBaseContainer create(EntityPlayer player, World world, BlockPos pos) {
+    public static SGBaseContainer create(EntityPlayer player, World world, Vector3i pos) {
         SGBaseTE te = SGBaseTE.at(world, pos);
         if (te != null) return new SGBaseContainer(player, te);
         return null;

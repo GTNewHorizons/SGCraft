@@ -7,11 +7,12 @@
 package gcewing.sg;
 
 import net.minecraft.world.IBlockAccess;
+import org.joml.Vector3i;
 
 public interface ISGBlock {
 
-    SGBaseTE getBaseTE(IBlockAccess world, BlockPos pos);
+    SGBaseTE getBaseTE(IBlockAccess world, Vector3i pos);
 
-    boolean isMerged(IBlockAccess world, BlockPos pos);
+    boolean isMerged(IBlockAccess world, Vector3i pos);
 
 }

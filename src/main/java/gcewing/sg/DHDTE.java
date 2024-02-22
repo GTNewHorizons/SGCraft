@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
+import org.joml.Vector3i;
 
 public class DHDTE extends BaseTileInventory implements ISGEnergySource {
 
@@ -35,7 +36,7 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
 
     // Persisted fields
     public boolean isLinkedToStargate;
-    public BlockPos linkedPos = new BlockPos(0, 0, 0);
+    public Vector3i linkedPos = new Vector3i(0, 0, 0);
     public String enteredAddress = "";
     IInventory inventory = new InventoryBasic("DHD", false, numSlots);
 
@@ -51,14 +52,14 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         maxEnergyBuffer = SGBaseTE.energyPerFuelItem;
     }
 
-    public static DHDTE at(IBlockAccess world, BlockPos pos) {
+    public static DHDTE at(IBlockAccess world, Vector3i pos) {
         TileEntity te = getWorldTileEntity(world, pos);
         if (te instanceof DHDTE) return (DHDTE) te;
         return null;
     }
 
     public static DHDTE at(IBlockAccess world, NBTTagCompound nbt) {
-        BlockPos pos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
+        Vector3i pos = new Vector3i(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
         return DHDTE.at(world, pos);
     }
 
@@ -94,7 +95,7 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         int x = nbt.getInteger("linkedX");
         int y = nbt.getInteger("linkedY");
         int z = nbt.getInteger("linkedZ");
-        linkedPos = new BlockPos(x, y, z);
+        linkedPos = new Vector3i(x, y, z);
         enteredAddress = nbt.getString("enteredAddress");
     }
 
@@ -103,9 +104,9 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         super.writeContentsToNBT(nbt);
         nbt.setBoolean("isLinkedToStargate", isLinkedToStargate);
         nbt.setDouble("energyInBuffer", energyInBuffer);
-        nbt.setInteger("linkedX", linkedPos.getX());
-        nbt.setInteger("linkedY", linkedPos.getY());
-        nbt.setInteger("linkedZ", linkedPos.getZ());
+        nbt.setInteger("linkedX", linkedPos.x);
+        nbt.setInteger("linkedY", linkedPos.y);
+        nbt.setInteger("linkedZ", linkedPos.z);
         nbt.setString("enteredAddress", enteredAddress);
     }
 
@@ -128,11 +129,11 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         for (int i = -linkRangeX; i <= linkRangeX; i++) {
             for (int j = -linkRangeY; j <= linkRangeY; j++) for (int k = 1; k <= linkRangeZ; k++) {
                 Vector3 p = t.p(i, j, -k);
-                BlockPos bp = new BlockPos(p.floorX(), p.floorY(), p.floorZ());
+                Vector3i blockPos = new Vector3i(p.floorX(), p.floorY(), p.floorZ());
 
-                if (debugLink) SGCraft.log.debug(String.format("DHDTE.checkForLink: probing %s", bp));
+                if (debugLink) SGCraft.log.debug(String.format("DHDTE.checkForLink: probing %s", blockPos));
 
-                TileEntity te = getWorldTileEntity(worldObj, bp);
+                TileEntity te = getWorldTileEntity(worldObj, blockPos);
                 if (!(te instanceof SGBaseTE)) {
                     continue;
                 }

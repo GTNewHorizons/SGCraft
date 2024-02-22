@@ -10,6 +10,7 @@ import static gcewing.sg.BaseBlockUtils.getTileEntityPos;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import org.joml.Vector3i;
 
 public class SGChannel extends BaseDataChannel {
 
@@ -29,7 +30,7 @@ public class SGChannel extends BaseDataChannel {
 
     @ServerMessageHandler("ConnectOrDisconnect")
     public void handleConnectOrDisconnectFromClient(EntityPlayer player, ChannelInput data) {
-        BlockPos pos = readCoords(data);
+        Vector3i pos = readCoords(data);
         String address = data.readUTF();
         SGBaseTE te = SGBaseTE.at(player.worldObj, pos);
         SGCraft.log.debug(String.format("SGChannel.handleConnectOrDisconnectFromClient: %s %s %s", pos, address, te));
@@ -45,7 +46,7 @@ public class SGChannel extends BaseDataChannel {
 
     @ServerMessageHandler("EnteredAddress")
     public void handleEnteredAddressFromClient(EntityPlayer player, ChannelInput data) {
-        BlockPos pos = readCoords(data);
+        Vector3i pos = readCoords(data);
         String address = data.readUTF();
         DHDTE te = DHDTE.at(player.worldObj, pos);
         if (te != null) te.setEnteredAddress(address);
@@ -55,7 +56,7 @@ public class SGChannel extends BaseDataChannel {
         BaseUtils.writeBlockPos(data, getTileEntityPos(te));
     }
 
-    public BlockPos readCoords(ChannelInput data) {
+    public Vector3i readCoords(ChannelInput data) {
         return BaseUtils.readBlockPos(data);
     }
 

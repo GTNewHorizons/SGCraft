@@ -14,6 +14,7 @@ import java.util.List;
 
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+import org.joml.Vector3i;
 
 public class Trans3 {
 
@@ -25,7 +26,7 @@ public class Trans3 {
             sideTurnRotations[side][turn] = new Trans3(Vector3.zero, Matrix3.sideTurnRotations[side][turn]);
     }
 
-    public static Trans3 blockCenter(BlockPos pos) {
+    public static Trans3 blockCenter(Vector3i pos) {
         return new Trans3(Vector3.blockCenter(pos));
     }
 
@@ -60,8 +61,8 @@ public class Trans3 {
         this(new Vector3(dx, dy, dz), Matrix3.ident, 1.0);
     }
 
-    public Trans3(BlockPos pos) {
-        this(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+    public Trans3(Vector3i pos) {
+        this(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
     }
 
     public Trans3 translate(Vector3 v) {

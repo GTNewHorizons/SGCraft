@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableMap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import org.joml.Vector3i;
 
 public class BaseBlockUtils {
 
@@ -39,19 +40,19 @@ public class BaseBlockUtils {
      * Test whether a block is receiving a redstone signal from a source other than itself. For blocks that can both
      * send and receive in any direction.
      */
-    public static boolean blockIsGettingExternallyPowered(World world, BlockPos pos) {
+    public static boolean blockIsGettingExternallyPowered(World world, Vector3i pos) {
         for (EnumFacing side : facings) {
-            if (isPoweringSide(world, pos.offset(side), side)) return true;
+            if (isPoweringSide(world, new Vector3i(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()).add(pos), side)) return true;
         }
         return false;
     }
 
-    static boolean isPoweringSide(World world, BlockPos pos, EnumFacing side) {
+    static boolean isPoweringSide(World world, Vector3i pos, EnumFacing side) {
         Block block = world.getBlock(pos.x, pos.y, pos.z);
         if (block.isProvidingWeakPower(world, pos.x, pos.y, pos.z, side.ordinal()) > 0) return true;
         if (block.shouldCheckWeakPower(world, pos.x, pos.y, pos.z, side.ordinal())) {
             for (EnumFacing side2 : facings) if (side2 != oppositeFacing(side)) {
-                BlockPos pos2 = pos.offset(side2);
+                Vector3i pos2 = new Vector3i(side2.getFrontOffsetX(), side2.getFrontOffsetY(), side2.getFrontOffsetZ()).add(pos);
                 Block block2 = world.getBlock(pos2.x, pos2.y, pos2.z);
                 if (block2.isProvidingStrongPower(world, pos2.x, pos2.y, pos2.z, side2.ordinal()) > 0) return true;
             }
@@ -77,32 +78,32 @@ public class BaseBlockUtils {
         else return ((BaseBlock) state.getBlock()).getMetaFromState(state);
     }
 
-    public static Block getWorldBlock(IBlockAccess world, BlockPos pos) {
+    public static Block getWorldBlock(IBlockAccess world, Vector3i pos) {
         return world.getBlock(pos.x, pos.y, pos.z);
     }
 
-    public static IBlockState getWorldBlockState(IBlockAccess world, BlockPos pos) {
+    public static IBlockState getWorldBlockState(IBlockAccess world, Vector3i pos) {
         Block block = world.getBlock(pos.x, pos.y, pos.z);
         int meta = world.getBlockMetadata(pos.x, pos.y, pos.z);
         if (block instanceof BaseBlock) return ((BaseBlock) block).getStateFromMeta(meta);
         else return new MetaBlockState(block, meta);
     }
 
-    public static boolean setWorldBlockState(World world, BlockPos pos, IBlockState state, int flags) {
+    public static boolean setWorldBlockState(World world, Vector3i pos, IBlockState state, int flags) {
         Block block = state.getBlock();
         int meta = getMetaFromBlockState(state);
         return world.setBlock(pos.x, pos.y, pos.z, block, meta, flags);
     }
 
-    public static void markWorldBlockForUpdate(World world, BlockPos pos) {
+    public static void markWorldBlockForUpdate(World world, Vector3i pos) {
         world.markBlockForUpdate(pos.x, pos.y, pos.z);
     }
 
-    public static void notifyWorldNeighborsOfStateChange(World world, BlockPos pos, Block block) {
+    public static void notifyWorldNeighborsOfStateChange(World world, Vector3i pos, Block block) {
         world.notifyBlocksOfNeighborChange(pos.x, pos.y, pos.z, block);
     }
 
-    public static TileEntity getWorldTileEntity(IBlockAccess world, BlockPos pos) {
+    public static TileEntity getWorldTileEntity(IBlockAccess world, Vector3i pos) {
         return world.getTileEntity(pos.x, pos.y, pos.z);
     }
 
@@ -110,8 +111,8 @@ public class BaseBlockUtils {
         return te.getWorldObj();
     }
 
-    public static BlockPos getTileEntityPos(TileEntity te) {
-        return new BlockPos(te.xCoord, te.yCoord, te.zCoord);
+    public static Vector3i getTileEntityPos(TileEntity te) {
+        return new Vector3i(te.xCoord, te.yCoord, te.zCoord);
     }
 
     public static boolean blockCanRenderInLayer(Block block, EnumWorldBlockLayer layer) {
@@ -131,14 +132,14 @@ public class BaseBlockUtils {
         else return new MetaBlockState(block, 0);
     }
 
-    public static void playWorldAuxSFX(World world, int fxId, BlockPos pos, IBlockState state) {
+    public static void playWorldAuxSFX(World world, int fxId, Vector3i pos, IBlockState state) {
         Block block = state.getBlock();
         int meta = getMetaFromBlockState(state);
         int stateId = (meta << 12) | Block.getIdFromBlock(block);
-        world.playAuxSFX(fxId, pos.getX(), pos.getY(), pos.getZ(), stateId);
+        world.playAuxSFX(fxId, pos.x, pos.y, pos.z, stateId);
     }
 
-    public static float getBlockHardness(Block block, World world, BlockPos pos) {
+    public static float getBlockHardness(Block block, World world, Vector3i pos) {
         return block.getBlockHardness(world, pos.x, pos.y, pos.z);
     }
 
@@ -154,7 +155,7 @@ public class BaseBlockUtils {
         return block.getHarvestLevel(meta);
     }
 
-    public static float getPlayerBreakSpeed(EntityPlayer player, IBlockState state, BlockPos pos) {
+    public static float getPlayerBreakSpeed(EntityPlayer player, IBlockState state, Vector3i pos) {
         Block block = state.getBlock();
         int meta = getMetaFromBlockState(state);
         return player.getBreakSpeed(block, false, meta, pos.x, pos.y, pos.z);
@@ -169,11 +170,11 @@ public class BaseBlockUtils {
         } else return null;
     }
 
-    public static void spawnBlockStackAsEntity(World world, BlockPos pos, ItemStack stack) {
+    public static void spawnBlockStackAsEntity(World world, Vector3i pos, ItemStack stack) {
         spawnItemStackAsEntity(world, pos, stack);
     }
 
-    public static void spawnItemStackAsEntity(World world, BlockPos pos, ItemStack stack) {
+    public static void spawnItemStackAsEntity(World world, Vector3i pos, ItemStack stack) {
         float var6 = 0.7F;
         double var7 = (double) (world.rand.nextFloat() * var6) + (double) (1.0F - var6) * 0.5D;
         double var9 = (double) (world.rand.nextFloat() * var6) + (double) (1.0F - var6) * 0.5D;
@@ -199,16 +200,16 @@ public class BaseBlockUtils {
         return null;
     }
 
-    public static NBTTagCompound nbtFromBlockPos(BlockPos pos) {
+    public static NBTTagCompound nbtFromBlockPos(Vector3i pos) {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInteger("x", pos.getX());
-        nbt.setInteger("y", pos.getY());
-        nbt.setInteger("z", pos.getZ());
+        nbt.setInteger("x", pos.x);
+        nbt.setInteger("y", pos.y);
+        nbt.setInteger("z", pos.z);
         return nbt;
     }
 
-    public static BlockPos blockPosFromNBT(NBTTagCompound nbt) {
-        return new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
+    public static Vector3i blockPosFromNBT(NBTTagCompound nbt) {
+        return new Vector3i(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
     }
 
     // ------------------------------------------------------------------------------------------------

@@ -10,11 +10,12 @@ import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import org.joml.Vector3i;
 
 public class SGRingTE extends BaseTileEntity {
 
     public boolean isMerged;
-    public BlockPos basePos = new BlockPos(0, 0, 0);
+    public Vector3i basePos = new Vector3i(0, 0, 0);
 
     @Override
     public void readContentsFromNBT(NBTTagCompound nbt) {
@@ -23,16 +24,16 @@ public class SGRingTE extends BaseTileEntity {
         int baseX = nbt.getInteger("baseX");
         int baseY = nbt.getInteger("baseY");
         int baseZ = nbt.getInteger("baseZ");
-        basePos = new BlockPos(baseX, baseY, baseZ);
+        basePos = new Vector3i(baseX, baseY, baseZ);
     }
 
     @Override
     public void writeContentsToNBT(NBTTagCompound nbt) {
         super.writeContentsToNBT(nbt);
         nbt.setBoolean("isMerged", isMerged);
-        nbt.setInteger("baseX", basePos.getX());
-        nbt.setInteger("baseY", basePos.getY());
-        nbt.setInteger("baseZ", basePos.getZ());
+        nbt.setInteger("baseX", basePos.x);
+        nbt.setInteger("baseY", basePos.y);
+        nbt.setInteger("baseZ", basePos.z);
     }
 
     public SGBaseTE getBaseTE() {

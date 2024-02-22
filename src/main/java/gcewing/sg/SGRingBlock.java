@@ -24,6 +24,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseMod.ModelSpec;
+import org.joml.Vector3i;
 
 public class SGRingBlock extends SGBlock<SGRingTE> {
 
@@ -80,12 +81,12 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
     }
 
     @Override
-    public boolean shouldCheckWeakPower(IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean shouldCheckWeakPower(IBlockAccess world, Vector3i pos, EnumFacing side) {
         return true;
     }
 
     @Override
-    public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean isSideSolid(IBlockAccess world, Vector3i pos, EnumFacing side) {
         return true;
     }
 
@@ -100,7 +101,7 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side,
+    public boolean onBlockActivated(World world, Vector3i pos, IBlockState state, EntityPlayer player, EnumFacing side,
             float cx, float cy, float cz) {
         SGRingTE te = getRingTE(world, pos);
         if (te.isMerged) {
@@ -114,13 +115,13 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
     }
 
     @Override
-    public SGBaseTE getBaseTE(IBlockAccess world, BlockPos pos) {
+    public SGBaseTE getBaseTE(IBlockAccess world, Vector3i pos) {
         SGRingTE rte = getRingTE(world, pos);
         if (rte != null) return rte.getBaseTE();
         return null;
     }
 
-    public SGRingTE getRingTE(IBlockAccess world, BlockPos pos) {
+    public SGRingTE getRingTE(IBlockAccess world, Vector3i pos) {
         TileEntity te = getTileEntity(world, pos);
         if (te instanceof SGRingTE) {
             return (SGRingTE) te;
@@ -133,12 +134,12 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
         for (int i = 0; i < numSubBlocks; i++) list.add(new ItemStack(item, 1, i));
     }
 
-    public boolean isMerged(IBlockAccess world, BlockPos pos) {
+    public boolean isMerged(IBlockAccess world, Vector3i pos) {
         SGRingTE te = getRingTE(world, pos);
         return te != null && te.isMerged;
     }
 
-    public void mergeWith(World world, BlockPos pos, BlockPos basePos) {
+    public void mergeWith(World world, Vector3i pos, Vector3i basePos) {
         SGRingTE te = getRingTE(world, pos);
         te.isMerged = true;
         te.basePos = basePos;
@@ -146,7 +147,7 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
         markWorldBlockForUpdate(world, pos);
     }
 
-    public void unmergeFrom(World world, BlockPos pos, BlockPos basePos) {
+    public void unmergeFrom(World world, Vector3i pos, Vector3i basePos) {
         SGRingTE te = getRingTE(world, pos);
         if (SGBaseBlock.debugMerge) SGCraft.log.debug(
                 String.format(
@@ -163,31 +164,31 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
     }
 
     @Override
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+    public void onBlockAdded(World world, Vector3i pos, IBlockState state) {
         if (SGBaseBlock.debugMerge) SGCraft.log.debug(String.format("SGRingBlock.onBlockAdded: at %s", pos));
         SGRingTE te = getRingTE(world, pos);
         updateBaseBlocks(world, pos, te);
     }
 
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    public void breakBlock(World world, Vector3i pos, IBlockState state) {
         SGRingTE te = getRingTE(world, pos);
         super.breakBlock(world, pos, state);
         if (te != null && te.isMerged) updateBaseBlocks(world, pos, te);
     }
 
-    void updateBaseBlocks(World world, BlockPos pos, SGRingTE te) {
+    void updateBaseBlocks(World world, Vector3i pos, SGRingTE te) {
         if (SGBaseBlock.debugMerge) SGCraft.log
                 .debug(String.format("SGRingBlock.updateBaseBlocks: merged = %s, base = %s", te.isMerged, te.basePos));
         for (int i = -2; i <= 2; i++) for (int j = -4; j <= 0; j++) for (int k = -2; k <= 2; k++) {
-            BlockPos bp = pos.add(i, j, k);
-            Block block = getWorldBlock(world, bp);
+            Vector3i blockPos = pos.add(i, j, k);
+            Block block = getWorldBlock(world, blockPos);
             if (block instanceof SGBaseBlock) {
                 if (SGBaseBlock.debugMerge)
-                    SGCraft.log.debug(String.format("SGRingBlock.updateBaseBlocks: found base at %s", bp));
+                    SGCraft.log.debug(String.format("SGRingBlock.updateBaseBlocks: found base at %s", blockPos));
                 SGBaseBlock base = (SGBaseBlock) block;
-                if (!te.isMerged) base.checkForMerge(world, bp);
-                else if (te.basePos.equals(bp)) base.unmerge(world, bp);
+                if (!te.isMerged) base.checkForMerge(world, blockPos);
+                else if (te.basePos.equals(blockPos)) base.unmerge(world, blockPos);
             }
         }
     }

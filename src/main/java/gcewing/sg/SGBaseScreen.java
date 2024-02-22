@@ -8,6 +8,7 @@ package gcewing.sg;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import org.joml.Vector3i;
 
 public class SGBaseScreen extends SGScreen {
 
@@ -26,7 +27,7 @@ public class SGBaseScreen extends SGScreen {
     String formattedAddress;
     boolean addressValid;
 
-    public static SGBaseScreen create(EntityPlayer player, World world, BlockPos pos) {
+    public static SGBaseScreen create(EntityPlayer player, World world, Vector3i pos) {
         SGBaseTE te = SGBaseTE.at(world, pos);
         if (te != null) return new SGBaseScreen(player, te);
         else return null;

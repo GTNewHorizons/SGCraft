@@ -52,6 +52,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import gcewing.sg.BaseModClient.IModel;
+import org.joml.Vector3i;
 
 public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends BaseSubsystem implements IGuiHandler {
 
@@ -72,9 +73,9 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
         int getNumSubtypes();
 
-        Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin);
+        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin);
 
-        // IBlockState getParticleState(IBlockAccess world, BlockPos pos);
+        // IBlockState getParticleState(IBlockAccess world, Vector3i pos);
         Class getDefaultItemClass();
     }
 
@@ -581,8 +582,8 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
     // Container classes registered using addContainer() must implement one of:
     //
-    // (1) A static method create(EntityPlayer player, World world, BlockPos pos [,int param])
-    // (2) A constructor MyContainer(EntityPlayer player, World world, BlockPos pos [, int param])
+    // (1) A static method create(EntityPlayer player, World world, Vector3i pos [,int param])
+    // (2) A constructor MyContainer(EntityPlayer player, World world, Vector3i pos [, int param])
     // (3) A constructor MyContainer(EntityPlayer player, MyTileEntity te [,int param]) where
     // MyTileEntity is the tile entity class registered with MyContainer
 
@@ -633,23 +634,23 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
     public void openGui(EntityPlayer player, int id, TileEntity te, int param) {
         if (id < 0) id = getGuiId(te);
-        openGui(player, id, te.getWorldObj(), new BlockPos(te), param);
+        openGui(player, id, te.getWorldObj(), new Vector3i(te.xCoord, te.yCoord, te.zCoord), param);
     }
 
-    public void openGui(EntityPlayer player, Enum id, World world, BlockPos pos) {
+    public void openGui(EntityPlayer player, Enum id, World world, Vector3i pos) {
         openGui(player, id, world, pos, 0);
     }
 
-    public void openGui(EntityPlayer player, Enum id, World world, BlockPos pos, int param) {
+    public void openGui(EntityPlayer player, Enum id, World world, Vector3i pos, int param) {
         openGui(player, id.ordinal(), world, pos, param);
     }
 
-    public void openGui(EntityPlayer player, int id, World world, BlockPos pos, int param) {
+    public void openGui(EntityPlayer player, int id, World world, Vector3i pos, int param) {
         openGui(player, id | (param << 16), world, pos);
     }
 
-    public void openGui(EntityPlayer player, int id, World world, BlockPos pos) {
-        int x = pos.getX(), y = pos.getY(), z = pos.getZ();
+    public void openGui(EntityPlayer player, int id, World world, Vector3i pos) {
+        int x = pos.x, y = pos.y, z = pos.z;
         if (debugGui) SGCraft.log.debug(
                 String.format("BaseMod.openGui: for %s with id 0x%x in %s at (%s, %s, %s)", this, id, world, x, y, z));
         player.openGui(this, id, world, x, y, z);
@@ -672,10 +673,10 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        return getServerGuiElement(id, player, world, new BlockPos(x, y, z));
+        return getServerGuiElement(id, player, world, new Vector3i(x, y, z));
     }
 
-    public Object getServerGuiElement(int id, EntityPlayer player, World world, BlockPos pos) {
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, Vector3i pos) {
         if (debugGui) SGCraft.log.debug(String.format("BaseMod.getServerGuiElement: for id 0x%x", id));
         int param = id >> 16;
         id = id & 0xffff;
@@ -688,7 +689,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return result;
     }
 
-    Container getGuiContainer(int id, EntityPlayer player, World world, BlockPos pos, int param) {
+    Container getGuiContainer(int id, EntityPlayer player, World world, Vector3i pos, int param) {
         // Called when container id not found in registry
         if (debugGui) SGCraft.log
                 .debug(String.format("%s: BaseMod.getGuiContainer: No Container class found for gui id %d", this, id));
@@ -700,7 +701,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return null;
     }
 
-    Object createGuiElement(Class cls, EntityPlayer player, World world, BlockPos pos, int param) {
+    Object createGuiElement(Class cls, EntityPlayer player, World world, Vector3i pos, int param) {
         try {
             if (debugGui) {
                 SGCraft.log.debug(
@@ -710,22 +711,22 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
                                 player,
                                 world));
             }
-            Method m = getMethod(cls, "create", EntityPlayer.class, World.class, BlockPos.class, int.class);
+            Method m = getMethod(cls, "create", EntityPlayer.class, World.class, Vector3i.class, int.class);
             if (m != null) {
                 return m.invoke(null, player, world, pos, param);
             }
-            m = getMethod(cls, "create", EntityPlayer.class, World.class, BlockPos.class);
+            m = getMethod(cls, "create", EntityPlayer.class, World.class, Vector3i.class);
             if (m != null) {
                 return m.invoke(null, player, world, pos);
             }
             if (debugGui) {
                 SGCraft.log.debug(String.format("BaseMod.createGuiElement: Looking for constructor on %s", cls));
             }
-            Constructor c = getConstructor(cls, EntityPlayer.class, World.class, BlockPos.class, int.class);
+            Constructor c = getConstructor(cls, EntityPlayer.class, World.class, Vector3i.class, int.class);
             if (c != null) {
                 return c.newInstance(player, world, pos, param);
             }
-            c = getConstructor(cls, EntityPlayer.class, World.class, BlockPos.class);
+            c = getConstructor(cls, EntityPlayer.class, World.class, Vector3i.class);
             if (c != null) {
                 return c.newInstance(player, world, pos);
             }

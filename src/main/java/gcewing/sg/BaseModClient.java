@@ -60,6 +60,7 @@ import gcewing.sg.BaseMod.IItem;
 import gcewing.sg.BaseMod.ITextureConsumer;
 import gcewing.sg.BaseMod.ModelSpec;
 import gcewing.sg.BaseMod.VSBinding;
+import org.joml.Vector3i;
 // import static gcewing.sg.BaseBlockUtils.*;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
@@ -266,10 +267,10 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        return getClientGuiElement(id, player, world, new BlockPos(x, y, z));
+        return getClientGuiElement(id, player, world, new Vector3i(x, y, z));
     }
 
-    public Object getClientGuiElement(int id, EntityPlayer player, World world, BlockPos pos) {
+    public Object getClientGuiElement(int id, EntityPlayer player, World world, Vector3i pos) {
         int param = id >> 16;
         id = id & 0xffff;
         Object result = null;
@@ -313,7 +314,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         return result;
     }
 
-    GuiScreen getGuiScreen(int id, EntityPlayer player, World world, BlockPos pos, int param) {
+    GuiScreen getGuiScreen(int id, EntityPlayer player, World world, Vector3i pos, int param) {
         // Called when screen id not found in registry
         SGCraft.log.debug(
                 String.format("%s: BaseModClient.getGuiScreen: No GuiScreen class found for gui id %d", this, id));
@@ -322,7 +323,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     public interface ICustomRenderer {
 
-        void renderBlock(IBlockAccess world, BlockPos pos, IBlockState state, IRenderTarget target,
+        void renderBlock(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
                 EnumWorldBlockLayer layer, Trans3 t);
 
         void renderItemStack(ItemStack stack, IRenderTarget target, Trans3 t);
@@ -459,7 +460,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
                 RenderBlocks rb) {
             boolean result = false;
-            BlockPos pos = new BlockPos(x, y, z);
+            Vector3i pos = new Vector3i(x, y, z);
             int meta = world.getBlockMetadata(x, y, z);
             BaseBlock baseBlock = (BaseBlock) block;
             IBlockState state = baseBlock.getStateFromMeta(meta);
@@ -586,7 +587,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     // ------------------------------------------------------------------------------------------------
 
-    protected ICustomRenderer getCustomBlockRenderer(IBlockAccess world, BlockPos pos, IBlockState state) {
+    protected ICustomRenderer getCustomBlockRenderer(IBlockAccess world, Vector3i pos, IBlockState state) {
         BaseBlock block = (BaseBlock) state.getBlock();
         ICustomRenderer rend = blockRenderers.get(block);
         if (rend == null && block != null) {
@@ -646,7 +647,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
     }
 
     // Call this from renderBlock of an ICustomRenderer to fall back to model spec
-    public void renderBlockUsingModelSpec(IBlockAccess world, BlockPos pos, IBlockState state, IRenderTarget target,
+    public void renderBlockUsingModelSpec(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
             EnumWorldBlockLayer layer, Trans3 t) {
         ICustomRenderer rend = getModelRendererForState(state);
         if (rend != null) rend.renderBlock(world, pos, state, target, layer, t);

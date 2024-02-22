@@ -22,12 +22,13 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
+import org.joml.Vector3i;
 
 public class IrisEntity extends BaseEntity implements IEntityAdditionalSpawnData {
 
     public static boolean debugIrisEntity = false;
 
-    BlockPos blockPos;
+    Vector3i blockPos;
 
     public IrisEntity(World world) {
         super(world);
@@ -49,7 +50,7 @@ public class IrisEntity extends BaseEntity implements IEntityAdditionalSpawnData
         init(te.getPos(), globalBox);
     }
 
-    void init(BlockPos pos, AxisAlignedBB box) {
+    void init(Vector3i pos, AxisAlignedBB box) {
         if (debugIrisEntity) SGCraft.log.debug(String.format("IrisEntity.init: %s at %s box %s", this, pos, box));
         this.blockPos = pos;
         setPosition(box.minX, box.minY, box.minZ);
@@ -91,7 +92,7 @@ public class IrisEntity extends BaseEntity implements IEntityAdditionalSpawnData
         int blockX = nbt.getInteger("blockX");
         int blockY = nbt.getInteger("blockY");
         int blockZ = nbt.getInteger("blockZ");
-        BlockPos pos = new BlockPos(blockX, blockY, blockZ);
+        Vector3i pos = new Vector3i(blockX, blockY, blockZ);
         double minX = nbt.getDouble("minX");
         double minY = nbt.getDouble("minY");
         double minZ = nbt.getDouble("minZ");
@@ -104,9 +105,9 @@ public class IrisEntity extends BaseEntity implements IEntityAdditionalSpawnData
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
-        nbt.setInteger("blockX", blockPos.getX());
-        nbt.setInteger("blockY", blockPos.getY());
-        nbt.setInteger("blockZ", blockPos.getZ());
+        nbt.setInteger("blockX", blockPos.x);
+        nbt.setInteger("blockY", blockPos.y);
+        nbt.setInteger("blockZ", blockPos.z);
         AxisAlignedBB box = getEntityBoundingBox();
         nbt.setDouble("minX", box.minX);
         nbt.setDouble("minY", box.minY);
@@ -143,7 +144,7 @@ public class IrisEntity extends BaseEntity implements IEntityAdditionalSpawnData
     public void readSpawnData(ByteBuf buffer) {
         try {
             DataInput data = new ByteBufInputStream(buffer);
-            BlockPos pos = BaseUtils.readBlockPos(data);
+            Vector3i pos = BaseUtils.readBlockPos(data);
             double minX = data.readDouble();
             double minY = data.readDouble();
             double minZ = data.readDouble();

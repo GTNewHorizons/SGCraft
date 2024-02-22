@@ -15,11 +15,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
+import org.joml.Vector3i;
 
 public class BaseRenderingUtils {
 
-    public static void renderAlternateBlock(BaseMod mod, IBlockAccess world, BlockPos pos, IBlockState state,
-            IRenderTarget target) {
+    public static void renderAlternateBlock(BaseMod mod, IBlockAccess world, Vector3i pos, IBlockState state,
+                                            IRenderTarget target) {
         Block block = state.getBlock();
         int meta = getMetaFromBlockState(state);
         renderAlternateBlock(world, pos.x, pos.y, pos.z, block, meta, target);

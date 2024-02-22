@@ -14,17 +14,18 @@ import static gcewing.sg.BaseUtils.getWorldDimensionId;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import org.joml.Vector3i;
 
 public class SGLocation {
 
     public int dimension;
-    public BlockPos pos;
+    public Vector3i pos;
 
     public SGLocation(TileEntity te) {
         this(getWorldDimensionId(getTileEntityWorld(te)), getTileEntityPos(te));
     }
 
-    public SGLocation(int dimension, BlockPos pos) {
+    public SGLocation(int dimension, Vector3i pos) {
         this.dimension = dimension;
         this.pos = pos;
     }
@@ -34,15 +35,15 @@ public class SGLocation {
         int x = nbt.getInteger("x");
         int y = nbt.getInteger("y");
         int z = nbt.getInteger("z");
-        pos = new BlockPos(x, y, z);
+        pos = new Vector3i(x, y, z);
     }
 
     NBTTagCompound toNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setInteger("dimension", dimension);
-        nbt.setInteger("x", pos.getX());
-        nbt.setInteger("y", pos.getY());
-        nbt.setInteger("z", pos.getZ());
+        nbt.setInteger("x", pos.x);
+        nbt.setInteger("y", pos.y);
+        nbt.setInteger("z", pos.z);
         return nbt;
     }
 

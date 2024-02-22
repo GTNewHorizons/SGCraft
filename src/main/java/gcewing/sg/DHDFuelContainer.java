@@ -11,6 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import org.joml.Vector3i;
 
 public class DHDFuelContainer extends BaseContainer {
 
@@ -22,7 +23,7 @@ public class DHDFuelContainer extends BaseContainer {
 
     DHDTE te;
 
-    public static DHDFuelContainer create(EntityPlayer player, World world, BlockPos pos) {
+    public static DHDFuelContainer create(EntityPlayer player, World world, Vector3i pos) {
         DHDTE te = DHDTE.at(world, pos);
         if (te != null) return new DHDFuelContainer(player, te);
         else return null;

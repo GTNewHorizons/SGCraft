@@ -69,6 +69,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import gcewing.sg.oc.OCWirelessEndpoint;
 import io.netty.channel.ChannelFutureListener;
+import org.joml.Vector3i;
 
 public class SGBaseTE extends BaseTileInventory {
 
@@ -140,7 +141,7 @@ public class SGBaseTE extends BaseTileInventory {
     public int numEngagedChevrons;
     public String dialledAddress = "";
     public boolean isLinkedToController;
-    public BlockPos linkedPos = new BlockPos(0, 0, 0);
+    public Vector3i linkedPos = new Vector3i(0, 0, 0);
     public boolean hasChevronUpgrade;
     public boolean hasIrisUpgrade;
     public IrisState irisState = IrisState.Open;
@@ -188,7 +189,7 @@ public class SGBaseTE extends BaseTileInventory {
         variableChevronPositions = cfg.getBoolean("stargate", "variableChevronPositions", variableChevronPositions);
     }
 
-    public static SGBaseTE get(IBlockAccess world, BlockPos pos) {
+    public static SGBaseTE get(IBlockAccess world, Vector3i pos) {
         TileEntity te = getWorldTileEntity(world, pos);
         if (te instanceof SGBaseTE) return (SGBaseTE) te;
         else if (te instanceof SGRingTE) return ((SGRingTE) te).getBaseTE();
@@ -224,7 +225,7 @@ public class SGBaseTE extends BaseTileInventory {
         } else SGCraft.chunkManager.clearForcedChunkRange(this);
     }
 
-    public static SGBaseTE at(IBlockAccess world, BlockPos pos) {
+    public static SGBaseTE at(IBlockAccess world, Vector3i pos) {
         TileEntity te = getWorldTileEntity(world, pos);
         if (te instanceof SGBaseTE) return (SGBaseTE) te;
         return null;
@@ -239,7 +240,7 @@ public class SGBaseTE extends BaseTileInventory {
     }
 
     public static SGBaseTE at(IBlockAccess world, NBTTagCompound nbt) {
-        BlockPos pos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
+        Vector3i pos = new Vector3i(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
         return SGBaseTE.at(world, pos);
     }
 
@@ -287,7 +288,7 @@ public class SGBaseTE extends BaseTileInventory {
         int x = nbt.getInteger("linkedX");
         int y = nbt.getInteger("linkedY");
         int z = nbt.getInteger("linkedZ");
-        linkedPos = new BlockPos(x, y, z);
+        linkedPos = new Vector3i(x, y, z);
         hasChevronUpgrade = nbt.getBoolean("hasChevronUpgrade");
         if (nbt.hasKey("connectedLocation"))
             connectedLocation = new SGLocation(nbt.getCompoundTag("connectedLocation"));
@@ -319,9 +320,9 @@ public class SGBaseTE extends BaseTileInventory {
         // nbt.setString("homeAddress", homeAddress);
         nbt.setString("dialledAddress", dialledAddress);
         nbt.setBoolean("isLinkedToController", isLinkedToController);
-        nbt.setInteger("linkedX", linkedPos.getX());
-        nbt.setInteger("linkedY", linkedPos.getY());
-        nbt.setInteger("linkedZ", linkedPos.getZ());
+        nbt.setInteger("linkedX", linkedPos.x);
+        nbt.setInteger("linkedY", linkedPos.y);
+        nbt.setInteger("linkedZ", linkedPos.z);
         nbt.setBoolean("hasChevronUpgrade", hasChevronUpgrade);
         if (connectedLocation != null) nbt.setTag("connectedLocation", connectedLocation.toNBT());
         nbt.setBoolean("isInitiator", isInitiator);
@@ -569,10 +570,10 @@ public class SGBaseTE extends BaseTileInventory {
     }
 
     public static double distanceFactorForCoordDifference(TileEntity te1, TileEntity te2) {
-        BlockPos pos1 = getTileEntityPos(te1);
-        BlockPos pos2 = getTileEntityPos(te2);
-        double dx = pos1.getX() - pos2.getX();
-        double dz = pos1.getZ() - pos2.getZ();
+        Vector3i pos1 = getTileEntityPos(te1);
+        Vector3i pos2 = getTileEntityPos(te2);
+        double dx = pos1.x - pos2.x;
+        double dz = pos1.z - pos2.z;
         double d = Math.sqrt(dx * dx + dz * dz);
         if (debugEnergyUse) SGCraft.log.debug(String.format("SGBaseTE: Connection distance = %s", d));
         double ld = Math.log(0.05 * d + 1);
@@ -758,9 +759,9 @@ public class SGBaseTE extends BaseTileInventory {
         List<ISGEnergySource> result = new ArrayList<ISGEnergySource>();
         Trans3 t = localToGlobalTransformation();
         for (int i = -2; i <= 2; i++) {
-            BlockPos bp = t.p(i, -1, 0).blockPos();
-            if (debugEnergyUse) SGCraft.log.debug(String.format("SGBaseTE.findEnergySources: Checking %s", bp));
-            TileEntity nte = getWorldTileEntity(worldObj, bp);
+            Vector3i blockPos = t.p(i, -1, 0).blockPos();
+            if (debugEnergyUse) SGCraft.log.debug(String.format("SGBaseTE.findEnergySources: Checking %s", blockPos));
+            TileEntity nte = getWorldTileEntity(worldObj, blockPos);
             if (nte instanceof ISGEnergySource) result.add((ISGEnergySource) nte);
         }
         DHDTE te = getLinkedControllerTE();
@@ -1462,7 +1463,7 @@ public class SGBaseTE extends BaseTileInventory {
         return (List<IrisEntity>) worldObj.getEntitiesWithinAABB(IrisEntity.class, box);
     }
 
-    ItemStack getCamouflageStack(BlockPos cpos) {
+    ItemStack getCamouflageStack(Vector3i cpos) {
         Trans3 t = localToGlobalTransformation();
         Vector3 p = t.ip(Vector3.blockCenter(cpos));
         if (p.y == 0) {
@@ -1514,8 +1515,8 @@ public class SGBaseTE extends BaseTileInventory {
         Collection<BlockRef> result = new ArrayList<BlockRef>();
         Trans3 t = localToGlobalTransformation();
         for (int i = -2; i <= 2; i++) {
-            BlockPos bp = t.p(i, -1, 0).blockPos();
-            TileEntity te = getWorldTileEntity(worldObj, bp);
+            Vector3i blockPos = t.p(i, -1, 0).blockPos();
+            TileEntity te = getWorldTileEntity(worldObj, blockPos);
             if (te != null) result.add(new BlockRef(te));
         }
         return result;
@@ -1588,13 +1589,13 @@ public class SGBaseTE extends BaseTileInventory {
 class BlockRef {
 
     public IBlockAccess worldObj;
-    BlockPos pos;
+    Vector3i pos;
 
     public BlockRef(TileEntity te) {
         this(getTileEntityWorld(te), getTileEntityPos(te));
     }
 
-    public BlockRef(IBlockAccess world, BlockPos pos) {
+    public BlockRef(IBlockAccess world, Vector3i pos) {
         worldObj = world;
         this.pos = pos;
     }

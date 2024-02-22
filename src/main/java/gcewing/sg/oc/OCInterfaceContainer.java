@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseContainer;
-import gcewing.sg.BlockPos;
+import org.joml.Vector3i;
 
 public class OCInterfaceContainer extends BaseContainer {
 
@@ -26,7 +26,7 @@ public class OCInterfaceContainer extends BaseContainer {
 
     OCInterfaceTE te;
 
-    public OCInterfaceContainer(EntityPlayer player, World world, BlockPos pos) {
+    public OCInterfaceContainer(EntityPlayer player, World world, Vector3i pos) {
         super(guiWidth, guiHeight);
         te = (OCInterfaceTE) getWorldTileEntity(world, pos);
         addPlayerSlots(player);

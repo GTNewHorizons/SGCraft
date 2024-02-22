@@ -16,6 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseMod.ModelSpec;
+import org.joml.Vector3i;
 
 public class DHDBlock extends BaseBlock<DHDTE> {
 
@@ -54,13 +55,13 @@ public class DHDBlock extends BaseBlock<DHDTE> {
     }
 
     @Override
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+    public void onBlockAdded(World world, Vector3i pos, IBlockState state) {
         if (SGBaseBlock.debugMerge) SGCraft.log.debug(String.format("DHDBlock.onBlockAdded: at %s", pos));
         checkForLink(world, pos);
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player,
+    public void onBlockPlacedBy(World world, Vector3i pos, IBlockState state, EntityLivingBase player,
             ItemStack stack) {
         super.onBlockPlacedBy(world, pos, state, player, stack);
         checkForLink(world, pos);
@@ -72,7 +73,7 @@ public class DHDBlock extends BaseBlock<DHDTE> {
     }
 
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    public void breakBlock(World world, Vector3i pos, IBlockState state) {
         TileEntity cte = getTileEntity(world, pos);
         super.breakBlock(world, pos, state);
         if (cte == null) {
@@ -84,14 +85,14 @@ public class DHDBlock extends BaseBlock<DHDTE> {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side,
+    public boolean onBlockActivated(World world, Vector3i pos, IBlockState state, EntityPlayer player, EnumFacing side,
             float cx, float cy, float cz) {
         SGGui id = cy > 0.5 ? SGGui.SGController : SGGui.DHDFuel;
         SGCraft.mod.openGui(player, id, world, pos);
         return true;
     }
 
-    public void checkForLink(World world, BlockPos pos) {
+    public void checkForLink(World world, Vector3i pos) {
         TileEntity te = getTileEntity(world, pos);
         if (te instanceof DHDTE) {
             ((DHDTE) te).checkForLink();

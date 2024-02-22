@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 
 import gcewing.sg.BaseMod.IItem;
 import gcewing.sg.BaseMod.ModelSpec;
+import org.joml.Vector3i;
 
 public class BaseItemBlock extends ItemBlock implements IItem {
 
@@ -57,7 +58,7 @@ public class BaseItemBlock extends ItemBlock implements IItem {
             int i1 = this.getMetadata(stack.getItemDamage());
             BaseBlock baseBlock = (BaseBlock) this.field_150939_a;
             IBlockState state = baseBlock
-                    .onBlockPlaced(world, new BlockPos(x, y, z), facings[side], hitX, hitY, hitZ, i1, player);
+                    .onBlockPlaced(world, new Vector3i(x, y, z), facings[side], hitX, hitY, hitZ, i1, player);
             int j1 = baseBlock.getMetaFromState(state);
             if (placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, j1)) {
                 world.playSoundEffect(
@@ -78,12 +79,12 @@ public class BaseItemBlock extends ItemBlock implements IItem {
     @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
             float hitX, float hitY, float hitZ, int meta) {
-        BlockPos pos = new BlockPos(x, y, z);
+        Vector3i pos = new Vector3i(x, y, z);
         IBlockState newState = getBlockStateFromMeta(field_150939_a, meta);
         return placeBlockAt(stack, player, world, pos, facings[side], hitX, hitY, hitZ, newState);
     }
 
-    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing face,
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, Vector3i pos, EnumFacing face,
             float hitX, float hitY, float hitZ, IBlockState newState) {
         int meta = getMetaFromBlockState(newState);
         return super.placeBlockAt(stack, player, world, pos.x, pos.y, pos.z, face.ordinal(), hitX, hitY, hitZ, meta);

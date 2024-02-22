@@ -10,6 +10,7 @@ import static java.lang.Math.abs;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
+import org.joml.Vector3i;
 
 public class Vector3 {
 
@@ -33,8 +34,8 @@ public class Vector3 {
         return blockCenter.add(x, y, z);
     }
 
-    public static Vector3 blockCenter(BlockPos pos) {
-        return blockCenter.add(pos);
+    public static Vector3 blockCenter(Vector3i pos) {
+        return blockCenter.add(new Vector3(pos.x, pos.y, pos.z));
     }
 
     double x, y, z;
@@ -49,7 +50,7 @@ public class Vector3 {
         this(v.xCoord, v.yCoord, v.zCoord);
     }
 
-    public Vector3(BlockPos pos) {
+    public Vector3(Vector3i pos) {
         this(pos.x, pos.y, pos.z);
     }
 
@@ -77,8 +78,8 @@ public class Vector3 {
         return add(v.x, v.y, v.z);
     }
 
-    public Vector3 add(BlockPos pos) {
-        return add(pos.getX(), pos.getY(), pos.getZ());
+    public Vector3 add(Vector3i pos) {
+        return add(pos.x, pos.y, pos.z);
     }
 
     public Vector3 sub(double x, double y, double z) {
@@ -189,8 +190,9 @@ public class Vector3 {
         return facing(x, y, z);
     }
 
-    public BlockPos blockPos() {
-        return new BlockPos(floorX(), floorY(), floorZ());
+    //todo: remove this method
+    public Vector3i blockPos() {
+        return new Vector3i(floorX(), floorY(), floorZ());
     }
 
     // Normals at 45 degrees are biased towards UP or DOWN.

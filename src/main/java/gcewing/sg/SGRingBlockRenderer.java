@@ -15,13 +15,14 @@ import net.minecraft.world.IBlockAccess;
 
 import gcewing.sg.BaseModClient.ICustomRenderer;
 import gcewing.sg.BaseModClient.IRenderTarget;
+import org.joml.Vector3i;
 
 public class SGRingBlockRenderer implements ICustomRenderer {
 
     public SGRingBlockRenderer() {}
 
-    public void renderBlock(IBlockAccess world, BlockPos pos, IBlockState state, IRenderTarget target,
-            EnumWorldBlockLayer layer, Trans3 t) {
+    public void renderBlock(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
+                            EnumWorldBlockLayer layer, Trans3 t) {
         ISGBlock ringBlock = (ISGBlock) state.getBlock();
         if (target.isRenderingBreakEffects()
                 || (layer == EnumWorldBlockLayer.SOLID && !ringBlock.isMerged(world, pos))) {

@@ -42,6 +42,7 @@ import net.minecraft.world.storage.MapStorage;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import org.joml.Vector3i;
 
 public class BaseUtils {
 
@@ -196,22 +197,22 @@ public class BaseUtils {
         return stack;
     }
 
-    public static BlockPos readBlockPos(DataInput data) {
+    public static Vector3i readBlockPos(DataInput data) {
         try {
             int x = data.readInt();
             int y = data.readInt();
             int z = data.readInt();
-            return new BlockPos(x, y, z);
+            return new Vector3i(x, y, z);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void writeBlockPos(DataOutput data, BlockPos pos) {
+    public static void writeBlockPos(DataOutput data, Vector3i pos) {
         try {
-            data.writeInt(pos.getX());
-            data.writeInt(pos.getY());
-            data.writeInt(pos.getZ());
+            data.writeInt(pos.x);
+            data.writeInt(pos.y);
+            data.writeInt(pos.z);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -269,7 +270,7 @@ public class BaseUtils {
         return stack.getItem().getMetadata(stack.getItemDamage());
     }
 
-    public static MovingObjectPosition newMovingObjectPosition(Vec3 hitVec, int sideHit, BlockPos pos) {
+    public static MovingObjectPosition newMovingObjectPosition(Vec3 hitVec, int sideHit,Vector3i pos) {
         return new MovingObjectPosition(pos.x, pos.y, pos.z, sideHit, hitVec, true);
     }
 

@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.joml.Vector3i;
 
 public class PowerBlock<TE extends PowerTE> extends BaseBlock<TE> {
 
@@ -31,12 +32,12 @@ public class PowerBlock<TE extends PowerTE> extends BaseBlock<TE> {
     }
 
     @Override
-    public boolean shouldCheckWeakPower(IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean shouldCheckWeakPower(IBlockAccess world, Vector3i pos, EnumFacing side) {
         return true;
     }
 
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    public void breakBlock(World world, Vector3i pos, IBlockState state) {
         TileEntity te = getTileEntity(world, pos);
         if (te instanceof PowerTE) {
             lastRemovedTE = (PowerTE) te;
@@ -45,14 +46,14 @@ public class PowerBlock<TE extends PowerTE> extends BaseBlock<TE> {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side,
+    public boolean onBlockActivated(World world, Vector3i pos, IBlockState state, EntityPlayer player, EnumFacing side,
             float cx, float cy, float cz) {
         SGCraft.mod.openGui(player, SGGui.PowerUnit, world, pos);
         return true;
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    public ArrayList<ItemStack> getDrops(IBlockAccess world, Vector3i pos, IBlockState state, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         Item item = getItemDropped(state, ((World) world).rand, fortune);
         ItemStack stack = new ItemStack(item, 1);
@@ -68,7 +69,7 @@ public class PowerBlock<TE extends PowerTE> extends BaseBlock<TE> {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player,
+    public void onBlockPlacedBy(World world, Vector3i pos, IBlockState state, EntityLivingBase player,
             ItemStack stack) {
         TileEntity t = getTileEntity(world, pos);
         if (t instanceof PowerTE) {

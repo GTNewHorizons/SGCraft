@@ -12,6 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import org.joml.Vector3i;
 
 public class SGInterfaceBlock<TE extends TileEntity> extends BaseBlock<TE> {
 
@@ -33,7 +34,7 @@ public class SGInterfaceBlock<TE extends TileEntity> extends BaseBlock<TE> {
     }
 
     @Override
-    public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean isSideSolid(IBlockAccess world, Vector3i pos, EnumFacing side) {
         return true;
     }
 

@@ -15,11 +15,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import org.joml.Vector3i;
 
 public class BaseWorldRenderTarget extends BaseRenderTarget {
 
     protected IBlockAccess world;
-    protected BlockPos blockPos;
+    protected Vector3i blockPos;
     protected Block block;
     protected Tessellator tess;
     protected float cmr = 1, cmg = 1, cmb = 1;
@@ -29,8 +30,8 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
     protected float vr, vg, vb, va; // Colour to be applied to next vertex
     protected int vlm1, vlm2; // Light map values to be applied to next vertex
 
-    public BaseWorldRenderTarget(IBlockAccess world, BlockPos pos, Tessellator tess, IIcon overrideIcon) {
-        super(pos.getX(), pos.getY(), pos.getZ(), overrideIcon);
+    public BaseWorldRenderTarget(IBlockAccess world, Vector3i pos, Tessellator tess, IIcon overrideIcon) {
+        super(pos.x, pos.y, pos.z, overrideIcon);
         this.world = world;
         this.blockPos = pos;
         this.block = world.getBlock(pos.x, pos.y, pos.z);
@@ -72,7 +73,7 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
             int X = ifloor(vx + 0.5 * dx);
             int Y = ifloor(vy + 0.5 * dy);
             int Z = ifloor(vz + 0.5 * dz);
-            BlockPos pos = new BlockPos(X, Y, Z);
+            Vector3i pos = new Vector3i(X, Y, Z);
             // Calculate overlap of sampled block with sampling cube
             double wox = (dx < 0) ? (X + 1) - (vx - 0.5) : (vx + 0.5) - X;
             double woy = (dy < 0) ? (Y + 1) - (vy - 0.5) : (vy + 0.5) - Y;
@@ -118,11 +119,13 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
 
     protected void brLightVertex(Vector3 p) {
         Vector3 n = normal;
-        BlockPos pos;
-        if (axisAlignedNormal) pos = new BlockPos(
-                (int) floor(p.x + 0.01 * n.x),
-                (int) floor(p.y + 0.01 * n.y),
-                (int) floor(p.z + 0.01 * n.z));
+        Vector3i pos;
+        if (axisAlignedNormal) {
+            pos = new Vector3i(
+                    (int) floor(p.x + 0.01 * n.x),
+                    (int) floor(p.y + 0.01 * n.y),
+                    (int) floor(p.z + 0.01 * n.z));
+        }
         else pos = blockPos;
         int br = block.getMixedBrightnessForBlock(world, pos.x, pos.y, pos.z);
         setLight(shade, br);

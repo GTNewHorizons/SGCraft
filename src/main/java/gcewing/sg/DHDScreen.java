@@ -30,6 +30,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import org.joml.Vector3i;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -42,13 +43,13 @@ public class DHDScreen extends SGScreen {
     final static double dhdRadius3 = dhdWidth * 0.45;
 
     World world;
-    BlockPos pos;
+    Vector3i pos;
     int dhdTop, dhdCentreX, dhdCentreY;
     int closingDelay = 0;
     int addressLength;
     DHDTE cte;
 
-    public DHDScreen(EntityPlayer player, World world, BlockPos pos) {
+    public DHDScreen(EntityPlayer player, World world, Vector3i pos) {
         this.world = world;
         this.pos = pos;
         cte = getControllerTE();

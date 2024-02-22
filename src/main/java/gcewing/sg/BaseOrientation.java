@@ -18,6 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseBlock.IOrientationHandler;
+import org.joml.Vector3i;
 
 public class BaseOrientation {
 
@@ -38,8 +39,8 @@ public class BaseOrientation {
             block.addProperty(FACING);
         }
 
-        public IBlockState onBlockPlaced(Block block, World world, BlockPos pos, EnumFacing side, float hitX,
-                float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
+        public IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX,
+                                         float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
             EnumFacing dir = getHorizontalFacing(placer);
             if (debugPlacement) SGCraft.log
                     .debug(String.format("BaseOrientation.Orient4WaysByState: Placing block with FACING = %s", dir));
@@ -50,7 +51,7 @@ public class BaseOrientation {
             return horizontalFacings[iround(entity.rotationYaw / 90.0) & 3];
         }
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin) {
             EnumFacing f = (EnumFacing) state.getValue(FACING);
             if (debugOrientation) SGCraft.log.debug(
                     String.format(
@@ -83,7 +84,7 @@ public class BaseOrientation {
 
     public static class Orient24WaysByTE extends BaseBlock.Orient1Way {
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin) {
             TileEntity te = world.getTileEntity(pos.x, pos.y, pos.z);
             if (te instanceof BaseTileEntity) {
                 BaseTileEntity bte = (BaseTileEntity) te;

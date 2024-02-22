@@ -116,8 +116,8 @@ public class SGAddressing {
     public static String addressForLocation(SGLocation loc) throws AddressingError {
         if (debugAddressing) SGCraft.log
                 .debug(String.format("SGAddressing.addressForLocation: coord range = %d to %d", minCoord, maxCoord));
-        int chunkx = loc.pos.getX() >> 4;
-        int chunkz = loc.pos.getZ() >> 4;
+        int chunkx = loc.pos.x >> 4;
+        int chunkz = loc.pos.z >> 4;
         if (!inCoordRange(chunkx) || !inCoordRange(chunkz)) throw coordRangeError;
         Integer di = SGDimensionMap.indexForDimension(loc.dimension);
         if (di > maxDimensionIndex) throw dimensionRangeError;

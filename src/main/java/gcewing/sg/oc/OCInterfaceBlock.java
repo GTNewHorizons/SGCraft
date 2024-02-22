@@ -10,11 +10,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import gcewing.sg.BlockPos;
 import gcewing.sg.IBlockState;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGGui;
 import gcewing.sg.SGInterfaceBlock;
+import org.joml.Vector3i;
 
 public class OCInterfaceBlock extends SGInterfaceBlock<OCInterfaceTE> {
 
@@ -29,9 +29,11 @@ public class OCInterfaceBlock extends SGInterfaceBlock<OCInterfaceTE> {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side,
-            float hx, float hy, float hz) {
-        if (!world.isRemote) SGCraft.mod.openGui(player, SGGui.OCInterface, world, pos);
+    public boolean onBlockActivated(World world, Vector3i pos, IBlockState state, EntityPlayer player, EnumFacing side,
+                                    float hx, float hy, float hz) {
+        if (!world.isRemote){
+            SGCraft.mod.openGui(player, SGGui.OCInterface, world, pos);
+        }
         return true;
     }
 

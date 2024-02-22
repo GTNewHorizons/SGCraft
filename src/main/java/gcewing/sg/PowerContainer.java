@@ -11,12 +11,13 @@ import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import org.joml.Vector3i;
 
 public class PowerContainer extends BaseContainer {
 
     PowerTE te;
 
-    public static PowerContainer create(EntityPlayer player, World world, BlockPos pos) {
+    public static PowerContainer create(EntityPlayer player, World world, Vector3i pos) {
         TileEntity te = getWorldTileEntity(world, pos);
         if (te instanceof PowerTE) return new PowerContainer(player, (PowerTE) te);
         return null;

@@ -13,6 +13,7 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import org.joml.Vector3i;
 
 public class PowerScreen extends BaseGui.Screen {
 
@@ -22,7 +23,7 @@ public class PowerScreen extends BaseGui.Screen {
 
     PowerTE te;
 
-    public static PowerScreen create(EntityPlayer player, World world, BlockPos pos) {
+    public static PowerScreen create(EntityPlayer player, World world, Vector3i pos) {
         PowerContainer container = PowerContainer.create(player, world, pos);
         if (container != null) return new PowerScreen(container);
         else return null;

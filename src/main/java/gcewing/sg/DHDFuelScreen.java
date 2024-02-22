@@ -9,6 +9,7 @@ package gcewing.sg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import org.joml.Vector3i;
 import org.lwjgl.opengl.GL11;
 
 public class DHDFuelScreen extends SGScreen {
@@ -25,7 +26,7 @@ public class DHDFuelScreen extends SGScreen {
 
     DHDTE te;
 
-    public static DHDFuelScreen create(EntityPlayer player, World world, BlockPos pos) {
+    public static DHDFuelScreen create(EntityPlayer player, World world, Vector3i pos) {
         DHDTE te = DHDTE.at(world, pos);
         if (te != null) return new DHDFuelScreen(player, te);
         return null;
