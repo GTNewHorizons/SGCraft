@@ -1,9 +1,9 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.BaseModClient;
 import net.minecraft.util.ResourceLocation;
 
 public interface ITexture {
+
     ResourceLocation location();
 
     int tintIndex();

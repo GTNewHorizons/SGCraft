@@ -1,9 +1,10 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.utils.Trans3;
+import java.util.List;
+
 import net.minecraft.util.AxisAlignedBB;
 
-import java.util.List;
+import gcewing.sg.utils.Trans3;
 
 public interface IModel {
 

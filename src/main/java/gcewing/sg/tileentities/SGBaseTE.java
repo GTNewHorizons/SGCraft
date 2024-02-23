@@ -25,21 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import gcewing.sg.BaseConfiguration;
-import gcewing.sg.SGAddressing;
-import gcewing.sg.blocks.SGBaseBlock;
-import gcewing.sg.SGCraft;
-import gcewing.sg.SGLocation;
-import gcewing.sg.SGState;
-import gcewing.sg.entities.IrisEntity;
-import gcewing.sg.interfaces.IComputerInterface;
-import gcewing.sg.interfaces.ISGEnergySource;
-import gcewing.sg.renderers.SGBaseTERenderer;
-import gcewing.sg.utils.BaseBlockUtils;
-import gcewing.sg.utils.BaseInventoryUtils;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Utils;
-import gcewing.sg.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.entity.Entity;
@@ -75,15 +60,30 @@ import net.minecraftforge.common.network.ForgeMessage;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joml.Vector3i;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.SGAddressing;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGLocation;
+import gcewing.sg.SGState;
+import gcewing.sg.blocks.SGBaseBlock;
 import gcewing.sg.compat.oc.OCWirelessEndpoint;
+import gcewing.sg.entities.IrisEntity;
+import gcewing.sg.interfaces.IComputerInterface;
+import gcewing.sg.interfaces.ISGEnergySource;
+import gcewing.sg.renderers.SGBaseTERenderer;
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.BaseInventoryUtils;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Utils;
+import gcewing.sg.utils.Vector3;
 import io.netty.channel.ChannelFutureListener;
-import org.joml.Vector3i;
 
 public class SGBaseTE extends BaseTileInventory {
 

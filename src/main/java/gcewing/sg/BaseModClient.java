@@ -15,18 +15,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.ICustomRenderer;
-import gcewing.sg.interfaces.IModel;
-import gcewing.sg.interfaces.IRenderTarget;
-import gcewing.sg.interfaces.ITexture;
-import gcewing.sg.renderers.BaseGLRenderTarget;
-import gcewing.sg.renderers.BaseModelRenderer;
-import gcewing.sg.renderers.BaseWorldRenderTarget;
-import gcewing.sg.utils.BaseBlockUtils;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.worldgen.EnumWorldBlockLayer;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -53,6 +41,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.joml.Vector3i;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -63,12 +53,23 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
 import gcewing.sg.interfaces.IItem;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
 import gcewing.sg.interfaces.ITextureConsumer;
+import gcewing.sg.renderers.BaseGLRenderTarget;
+import gcewing.sg.renderers.BaseModelRenderer;
+import gcewing.sg.renderers.BaseWorldRenderTarget;
+import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.Trans3;
 import gcewing.sg.utils.VSBinding;
-import org.joml.Vector3i;
+import gcewing.sg.worldgen.EnumWorldBlockLayer;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 

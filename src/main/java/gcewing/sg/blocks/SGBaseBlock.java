@@ -10,17 +10,6 @@ import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
-import gcewing.sg.BaseConfiguration;
-import gcewing.sg.worldgen.EnumWorldBlockLayer;
-import gcewing.sg.SGCraft;
-import gcewing.sg.guis.SGGui;
-import gcewing.sg.SGState;
-import gcewing.sg.blocks.orientation.Orient4WaysByState;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IOrientationHandler;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,8 +21,20 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import gcewing.sg.utils.ModelSpec;
 import org.joml.Vector3i;
+
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGState;
+import gcewing.sg.blocks.orientation.Orient4WaysByState;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IOrientationHandler;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
+import gcewing.sg.worldgen.EnumWorldBlockLayer;
 
 public class SGBaseBlock extends SGBlock<SGBaseTE> {
 

@@ -8,14 +8,15 @@ package gcewing.sg.packets;
 
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+
+import org.joml.Vector3i;
+
 import gcewing.sg.SGCraft;
-import gcewing.sg.packets.BaseDataChannel;
 import gcewing.sg.tileentities.DHDTE;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import org.joml.Vector3i;
 
 public class SGChannel extends BaseDataChannel {
 

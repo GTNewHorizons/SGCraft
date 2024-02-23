@@ -29,7 +29,6 @@ public class BaseContainer extends Container {
         ySize = height;
     }
 
-
     // Slots added between beginContainerSlots and endContainerSlots will be included in
     // containerSlotRange.
 
@@ -59,7 +58,6 @@ public class BaseContainer extends Container {
         for (int var3 = 0; var3 < 9; ++var3) this.addSlotToContainer(new Slot(inventory, var3, x + var3 * 18, y + 58));
         endPlayerSlots();
     }
-
 
     public SlotRange addSlots(IInventory inventory, int x, int y, int numRows, Class slotClass) {
         return addSlots(inventory, 0, inventory.getSizeInventory(), x, y, numRows, slotClass);

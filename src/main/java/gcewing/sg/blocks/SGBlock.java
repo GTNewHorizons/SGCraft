@@ -6,14 +6,16 @@
 
 package gcewing.sg.blocks;
 
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.interfaces.ISGBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
+
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.ISGBlock;
+import gcewing.sg.tileentities.SGBaseTE;
 
 public abstract class SGBlock<TE extends TileEntity> extends BaseBlock<TE> implements ISGBlock {
 

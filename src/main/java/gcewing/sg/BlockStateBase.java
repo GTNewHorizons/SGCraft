@@ -4,13 +4,14 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
+
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 
 public abstract class BlockStateBase implements IBlockState {
 

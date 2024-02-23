@@ -8,11 +8,12 @@ package gcewing.sg.worldgen;
 
 import java.util.HashMap;
 
-import gcewing.sg.SGCraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.world.ChunkDataEvent;
+
+import gcewing.sg.SGCraft;
 
 public class SGChunkData {
 

@@ -6,7 +6,6 @@
 
 package gcewing.sg.tileentities;
 
-import gcewing.sg.tileentities.BaseTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;

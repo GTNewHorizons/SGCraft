@@ -17,12 +17,6 @@ import static gcewing.sg.utils.BaseUtils.setIntField;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import gcewing.sg.SGCraft;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.ITickable;
-import gcewing.sg.interfaces.ITileEntity;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,8 +29,15 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
-import gcewing.sg.interfaces.IBlock;
 import org.joml.Vector3i;
+
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ITickable;
+import gcewing.sg.interfaces.ITileEntity;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
 
 public class BaseTileEntity extends TileEntity implements ITileEntity {
 

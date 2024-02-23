@@ -25,9 +25,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import gcewing.sg.BaseMod;
-import gcewing.sg.SGCraft;
-import gcewing.sg.interfaces.ISetMod;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -35,6 +32,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
+
+import gcewing.sg.BaseMod;
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.ISetMod;
 
 // ------------------------------------------------------------------------------------------------
 

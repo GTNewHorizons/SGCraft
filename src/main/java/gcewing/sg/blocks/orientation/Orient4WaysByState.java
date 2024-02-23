@@ -1,25 +1,28 @@
 package gcewing.sg.blocks.orientation;
 
-import gcewing.sg.utils.PropertyTurn;
-import gcewing.sg.SGCraft;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IOrientationHandler;
-import gcewing.sg.interfaces.IProperty;
+import static gcewing.sg.utils.BaseUtils.horizontalFacings;
+import static gcewing.sg.utils.BaseUtils.iround;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
 
-import static gcewing.sg.utils.BaseUtils.horizontalFacings;
-import static gcewing.sg.utils.BaseUtils.iround;
+import gcewing.sg.SGCraft;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IOrientationHandler;
+import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.utils.PropertyTurn;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
 
 public class Orient4WaysByState implements IOrientationHandler {
+
     public static boolean debugPlacement = false;
     public static boolean debugOrientation = false;
 
@@ -31,11 +34,11 @@ public class Orient4WaysByState implements IOrientationHandler {
         block.addProperty(FACING);
     }
 
-    public IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX,
-                                     float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
+    public IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX, float hitY,
+            float hitZ, IBlockState baseState, EntityLivingBase placer) {
         EnumFacing dir = getHorizontalFacing(placer);
-        if (debugPlacement) SGCraft.log
-                .debug(String.format("BaseOrientation.Orient4WaysByState: Placing block with FACING = %s", dir));
+        if (debugPlacement)
+            SGCraft.log.debug(String.format("BaseOrientation.Orient4WaysByState: Placing block with FACING = %s", dir));
         return baseState.withProperty(FACING, dir);
     }
 

@@ -6,13 +6,13 @@
 
 package gcewing.sg.renderers;
 
-import gcewing.sg.tileentities.BaseTileEntity;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.tileentities.BaseTileEntity;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
 
 public abstract class BaseTileEntityRenderer extends TileEntitySpecialRenderer {
 

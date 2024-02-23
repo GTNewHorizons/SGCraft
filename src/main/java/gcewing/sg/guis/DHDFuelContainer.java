@@ -6,13 +6,15 @@
 
 package gcewing.sg.guis;
 
-import gcewing.sg.tileentities.DHDTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
+
+import gcewing.sg.tileentities.DHDTE;
 
 public class DHDFuelContainer extends BaseContainer {
 

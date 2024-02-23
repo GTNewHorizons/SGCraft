@@ -8,9 +8,6 @@ package gcewing.sg.tileentities;
 
 import java.util.List;
 
-import gcewing.sg.BaseMod;
-import gcewing.sg.SGCraft;
-import gcewing.sg.tileentities.BaseTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -18,6 +15,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
+
+import gcewing.sg.BaseMod;
+import gcewing.sg.SGCraft;
 
 public class BaseTEChunkManager implements ForgeChunkManager.LoadingCallback {
 

@@ -12,8 +12,8 @@ import net.minecraft.init.Items;
 
 import dan200.computercraft.api.ComputerCraftAPI;
 import gcewing.sg.BaseSubsystem;
-import gcewing.sg.interfaces.IIntegration;
 import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IIntegration;
 
 public class CCIntegration extends BaseSubsystem implements IIntegration {
 

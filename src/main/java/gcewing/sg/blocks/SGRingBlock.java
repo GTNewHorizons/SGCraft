@@ -12,13 +12,6 @@ import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 import java.util.List;
 
-import gcewing.sg.worldgen.EnumWorldBlockLayer;
-import gcewing.sg.utils.PropertyInteger;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.SGCraft;
-import gcewing.sg.tileentities.SGRingTE;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,8 +23,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import gcewing.sg.utils.ModelSpec;
 import org.joml.Vector3i;
+
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.tileentities.SGRingTE;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.PropertyInteger;
+import gcewing.sg.worldgen.EnumWorldBlockLayer;
 
 public class SGRingBlock extends SGBlock<SGRingTE> {
 

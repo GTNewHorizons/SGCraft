@@ -16,11 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.interfaces.IBlock;
-import gcewing.sg.interfaces.ISetMod;
-import gcewing.sg.utils.BaseBlockUtils;
-import gcewing.sg.utils.VSBinding;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -38,6 +33,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import org.joml.Vector3i;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -50,8 +47,12 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.IModel;
-import org.joml.Vector3i;
+import gcewing.sg.interfaces.ISetMod;
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.VSBinding;
 
 public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends BaseSubsystem implements IGuiHandler {
 

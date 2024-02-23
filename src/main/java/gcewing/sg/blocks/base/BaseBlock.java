@@ -17,22 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import gcewing.sg.BaseMod;
-import gcewing.sg.BaseModClient;
-import gcewing.sg.utils.BaseUtils;
-import gcewing.sg.utils.BlockState;
-import gcewing.sg.worldgen.EnumWorldBlockLayer;
-import gcewing.sg.utils.InventoryHelper;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.SGCraft;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
-import gcewing.sg.blocks.orientation.Orient1Way;
-import gcewing.sg.interfaces.IBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IOrientationHandler;
-import gcewing.sg.interfaces.IProperty;
-import gcewing.sg.interfaces.ITileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -54,12 +38,29 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.joml.Vector3i;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.BaseMod;
+import gcewing.sg.BaseModClient;
+import gcewing.sg.SGCraft;
+import gcewing.sg.blocks.orientation.Orient1Way;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IModel;
-import org.joml.Vector3i;
+import gcewing.sg.interfaces.IOrientationHandler;
+import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.interfaces.ITileEntity;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.BaseUtils;
+import gcewing.sg.utils.BlockState;
+import gcewing.sg.utils.InventoryHelper;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
+import gcewing.sg.worldgen.EnumWorldBlockLayer;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
 
@@ -73,7 +74,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     // --------------------------- Orientation -------------------------------
-
 
     public static IOrientationHandler orient1Way = new Orient1Way();
 
@@ -319,10 +319,10 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         renderID = id;
     }
 
-    //TODO: rework this whole dam thing, it's a nightmare
+    // TODO: rework this whole dam thing, it's a nightmare
     public String getQualifiedRendererClassName() {
         String name = getRendererClassName();
-        if (name != null) name =  "gcewing.sg.renderers." + name;
+        if (name != null) name = "gcewing.sg.renderers." + name;
         return name;
     }
 

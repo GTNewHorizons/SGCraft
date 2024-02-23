@@ -1,9 +1,11 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.utils.Vector3;
 import net.minecraft.util.EnumFacing;
 
+import gcewing.sg.utils.Vector3;
+
 public interface IRenderTarget {
+
     boolean isRenderingBreakEffects();
 
     void setTexture(ITexture texture);

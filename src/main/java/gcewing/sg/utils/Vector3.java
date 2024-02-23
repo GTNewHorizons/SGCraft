@@ -10,6 +10,7 @@ import static java.lang.Math.abs;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
+
 import org.joml.Vector3i;
 
 public class Vector3 {
@@ -23,7 +24,6 @@ public class Vector3 {
 
     public static Vector3 unitNX = new Vector3(-1, 0, 0);
     public static Vector3 unitNZ = new Vector3(0, 0, -1);
-
 
     public static Vector3 blockCenter(double x, double y, double z) {
         return blockCenter.add(x, y, z);
@@ -138,11 +138,12 @@ public class Vector3 {
     public int roundX() {
         return (int) Math.round(x);
     }
+
     public EnumFacing facing() {
         return facing(x, y, z);
     }
 
-    //todo: remove this method
+    // todo: remove this method
     public Vector3i blockPos() {
         return new Vector3i(floorX(), floorY(), floorZ());
     }

@@ -36,12 +36,13 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 import static org.lwjgl.opengl.GL11.glVertex3d;
 import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
 
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.SGCraft;
-import gcewing.sg.utils.BaseGLUtils;
-import gcewing.sg.utils.Vector3;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.tileentity.TileEntity;
+
+import gcewing.sg.SGCraft;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.BaseGLUtils;
+import gcewing.sg.utils.Vector3;
 
 public class SGBaseTERenderer extends BaseTileEntityRenderer {
 

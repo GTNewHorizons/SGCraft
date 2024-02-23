@@ -1,23 +1,25 @@
 package gcewing.sg.blocks.orientation;
 
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
+
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IOrientationHandler;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
 
 public class Orient1Way implements IOrientationHandler {
 
     public void defineProperties(BaseBlock block) {}
 
-    public IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX,
-                                     float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
+    public IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX, float hitY,
+            float hitZ, IBlockState baseState, EntityLivingBase placer) {
         return baseState;
     }
 

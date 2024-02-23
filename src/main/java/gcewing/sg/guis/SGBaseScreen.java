@@ -6,12 +6,14 @@
 
 package gcewing.sg.guis;
 
-import gcewing.sg.SGAddressing;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.SGCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
+
+import gcewing.sg.SGAddressing;
+import gcewing.sg.SGCraft;
+import gcewing.sg.tileentities.SGBaseTE;
 
 public class SGBaseScreen extends SGScreen {
 

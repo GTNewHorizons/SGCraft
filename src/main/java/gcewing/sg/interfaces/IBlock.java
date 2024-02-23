@@ -1,12 +1,15 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
-import gcewing.sg.utils.ModelSpec;
 import net.minecraft.world.IBlockAccess;
+
 import org.joml.Vector3i;
 
-public interface IBlock extends ITextureConsumer{
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
+
+public interface IBlock extends ITextureConsumer {
+
     void setRenderType(int id);
 
     String getQualifiedRendererClassName();

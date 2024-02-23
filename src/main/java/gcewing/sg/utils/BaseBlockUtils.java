@@ -11,10 +11,6 @@ import static gcewing.sg.utils.BaseUtils.oppositeFacing;
 
 import java.util.Collection;
 
-import gcewing.sg.worldgen.EnumWorldBlockLayer;
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -22,9 +18,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import org.joml.Vector3i;
+
 import com.google.common.collect.ImmutableMap;
 
-import org.joml.Vector3i;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.worldgen.EnumWorldBlockLayer;
 
 public class BaseBlockUtils {
 
@@ -39,7 +40,11 @@ public class BaseBlockUtils {
      */
     public static boolean blockIsGettingExternallyPowered(World world, Vector3i pos) {
         for (EnumFacing side : facings) {
-            if (isPoweringSide(world, new Vector3i(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()).add(pos), side)) return true;
+            if (isPoweringSide(
+                    world,
+                    new Vector3i(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()).add(pos),
+                    side))
+                return true;
         }
         return false;
     }
@@ -49,7 +54,8 @@ public class BaseBlockUtils {
         if (block.isProvidingWeakPower(world, pos.x, pos.y, pos.z, side.ordinal()) > 0) return true;
         if (block.shouldCheckWeakPower(world, pos.x, pos.y, pos.z, side.ordinal())) {
             for (EnumFacing side2 : facings) if (side2 != oppositeFacing(side)) {
-                Vector3i pos2 = new Vector3i(side2.getFrontOffsetX(), side2.getFrontOffsetY(), side2.getFrontOffsetZ()).add(pos);
+                Vector3i pos2 = new Vector3i(side2.getFrontOffsetX(), side2.getFrontOffsetY(), side2.getFrontOffsetZ())
+                        .add(pos);
                 Block block2 = world.getBlock(pos2.x, pos2.y, pos2.z);
                 if (block2.isProvidingStrongPower(world, pos2.x, pos2.y, pos2.z, side2.ordinal()) > 0) return true;
             }

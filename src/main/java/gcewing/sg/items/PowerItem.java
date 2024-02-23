@@ -8,11 +8,12 @@ package gcewing.sg.items;
 
 import java.util.List;
 
-import gcewing.sg.blocks.base.BaseItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import gcewing.sg.blocks.base.BaseItemBlock;
 
 public class PowerItem extends BaseItemBlock {
 

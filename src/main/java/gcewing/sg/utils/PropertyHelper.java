@@ -1,6 +1,7 @@
 package gcewing.sg.utils;
 
 import com.google.common.base.Objects;
+
 import gcewing.sg.interfaces.IProperty;
 
 public abstract class PropertyHelper<T extends Comparable> implements IProperty<T> {

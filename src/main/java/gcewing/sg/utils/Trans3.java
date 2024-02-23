@@ -14,6 +14,7 @@ import java.util.List;
 
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+
 import org.joml.Vector3i;
 
 public class Trans3 {
@@ -29,7 +30,6 @@ public class Trans3 {
     public static Trans3 blockCenter(Vector3i pos) {
         return new Trans3(Vector3.blockCenter(pos));
     }
-
 
     public static Trans3 blockCenterSideTurn(int side, int turn) {
         return sideTurn(Vector3.blockCenter, side, turn);
@@ -77,7 +77,6 @@ public class Trans3 {
     public Trans3 rotate(Matrix3 m) {
         return new Trans3(offset, rotation.mul(m), scaling);
     }
-
 
     public Trans3 scale(double s) {
         return new Trans3(offset, rotation, scaling * s);
@@ -168,7 +167,6 @@ public class Trans3 {
         return rotation.imul(u).mul(1.0 / scaling);
     }
 
-
     public AxisAlignedBB t(AxisAlignedBB box) {
         return boxEnclosing(p(box.minX, box.minY, box.minZ), p(box.maxX, box.maxY, box.maxZ));
     }
@@ -176,7 +174,6 @@ public class Trans3 {
     public AxisAlignedBB box(Vector3 p0, Vector3 p1) {
         return boxEnclosing(p(p0), p(p1));
     }
-
 
     public static AxisAlignedBB boxEnclosing(Vector3 p, Vector3 q) {
         return AxisAlignedBB.getBoundingBox(
@@ -195,7 +192,6 @@ public class Trans3 {
     public EnumFacing it(EnumFacing f) {
         return iv(f).facing();
     }
-
 
     public void addBox(double x0, double y0, double z0, double x1, double y1, double z1, List list) {
         AxisAlignedBB box = boxEnclosing(p(x0, y0, z0), p(x1, y1, z1));

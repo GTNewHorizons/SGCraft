@@ -7,9 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import gcewing.sg.BlockStateBase;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 
 import com.google.common.base.Function;
@@ -22,6 +19,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
+
+import gcewing.sg.BlockStateBase;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 
 public class BlockState {
 

@@ -10,8 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Vector3;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
@@ -20,6 +18,8 @@ import com.google.gson.Gson;
 import gcewing.sg.interfaces.IModel;
 import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
 
 public class BaseModel implements IModel {
 

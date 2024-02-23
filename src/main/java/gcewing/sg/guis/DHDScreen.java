@@ -23,12 +23,6 @@ import static org.lwjgl.opengl.GL11.glPopAttrib;
 import static org.lwjgl.opengl.GL11.glPushAttrib;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
-import gcewing.sg.SGAddressing;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.packets.SGChannel;
-import gcewing.sg.SGCraft;
-import gcewing.sg.SGState;
-import gcewing.sg.tileentities.DHDTE;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +33,13 @@ import net.minecraft.world.World;
 import org.joml.Vector3i;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+
+import gcewing.sg.SGAddressing;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGState;
+import gcewing.sg.packets.SGChannel;
+import gcewing.sg.tileentities.DHDTE;
+import gcewing.sg.tileentities.SGBaseTE;
 
 public class DHDScreen extends SGScreen {
 

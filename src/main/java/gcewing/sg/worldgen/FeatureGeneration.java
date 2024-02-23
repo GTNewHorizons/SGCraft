@@ -14,14 +14,15 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import gcewing.sg.BaseConfiguration;
-import gcewing.sg.SGCraft;
 import net.minecraft.world.gen.structure.ComponentScatteredFeaturePieces;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
+
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.SGCraft;
 
 public class FeatureGeneration {
 

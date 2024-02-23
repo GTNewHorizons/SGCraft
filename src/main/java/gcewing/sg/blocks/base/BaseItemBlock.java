@@ -10,7 +10,6 @@ import static gcewing.sg.utils.BaseBlockUtils.getBlockStateFromMeta;
 import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
 import static gcewing.sg.utils.BaseUtils.facings;
 
-import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -18,9 +17,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import org.joml.Vector3i;
+
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IItem;
 import gcewing.sg.utils.ModelSpec;
-import org.joml.Vector3i;
 
 public class BaseItemBlock extends ItemBlock implements IItem {
 

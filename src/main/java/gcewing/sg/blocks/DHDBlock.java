@@ -6,15 +6,6 @@
 
 package gcewing.sg.blocks;
 
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.SGCraft;
-import gcewing.sg.guis.SGGui;
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.blocks.orientation.Orient4WaysByState;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IOrientationHandler;
-import gcewing.sg.tileentities.DHDTE;
-import gcewing.sg.utils.Vector3;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,8 +15,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import gcewing.sg.utils.ModelSpec;
 import org.joml.Vector3i;
+
+import gcewing.sg.SGCraft;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.blocks.orientation.Orient4WaysByState;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IOrientationHandler;
+import gcewing.sg.tileentities.DHDTE;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.Vector3;
 
 public class DHDBlock extends BaseBlock<DHDTE> {
 

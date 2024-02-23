@@ -6,9 +6,6 @@
 
 package gcewing.sg.utils;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -17,20 +14,12 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.GameRules;
@@ -40,8 +29,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapStorage;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import org.joml.Vector3i;
 
 public class BaseUtils {
@@ -223,7 +210,7 @@ public class BaseUtils {
         return facings[dir.ordinal() ^ 1];
     }
 
-    public static MovingObjectPosition newMovingObjectPosition(Vec3 hitVec, int sideHit,Vector3i pos) {
+    public static MovingObjectPosition newMovingObjectPosition(Vec3 hitVec, int sideHit, Vector3i pos) {
         return new MovingObjectPosition(pos.x, pos.y, pos.z, sideHit, hitVec, true);
     }
 

@@ -6,14 +6,16 @@
 
 package gcewing.sg.blocks;
 
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.blocks.orientation.Orient4WaysByState;
-import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
+
 import org.joml.Vector3i;
+
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.blocks.orientation.Orient4WaysByState;
+import gcewing.sg.interfaces.IOrientationHandler;
 
 public class SGInterfaceBlock<TE extends TileEntity> extends BaseBlock<TE> {
 

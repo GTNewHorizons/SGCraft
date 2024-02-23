@@ -13,10 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import gcewing.sg.SGCraft;
 import gcewing.sg.interfaces.IComputerInterface;
 import gcewing.sg.interfaces.ITickable;
 import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGInterfaceTE;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
