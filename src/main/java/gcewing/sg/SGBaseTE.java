@@ -1467,7 +1467,7 @@ public class SGBaseTE extends BaseTileInventory {
         Trans3 t = localToGlobalTransformation();
         Vector3 p = t.ip(Vector3.blockCenter(cpos));
         if (p.y == 0) {
-            int i = 2 + p.roundX();
+            int i = 2 + (int) Math.round(p.x);
             if (i >= 0 && i < 5) return getStackInSlot(firstCamouflageSlot + i);
         }
         return null;

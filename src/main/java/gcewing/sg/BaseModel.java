@@ -58,7 +58,10 @@ public class BaseModel implements IModel {
             double[][] p = face.vertices;
             int[] t = face.triangles[0];
             // face.centroid = Vector3.average(p[t[0]], p[t[1]], p[t[2]]);
-            face.normal = Vector3.unit(Vector3.sub(p[t[1]], p[t[0]]).cross(Vector3.sub(p[t[2]], p[t[0]])));
+            Vector3 vector0 = new Vector3(p[t[0]][0], p[t[0]][1], p[t[0]][2]);
+            Vector3 vector1 = new Vector3(p[t[1]][0], p[t[1]][1], p[t[1]][2]);
+            Vector3 vector2 = new Vector3(p[t[2]][0], p[t[2]][1], p[t[2]][2]);
+            face.normal = Vector3.unit(vector1.sub(vector0)).cross(vector2.sub(vector0));
         }
     }
 

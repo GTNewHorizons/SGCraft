@@ -218,7 +218,7 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
             markWorldBlockForUpdate(world, pos);
             unmergeRing(world, pos);
         }
-        if (goBang && explosionRadius > 0) explode(world, new Vector3(pos).add(0.5, 2.5, 0.5), explosionRadius);
+        if (goBang && explosionRadius > 0) explode(world, new Vector3(pos.x, pos.y, pos.z).add(new Vector3(0.5, 2.5, 0.5)), explosionRadius);
     }
 
     void explode(World world, Vector3 p, double s) {

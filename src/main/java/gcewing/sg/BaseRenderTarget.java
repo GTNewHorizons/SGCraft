@@ -71,7 +71,7 @@ public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
 
     public void setNormal(Vector3 n) {
         normal = n;
-        face = n.facing();
+        face = Vector3.facing(n);
         shade = (float) (0.6 * n.x * n.x + 0.8 * n.z * n.z + (n.y > 0 ? 1 : 0.5) * n.y * n.y);
     }
 

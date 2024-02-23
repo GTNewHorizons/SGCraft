@@ -6,7 +6,6 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.Vector3.getDirectionVec;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -157,11 +156,11 @@ public class Trans3 {
     }
 
     public Vector3 v(EnumFacing f) {
-        return v(getDirectionVec(f));
+        return v(Vec3i.getDirectionVec(f));
     }
 
     public Vector3 iv(EnumFacing f) {
-        return iv(getDirectionVec(f));
+        return iv(Vec3i.getDirectionVec(f));
     }
 
     public Vector3 iv(Vector3 u) {
@@ -189,11 +188,11 @@ public class Trans3 {
     }
 
     public EnumFacing t(EnumFacing f) {
-        return v(f).facing();
+        return Vector3.facing(v(f));
     }
 
     public EnumFacing it(EnumFacing f) {
-        return iv(f).facing();
+        return Vector3.facing(iv(f));
     }
 
 

@@ -129,7 +129,8 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         for (int i = -linkRangeX; i <= linkRangeX; i++) {
             for (int j = -linkRangeY; j <= linkRangeY; j++) for (int k = 1; k <= linkRangeZ; k++) {
                 Vector3 p = t.p(i, j, -k);
-                Vector3i blockPos = new Vector3i(p.floorX(), p.floorY(), p.floorZ());
+                Vector3 blockPosSrc = Vector3.floorVector(p);
+                Vector3i blockPos = new Vector3i((int) blockPosSrc.x, (int) blockPosSrc.y,(int) blockPosSrc.z);
 
                 if (debugLink) SGCraft.log.debug(String.format("DHDTE.checkForLink: probing %s", blockPos));
 
