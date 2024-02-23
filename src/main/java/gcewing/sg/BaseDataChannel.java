@@ -71,30 +71,6 @@ public class BaseDataChannel {
         return openTarget(message, Side.SERVER, OutboundTarget.PLAYER, player);
     }
 
-    public ChannelOutput openAllPlayers(String message) {
-        return openTarget(message, Side.SERVER, OutboundTarget.ALL);
-    }
-
-    public ChannelOutput openAllAround(NetworkRegistry.TargetPoint point, String message) {
-        return openTarget(message, Side.SERVER, OutboundTarget.ALLAROUNDPOINT, point);
-    }
-
-    public ChannelOutput openDimension(int dimensionId, String message) {
-        return openTarget(message, Side.SERVER, OutboundTarget.DIMENSION, dimensionId);
-    }
-
-    public ChannelOutput openServerContainer(String message) {
-        ChannelOutput out = openServer(".container.");
-        out.writeUTF(message);
-        return out;
-    }
-
-    public ChannelOutput openClientContainer(EntityPlayer player, String message) {
-        ChannelOutput out = openPlayer(player, ".container.");
-        out.writeUTF(message);
-        return out;
-    }
-
     @ServerMessageHandler(".container.")
     public void onServerContainerMessage(EntityPlayer player, ChannelInput data) {
         String message = data.readUTF();

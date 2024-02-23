@@ -22,13 +22,8 @@ public class Vector3 {
     public static Vector3 unitZ = new Vector3(0, 0, 1);
 
     public static Vector3 unitNX = new Vector3(-1, 0, 0);
-    public static Vector3 unitNY = new Vector3(0, -1, 0);
     public static Vector3 unitNZ = new Vector3(0, 0, -1);
 
-    public static Vector3 unitPYNZ = new Vector3(0, 0.707, -0.707);
-    public static Vector3 unitPXPY = new Vector3(0.707, 0.707, 0);
-    public static Vector3 unitPYPZ = new Vector3(0, 0.707, 0.707);
-    public static Vector3 unitNXPY = new Vector3(-0.707, 0.707, 0);
 
     public static Vector3 blockCenter(double x, double y, double z) {
         return blockCenter.add(x, y, z);
@@ -62,10 +57,6 @@ public class Vector3 {
         this(getDirectionVec(f));
     }
 
-    public Vec3 toVec3() {
-        return Vec3.createVectorHelper(x, y, z);
-    }
-
     public String toString() {
         return String.format("(%.3f,%.3f,%.3f)", x, y, z);
     }
@@ -96,14 +87,6 @@ public class Vector3 {
 
     public Vector3 mul(double c) {
         return new Vector3(c * x, c * y, c * z);
-    }
-
-    public double dot(Vector3 v) {
-        return dot(v.x, v.y, v.z);
-    }
-
-    public double dot(double[] v) {
-        return dot(v[0], v[1], v[2]);
     }
 
     public double dot(EnumFacing f) {
@@ -140,28 +123,6 @@ public class Vector3 {
         return v.mul(1 / v.length());
     }
 
-    public static Vector3 average(Vector3... va) {
-        double x = 0, y = 0, z = 0;
-        for (Vector3 v : va) {
-            x += v.x;
-            y += v.y;
-            z += v.z;
-        }
-        int n = va.length;
-        return new Vector3(x / n, y / n, z / n);
-    }
-
-    public static Vector3 average(double[]... va) {
-        double x = 0, y = 0, z = 0;
-        for (double[] v : va) {
-            x += v[0];
-            y += v[1];
-            z += v[2];
-        }
-        int n = va.length;
-        return new Vector3(x / n, y / n, z / n);
-    }
-
     public int floorX() {
         return (int) Math.floor(x);
     }
@@ -177,15 +138,6 @@ public class Vector3 {
     public int roundX() {
         return (int) Math.round(x);
     }
-
-    public int roundY() {
-        return (int) Math.round(y);
-    }
-
-    public int roundZ() {
-        return (int) Math.round(z);
-    }
-
     public EnumFacing facing() {
         return facing(x, y, z);
     }
@@ -203,10 +155,6 @@ public class Vector3 {
         if (ay >= ax && ay >= az) return dy < 0 ? EnumFacing.DOWN : EnumFacing.UP;
         else if (ax >= az) return dx > 0 ? EnumFacing.WEST : EnumFacing.EAST; // E/W are swapped between 1.7 and 1.8
         return dz < 0 ? EnumFacing.NORTH : EnumFacing.SOUTH;
-    }
-
-    public static Vector3[] faceBasis(EnumFacing f) {
-        return faceBases[f.ordinal()];
     }
 
     public static Vector3[][] faceBases = { { unitX, unitZ }, // DOWN

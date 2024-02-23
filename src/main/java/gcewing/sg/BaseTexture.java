@@ -52,10 +52,6 @@ public abstract class BaseTexture implements ITexture {
         return new Sprite(icon);
     }
 
-    public static Image fromImage(ResourceLocation location) {
-        return new Image(location);
-    }
-
     public ResourceLocation location() {
         return location;
     }
@@ -165,29 +161,6 @@ public abstract class BaseTexture implements ITexture {
 
     }
 
-    public static class Solid extends BaseTexture {
-
-        public Solid(double red, double green, double blue) {
-            this.red = red;
-            this.green = green;
-            this.blue = blue;
-        }
-
-        @Override
-        public boolean isSolid() {
-            return true;
-        }
-
-        public double interpolateU(double u) {
-            return 0;
-        }
-
-        public double interpolateV(double v) {
-            return 0;
-        }
-
-    }
-
     public static class TileSet extends Proxy implements ITiledTexture {
 
         public double tileSizeU, tileSizeV;
@@ -227,30 +200,4 @@ public abstract class BaseTexture implements ITexture {
         }
 
     }
-
-    public static class Debug extends Sprite {
-
-        public Debug(IIcon icon) {
-            super(icon);
-        }
-
-        @Override
-        public double interpolateU(double u) {
-            double iu = super.interpolateU(u);
-            SGCraft.log.debug(
-                    String.format("BaseTexture: %s u (%s - %s)", icon.getIconName(), icon.getMinU(), icon.getMaxU()));
-            SGCraft.log.debug(String.format("BaseTexture: u %s --> %s", u, iu));
-            return iu;
-        }
-
-        public double interpolateV(double v) {
-            double iv = super.interpolateV(v);
-            SGCraft.log.debug(
-                    String.format("BaseTexture: %s v (%s - %s)", icon.getIconName(), icon.getMinV(), icon.getMaxV()));
-            SGCraft.log.debug(String.format("BaseTexture: v %s --> %s", v, iv));
-            return iv;
-        }
-
-    }
-
 }

@@ -58,14 +58,6 @@ public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
         this.side = (byte) side;
     }
 
-    public void setTurn(int turn) {
-        this.turn = (byte) turn;
-    }
-
-    public Trans3 localToGlobalRotation() {
-        return localToGlobalTransformation(Vector3.zero);
-    }
-
     public Trans3 localToGlobalTransformation() {
         return localToGlobalTransformation(Vector3.blockCenter(xCoord, yCoord, zCoord));
     }
@@ -236,10 +228,6 @@ public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
             stack.setTagCompound(tag);
         }
         return stack;
-    }
-
-    public ItemStack newItemStack(int size) {
-        return blockStackWithTileEntity(getBlockType(), size, this);
     }
 
     @Override

@@ -32,7 +32,6 @@ public class BaseOrientation {
 
     public static class Orient4WaysByState implements IOrientationHandler {
 
-        // public static IProperty FACING = PropertyDirection.create("facing", Plane.HORIZONTAL);
         public static IProperty FACING = new PropertyTurn("facing");
 
         public void defineProperties(BaseBlock block) {

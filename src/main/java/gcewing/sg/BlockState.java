@@ -23,7 +23,6 @@ import com.google.common.collect.Table;
 
 public class BlockState {
 
-    private static final Joiner COMMA_JOINER = Joiner.on(", ");
     private static final Function<IProperty, String> GET_NAME_FUNC = new Function<IProperty, String>() {
 
         public String apply(IProperty p_apply_1_) {
@@ -72,10 +71,6 @@ public class BlockState {
         this.validStates = ImmutableList.<IBlockState>copyOf(list);
     }
 
-    public ImmutableList<IBlockState> getValidStates() {
-        return this.validStates;
-    }
-
     private List<Iterable<Comparable>> getAllowedValues() {
         List<Iterable<Comparable>> list = Lists.<Iterable<Comparable>>newArrayList();
 
@@ -92,10 +87,6 @@ public class BlockState {
 
     public Block getBlock() {
         return this.block;
-    }
-
-    public Collection<IProperty> getProperties() {
-        return this.properties;
     }
 
     public String toString() {
@@ -125,13 +116,6 @@ public class BlockState {
             } else {
                 return (T) ((Comparable) property.getValueClass().cast(this.properties.get(property)));
             }
-        }
-
-        protected StateImplementation(Block blockIn, ImmutableMap<IProperty, Comparable> propertiesIn,
-                ImmutableTable<IProperty, Comparable, IBlockState> propertyValueTable) {
-            this.block = blockIn;
-            this.properties = propertiesIn;
-            this.propertyValueTable = propertyValueTable;
         }
 
         public <T extends Comparable<T>, V extends T> IBlockState withProperty(IProperty<T> property, V value) {

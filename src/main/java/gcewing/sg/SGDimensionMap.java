@@ -16,7 +16,6 @@ import net.minecraft.world.WorldSavedData;
 
 import com.google.common.primitives.Ints;
 
-// import net.minecraftforge.common.*;
 
 public class SGDimensionMap extends WorldSavedData {
 

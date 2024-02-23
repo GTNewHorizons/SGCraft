@@ -77,9 +77,4 @@ public class Matrix3 {
     public Vector3 imul(Vector3 v) {
         return imul(v.x, v.y, v.z);
     }
-
-    public void dump() {
-        for (int i = 0; i < 3; i++) SGCraft.log.debug(String.format("[%6.3f %6.3f %6.3f]", m[i][0], m[i][1], m[i][2]));
-    }
-
 }

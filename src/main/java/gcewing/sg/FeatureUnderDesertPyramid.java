@@ -23,10 +23,6 @@ public class FeatureUnderDesertPyramid extends StructureComponent {
 
     protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {}
 
-    public FeatureUnderDesertPyramid() {
-
-    }
-
     public FeatureUnderDesertPyramid(StructureComponent base) {
         super(0);
         if (FeatureGeneration.debugStructures)

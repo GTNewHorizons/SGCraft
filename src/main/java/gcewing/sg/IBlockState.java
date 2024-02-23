@@ -5,7 +5,6 @@ import java.util.Collection;
 import net.minecraft.block.Block;
 
 import com.google.common.collect.ImmutableMap;
-// import net.minecraft.block.properties.IProperty;
 
 public interface IBlockState {
 

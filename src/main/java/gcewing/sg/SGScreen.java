@@ -62,14 +62,6 @@ public class SGScreen extends BaseGui.Screen {
         drawCenteredString(this.fontRendererObj, address, x, y, 0xffffff);
     }
 
-    // void drawAddressString(int x, int y, String address, String caret) {
-    // drawCenteredString(this.fontRendererObj, padAddress(address, caret), x, y, 0xffffff);
-    // }
-
-    // String padAddress(String address, String caret) {
-    // return SGAddressing.padAddress(address, caret, );
-    // }
-
     void bindSGTexture(String name) {
         bindSGTexture(name, 1, 1);
     }

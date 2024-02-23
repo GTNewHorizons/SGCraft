@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
-// import net.minecraft.block.properties.IProperty;
 
 public abstract class BlockStateBase implements IBlockState {
 

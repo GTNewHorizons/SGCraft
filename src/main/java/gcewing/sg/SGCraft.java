@@ -155,10 +155,6 @@ public class SGCraft extends BaseMod<SGCraftClient> {
         }
     }
 
-    public static boolean isValidStargateUpgrade(Item item) {
-        return item == sgChevronUpgrade || item == sgIrisUpgrade;
-    }
-
     @Override
     protected void registerOres() {
         addOre("oreNaquadah", naquadahOre);
@@ -361,7 +357,6 @@ public class SGCraft extends BaseMod<SGCraftClient> {
             return;
         }
 
-        // SGCraft.log.trace("SGCraft.onChunkUnload: " + chunk.xPosition + "," + chunk.zPosition);
         for (Object obj : getChunkTileEntityMap(chunk).values()) {
             if (obj instanceof SGBaseTE) {
                 SGBaseTE te = (SGBaseTE) obj;

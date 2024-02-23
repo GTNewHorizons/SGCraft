@@ -43,8 +43,6 @@ public class BaseGui {
 
     public static class Screen extends GuiContainer implements BaseMod.ISetMod {
 
-        final static int defaultTextColor = 0x404040;
-
         protected BaseMod mod;
 
         protected Root root;
@@ -122,10 +120,6 @@ public class BaseGui {
 
         protected void onClose() {}
 
-        public void bindTexture(String path) {
-            bindTexture(path, 1, 1);
-        }
-
         public void bindTexture(String path, int usize, int vsize) {
             bindTexture(mod.client.textureLocation(path), usize, vsize);
         }
@@ -147,20 +141,6 @@ public class BaseGui {
                             vsize,
                             gstate.uscale,
                             gstate.vscale));
-        }
-
-        public void gSave() {
-            gstate = new GState(gstate);
-        }
-
-        public void gRestore() {
-            if (gstate.previous != null) {
-                gstate = gstate.previous;
-                mc.getTextureManager().bindTexture(gstate.texture);
-                return;
-            }
-
-            SGCraft.log.warn("BaseGui: Warning: Graphics state stack underflow");
         }
 
         public void drawRect(double x, double y, double w, double h) {
@@ -267,14 +247,6 @@ public class BaseGui {
             gstate.textColor = hex;
         }
 
-        public void setTextColor(double red, double green, double blue) {
-            setTextColor(packedColor(red, green, blue));
-        }
-
-        public void setTextShadow(boolean state) {
-            gstate.textShadow = state;
-        }
-
         public void drawString(String s, int x, int y) {
             fontRendererObj.drawString(s, x, y, gstate.textColor, gstate.textShadow);
         }
@@ -291,14 +263,6 @@ public class BaseGui {
 
         public void drawTitle(String s) {
             drawCenteredString(s, xSize / 2, 4);
-        }
-
-        public void drawInventoryName(IInventory inv, int x, int y) {
-            drawString(inventoryName(inv), x, y);
-        }
-
-        public void drawPlayerInventoryName() {
-            drawString(playerInventoryName(), 8, ySize - 96 + 2);
         }
 
         public static String inventoryName(IInventory inv) {
@@ -403,8 +367,6 @@ public class BaseGui {
             parent.setFocus(newFocus);
             focusOn(parent);
         }
-
-        public void focusChanged(boolean state) {}
 
     }
 
@@ -566,10 +528,6 @@ public class BaseGui {
             return this.keyPressed(c, key);
         }
 
-        public static int stringWidth(String s) {
-            return Minecraft.getMinecraft().fontRenderer.getStringWidth(s);
-        }
-
         public void addPopup(int x, int y, IWidget widget) {
             IWidget w = this;
             while (!(w instanceof Root)) {
@@ -578,17 +536,6 @@ public class BaseGui {
                 w = w.parent();
             }
             ((Root) w).addPopup(x, y, widget);
-        }
-
-        public void removePopup() {
-            Root root = getRoot();
-            root.remove(this);
-        }
-
-        public Root getRoot() {
-            IWidget w = this;
-            while (w != null && !(w instanceof Root)) w = w.parent();
-            return (Root) w;
         }
 
     }
@@ -810,14 +757,6 @@ public class BaseGui {
 
     }
 
-    public static Ref ref(Object target, String name) {
-        return new FieldRef(target, name);
-    }
-
-    public static Ref ref(Object target, String getterName, String setterName) {
-        return new PropertyRef(target, getterName, setterName);
-    }
-
     public interface Action {
 
         void perform();
@@ -847,10 +786,6 @@ public class BaseGui {
 
     }
 
-    public static Action action(Object target, String name) {
-        return new MethodAction(target, name);
-    }
-
     public static class GState {
 
         public GState previous;
@@ -867,18 +802,5 @@ public class BaseGui {
             textColor = defaultTextColor;
             textShadow = false;
         }
-
-        public GState(GState previous) {
-            this.previous = previous;
-            this.uscale = previous.uscale;
-            this.vscale = previous.vscale;
-            this.red = previous.red;
-            this.green = previous.green;
-            this.blue = previous.blue;
-            this.textColor = previous.textColor;
-            this.textShadow = previous.textShadow;
-            this.texture = previous.texture;
-        }
-
     }
 }

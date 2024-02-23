@@ -78,8 +78,6 @@ public class SGBaseTE extends BaseTileInventory {
     static boolean debugConnect = false;
     static boolean debugTransientDamage = false;
     static boolean debugTeleport = false;
-
-    public final static String symbolChars = SGAddressing.symbolChars;
     public final static int numRingSymbols = SGAddressing.numSymbols;
     public final static double ringSymbolAngle = 360.0 / numRingSymbols;
     public final static double irisZPosition = 0.1;
@@ -271,11 +269,6 @@ public class SGBaseTE extends BaseTileInventory {
         }
     }
 
-    public int dimension() {
-        if (worldObj != null) return getWorldDimensionId(worldObj);
-        return -999;
-    }
-
     @Override
     public void readContentsFromNBT(NBTTagCompound nbt) {
         super.readContentsFromNBT(nbt);
@@ -341,19 +334,11 @@ public class SGBaseTE extends BaseTileInventory {
         return state != SGState.Idle && state != SGState.Disconnecting;
     }
 
-    static boolean isValidSymbolChar(String c) {
-        return SGAddressing.isValidSymbolChar(c);
-    }
-
     static char symbolToChar(int i) {
         return SGAddressing.symbolToChar(i);
     }
 
     static int charToSymbol(char c) {
-        return SGAddressing.charToSymbol(c);
-    }
-
-    static int charToSymbol(String c) {
         return SGAddressing.charToSymbol(c);
     }
 
@@ -392,11 +377,6 @@ public class SGBaseTE extends BaseTileInventory {
             return chevronAngles[c9][bc];
         }
         return defaultChevronAngle;
-    }
-
-    Item getItemInSlot(int slot) {
-        ItemStack stack = getStackInSlot(slot);
-        return stack != null ? stack.getItem() : null;
     }
 
     public String getHomeAddress() throws SGAddressing.AddressingError {
@@ -1486,12 +1466,6 @@ public class SGBaseTE extends BaseTileInventory {
         }
     }
 
-    public int numItemsInSlot(int slot) {
-        ItemStack stack = getStackInSlot(slot);
-        if (stack != null) return stack.stackSize;
-        return 0;
-    }
-
     protected int baseCornerCamouflage() {
         return max(baseCamouflageAt(0), baseCamouflageAt(4));
     }
@@ -1499,7 +1473,6 @@ public class SGBaseTE extends BaseTileInventory {
     protected int baseCamouflageAt(int i) {
         ItemStack stack = getStackInSlot(i);
         if (stack != null) {
-            Item item = stack.getItem();
             Block block = Block.getBlockFromItem(stack.getItem());
             if (block != null) {
                 if (block instanceof BlockSlab) return 1;

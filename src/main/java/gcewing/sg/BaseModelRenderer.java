@@ -26,12 +26,6 @@ public class BaseModelRenderer implements ICustomRenderer {
     protected ITexture[] textures;
     protected Vector3 origin;
 
-    // private static Trans3 itemTrans = Trans3.blockCenterSideTurn(0, 0);
-
-    public BaseModelRenderer(IModel model, ITexture... textures) {
-        this(model, Vector3.zero, textures);
-    }
-
     public BaseModelRenderer(IModel model, Vector3 origin, ITexture... textures) {
         this.model = model;
         this.textures = textures;

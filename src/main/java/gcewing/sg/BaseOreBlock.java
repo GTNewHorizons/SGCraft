@@ -13,8 +13,6 @@ import net.minecraft.item.Item;
 
 public class BaseOreBlock extends BaseBlock {
 
-    private Random rand = new Random();
-
     public BaseOreBlock() {
         super(Material.rock);
     }

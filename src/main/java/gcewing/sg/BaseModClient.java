@@ -61,7 +61,6 @@ import gcewing.sg.BaseMod.ITextureConsumer;
 import gcewing.sg.BaseMod.ModelSpec;
 import gcewing.sg.BaseMod.VSBinding;
 import org.joml.Vector3i;
-// import static gcewing.sg.BaseBlockUtils.*;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 
@@ -232,16 +231,8 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         }
     }
 
-    public static void openClientGui(GuiScreen gui) {
-        FMLClientHandler.instance().getClient().displayGuiScreen(gui);
-    }
-
     public ResourceLocation textureLocation(String path) {
         return base.resourceLocation("textures/" + path);
-    }
-
-    public void bindTexture(String path) {
-        bindTexture(textureLocation(path));
     }
 
     public static void bindTexture(ResourceLocation rsrc) {
@@ -669,10 +660,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         // Cache is keyed by texture name without "textures/"
         ResourceLocation loc = base.resourceLocation(name);
         return textureCaches[type].get(loc);
-    }
-
-    public IIcon getIcon(int type, String name) {
-        return ((BaseTexture.Sprite) getTexture(type, name)).icon;
     }
 
     @SubscribeEvent

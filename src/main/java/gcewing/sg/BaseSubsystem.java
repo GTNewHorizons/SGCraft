@@ -62,21 +62,4 @@ public class BaseSubsystem<MOD extends BaseMod, CLIENT extends BaseModClient> {
 
     protected void registerOtherClient() {}
 
-    public Item searchForItem(String... names) {
-        Item result = null;
-        for (String name : names) {
-            result = findItem(name);
-            if (result != null) return result;
-        }
-        SGCraft.log.debug(
-                String.format("%s: Unable to find an item with any of the following names:", getClass().getName()));
-        for (String name : names) SGCraft.log.debug(String.format(" %s", name));
-        return null;
-    }
-
-    public static Item findItem(String name) {
-        String[] parts = name.split(":");
-        return GameRegistry.findItem(parts[0], parts[1]);
-    }
-
 }

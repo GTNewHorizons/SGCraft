@@ -14,8 +14,6 @@ import org.joml.Vector3i;
 
 public class SGBaseContainer extends BaseContainer {
 
-    static final int numFuelSlotColumns = 2;
-
     SGBaseTE te;
 
     public static SGBaseContainer create(EntityPlayer player, World world, Vector3i pos) {

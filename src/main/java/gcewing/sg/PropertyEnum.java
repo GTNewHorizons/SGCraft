@@ -9,7 +9,6 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-// import net.minecraft.util.IStringSerializable;
 
 public class PropertyEnum<T extends Enum> extends PropertyHelper<T> {
 
