@@ -151,7 +151,7 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
         Trans3 t = localToGlobalTransformation(world, pos);
         for (int i = -2; i <= 2; i++) for (int j = 0; j <= 4; j++) if (!(i == 0 && j == 0)) {
             // BlockPos rp = pos.add(i * dx, j, i * dz);
-            Vector3i rp = t.p(i, j, 0).blockPos();
+            Vector3i rp = Trans3.intVector(t.p(new Vector3(i, j, 0)));
             int type = getRingBlockType(world, rp);
             int pat = pattern[4 - j][2 + i];
             if (pat != 0 && type != pat) {
@@ -165,7 +165,7 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
         te.setMerged(true);
         markWorldBlockForUpdate(world, pos);
         for (int i = -2; i <= 2; i++) for (int j = 0; j <= 4; j++) if (!(i == 0 && j == 0)) {
-            Vector3i rp = t.p(i, j, 0).blockPos();
+            Vector3i rp = Trans3.intVector(t.p(new Vector3(i, j, 0)));
             Block block = getWorldBlock(world, rp);
             if (block instanceof SGRingBlock) ((SGRingBlock) block).mergeWith(world, rp, pos);
         }

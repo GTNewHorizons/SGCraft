@@ -759,7 +759,7 @@ public class SGBaseTE extends BaseTileInventory {
         List<ISGEnergySource> result = new ArrayList<ISGEnergySource>();
         Trans3 t = localToGlobalTransformation();
         for (int i = -2; i <= 2; i++) {
-            Vector3i blockPos = t.p(i, -1, 0).blockPos();
+            Vector3i blockPos = Trans3.intVector(t.p(new Vector3(i, -1, 0)));
             if (debugEnergyUse) SGCraft.log.debug(String.format("SGBaseTE.findEnergySources: Checking %s", blockPos));
             TileEntity nte = getWorldTileEntity(worldObj, blockPos);
             if (nte instanceof ISGEnergySource) result.add((ISGEnergySource) nte);
@@ -805,8 +805,8 @@ public class SGBaseTE extends BaseTileInventory {
 
     void performTransientDamage() {
         Trans3 t = localToGlobalTransformation();
-        Vector3 p0 = t.p(-1.5, 0.5, 0.5);
-        Vector3 p1 = t.p(1.5, 3.5, 5.5);
+        Vector3 p0 = t.p(new Vector3(-1.5, 0.5, 0.5));
+        Vector3 p1 = t.p(new Vector3(1.5, 3.5, 5.5));
         Vector3 q0 = p0.min(p1);
         Vector3 q1 = p0.max(p1);
         AxisAlignedBB box = newAxisAlignedBB(q0.x, q0.y, q0.z, q1.x, q1.y, q1.z);
@@ -819,7 +819,7 @@ public class SGBaseTE extends BaseTileInventory {
         List<EntityLivingBase> ents = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, box);
         for (EntityLivingBase ent : ents) {
             Vector3 ep = new Vector3(ent.posX, ent.posY, ent.posZ);
-            Vector3 gp = t.p(0, 2, 0.5);
+            Vector3 gp = t.p(new Vector3(0, 2, 0.5));
             double dist = ep.distance(gp);
             if (debugTransientDamage)
                 SGCraft.log.debug(String.format("SGBaseTE.performTransientDamage: found %s", ent));
@@ -933,8 +933,8 @@ public class SGBaseTE extends BaseTileInventory {
         double vx = entity.posX - prevPos.x;
         double vy = entity.posY - prevPos.y;
         double vz = entity.posZ - prevPos.z;
-        Vector3 p1 = t.ip(entity.posX, entity.posY, entity.posZ);
-        Vector3 p0 = t.ip(2 * prevPos.x - entity.posX, 2 * prevPos.y - entity.posY, 2 * prevPos.z - entity.posZ);
+        Vector3 p1 = t.ip(new Vector3(entity.posX, entity.posY, entity.posZ));
+        Vector3 p0 = t.ip(new Vector3(2 * prevPos.x - entity.posX, 2 * prevPos.y - entity.posY, 2 * prevPos.z - entity.posZ));
         double z0 = 0.0;
         if (p0.z < z0 || p1.z >= z0 || p1.z <= z0 - 5.0) {
             return;
@@ -1010,11 +1010,11 @@ public class SGBaseTE extends BaseTileInventory {
                             entity.lastTickPosY,
                             entity.lastTickPosZ));
         }
-        Vector3 p = t1.ip(entity.posX, entity.posY, entity.posZ); // local position
-        Vector3 v = t1.iv(entity.motionX, entity.motionY, entity.motionZ); // local velocity
+        Vector3 p = t1.ip(new Vector3(entity.posX, entity.posY, entity.posZ)); // local position
+        Vector3 v = t1.iv(new Vector3(entity.motionX, entity.motionY, entity.motionZ)); // local velocity
         Vector3 r = t1.iv(yawVector(entity)); // local facing
-        Vector3 q = t2.p(-p.x, p.y, -p.z); // new global position
-        Vector3 u = t2.v(-v.x, v.y, -v.z); // new global velocity
+        Vector3 q = t2.p(new Vector3(-p.x, p.y, -p.z)); // new global position
+        Vector3 u = t2.v(new Vector3(-v.x, v.y, -v.z)); // new global velocity
         Vector3 s = t2.v(r.mul(-1)); // new global facing
         if (debugTeleport) SGCraft.log.debug(String.format("SGBaseTE.teleportEntity: Facing old %s new %s", r, s));
         double a = yawAngle(s, entity); // new global yaw angle
@@ -1465,7 +1465,7 @@ public class SGBaseTE extends BaseTileInventory {
 
     ItemStack getCamouflageStack(Vector3i cpos) {
         Trans3 t = localToGlobalTransformation();
-        Vector3 p = t.ip(Vector3.blockCenter(cpos));
+        Vector3 p = t.ip(Vector3.blockCenter.add(new Vector3(cpos.x, cpos.y, cpos.z)));
         if (p.y == 0) {
             int i = 2 + (int) Math.round(p.x);
             if (i >= 0 && i < 5) return getStackInSlot(firstCamouflageSlot + i);
@@ -1515,7 +1515,7 @@ public class SGBaseTE extends BaseTileInventory {
         Collection<BlockRef> result = new ArrayList<BlockRef>();
         Trans3 t = localToGlobalTransformation();
         for (int i = -2; i <= 2; i++) {
-            Vector3i blockPos = t.p(i, -1, 0).blockPos();
+            Vector3i blockPos = Trans3.intVector(t.p(new Vector3(i, -1, 0)));
             TileEntity te = getWorldTileEntity(worldObj, blockPos);
             if (te != null) result.add(new BlockRef(te));
         }

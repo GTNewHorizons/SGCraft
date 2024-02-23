@@ -67,7 +67,7 @@ public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
     }
 
     public Trans3 localToGlobalTransformation() {
-        return localToGlobalTransformation(Vector3.blockCenter(xCoord, yCoord, zCoord));
+        return localToGlobalTransformation(Vector3.blockCenter.add(new Vector3(xCoord, yCoord, zCoord)));
     }
 
     public Trans3 localToGlobalTransformation(Vector3 origin) {

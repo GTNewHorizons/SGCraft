@@ -354,7 +354,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state) {
-        return localToGlobalTransformation(world, pos, state, Vector3.blockCenter(pos));
+        return localToGlobalTransformation(world, pos, state, Vector3.blockCenter.add(new Vector3(pos.x, pos.y, pos.z)));
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin) {

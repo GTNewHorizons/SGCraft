@@ -43,8 +43,7 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
     @Override
     public void setNormal(Vector3 n) {
         super.setNormal(n);
-        Vec3i vec3i = Vec3i.getDirectionVec(face);
-        Vector3 vector = new Vector3(vec3i.getX(), vec3i.getY(), vec3i.getZ());
+        Vector3 vector = Vec3i.getDirectionVec(face);
 
         axisAlignedNormal = n.dot(vector) >= 0.99;
     }

@@ -26,9 +26,12 @@ public class Trans3 {
     }
 
     public static Trans3 blockCenter(Vector3i pos) {
-        return new Trans3(Vector3.blockCenter(pos));
+        return new Trans3(Vector3.blockCenter.add(new Vector3(pos.x, pos.y, pos.z)));
     }
 
+    public static Vector3i intVector(Vector3 v) {
+        return new Vector3i((int) Math.floor(v.x), (int) Math.floor(v.y), (int) Math.floor(v.z));
+    }
 
     public static Trans3 blockCenterSideTurn(int side, int turn) {
         return sideTurn(Vector3.blockCenter, side, turn);
@@ -101,10 +104,6 @@ public class Trans3 {
                 scaling * t.scaling);
     }
 
-    public Vector3 p(double x, double y, double z) {
-        return p(new Vector3(x, y, z));
-    }
-
     public void p(double x, double y, double z, Vector3 result) {
         result.x = x * scaling * rotation.m[0][0] + y * scaling * rotation.m[0][1]
                 + z * scaling * rotation.m[0][2]
@@ -121,16 +120,8 @@ public class Trans3 {
         return offset.add(rotation.mul(u.mul(scaling)));
     }
 
-    public Vector3 ip(double x, double y, double z) {
-        return ip(new Vector3(x, y, z));
-    }
-
     public Vector3 ip(Vector3 u) {
         return rotation.imul(u.sub(offset)).mul(1.0 / scaling);
-    }
-
-    public Vector3 v(double x, double y, double z) {
-        return v(new Vector3(x, y, z));
     }
 
     public void v(double x, double y, double z, Vector3 result) {
@@ -139,28 +130,8 @@ public class Trans3 {
         result.z = x * scaling * rotation.m[2][0] + y * scaling * rotation.m[2][1] + z * scaling * rotation.m[2][2];
     }
 
-    public Vector3 iv(double x, double y, double z) {
-        return iv(new Vector3(x, y, z));
-    }
-
-    public Vector3 v(Vec3i u) {
-        return v(u.getX(), u.getY(), u.getZ());
-    }
-
-    public Vector3 iv(Vec3i u) {
-        return iv(u.getX(), u.getY(), u.getZ());
-    }
-
     public Vector3 v(Vector3 u) {
         return rotation.mul(u.mul(scaling));
-    }
-
-    public Vector3 v(EnumFacing f) {
-        return v(Vec3i.getDirectionVec(f));
-    }
-
-    public Vector3 iv(EnumFacing f) {
-        return iv(Vec3i.getDirectionVec(f));
     }
 
     public Vector3 iv(Vector3 u) {
@@ -169,7 +140,7 @@ public class Trans3 {
 
 
     public AxisAlignedBB t(AxisAlignedBB box) {
-        return boxEnclosing(p(box.minX, box.minY, box.minZ), p(box.maxX, box.maxY, box.maxZ));
+        return boxEnclosing(p(new Vector3(box.minX, box.minY, box.minZ)), p(new Vector3(box.maxX, box.maxY, box.maxZ)));
     }
 
     public AxisAlignedBB box(Vector3 p0, Vector3 p1) {
@@ -188,16 +159,18 @@ public class Trans3 {
     }
 
     public EnumFacing t(EnumFacing f) {
-        return Vector3.facing(v(f));
+        Vector3 vectorFromFacing = Vec3i.getDirectionVec(f);
+        return Vector3.facing(v(vectorFromFacing));
     }
 
     public EnumFacing it(EnumFacing f) {
-        return Vector3.facing(iv(f));
+        Vector3 vectorFromFacing = Vec3i.getDirectionVec(f);
+        return Vector3.facing(iv(vectorFromFacing));
     }
 
 
     public void addBox(double x0, double y0, double z0, double x1, double y1, double z1, List list) {
-        AxisAlignedBB box = boxEnclosing(p(x0, y0, z0), p(x1, y1, z1));
+        AxisAlignedBB box = boxEnclosing(p(new Vector3(x0, y0, z0)), p(new Vector3(x1, y1, z1)));
         list.add(box);
     }
 

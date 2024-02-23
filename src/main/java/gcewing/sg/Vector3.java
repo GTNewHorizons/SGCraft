@@ -9,21 +9,12 @@ package gcewing.sg;
 import static java.lang.Math.abs;
 
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3;
 import org.joml.Vector3i;
 
 public class Vector3 {
 
     public static Vector3 zero = new Vector3(0, 0, 0);
     public static Vector3 blockCenter = new Vector3(0.5, 0.5, 0.5);
-
-    public static Vector3 blockCenter(double x, double y, double z) {
-        return blockCenter.add(new Vector3(x, y, z));
-    }
-
-    public static Vector3 blockCenter(Vector3i pos) {
-        return blockCenter.add(new Vector3(pos.x, pos.y, pos.z));
-    }
 
     double x, y, z;
 
@@ -74,15 +65,6 @@ public class Vector3 {
         return v.mul(1 / v.length());
     }
 
-    public static Vector3 floorVector(Vector3 v){
-        return new Vector3((int) Math.floor(v.x), (int) Math.floor(v.y), (int) Math.floor(v.z));
-    }
-
-    //todo: remove this method
-    public Vector3i blockPos() {
-        Vector3 floored = Vector3.floorVector(this);
-        return new Vector3i((int) floored.x, (int) floored.y, (int) floored.z);
-    }
 
     // Normals at 45 degrees are biased towards UP or DOWN.
     // In 1.8 this is important for item lighting in inventory to work well.
