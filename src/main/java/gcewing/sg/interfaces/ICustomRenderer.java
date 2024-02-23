@@ -1,8 +1,7 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.BaseModClient;
-import gcewing.sg.EnumWorldBlockLayer;
-import gcewing.sg.Trans3;
+import gcewing.sg.worldgen.EnumWorldBlockLayer;
+import gcewing.sg.utils.Trans3;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3i;

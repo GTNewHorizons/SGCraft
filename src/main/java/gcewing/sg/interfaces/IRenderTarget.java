@@ -1,6 +1,6 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.Vector3;
+import gcewing.sg.utils.Vector3;
 import net.minecraft.util.EnumFacing;
 
 public interface IRenderTarget {

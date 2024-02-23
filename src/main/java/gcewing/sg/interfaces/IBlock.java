@@ -1,8 +1,7 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.BaseMod;
-import gcewing.sg.Trans3;
-import gcewing.sg.Vector3;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Vector3;
 import gcewing.sg.utils.ModelSpec;
 import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3i;

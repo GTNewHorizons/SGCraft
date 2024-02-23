@@ -1,7 +1,5 @@
 package gcewing.sg.utils;
 
-import gcewing.sg.Vector3;
-
 public class ModelSpec {
 
     public String modelName;

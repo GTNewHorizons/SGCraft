@@ -6,11 +6,12 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.BaseUtils.getWorldDimensionId;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
 
+import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -38,7 +39,7 @@ public class SGLocation {
         pos = new Vector3i(x, y, z);
     }
 
-    NBTTagCompound toNBT() {
+    public NBTTagCompound toNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setInteger("dimension", dimension);
         nbt.setInteger("x", pos.x);
@@ -47,7 +48,7 @@ public class SGLocation {
         return nbt;
     }
 
-    SGBaseTE getStargateTE() {
+    public SGBaseTE getStargateTE() {
         World world = /* DimensionManager. */SGAddressing.getWorld(dimension);
         if (world == null) {
             SGCraft.log.warn(

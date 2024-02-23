@@ -16,9 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.ISetMod;
-import gcewing.sg.utils.IDBinding;
+import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.VSBinding;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;

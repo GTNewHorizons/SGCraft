@@ -13,14 +13,20 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.ICustomRenderer;
 import gcewing.sg.interfaces.IModel;
 import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.renderers.BaseGLRenderTarget;
+import gcewing.sg.renderers.BaseModelRenderer;
+import gcewing.sg.renderers.BaseWorldRenderTarget;
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.worldgen.EnumWorldBlockLayer;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -37,8 +43,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
@@ -167,6 +171,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
                                 block.getUnlocalizedName()));
                 if (!blockRenderers.containsKey(block)) {
                     String name = ((IBlock) block).getQualifiedRendererClassName();
+                    SGCraft.log.error(name);
                     if (name != null) {
                         try {
                             Class cls = Class.forName(name);

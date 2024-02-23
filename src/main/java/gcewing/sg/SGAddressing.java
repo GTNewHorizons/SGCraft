@@ -27,6 +27,8 @@
 
 package gcewing.sg;
 
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.BaseUtils;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -35,7 +37,7 @@ public class SGAddressing {
 
     static boolean debugAddressing = false;
 
-    static class AddressingError extends Exception {
+    public static class AddressingError extends Exception {
 
         AddressingError(String s) {
             super(s);
@@ -70,15 +72,15 @@ public class SGAddressing {
     final static long mdOld = dimensionRange + 2;
     final static long qdOld = 459;
 
-    protected static boolean isValidSymbolChar(String c) {
+    public static boolean isValidSymbolChar(String c) {
         return symbolChars.indexOf(c) >= 0;
     }
 
-    protected static char symbolToChar(int i) {
+    public static char symbolToChar(int i) {
         return symbolChars.charAt(i);
     }
 
-    protected static int charToSymbol(char c) {
+    public static int charToSymbol(char c) {
         return charToSymbol(String.valueOf(c));
     }
 

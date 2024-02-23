@@ -6,7 +6,7 @@
 
 package gcewing.sg.interfaces;
 
-import gcewing.sg.SGBaseTE;
+import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3i;
 

@@ -1,6 +1,6 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.Trans3;
+import gcewing.sg.utils.Trans3;
 import net.minecraft.util.AxisAlignedBB;
 
 import java.util.List;
