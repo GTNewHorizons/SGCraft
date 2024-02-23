@@ -8,6 +8,7 @@ package gcewing.sg;
 
 import java.util.Random;
 
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 

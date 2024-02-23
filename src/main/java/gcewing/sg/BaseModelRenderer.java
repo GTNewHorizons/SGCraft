@@ -6,16 +6,15 @@
 
 package gcewing.sg;
 
-// import net.minecraft.block.state.IBlockState;
-
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
-import gcewing.sg.BaseMod.IBlock;
-import gcewing.sg.BaseModClient.ICustomRenderer;
-import gcewing.sg.BaseModClient.IModel;
-import gcewing.sg.BaseModClient.IRenderTarget;
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
 import org.joml.Vector3i;
 
 public class BaseModelRenderer implements ICustomRenderer {

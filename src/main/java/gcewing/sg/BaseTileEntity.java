@@ -17,6 +17,9 @@ import static gcewing.sg.BaseUtils.setIntField;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ITickable;
+import gcewing.sg.interfaces.ITileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,10 +32,10 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
-import gcewing.sg.BaseMod.IBlock;
+import gcewing.sg.interfaces.IBlock;
 import org.joml.Vector3i;
 
-public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
+public class BaseTileEntity extends TileEntity implements ITileEntity {
 
     public byte side, turn;
     public Ticket chunkTicket;

@@ -30,7 +30,7 @@ import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
 
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.ITexture;
 
 public class BaseGLRenderTarget extends BaseRenderTarget {
 

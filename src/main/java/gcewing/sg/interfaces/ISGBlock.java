@@ -4,8 +4,9 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.interfaces;
 
+import gcewing.sg.SGBaseTE;
 import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3i;
 

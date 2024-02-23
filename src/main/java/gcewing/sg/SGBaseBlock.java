@@ -10,6 +10,7 @@ import static gcewing.sg.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.BaseBlockUtils.markWorldBlockForUpdate;
 
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,7 +22,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import gcewing.sg.BaseMod.ModelSpec;
+import gcewing.sg.utils.ModelSpec;
 import org.joml.Vector3i;
 
 public class SGBaseBlock extends SGBlock<SGBaseTE> {

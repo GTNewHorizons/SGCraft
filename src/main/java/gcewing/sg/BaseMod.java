@@ -16,23 +16,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.ISetMod;
+import gcewing.sg.utils.IDBinding;
+import gcewing.sg.utils.VSBinding;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
-import net.minecraft.server.management.PlayerManager;
-import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -51,75 +49,15 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
-import gcewing.sg.BaseModClient.IModel;
+import gcewing.sg.interfaces.IModel;
 import org.joml.Vector3i;
 
 public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends BaseSubsystem implements IGuiHandler {
 
     protected Map<ResourceLocation, IModel> modelCache = new HashMap<ResourceLocation, IModel>();
 
-    interface ITextureConsumer {
-
-        String[] getTextureNames();
-    }
-
-    interface IBlock extends ITextureConsumer {
-
-        void setRenderType(int id);
-
-        String getQualifiedRendererClassName();
-
-        ModelSpec getModelSpec(IBlockState state);
-
-        int getNumSubtypes();
-
-        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin);
-
-        Class getDefaultItemClass();
-    }
-
-    interface IItem extends ITextureConsumer {
-
-        ModelSpec getModelSpec(ItemStack stack);
-
-        int getNumSubtypes();
-    }
-
-    interface ITileEntity {
-
-        void onAddedToWorld();
-    }
-
-    interface ISetMod {
-
-        void setMod(BaseMod mod);
-    }
-
     public void setModOf(Object obj) {
         if (obj instanceof ISetMod) ((ISetMod) obj).setMod(this);
-    }
-
-    static class IDBinding<T> {
-
-        public int id;
-        public T object;
-    }
-
-    public static class ModelSpec {
-
-        public String modelName;
-        public String[] textureNames;
-        public Vector3 origin;
-
-        public ModelSpec(String model, String... textures) {
-            this(model, Vector3.zero, textures);
-        }
-
-        public ModelSpec(String model, Vector3 origin, String... textures) {
-            modelName = model;
-            textureNames = textures;
-            this.origin = origin;
-        }
     }
 
     public String modID;
@@ -280,17 +218,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         }
     }
 
-    public static boolean classAvailable(String name) {
-        try {
-            Class.forName(name);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public Item newItem(String name) {
         return newItem(name, Item.class);
     }
@@ -386,16 +313,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         OreDictionary.registerOre(name, item);
     }
 
-    public static boolean stackMatchesOre(ItemStack stack, String name) {
-        int id2 = OreDictionary.getOreID(name);
-        for (int id1 : OreDictionary.getOreIDs(stack)) {
-            if (id1 == id2) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void newRecipe(Item product, int qty, Object... params) {
         newRecipe(new ItemStack(product, qty), params);
     }
@@ -416,18 +333,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         GameRegistry.addRecipe(new ShapelessOreRecipe(product, params));
     }
 
-    public void newSmeltingRecipe(Item product, int qty, Item input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Block input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, int id) {
-        addEntity(cls, name, id, 1, true);
-    }
-
     public void addEntity(Class<? extends Entity> cls, String name, Enum id, int updateFrequency,
             boolean sendVelocityUpdates) {
         addEntity(cls, name, id.ordinal(), updateFrequency, sendVelocityUpdates);
@@ -443,9 +348,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
                         name,
                         id));
         EntityRegistry.registerModEntity(cls, name, id, /* base */this, 256, updateFrequency, sendVelocityUpdates);
-    }
-
-    static class VSBinding extends IDBinding<ResourceLocation> {
     }
 
     public List<VSBinding> registeredVillagers = new ArrayList<VSBinding>();

@@ -9,6 +9,7 @@ package gcewing.sg;
 import static gcewing.sg.BaseUtils.getChunkTileEntityMap;
 import static gcewing.sg.BaseUtils.getChunkWorld;
 
+import gcewing.sg.interfaces.IIntegration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;

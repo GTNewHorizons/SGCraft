@@ -10,6 +10,7 @@ import static gcewing.sg.BaseBlockUtils.getTileEntityPos;
 import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
 import static java.lang.Math.min;
 
+import gcewing.sg.interfaces.ISGEnergySource;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;

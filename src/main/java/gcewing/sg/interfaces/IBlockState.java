@@ -1,4 +1,4 @@
-package gcewing.sg;
+package gcewing.sg.interfaces;
 
 import java.util.Collection;
 

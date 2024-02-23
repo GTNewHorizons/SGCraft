@@ -6,12 +6,13 @@
 
 package gcewing.sg;
 
+import gcewing.sg.interfaces.IRenderTarget;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.ITexture;
 
-public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
+public abstract class BaseRenderTarget implements IRenderTarget {
 
     // Position of block in rendering coordinates (may be different from world coordinates)
     protected double blockX, blockY, blockZ;

@@ -7,10 +7,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableList;

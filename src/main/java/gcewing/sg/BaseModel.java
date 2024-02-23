@@ -15,9 +15,9 @@ import net.minecraft.util.ResourceLocation;
 
 import com.google.gson.Gson;
 
-import gcewing.sg.BaseModClient.IModel;
-import gcewing.sg.BaseModClient.IRenderTarget;
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
 
 public class BaseModel implements IModel {
 

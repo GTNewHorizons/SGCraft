@@ -9,7 +9,7 @@ package gcewing.sg;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-import gcewing.sg.BaseModClient.IRenderTarget;
+import gcewing.sg.interfaces.IRenderTarget;
 
 public abstract class BaseTileEntityRenderer extends TileEntitySpecialRenderer {
 

@@ -9,6 +9,8 @@ package gcewing.sg;
 import static gcewing.sg.BaseUtils.horizontalFacings;
 import static gcewing.sg.BaseUtils.iround;
 
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

@@ -8,10 +8,10 @@ package gcewing.sg;
 
 import net.minecraft.util.ResourceLocation;
 
-import gcewing.sg.BaseModClient.IModel;
-import gcewing.sg.BaseModClient.IRenderTarget;
-import gcewing.sg.BaseModClient.ITexture;
-import gcewing.sg.BaseModClient.ITiledTexture;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.interfaces.ITiledTexture;
 import gcewing.sg.BaseTexture.Image;
 
 class DHDTERenderer extends BaseTileEntityRenderer {

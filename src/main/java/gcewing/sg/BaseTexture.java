@@ -9,8 +9,8 @@ package gcewing.sg;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
-import gcewing.sg.BaseModClient.ITexture;
-import gcewing.sg.BaseModClient.ITiledTexture;
+import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.interfaces.ITiledTexture;
 
 public abstract class BaseTexture implements ITexture {
 

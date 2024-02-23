@@ -7,8 +7,9 @@
 package gcewing.sg;
 
 import static gcewing.sg.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.sg.BaseModClient.IRenderTarget;
+import gcewing.sg.interfaces.IRenderTarget;
 
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;

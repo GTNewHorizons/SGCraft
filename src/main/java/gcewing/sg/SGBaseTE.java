@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.interfaces.IComputerInterface;
+import gcewing.sg.interfaces.ISGEnergySource;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.entity.Entity;
@@ -36,7 +38,6 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

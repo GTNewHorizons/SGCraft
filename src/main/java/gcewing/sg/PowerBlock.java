@@ -8,6 +8,7 @@ package gcewing.sg;
 
 import java.util.ArrayList;
 
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
