@@ -75,7 +75,7 @@ public class BaseSubsystem<MOD extends BaseMod, CLIENT extends BaseModClient> {
     }
 
     public static Item findItem(String name) {
-        String[] parts = BaseStringUtils.split(":", name);
+        String[] parts = name.split(":");
         return GameRegistry.findItem(parts[0], parts[1]);
     }
 
