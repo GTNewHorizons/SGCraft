@@ -13,7 +13,6 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.sg.utils.BaseStringUtils;
 
 public class BaseConfiguration extends Configuration {
 
@@ -38,12 +37,6 @@ public class BaseConfiguration extends Configuration {
 
     public String getString(String category, String key, String defaultValue) {
         return get(category, key, defaultValue).getString();
-    }
-
-    public String[] getStringList(String category, String key, String... defaultValueList) {
-        String defaultValue = BaseStringUtils.join(",", defaultValueList);
-        String value = getString(category, key, defaultValue);
-        return BaseStringUtils.split(",", value);
     }
 
     public int getVillager(String key) {
