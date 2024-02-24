@@ -1,19 +1,19 @@
 // ------------------------------------------------------------------------------------------------
 //
-// SG Craft - RF Stargate Power Unit Item
+// SG Craft - IC2 Stargate Power Unit Item
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.rf;
+package gcewing.sg.compat.ic2;
 
 import net.minecraft.block.Block;
 
 import gcewing.sg.PowerItem;
 
-public class RFPowerItem extends PowerItem {
+public class IC2PowerItem extends PowerItem {
 
-    public RFPowerItem(Block block) {
-        super(block, "RF", RFPowerTE.maxEnergyBuffer);
+    public IC2PowerItem(Block block) {
+        super(block, "EU", IC2PowerTE.maxEnergyBuffer);
     }
 
 }

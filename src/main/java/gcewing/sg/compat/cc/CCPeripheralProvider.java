@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.cc;
+package gcewing.sg.compat.cc;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.cc;
+package gcewing.sg.compat.cc;
 
 import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.SGInterfaceBlock;

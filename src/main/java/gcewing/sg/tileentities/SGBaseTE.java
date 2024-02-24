@@ -83,7 +83,7 @@ import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
-import gcewing.sg.oc.OCWirelessEndpoint;
+import gcewing.sg.compat.oc.OCWirelessEndpoint;
 import io.netty.channel.ChannelFutureListener;
 import org.joml.Vector3d;
 import org.joml.Vector3i;

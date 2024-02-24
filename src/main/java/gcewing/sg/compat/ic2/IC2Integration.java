@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.ic2;
+package gcewing.sg.compat.ic2;
 
 import net.minecraft.item.ItemStack;
 

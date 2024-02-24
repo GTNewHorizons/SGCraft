@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.ic2;
+package gcewing.sg.compat.ic2;
 
 import static java.lang.Math.min;
 

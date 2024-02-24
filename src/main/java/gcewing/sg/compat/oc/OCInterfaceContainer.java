@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.oc;
+package gcewing.sg.compat.oc;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 

@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.cc;
+package gcewing.sg.compat.cc;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

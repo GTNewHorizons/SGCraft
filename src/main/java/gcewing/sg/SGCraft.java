@@ -14,6 +14,7 @@ import gcewing.sg.blocks.NaquadahBlock;
 import gcewing.sg.blocks.NaquadahOreBlock;
 import gcewing.sg.blocks.SGBaseBlock;
 import gcewing.sg.blocks.SGRingBlock;
+import gcewing.sg.compat.MystcraftIntegration;
 import gcewing.sg.items.SGChevronUpgradeItem;
 import gcewing.sg.items.SGIrisUpgradeItem;
 import gcewing.sg.items.SGRingItem;
@@ -43,7 +44,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import gcewing.sg.oc.OCIntegration;
+import gcewing.sg.compat.oc.OCIntegration;
 
 @Mod(
         modid = Info.modID,
@@ -100,12 +101,12 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
         FMLCommonHandler.instance().bus().register(this);
-        ic2Integration = integrateWithMod("IC2", "gcewing.sg.ic2.IC2Integration"); // [IC2]
-        rfIntegration = integrateWithMod("CoFHCore", "gcewing.sg.rf.RFIntegration"); // [RF]
-        txIntegration = integrateWithMod("ThermalExpansion", "gcewing.sg.TXIntegration"); // [TX]
-        ccIntegration = integrateWithMod("ComputerCraft", "gcewing.sg.cc.CCIntegration"); // [CC]
-        ocIntegration = (OCIntegration) integrateWithMod("OpenComputers", "gcewing.sg.oc.OCIntegration"); // [OC]
-        mystcraftIntegration = (MystcraftIntegration) integrateWithMod("Mystcraft", "gcewing.sg.MystcraftIntegration"); // [MYST]
+        ic2Integration = integrateWithMod("IC2", "gcewing.sg.compat.ic2.IC2Integration"); // [IC2]
+        rfIntegration = integrateWithMod("CoFHCore", "gcewing.sg.compat.rf.RFIntegration"); // [RF]
+        txIntegration = integrateWithMod("ThermalExpansion", "gcewing.sg.compat.TXIntegration"); // [TX]
+        ccIntegration = integrateWithMod("ComputerCraft", "gcewing.sg.compat.cc.CCIntegration"); // [CC]
+        ocIntegration = (OCIntegration) integrateWithMod("OpenComputers", "gcewing.sg.compat.oc.OCIntegration"); // [OC]
+        mystcraftIntegration = (MystcraftIntegration) integrateWithMod("Mystcraft", "gcewing.sg.compat.MystcraftIntegration"); // [MYST]
         super.preInit(e);
     }
 

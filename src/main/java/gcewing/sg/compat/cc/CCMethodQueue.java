@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.cc;
+package gcewing.sg.compat.cc;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

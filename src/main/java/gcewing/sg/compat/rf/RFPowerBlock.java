@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.rf;
+package gcewing.sg.compat.rf;
 
 import gcewing.sg.blocks.PowerBlock;
 
