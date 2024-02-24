@@ -6,21 +6,6 @@
 
 package gcewing.sg.guis;
 
-import gcewing.sg.SGAddressing;
-import gcewing.sg.SGCraft;
-import gcewing.sg.SGState;
-import gcewing.sg.packets.SGChannel;
-import gcewing.sg.tileentities.SGBaseTE;
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import org.joml.Vector3i;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
@@ -37,6 +22,23 @@ import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glPopAttrib;
 import static org.lwjgl.opengl.GL11.glPushAttrib;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
+
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+
+import org.joml.Vector3i;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import gcewing.sg.SGAddressing;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGState;
+import gcewing.sg.packets.SGChannel;
+import gcewing.sg.tileentities.SGBaseTE;
 
 public class DHDScreen extends SGScreen {
 

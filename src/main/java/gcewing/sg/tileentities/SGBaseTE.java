@@ -6,29 +6,25 @@
 
 package gcewing.sg.tileentities;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.FMLOutboundHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import gcewing.sg.BaseConfiguration;
-import gcewing.sg.IrisState;
-import gcewing.sg.SGAddressing;
-import gcewing.sg.SGCraft;
-import gcewing.sg.SGLocation;
-import gcewing.sg.SGState;
-import gcewing.sg.blocks.SGBaseBlock;
-import gcewing.sg.compat.oc.OCWirelessEndpoint;
-import gcewing.sg.entities.IrisEntity;
-import gcewing.sg.guis.DHDTE;
-import gcewing.sg.interfaces.IComputerInterface;
-import gcewing.sg.interfaces.ISGEnergySource;
-import gcewing.sg.renderers.SGBaseTERenderer;
-import gcewing.sg.utils.BaseBlockUtils;
-import gcewing.sg.utils.BaseInventoryUtils;
-import gcewing.sg.utils.Trans3;
-import gcewing.sg.utils.Utils;
-import io.netty.channel.ChannelFutureListener;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
+import static gcewing.sg.utils.BaseBlockUtils.notifyWorldNeighborsOfStateChange;
+import static gcewing.sg.utils.BaseUtils.getGameRuleBoolean;
+import static gcewing.sg.utils.BaseUtils.getWorldDifficulty;
+import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
+import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
+import static gcewing.sg.utils.BaseUtils.scmPreparePlayer;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.entity.Entity;
@@ -62,29 +58,35 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.network.ForgeMessage;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
-import static gcewing.sg.utils.BaseBlockUtils.notifyWorldNeighborsOfStateChange;
-import static gcewing.sg.utils.BaseUtils.getGameRuleBoolean;
-import static gcewing.sg.utils.BaseUtils.getWorldDifficulty;
-import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
-import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
-import static gcewing.sg.utils.BaseUtils.scmPreparePlayer;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.IrisState;
+import gcewing.sg.SGAddressing;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGLocation;
+import gcewing.sg.SGState;
+import gcewing.sg.blocks.SGBaseBlock;
+import gcewing.sg.compat.oc.OCWirelessEndpoint;
+import gcewing.sg.entities.IrisEntity;
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.interfaces.IComputerInterface;
+import gcewing.sg.interfaces.ISGEnergySource;
+import gcewing.sg.renderers.SGBaseTERenderer;
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.BaseInventoryUtils;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Utils;
+import io.netty.channel.ChannelFutureListener;
 
 public class SGBaseTE extends BaseTileInventory {
 
@@ -949,7 +951,8 @@ public class SGBaseTE extends BaseTileInventory {
         double vy = entity.posY - prevPos.y;
         double vz = entity.posZ - prevPos.z;
         Vector3d p1 = t.ip(new Vector3d(entity.posX, entity.posY, entity.posZ));
-        Vector3d p0 = t.ip(new Vector3d(2 * prevPos.x - entity.posX, 2 * prevPos.y - entity.posY, 2 * prevPos.z - entity.posZ));
+        Vector3d p0 = t.ip(
+                new Vector3d(2 * prevPos.x - entity.posX, 2 * prevPos.y - entity.posY, 2 * prevPos.z - entity.posZ));
         double z0 = 0.0;
         if (p0.z < z0 || p1.z >= z0 || p1.z <= z0 - 5.0) {
             return;
@@ -1028,15 +1031,19 @@ public class SGBaseTE extends BaseTileInventory {
         Vector3d localPosition = t1.ip(new Vector3d(entity.posX, entity.posY, entity.posZ)); // local position
         Vector3d localVelocity = t1.iv(new Vector3d(entity.motionX, entity.motionY, entity.motionZ)); // local velocity
         Vector3d localFacing = t1.iv(yawVector(entity)); // local facing
-        Vector3d globalPosition = t2.p(new Vector3d(-localPosition.x, localPosition.y, -localPosition.z)); // new global position
-        Vector3d globalVelocity = t2.v(new Vector3d(-localVelocity.x, localVelocity.y, -localVelocity.z)); // new global velocity
+        Vector3d globalPosition = t2.p(new Vector3d(-localPosition.x, localPosition.y, -localPosition.z)); // new global
+                                                                                                           // position
+        Vector3d globalVelocity = t2.v(new Vector3d(-localVelocity.x, localVelocity.y, -localVelocity.z)); // new global
+                                                                                                           // velocity
 
         Vector3d globalFacing = t2.v(localFacing.mul(-1)); // new global facing
-        if (debugTeleport) SGCraft.log.debug(String.format("SGBaseTE.teleportEntity: Facing old %s new %s", localFacing, globalFacing));
+        if (debugTeleport) SGCraft.log
+                .debug(String.format("SGBaseTE.teleportEntity: Facing old %s new %s", localFacing, globalFacing));
         double a = yawAngle(globalFacing, entity); // new global yaw angle
         if (debugTeleport) SGCraft.log.debug(String.format("SGBaseTE.teleportEntity: new yaw %.2f", a));
         if (!destBlocked) {
-            if (entity.dimension == dimension) newEntity = teleportWithinDimension(entity, globalPosition, globalVelocity, a, destBlocked);
+            if (entity.dimension == dimension)
+                newEntity = teleportWithinDimension(entity, globalPosition, globalVelocity, a, destBlocked);
             else {
                 newEntity = teleportToOtherDimension(entity, globalPosition, globalVelocity, a, dimension, destBlocked);
                 if (newEntity != null) newEntity.dimension = dimension;
@@ -1481,7 +1488,7 @@ public class SGBaseTE extends BaseTileInventory {
 
     public ItemStack getCamouflageStack(Vector3i cpos) {
         Trans3 t = localToGlobalTransformation();
-        Vector3d p = t.ip(new Vector3d(0.5+cpos.x, 0.5+cpos.y, 0.5+cpos.z));
+        Vector3d p = t.ip(new Vector3d(0.5 + cpos.x, 0.5 + cpos.y, 0.5 + cpos.z));
         if (p.y == 0) {
             int i = 2 + (int) Math.round(p.x);
             if (i >= 0 && i < 5) return getStackInSlot(firstCamouflageSlot + i);

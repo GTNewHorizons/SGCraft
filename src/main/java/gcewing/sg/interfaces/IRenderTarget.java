@@ -1,10 +1,10 @@
 package gcewing.sg.interfaces;
 
 import net.minecraft.util.EnumFacing;
+
 import org.joml.Vector3d;
 
 public interface IRenderTarget {
-
 
     boolean isRenderingBreakEffects();
 

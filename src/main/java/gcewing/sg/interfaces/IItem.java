@@ -1,7 +1,8 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.utils.ModelSpec;
 import net.minecraft.item.ItemStack;
+
+import gcewing.sg.utils.ModelSpec;
 
 public interface IItem extends ITextureConsumer {
 

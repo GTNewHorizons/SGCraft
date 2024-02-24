@@ -8,6 +8,12 @@ package gcewing.sg.renderers;
 
 // import net.minecraft.block.state.IBlockState;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
+
+import org.joml.Vector3d;
+import org.joml.Vector3i;
+
 import gcewing.sg.SGCraft;
 import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.IBlockState;
@@ -17,10 +23,6 @@ import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ITexture;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.Trans3;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.IBlockAccess;
-import org.joml.Vector3d;
-import org.joml.Vector3i;
 
 public class BaseModelRenderer implements ICustomRenderer {
 
@@ -43,7 +45,7 @@ public class BaseModelRenderer implements ICustomRenderer {
     }
 
     public void renderBlock(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
-                            EnumWorldBlockLayer layer, Trans3 t) {
+            EnumWorldBlockLayer layer, Trans3 t) {
         IBlock block = (IBlock) state.getBlock();
         Trans3 t2 = t.t(block.localToGlobalTransformation(world, pos, state, new Vector3d())).translate(origin);
         model.render(t2, target, textures);

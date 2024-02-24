@@ -1,11 +1,12 @@
 package gcewing.sg;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterators;
-import net.minecraft.util.EnumFacing;
-
 import java.util.Iterator;
 import java.util.Random;
+
+import net.minecraft.util.EnumFacing;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
 
 public enum Plane implements Predicate<EnumFacing>, Iterable<EnumFacing> {
 

@@ -6,10 +6,11 @@
 
 package gcewing.sg;
 
-import gcewing.sg.interfaces.ITexture;
-import gcewing.sg.interfaces.ITiledTexture;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+
+import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.interfaces.ITiledTexture;
 
 public abstract class BaseTexture implements ITexture {
 

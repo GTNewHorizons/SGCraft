@@ -6,15 +6,17 @@
 
 package gcewing.sg.compat.oc;
 
-import gcewing.sg.guis.BaseContainer;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
 
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import gcewing.sg.guis.BaseContainer;
 
 public class OCInterfaceContainer extends BaseContainer {
 

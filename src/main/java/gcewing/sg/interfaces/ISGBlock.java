@@ -6,9 +6,11 @@
 
 package gcewing.sg.interfaces;
 
-import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.world.IBlockAccess;
+
 import org.joml.Vector3i;
+
+import gcewing.sg.tileentities.SGBaseTE;
 
 public interface ISGBlock {
 

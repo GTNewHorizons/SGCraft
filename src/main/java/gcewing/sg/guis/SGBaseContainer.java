@@ -6,12 +6,14 @@
 
 package gcewing.sg.guis;
 
-import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
+
+import gcewing.sg.tileentities.SGBaseTE;
 
 public class SGBaseContainer extends BaseContainer {
 

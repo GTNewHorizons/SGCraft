@@ -6,12 +6,11 @@
 
 package gcewing.sg.utils;
 
-import com.google.common.collect.ImmutableMap;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
+import static gcewing.sg.utils.BaseUtils.facings;
+import static gcewing.sg.utils.BaseUtils.oppositeFacing;
+
+import java.util.Collection;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,12 +22,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import org.joml.Vector3i;
 
-import java.util.Collection;
+import com.google.common.collect.ImmutableMap;
 
-import static gcewing.sg.utils.BaseUtils.facings;
-import static gcewing.sg.utils.BaseUtils.oppositeFacing;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 
 public class BaseBlockUtils {
 
@@ -43,7 +46,11 @@ public class BaseBlockUtils {
      */
     public static boolean blockIsGettingExternallyPowered(World world, Vector3i pos) {
         for (EnumFacing side : facings) {
-            if (isPoweringSide(world, new Vector3i(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()).add(pos), side)) return true;
+            if (isPoweringSide(
+                    world,
+                    new Vector3i(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()).add(pos),
+                    side))
+                return true;
         }
         return false;
     }
@@ -53,7 +60,8 @@ public class BaseBlockUtils {
         if (block.isProvidingWeakPower(world, pos.x, pos.y, pos.z, side.ordinal()) > 0) return true;
         if (block.shouldCheckWeakPower(world, pos.x, pos.y, pos.z, side.ordinal())) {
             for (EnumFacing side2 : facings) if (side2 != oppositeFacing(side)) {
-                Vector3i pos2 = new Vector3i(side2.getFrontOffsetX(), side2.getFrontOffsetY(), side2.getFrontOffsetZ()).add(pos);
+                Vector3i pos2 = new Vector3i(side2.getFrontOffsetX(), side2.getFrontOffsetY(), side2.getFrontOffsetZ())
+                        .add(pos);
                 Block block2 = world.getBlock(pos2.x, pos2.y, pos2.z);
                 if (block2.isProvidingStrongPower(world, pos2.x, pos2.y, pos2.z, side2.ordinal()) > 0) return true;
             }

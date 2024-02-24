@@ -1,10 +1,10 @@
 package gcewing.sg;
 
-import com.google.common.collect.Maps;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
+import com.google.common.collect.Maps;
 
 public class MapPopulator {
 

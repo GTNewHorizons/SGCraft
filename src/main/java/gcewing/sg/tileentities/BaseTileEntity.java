@@ -6,12 +6,17 @@
 
 package gcewing.sg.tileentities;
 
-import gcewing.sg.SGCraft;
-import gcewing.sg.interfaces.IBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.ITickable;
-import gcewing.sg.interfaces.ITileEntity;
-import gcewing.sg.utils.Trans3;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseUtils.classForName;
+import static gcewing.sg.utils.BaseUtils.getFieldDef;
+import static gcewing.sg.utils.BaseUtils.getIntField;
+import static gcewing.sg.utils.BaseUtils.getMethodDef;
+import static gcewing.sg.utils.BaseUtils.invokeMethod;
+import static gcewing.sg.utils.BaseUtils.setIntField;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,19 +28,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.utils.BaseUtils.classForName;
-import static gcewing.sg.utils.BaseUtils.getFieldDef;
-import static gcewing.sg.utils.BaseUtils.getIntField;
-import static gcewing.sg.utils.BaseUtils.getMethodDef;
-import static gcewing.sg.utils.BaseUtils.invokeMethod;
-import static gcewing.sg.utils.BaseUtils.setIntField;
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ITickable;
+import gcewing.sg.interfaces.ITileEntity;
+import gcewing.sg.utils.Trans3;
 
 public class BaseTileEntity extends TileEntity implements ITileEntity {
 
@@ -72,9 +74,8 @@ public class BaseTileEntity extends TileEntity implements ITileEntity {
     }
 
     public Trans3 localToGlobalTransformation() {
-        return localToGlobalTransformation(new Vector3d(0.5+xCoord, 0.5+yCoord, 0.5+zCoord));
+        return localToGlobalTransformation(new Vector3d(0.5 + xCoord, 0.5 + yCoord, 0.5 + zCoord));
     }
-
 
     public Trans3 localToGlobalTransformation(Vector3d origin) {
         Vector3i pos = getPos();

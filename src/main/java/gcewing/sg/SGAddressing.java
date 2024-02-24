@@ -27,11 +27,12 @@
 
 package gcewing.sg;
 
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.utils.BaseUtils;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.BaseUtils;
 
 public class SGAddressing {
 

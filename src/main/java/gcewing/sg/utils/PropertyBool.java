@@ -1,8 +1,8 @@
 package gcewing.sg.utils;
 
-import com.google.common.collect.ImmutableSet;
-
 import java.util.Collection;
+
+import com.google.common.collect.ImmutableSet;
 
 public class PropertyBool extends PropertyHelper<Boolean> {
 

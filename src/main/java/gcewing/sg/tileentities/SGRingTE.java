@@ -6,11 +6,12 @@
 
 package gcewing.sg.tileentities;
 
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import org.joml.Vector3i;
 
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import org.joml.Vector3i;
 
 public class SGRingTE extends BaseTileEntity {
 

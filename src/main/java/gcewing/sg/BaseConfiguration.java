@@ -6,13 +6,14 @@
 
 package gcewing.sg;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.sg.utils.BaseStringUtils;
+import java.io.File;
+import java.util.Collection;
+
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-import java.io.File;
-import java.util.Collection;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import gcewing.sg.utils.BaseStringUtils;
 
 public class BaseConfiguration extends Configuration {
 

@@ -6,19 +6,21 @@
 
 package gcewing.sg.renderers;
 
-import gcewing.sg.SGCraft;
-import gcewing.sg.utils.Vec3i;
+import static gcewing.sg.utils.BaseUtils.ifloor;
+import static gcewing.sg.utils.BaseUtils.iround;
+import static java.lang.Math.floor;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import static gcewing.sg.utils.BaseUtils.ifloor;
-import static gcewing.sg.utils.BaseUtils.iround;
-import static java.lang.Math.floor;
+import gcewing.sg.SGCraft;
+import gcewing.sg.utils.Vec3i;
 
 public class BaseWorldRenderTarget extends BaseRenderTarget {
 
@@ -130,8 +132,7 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
                     (int) floor(p.x + 0.01 * n.x),
                     (int) floor(p.y + 0.01 * n.y),
                     (int) floor(p.z + 0.01 * n.z));
-        }
-        else pos = blockPos;
+        } else pos = blockPos;
         int br = block.getMixedBrightnessForBlock(world, pos.x, pos.y, pos.z);
         setLight(shade, br);
     }

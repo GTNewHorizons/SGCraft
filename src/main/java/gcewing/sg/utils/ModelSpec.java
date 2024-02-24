@@ -3,6 +3,7 @@ package gcewing.sg.utils;
 import org.joml.Vector3d;
 
 public class ModelSpec {
+
     public String modelName;
     public String[] textureNames;
     public Vector3d origin;

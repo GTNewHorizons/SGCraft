@@ -6,8 +6,14 @@
 
 package gcewing.sg.worldgen;
 
-import gcewing.sg.BaseConfiguration;
-import gcewing.sg.SGCraft;
+import static gcewing.sg.utils.BaseUtils.getFieldDef;
+import static gcewing.sg.utils.BaseUtils.setField;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 import net.minecraft.world.gen.structure.ComponentScatteredFeaturePieces;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -15,13 +21,8 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.LinkedList;
-
-import static gcewing.sg.utils.BaseUtils.getFieldDef;
-import static gcewing.sg.utils.BaseUtils.setField;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.SGCraft;
 
 public class FeatureGeneration {
 

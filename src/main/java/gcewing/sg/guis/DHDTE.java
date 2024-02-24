@@ -6,13 +6,10 @@
 
 package gcewing.sg.guis;
 
-import gcewing.sg.BaseConfiguration;
-import gcewing.sg.SGCraft;
-import gcewing.sg.blocks.DHDBlock;
-import gcewing.sg.interfaces.ISGEnergySource;
-import gcewing.sg.tileentities.BaseTileInventory;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.utils.Trans3;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static java.lang.Math.min;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -20,12 +17,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
+
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static java.lang.Math.min;
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.SGCraft;
+import gcewing.sg.blocks.DHDBlock;
+import gcewing.sg.interfaces.ISGEnergySource;
+import gcewing.sg.tileentities.BaseTileInventory;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.Trans3;
 
 public class DHDTE extends BaseTileInventory implements ISGEnergySource {
 

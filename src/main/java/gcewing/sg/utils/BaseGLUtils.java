@@ -6,12 +6,13 @@
 
 package gcewing.sg.utils;
 
+import java.nio.FloatBuffer;
+
 import net.minecraft.client.renderer.GLAllocation;
+
 import org.joml.Matrix3d;
 import org.joml.Vector3d;
 import org.lwjgl.opengl.GL11;
-
-import java.nio.FloatBuffer;
 
 public class BaseGLUtils {
 

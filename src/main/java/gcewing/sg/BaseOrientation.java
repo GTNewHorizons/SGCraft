@@ -6,13 +6,9 @@
 
 package gcewing.sg;
 
-import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.blocks.base.BaseBlock.IOrientationHandler;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
-import gcewing.sg.tileentities.BaseTileEntity;
-import gcewing.sg.utils.PropertyTurn;
-import gcewing.sg.utils.Trans3;
+import static gcewing.sg.utils.BaseUtils.horizontalFacings;
+import static gcewing.sg.utils.BaseUtils.iround;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,11 +16,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import static gcewing.sg.utils.BaseUtils.horizontalFacings;
-import static gcewing.sg.utils.BaseUtils.iround;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.blocks.base.BaseBlock.IOrientationHandler;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.tileentities.BaseTileEntity;
+import gcewing.sg.utils.PropertyTurn;
+import gcewing.sg.utils.Trans3;
 
 public class BaseOrientation {
 
@@ -46,7 +48,7 @@ public class BaseOrientation {
         }
 
         public IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX,
-                                         float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
+                float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
             EnumFacing dir = getHorizontalFacing(placer);
             if (debugPlacement) SGCraft.log
                     .debug(String.format("BaseOrientation.Orient4WaysByState: Placing block with FACING = %s", dir));
@@ -57,7 +59,8 @@ public class BaseOrientation {
             return horizontalFacings[iround(entity.rotationYaw / 90.0) & 3];
         }
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state,
+                Vector3d origin) {
             EnumFacing f = (EnumFacing) state.getValue(FACING);
             if (debugOrientation) SGCraft.log.debug(
                     String.format(
@@ -90,7 +93,8 @@ public class BaseOrientation {
 
     public static class Orient24WaysByTE extends BaseBlock.Orient1Way {
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state,
+                Vector3d origin) {
             TileEntity te = world.getTileEntity(pos.x, pos.y, pos.z);
             if (te instanceof BaseTileEntity) {
                 BaseTileEntity bte = (BaseTileEntity) te;

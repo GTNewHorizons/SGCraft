@@ -6,11 +6,12 @@
 
 package gcewing.sg;
 
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
+import java.util.Random;
+
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.village.MerchantRecipeList;
 
-import java.util.Random;
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
 public class SGTradeHandler implements IVillageTradeHandler {
 

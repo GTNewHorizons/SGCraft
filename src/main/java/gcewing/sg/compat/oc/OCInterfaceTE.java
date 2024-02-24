@@ -6,6 +6,13 @@
 
 package gcewing.sg.compat.oc;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+
 import gcewing.sg.SGCraft;
 import gcewing.sg.interfaces.IComputerInterface;
 import gcewing.sg.interfaces.ITickable;
@@ -20,12 +27,6 @@ import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Packet;
 import li.cil.oc.api.network.Visibility;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 public class OCInterfaceTE extends SGInterfaceTE implements IComputerInterface, Environment, IInventory, ITickable {
 

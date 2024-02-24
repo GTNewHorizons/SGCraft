@@ -6,16 +6,10 @@
 
 package gcewing.sg.blocks;
 
-import gcewing.sg.BaseConfiguration;
-import gcewing.sg.BaseOrientation;
-import gcewing.sg.SGCraft;
-import gcewing.sg.SGState;
-import gcewing.sg.guis.SGGui;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.utils.EnumWorldBlockLayer;
-import gcewing.sg.utils.ModelSpec;
-import gcewing.sg.utils.Trans3;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,12 +20,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.BaseOrientation;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGState;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.Trans3;
 
 public class SGBaseBlock extends SGBlock<SGBaseTE> {
 
@@ -227,7 +229,8 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
             markWorldBlockForUpdate(world, pos);
             unmergeRing(world, pos);
         }
-        if (goBang && explosionRadius > 0) explode(world, new Vector3d(0.5+pos.x, 2.5+pos.y, 0.5+pos.z), explosionRadius);
+        if (goBang && explosionRadius > 0)
+            explode(world, new Vector3d(0.5 + pos.x, 2.5 + pos.y, 0.5 + pos.z), explosionRadius);
     }
 
     void explode(World world, Vector3d p, double s) {

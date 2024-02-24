@@ -6,6 +6,20 @@
 
 package gcewing.sg.entities;
 
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
+
+import org.joml.Vector3i;
+
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGBaseTE;
@@ -14,18 +28,6 @@ import gcewing.sg.utils.Trans3;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
-import org.joml.Vector3i;
-
-import java.io.DataInput;
-import java.io.DataOutput;
-
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
 
 public class IrisEntity extends BaseEntity implements IEntityAdditionalSpawnData {
 

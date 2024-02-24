@@ -6,11 +6,12 @@
 
 package gcewing.sg.tileentities;
 
-import gcewing.sg.SGCraft;
-import gcewing.sg.interfaces.ISGEnergySource;
+import static java.lang.Math.min;
+
 import net.minecraft.nbt.NBTTagCompound;
 
-import static java.lang.Math.min;
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.ISGEnergySource;
 
 public abstract class PowerTE extends BaseTileEntity implements ISGEnergySource {
 

@@ -1,9 +1,10 @@
 package gcewing.sg.utils;
 
-import gcewing.sg.interfaces.ITexture;
+import java.util.HashMap;
+
 import net.minecraft.util.ResourceLocation;
 
-import java.util.HashMap;
+import gcewing.sg.interfaces.ITexture;
 
 public class TextureCache extends HashMap<ResourceLocation, ITexture> {
 }

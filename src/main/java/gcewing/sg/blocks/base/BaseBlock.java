@@ -6,24 +6,17 @@
 
 package gcewing.sg.blocks.base;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.sg.BaseMod;
-import gcewing.sg.BaseModClient;
-import gcewing.sg.SGCraft;
-import gcewing.sg.interfaces.IBlock;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IModel;
-import gcewing.sg.interfaces.IProperty;
-import gcewing.sg.interfaces.ITileEntity;
-import gcewing.sg.tileentities.InventoryHelper;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.utils.BaseUtils;
-import gcewing.sg.utils.BlockState;
-import gcewing.sg.utils.EnumWorldBlockLayer;
-import gcewing.sg.utils.ModelSpec;
-import gcewing.sg.utils.Trans3;
+import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseUtils.facings;
+import static gcewing.sg.utils.BaseUtils.newMovingObjectPosition;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -44,19 +37,28 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.utils.BaseUtils.facings;
-import static gcewing.sg.utils.BaseUtils.newMovingObjectPosition;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gcewing.sg.BaseMod;
+import gcewing.sg.BaseModClient;
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.interfaces.ITileEntity;
+import gcewing.sg.tileentities.InventoryHelper;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.BaseUtils;
+import gcewing.sg.utils.BlockState;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.Trans3;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
 
@@ -76,7 +78,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         void defineProperties(BaseBlock block);
 
         IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX, float hitY,
-                                  float hitZ, IBlockState baseState, EntityLivingBase placer);
+                float hitZ, IBlockState baseState, EntityLivingBase placer);
 
         Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin);
     }
@@ -90,7 +92,8 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
             return baseState;
         }
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state,
+                Vector3d origin) {
             return new Trans3(origin);
         }
 
@@ -367,7 +370,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state) {
-        return localToGlobalTransformation(world, pos, state, new Vector3d(0.5+pos.x, 0.5+pos.y, 0.5+pos.z));
+        return localToGlobalTransformation(world, pos, state, new Vector3d(0.5 + pos.x, 0.5 + pos.y, 0.5 + pos.z));
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
@@ -633,7 +636,8 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         ModelSpec spec = getModelSpec(state);
         if (spec != null) {
             IModel model = mod.getModel(spec.modelName);
-            Trans3 t = localToGlobalTransformation(world, pos, state, new Vector3d(0.5, 0.5, 0.5)).translate(spec.origin);
+            Trans3 t = localToGlobalTransformation(world, pos, state, new Vector3d(0.5, 0.5, 0.5))
+                    .translate(spec.origin);
             return t.t(model.getBounds());
         }
         return null;

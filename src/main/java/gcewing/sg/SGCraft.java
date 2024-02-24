@@ -6,6 +6,26 @@
 
 package gcewing.sg;
 
+import static gcewing.sg.utils.BaseUtils.getChunkTileEntityMap;
+import static gcewing.sg.utils.BaseUtils.getChunkWorld;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.InitMapGenEvent;
+import net.minecraftforge.event.world.ChunkDataEvent;
+import net.minecraftforge.event.world.ChunkEvent;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -38,30 +58,12 @@ import gcewing.sg.worldgen.FeatureGeneration;
 import gcewing.sg.worldgen.FeatureUnderDesertPyramid;
 import gcewing.sg.worldgen.NaquadahOreWorldGen;
 import gcewing.sg.worldgen.SGChunkData;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.world.ChunkDataEvent;
-import net.minecraftforge.event.world.ChunkEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import static gcewing.sg.utils.BaseUtils.getChunkTileEntityMap;
-import static gcewing.sg.utils.BaseUtils.getChunkWorld;
 
 @Mod(
         modid = Info.modID,
         name = Info.modName,
         version = Info.versionNumber,
-        dependencies = "after:OpenComputers;"+" required-after:gtnhlib@[0.2.4,);",
+        dependencies = "after:OpenComputers;" + " required-after:gtnhlib@[0.2.4,);",
         acceptableRemoteVersions = Info.versionBounds)
 public class SGCraft extends BaseMod<SGCraftClient> {
 
@@ -117,7 +119,9 @@ public class SGCraft extends BaseMod<SGCraftClient> {
         txIntegration = integrateWithMod("ThermalExpansion", "gcewing.sg.compat.TXIntegration"); // [TX]
         ccIntegration = integrateWithMod("ComputerCraft", "gcewing.sg.compat.cc.CCIntegration"); // [CC]
         ocIntegration = (OCIntegration) integrateWithMod("OpenComputers", "gcewing.sg.compat.oc.OCIntegration"); // [OC]
-        mystcraftIntegration = (MystcraftIntegration) integrateWithMod("Mystcraft", "gcewing.sg.compat.MystcraftIntegration"); // [MYST]
+        mystcraftIntegration = (MystcraftIntegration) integrateWithMod(
+                "Mystcraft",
+                "gcewing.sg.compat.MystcraftIntegration"); // [MYST]
         super.preInit(e);
     }
 

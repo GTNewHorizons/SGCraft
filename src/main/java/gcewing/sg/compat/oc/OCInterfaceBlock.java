@@ -6,14 +6,16 @@
 
 package gcewing.sg.compat.oc;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
+
+import org.joml.Vector3i;
+
 import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.SGInterfaceBlock;
 import gcewing.sg.guis.SGGui;
 import gcewing.sg.interfaces.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
-import org.joml.Vector3i;
 
 public class OCInterfaceBlock extends SGInterfaceBlock<OCInterfaceTE> {
 
@@ -29,8 +31,8 @@ public class OCInterfaceBlock extends SGInterfaceBlock<OCInterfaceTE> {
 
     @Override
     public boolean onBlockActivated(World world, Vector3i pos, IBlockState state, EntityPlayer player, EnumFacing side,
-                                    float hx, float hy, float hz) {
-        if (!world.isRemote){
+            float hx, float hy, float hz) {
+        if (!world.isRemote) {
             SGCraft.mod.openGui(player, SGGui.OCInterface, world, pos);
         }
         return true;

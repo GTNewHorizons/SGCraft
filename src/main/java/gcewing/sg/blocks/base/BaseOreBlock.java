@@ -6,10 +6,10 @@
 
 package gcewing.sg.blocks.base;
 
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-
-import java.util.Random;
 
 public class BaseOreBlock extends BaseBlock {
 
