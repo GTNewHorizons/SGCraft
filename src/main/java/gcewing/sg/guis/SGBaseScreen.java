@@ -6,7 +6,6 @@
 
 package gcewing.sg.guis;
 
-import gcewing.sg.guis.containers.SGBaseContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -14,6 +13,7 @@ import org.joml.Vector3i;
 
 import gcewing.sg.SGAddressing;
 import gcewing.sg.SGCraft;
+import gcewing.sg.guis.containers.SGBaseContainer;
 import gcewing.sg.tileentities.SGBaseTE;
 
 public class SGBaseScreen extends SGScreen {
@@ -21,12 +21,6 @@ public class SGBaseScreen extends SGScreen {
     static String screenTitle = "Stargate Address";
     static final int guiWidth = 256;
     static final int guiHeight = 208; // 92;
-    static final int fuelGaugeWidth = 16;
-    static final int fuelGaugeHeight = 34;
-    static final int fuelGaugeX = 214;
-    static final int fuelGaugeY = 84;
-    static final int fuelGaugeU = 0;
-    static final int fuelGaugeV = 208;
 
     SGBaseTE te;
     String address;

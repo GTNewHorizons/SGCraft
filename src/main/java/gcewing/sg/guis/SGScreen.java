@@ -12,11 +12,11 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
-import gcewing.sg.guis.containers.BaseContainer;
-import gcewing.sg.guis.screens.Screen;
 import net.minecraft.inventory.Container;
 
 import gcewing.sg.SGCraft;
+import gcewing.sg.guis.containers.BaseContainer;
+import gcewing.sg.guis.screens.Screen;
 import gcewing.sg.tileentities.SGBaseTE;
 
 // ------------------------------------------------------------------------------------------------
@@ -29,13 +29,8 @@ public class SGScreen extends Screen {
     final static int symbolHeightInTexture = 48;
     final static int symbolTextureWidth = 512;
     final static int symbolTextureHeight = 256;
-    final static int frameWidth = 236;
     final static int frameHeight = 44;
-    final static int borderSize = 6;
     final static int cellSize = 24;
-
-    double uscale, vscale;
-    float red = 1.0F, green = 1.0F, blue = 1.0F;
 
     public SGScreen() {
         super(new BaseContainer(0, 0));
@@ -65,18 +60,6 @@ public class SGScreen extends Screen {
 
     protected void drawAddressString(int x, int y, String address) {
         drawCenteredString(this.fontRendererObj, address, x, y, 0xffffff);
-    }
-
-    // void drawAddressString(int x, int y, String address, String caret) {
-    // drawCenteredString(this.fontRendererObj, padAddress(address, caret), x, y, 0xffffff);
-    // }
-
-    // String padAddress(String address, String caret) {
-    // return SGAddressing.padAddress(address, caret, );
-    // }
-
-    void bindSGTexture(String name) {
-        bindSGTexture(name, 1, 1);
     }
 
     void bindSGTexture(String name, int usize, int vsize) {

@@ -422,8 +422,3 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
 }
-
-enum RingType {
-    Inner,
-    Outer
-}

@@ -1,18 +1,18 @@
 package gcewing.sg.guis;
 
-import gcewing.sg.SGCraft;
-import gcewing.sg.guis.screens.Screen;
-import gcewing.sg.interfaces.IWidget;
-import gcewing.sg.interfaces.IWidgetContainer;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static gcewing.sg.guis.BaseGui.isFocused;
 import static gcewing.sg.guis.BaseGui.tellFocusChanged;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glTranslated;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import gcewing.sg.SGCraft;
+import gcewing.sg.guis.screens.Screen;
+import gcewing.sg.interfaces.IWidget;
+import gcewing.sg.interfaces.IWidgetContainer;
 
 public class Group extends Widget implements IWidgetContainer {
 
@@ -64,11 +64,7 @@ public class Group extends Widget implements IWidgetContainer {
     @Override
     public IWidget dispatchMousePress(int x, int y, int button) {
         SGCraft.log.trace(
-                String.format(
-                        "BaseGui.Group.dispatchMousePress: (%s, %s) in %s",
-                        x,
-                        y,
-                        getClass().getSimpleName()));
+                String.format("BaseGui.Group.dispatchMousePress: (%s, %s) in %s", x, y, getClass().getSimpleName()));
         IWidget target = findWidget(x, y);
         if (target != null) return target.dispatchMousePress(x - target.left(), y - target.top(), button);
         else return this;

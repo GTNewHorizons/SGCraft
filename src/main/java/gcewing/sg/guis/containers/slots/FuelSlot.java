@@ -1,9 +1,10 @@
 package gcewing.sg.guis.containers.slots;
 
-import gcewing.sg.guis.DHDTE;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import gcewing.sg.guis.DHDTE;
 
 public class FuelSlot extends Slot {
 

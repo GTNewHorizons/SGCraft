@@ -18,7 +18,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -63,14 +62,6 @@ public class BaseTileEntity extends TileEntity implements ITileEntity {
 
     public void setSide(int side) {
         this.side = (byte) side;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = (byte) turn;
-    }
-
-    public Trans3 localToGlobalRotation() {
-        return localToGlobalTransformation(new Vector3d());
     }
 
     public Trans3 localToGlobalTransformation() {
@@ -170,15 +161,6 @@ public class BaseTileEntity extends TileEntity implements ITileEntity {
         readContentsFromNBT(nbt);
     }
 
-    public void readFromItemStack(ItemStack stack) {
-        NBTTagCompound nbt = stack.getTagCompound();
-        if (nbt != null) readFromItemStackNBT(nbt);
-    }
-
-    public void readFromItemStackNBT(NBTTagCompound nbt) {
-        readContentsFromNBT(nbt);
-    }
-
     protected void readClientStateFromNBT(NBTTagCompound nbt) {
         readPersistentStateFromNBT(nbt);
     }
@@ -229,24 +211,6 @@ public class BaseTileEntity extends TileEntity implements ITileEntity {
             ForgeChunkManager.releaseTicket(chunkTicket);
             chunkTicket = null;
         }
-    }
-
-    public static ItemStack blockStackWithTileEntity(Block block, int size, BaseTileEntity te) {
-        return blockStackWithTileEntity(block, size, 0, te);
-    }
-
-    public static ItemStack blockStackWithTileEntity(Block block, int size, int meta, BaseTileEntity te) {
-        ItemStack stack = new ItemStack(block, size, meta);
-        if (te != null) {
-            NBTTagCompound tag = new NBTTagCompound();
-            te.writeToItemStackNBT(tag);
-            stack.setTagCompound(tag);
-        }
-        return stack;
-    }
-
-    public ItemStack newItemStack(int size) {
-        return blockStackWithTileEntity(getBlockType(), size, this);
     }
 
     @Override

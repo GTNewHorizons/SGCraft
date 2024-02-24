@@ -15,8 +15,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import gcewing.sg.textures.BaseTexture;
-import gcewing.sg.textures.Sprite;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -45,7 +43,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.joml.Vector3i;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -68,6 +65,7 @@ import gcewing.sg.interfaces.ITextureConsumer;
 import gcewing.sg.renderers.BaseGLRenderTarget;
 import gcewing.sg.renderers.BaseModelRenderer;
 import gcewing.sg.renderers.BaseWorldRenderTarget;
+import gcewing.sg.textures.BaseTexture;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.ModelSpec;
@@ -81,7 +79,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     MOD base;
     boolean customRenderingRequired;
-    boolean debugSound = false;
 
     Map<Integer, Class<? extends GuiScreen>> screenClasses = new HashMap<Integer, Class<? extends GuiScreen>>();
 
@@ -244,16 +241,8 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         }
     }
 
-    public static void openClientGui(GuiScreen gui) {
-        FMLClientHandler.instance().getClient().displayGuiScreen(gui);
-    }
-
     public ResourceLocation textureLocation(String path) {
         return base.resourceLocation("textures/" + path);
-    }
-
-    public void bindTexture(String path) {
-        bindTexture(textureLocation(path));
     }
 
     public static void bindTexture(ResourceLocation rsrc) {
@@ -602,10 +591,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         // Cache is keyed by texture name without "textures/"
         ResourceLocation loc = base.resourceLocation(name);
         return textureCaches[type].get(loc);
-    }
-
-    public IIcon getIcon(int type, String name) {
-        return ((Sprite) getTexture(type, name)).icon;
     }
 
     @SubscribeEvent

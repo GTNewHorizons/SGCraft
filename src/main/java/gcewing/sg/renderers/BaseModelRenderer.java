@@ -6,8 +6,6 @@
 
 package gcewing.sg.renderers;
 
-// import net.minecraft.block.state.IBlockState;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
@@ -31,12 +29,6 @@ public class BaseModelRenderer implements ICustomRenderer {
     protected IModel model;
     protected ITexture[] textures;
     protected Vector3d origin;
-
-    // private static Trans3 itemTrans = Trans3.blockCenterSideTurn(0, 0);
-
-    public BaseModelRenderer(IModel model, ITexture... textures) {
-        this(model, new Vector3d(), textures);
-    }
 
     public BaseModelRenderer(IModel model, Vector3d origin, ITexture... textures) {
         this.model = model;

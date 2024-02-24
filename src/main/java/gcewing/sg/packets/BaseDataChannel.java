@@ -6,41 +6,25 @@
 
 package gcewing.sg.packets;
 
-import java.io.DataInput;
-import java.io.DataOutput;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 
-import gcewing.sg.interfaces.ChannelInput;
-import gcewing.sg.interfaces.ChannelOutput;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetHandler;
-import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.network.Packet;
-import net.minecraft.network.PacketBuffer;
 
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.FMLOutboundHandler.OutboundTarget;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.sg.SGCraft;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
+import gcewing.sg.interfaces.ChannelInput;
+import gcewing.sg.interfaces.ChannelOutput;
 import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class BaseDataChannel {
 
@@ -72,30 +56,6 @@ public class BaseDataChannel {
 
     public ChannelOutput openPlayer(EntityPlayer player, String message) {
         return openTarget(message, Side.SERVER, OutboundTarget.PLAYER, player);
-    }
-
-    public ChannelOutput openAllPlayers(String message) {
-        return openTarget(message, Side.SERVER, OutboundTarget.ALL);
-    }
-
-    public ChannelOutput openAllAround(NetworkRegistry.TargetPoint point, String message) {
-        return openTarget(message, Side.SERVER, OutboundTarget.ALLAROUNDPOINT, point);
-    }
-
-    public ChannelOutput openDimension(int dimensionId, String message) {
-        return openTarget(message, Side.SERVER, OutboundTarget.DIMENSION, dimensionId);
-    }
-
-    public ChannelOutput openServerContainer(String message) {
-        ChannelOutput out = openServer(".container.");
-        out.writeUTF(message);
-        return out;
-    }
-
-    public ChannelOutput openClientContainer(EntityPlayer player, String message) {
-        ChannelOutput out = openPlayer(player, ".container.");
-        out.writeUTF(message);
-        return out;
     }
 
     @ServerMessageHandler(".container.")

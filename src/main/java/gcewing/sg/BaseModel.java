@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import gcewing.sg.utils.Face;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
@@ -21,6 +20,7 @@ import com.google.gson.Gson;
 import gcewing.sg.interfaces.IModel;
 import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.utils.Face;
 import gcewing.sg.utils.Trans3;
 
 public class BaseModel implements IModel {
@@ -52,7 +52,6 @@ public class BaseModel implements IModel {
         for (Face face : faces) {
             double[][] p = face.vertices;
             int[] t = face.triangles[0];
-            // face.centroid = Vector3.average(p[t[0]], p[t[1]], p[t[2]]);
             Vector3d vector0 = new Vector3d(p[t[0]][0], p[t[0]][1], p[t[0]][2]);
             Vector3d vector1 = new Vector3d(p[t[1]][0], p[t[1]][1], p[t[1]][2]);
             Vector3d vector2 = new Vector3d(p[t[2]][0], p[t[2]][1], p[t[2]][2]);

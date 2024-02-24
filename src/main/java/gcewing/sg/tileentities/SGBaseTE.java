@@ -36,7 +36,6 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -83,7 +82,7 @@ import gcewing.sg.interfaces.IComputerInterface;
 import gcewing.sg.interfaces.ISGEnergySource;
 import gcewing.sg.renderers.SGBaseTERenderer;
 import gcewing.sg.utils.BaseBlockUtils;
-import gcewing.sg.utils.inventories.BaseInventoryUtils;
+import gcewing.sg.utils.BaseInventoryUtils;
 import gcewing.sg.utils.Trans3;
 import gcewing.sg.utils.Utils;
 import gcewing.sg.utils.exceptions.AddressingError;
@@ -96,8 +95,6 @@ public class SGBaseTE extends BaseTileInventory {
     static boolean debugConnect = false;
     static boolean debugTransientDamage = false;
     static boolean debugTeleport = false;
-
-    public final static String symbolChars = SGAddressing.symbolChars;
     public final static int numRingSymbols = SGAddressing.numSymbols;
     public final static double ringSymbolAngle = 360.0 / numRingSymbols;
     public final static double irisZPosition = 0.1;
@@ -289,11 +286,6 @@ public class SGBaseTE extends BaseTileInventory {
         }
     }
 
-    public int dimension() {
-        if (worldObj != null) return getWorldDimensionId(worldObj);
-        return -999;
-    }
-
     @Override
     public void readContentsFromNBT(NBTTagCompound nbt) {
         super.readContentsFromNBT(nbt);
@@ -359,19 +351,11 @@ public class SGBaseTE extends BaseTileInventory {
         return state != SGState.Idle && state != SGState.Disconnecting;
     }
 
-    public static boolean isValidSymbolChar(String c) {
-        return SGAddressing.isValidSymbolChar(c);
-    }
-
     public static char symbolToChar(int i) {
         return SGAddressing.symbolToChar(i);
     }
 
     public static int charToSymbol(char c) {
-        return SGAddressing.charToSymbol(c);
-    }
-
-    public static int charToSymbol(String c) {
         return SGAddressing.charToSymbol(c);
     }
 
@@ -410,11 +394,6 @@ public class SGBaseTE extends BaseTileInventory {
             return chevronAngles[c9][bc];
         }
         return defaultChevronAngle;
-    }
-
-    Item getItemInSlot(int slot) {
-        ItemStack stack = getStackInSlot(slot);
-        return stack != null ? stack.getItem() : null;
     }
 
     public String getHomeAddress() throws AddressingError {
@@ -904,18 +883,6 @@ public class SGBaseTE extends BaseTileInventory {
             return s;
         }
         return "null";
-    }
-
-    class TrackedEntity {
-
-        public Entity entity;
-        public Vector3d lastPos;
-
-        public TrackedEntity(Entity entity) {
-            this.entity = entity;
-            this.lastPos = new Vector3d(entity.posX, entity.posY, entity.posZ);
-        }
-
     }
 
     List<TrackedEntity> trackedEntities = new ArrayList<TrackedEntity>();
@@ -1510,12 +1477,6 @@ public class SGBaseTE extends BaseTileInventory {
         }
     }
 
-    public int numItemsInSlot(int slot) {
-        ItemStack stack = getStackInSlot(slot);
-        if (stack != null) return stack.stackSize;
-        return 0;
-    }
-
     protected int baseCornerCamouflage() {
         return max(baseCamouflageAt(0), baseCamouflageAt(4));
     }
@@ -1523,7 +1484,6 @@ public class SGBaseTE extends BaseTileInventory {
     protected int baseCamouflageAt(int i) {
         ItemStack stack = getStackInSlot(i);
         if (stack != null) {
-            Item item = stack.getItem();
             Block block = Block.getBlockFromItem(stack.getItem());
             if (block != null) {
                 if (block instanceof BlockSlab) return 1;
@@ -1606,26 +1566,6 @@ public class SGBaseTE extends BaseTileInventory {
 
     public static SGBaseTE getBaseTE(SGInterfaceTE ite) {
         return SGBaseTE.get(getTileEntityWorld(ite), getTileEntityPos(ite).add(0, 1, 0));
-    }
-
-}
-
-class BlockRef {
-
-    public IBlockAccess worldObj;
-    Vector3i pos;
-
-    public BlockRef(TileEntity te) {
-        this(getTileEntityWorld(te), getTileEntityPos(te));
-    }
-
-    public BlockRef(IBlockAccess world, Vector3i pos) {
-        worldObj = world;
-        this.pos = pos;
-    }
-
-    public TileEntity getTileEntity() {
-        return getWorldTileEntity(worldObj, pos);
     }
 
 }

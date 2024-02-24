@@ -1,10 +1,10 @@
 package gcewing.sg.utils.carthesian;
 
-import com.google.common.collect.UnmodifiableIterator;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import com.google.common.collect.UnmodifiableIterator;
 
 public class ProductIterator<T> extends UnmodifiableIterator<T[]> {
 

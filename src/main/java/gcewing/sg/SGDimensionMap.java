@@ -18,8 +18,6 @@ import com.google.common.primitives.Ints;
 
 import gcewing.sg.utils.BaseUtils;
 
-// import net.minecraftforge.common.*;
-
 public class SGDimensionMap extends WorldSavedData {
 
     public static boolean debugDimensionMap = false;

@@ -12,7 +12,6 @@ import com.google.common.collect.Iterables;
 
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IProperty;
-// import net.minecraft.block.properties.IProperty;
 
 public abstract class BlockStateBase implements IBlockState {
 

@@ -8,13 +8,13 @@ package gcewing.sg.guis.containers;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 
-import gcewing.sg.guis.screens.PowerScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
 
+import gcewing.sg.guis.screens.PowerScreen;
 import gcewing.sg.tileentities.PowerTE;
 
 public class PowerContainer extends BaseContainer {

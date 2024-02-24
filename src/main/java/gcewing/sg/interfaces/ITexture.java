@@ -24,8 +24,6 @@ public interface ITexture {
 
     boolean isSolid();
 
-    ITexture tinted(int index);
-
     ITexture colored(double red, double green, double blue);
 
     ITexture projected();

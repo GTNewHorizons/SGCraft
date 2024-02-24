@@ -32,22 +32,6 @@ public class BaseContainer extends Container {
         ySize = height;
     }
 
-    public BaseContainer(int width, int height, EntityPlayer player) {
-        this(width, height);
-        addPlayerSlots(player);
-    }
-
-    // Slots added between beginContainerSlots and endContainerSlots will be included in
-    // containerSlotRange.
-
-    protected void beginContainerSlots() {
-        containerSlotRange = new SlotRange(inventorySlots.size());
-    }
-
-    protected void endContainerSlots() {
-        containerSlotRange.end();
-    }
-
     protected void beginPlayerSlots() {
         playerSlotRange = new SlotRange(inventorySlots.size());
     }
@@ -75,25 +59,8 @@ public class BaseContainer extends Container {
         endPlayerSlots();
     }
 
-    public void addPlayerSlotsRotated(EntityPlayer player, int x, int y) {
-        beginPlayerSlots();
-        InventoryPlayer inventory = player.inventory;
-        for (int var3 = 0; var3 < 3; ++var3) for (int var4 = 0; var4 < 9; ++var4)
-            this.addSlotToContainer(new Slot(inventory, var4 + var3 * 9 + 9, x + 58 - var3 * 18, y + var4 * 18));
-        for (int var3 = 0; var3 < 9; ++var3) this.addSlotToContainer(new Slot(inventory, var3, x, y + var3 * 18));
-        endPlayerSlots();
-    }
-
-    public SlotRange addSlots(IInventory inventory, int x, int y, int numRows) {
-        return addSlots(inventory, 0, inventory.getSizeInventory(), x, y, numRows);
-    }
-
     public SlotRange addSlots(IInventory inventory, int x, int y, int numRows, Class slotClass) {
         return addSlots(inventory, 0, inventory.getSizeInventory(), x, y, numRows, slotClass);
-    }
-
-    public SlotRange addSlots(IInventory inventory, int firstSlot, int numSlots, int x, int y, int numRows) {
-        return addSlots(inventory, firstSlot, numSlots, x, y, numRows, Slot.class);
     }
 
     public SlotRange addSlots(IInventory inventory, int firstSlot, int numSlots, int x, int y, int numRows,

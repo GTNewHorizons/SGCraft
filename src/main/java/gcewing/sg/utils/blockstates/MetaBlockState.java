@@ -1,11 +1,11 @@
 package gcewing.sg.utils.blockstates;
 
-import com.google.common.collect.ImmutableMap;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 
-import java.util.Collection;
+import com.google.common.collect.ImmutableMap;
+
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 
 public class MetaBlockState implements IBlockState {
 
@@ -15,10 +15,6 @@ public class MetaBlockState implements IBlockState {
     public MetaBlockState(Block block, int meta) {
         this.block = block;
         this.meta = meta;
-    }
-
-    public Collection<IProperty> getPropertyNames() {
-        return null;
     }
 
     public <T extends Comparable<T>> T getValue(IProperty<T> property) {

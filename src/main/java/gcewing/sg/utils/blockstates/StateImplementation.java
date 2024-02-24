@@ -1,17 +1,17 @@
 package gcewing.sg.utils.blockstates;
 
+import java.util.Map;
+
+import net.minecraft.block.Block;
+
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
+
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IProperty;
-import net.minecraft.block.Block;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 public class StateImplementation extends BlockStateBase {
 
@@ -24,30 +24,17 @@ public class StateImplementation extends BlockStateBase {
         this.properties = propertiesIn;
     }
 
-    public Collection<IProperty> getPropertyNames() {
-        return Collections.<IProperty>unmodifiableCollection(this.properties.keySet());
-    }
-
     public <T extends Comparable<T>> T getValue(IProperty<T> property) {
         if (!this.properties.containsKey(property)) {
-            throw new IllegalArgumentException(
-                    "Cannot get property " + property + " as it does not exist in " + this);
+            throw new IllegalArgumentException("Cannot get property " + property + " as it does not exist in " + this);
         } else {
             return (T) ((Comparable) property.getValueClass().cast(this.properties.get(property)));
         }
     }
 
-    protected StateImplementation(Block blockIn, ImmutableMap<IProperty, Comparable> propertiesIn,
-                                  ImmutableTable<IProperty, Comparable, IBlockState> propertyValueTable) {
-        this.block = blockIn;
-        this.properties = propertiesIn;
-        this.propertyValueTable = propertyValueTable;
-    }
-
     public <T extends Comparable<T>, V extends T> IBlockState withProperty(IProperty<T> property, V value) {
         if (!this.properties.containsKey(property)) {
-            throw new IllegalArgumentException(
-                    "Cannot set property " + property + " as it does not exist in " + this);
+            throw new IllegalArgumentException("Cannot set property " + property + " as it does not exist in " + this);
         } else if (!property.getAllowedValues().contains(value)) {
             throw new IllegalArgumentException(
                     "Cannot set property " + property
@@ -88,10 +75,7 @@ public class StateImplementation extends BlockStateBase {
             for (IProperty<? extends Comparable> iproperty : this.properties.keySet()) {
                 for (Comparable comparable : iproperty.getAllowedValues()) {
                     if (comparable != this.properties.get(iproperty)) {
-                        table.put(
-                                iproperty,
-                                comparable,
-                                map.get(this.getPropertiesWithValue(iproperty, comparable)));
+                        table.put(iproperty, comparable, map.get(this.getPropertiesWithValue(iproperty, comparable)));
                     }
                 }
             }

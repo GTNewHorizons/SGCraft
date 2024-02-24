@@ -23,9 +23,9 @@ import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseBlockUtils;
-import gcewing.sg.utils.rendering.BaseRenderingUtils;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.rendering.BaseRenderingUtils;
 
 public class SGRingBlockRenderer implements ICustomRenderer {
 

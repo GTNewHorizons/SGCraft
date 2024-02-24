@@ -8,7 +8,6 @@ package gcewing.sg.tileentities;
 
 import java.util.Random;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -16,18 +15,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import org.joml.Vector3i;
-
 public class InventoryHelper {
 
     private static final Random RANDOM = new Random();
 
-    public static void dropInventoryItems(World worldIn, Vector3i pos, IInventory p_180175_2_) {
-        func_180174_a(worldIn, (double) pos.x, (double) pos.y, (double) pos.z, p_180175_2_);
-    }
-
-    public static void func_180176_a(World worldIn, Entity p_180176_1_, IInventory p_180176_2_) {
-        func_180174_a(worldIn, p_180176_1_.posX, p_180176_1_.posY, p_180176_1_.posZ, p_180176_2_);
+    public static void dropInventoryItems(World worldIn, double x, double y, double z, IInventory p_180175_2_) {
+        func_180174_a(worldIn, x, y, z, p_180175_2_);
     }
 
     private static void func_180174_a(World worldIn, double x, double y, double z, IInventory p_180174_7_) {

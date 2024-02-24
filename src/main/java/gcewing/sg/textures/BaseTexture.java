@@ -6,7 +6,6 @@
 
 package gcewing.sg.textures;
 
-import gcewing.sg.SGCraft;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
@@ -53,15 +52,8 @@ public abstract class BaseTexture implements ITexture {
         return new Sprite(icon);
     }
 
-
     public ResourceLocation location() {
         return location;
-    }
-
-    public ITexture tinted(int index) {
-        BaseTexture result = new Proxy(this);
-        result.tintIndex = index;
-        return result;
     }
 
     public ITexture colored(double red, double green, double blue) {

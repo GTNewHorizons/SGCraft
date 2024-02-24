@@ -11,9 +11,9 @@ import net.minecraft.util.IIcon;
 
 import org.joml.Vector3d;
 
-import gcewing.sg.textures.BaseTexture;
 import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.textures.BaseTexture;
 import gcewing.sg.utils.Trans3;
 
 public abstract class BaseRenderTarget implements IRenderTarget {
@@ -51,10 +51,6 @@ public abstract class BaseRenderTarget implements IRenderTarget {
         setMode(3);
     }
 
-    public void beginQuad() {
-        setMode(4);
-    }
-
     protected void setMode(int mode) {
         if (vertexCount != 0) throw new IllegalStateException("Changing mode in mid-face");
         verticesPerFace = mode;
@@ -65,13 +61,6 @@ public abstract class BaseRenderTarget implements IRenderTarget {
             if (texture == null) throw new IllegalArgumentException("Setting null texture");
             this.texture = texture;
         }
-    }
-
-    public void setColor(double r, double g, double b, double a) {
-        red = (float) r;
-        green = (float) g;
-        blue = (float) b;
-        alpha = (float) a;
     }
 
     public void setNormal(Vector3d n) {

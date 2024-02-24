@@ -30,4 +30,3 @@ public class Sprite extends BaseTexture {
     }
 
 }
-

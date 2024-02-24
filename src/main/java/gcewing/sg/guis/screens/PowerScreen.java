@@ -11,20 +11,19 @@ import static org.lwjgl.opengl.GL11.GL_ONE;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glEnable;
 
-import gcewing.sg.guis.containers.PowerContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
 
 import gcewing.sg.SGCraft;
+import gcewing.sg.guis.containers.PowerContainer;
 import gcewing.sg.tileentities.PowerTE;
 
 public class PowerScreen extends Screen {
 
     public final static int guiWidth = 128;
     public final static int guiHeight = 64;
-    // final static String screenTitle = "IC2 SGPU";
 
     PowerTE te;
 

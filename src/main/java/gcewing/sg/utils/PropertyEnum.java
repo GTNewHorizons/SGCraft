@@ -9,7 +9,6 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-// import net.minecraft.util.IStringSerializable;
 
 public class PropertyEnum<T extends Enum> extends PropertyHelper<T> {
 
@@ -21,7 +20,6 @@ public class PropertyEnum<T extends Enum> extends PropertyHelper<T> {
         this.allowedValues = ImmutableSet.copyOf(allowedValues);
 
         for (T t : allowedValues) {
-            // String s = ((IStringSerializable)t).getName();
             String s = getName(t);
 
             if (this.nameToValue.containsKey(s)) {
@@ -40,7 +38,6 @@ public class PropertyEnum<T extends Enum> extends PropertyHelper<T> {
      * Get the name for the given value.
      */
     public String getName(T value) {
-        // return ((IStringSerializable)value).getName();
         return value.toString().toLowerCase();
     }
 

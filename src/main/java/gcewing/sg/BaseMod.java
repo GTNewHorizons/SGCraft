@@ -20,18 +20,13 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
-import net.minecraft.server.management.PlayerManager;
-import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -88,14 +83,9 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
     public boolean debugBlockRegistration = false;
     public boolean debugCreativeTabs = false;
 
-    public String resourcePath(String fileName) {
-        return resourceDir + fileName;
-    }
-
     public BaseMod() {
         Class modClass = getClass();
         modPackage = modClass.getPackage().getName();
-        // assetKey = modPackage.replace(".", "_");
         modID = getModID(modClass);
         assetKey = modID.toLowerCase();
         blockDomain = assetKey;
@@ -172,10 +162,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         if (config.extended) config.save();
     }
 
-    String qualifiedName(String name) {
-        return modPackage + "." + name;
-    }
-
     @Override
     protected void registerScreens() {
         if (client != null) client.registerScreens();
@@ -217,11 +203,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return null;
     }
 
-    public BaseSubsystem integrateWithClass(String className, String subsystemClassName) {
-        if (classAvailable(className)) return loadSubsystem(subsystemClassName);
-        return null;
-    }
-
     public BaseSubsystem loadSubsystem(String className) {
         BaseSubsystem sub = newSubsystem(className);
         sub.mod = this;
@@ -235,17 +216,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
             return (BaseSubsystem) Class.forName(className).newInstance();
         } catch (Exception exc) {
             throw new RuntimeException(exc);
-        }
-    }
-
-    public static boolean classAvailable(String name) {
-        try {
-            Class.forName(name);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -280,10 +250,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return item;
     }
 
-    public Block newBlock(String name) {
-        return newBlock(name, Block.class);
-    }
-
     public <BLOCK extends Block> BLOCK newBlock(String name, Class<BLOCK> cls) {
         return newBlock(name, cls, null);
     }
@@ -297,10 +263,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
             throw new RuntimeException(e);
         }
         return addBlock(block, name, itemClass);
-    }
-
-    public <BLOCK extends Block> BLOCK addBlock(String name, BLOCK block) {
-        return addBlock(block, name);
     }
 
     public <BLOCK extends Block> BLOCK addBlock(BLOCK block, String name) {
@@ -352,28 +314,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         OreDictionary.registerOre(name, item);
     }
 
-    public void addOre(String name, ItemStack stack) {
-        OreDictionary.registerOre(name, stack);
-    }
-
-    public static boolean blockMatchesOre(Block block, String name) {
-        return stackMatchesOre(new ItemStack(block), name);
-    }
-
-    public static boolean itemMatchesOre(Item item, String name) {
-        return stackMatchesOre(new ItemStack(item), name);
-    }
-
-    public static boolean stackMatchesOre(ItemStack stack, String name) {
-        int id2 = OreDictionary.getOreID(name);
-        for (int id1 : OreDictionary.getOreIDs(stack)) {
-            if (id1 == id2) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void newRecipe(Item product, int qty, Object... params) {
         newRecipe(new ItemStack(product, qty), params);
     }
@@ -386,40 +326,12 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         GameRegistry.addRecipe(new ShapedOreRecipe(product, params));
     }
 
-    public void newShapelessRecipe(Block product, int qty, Object... params) {
-        newShapelessRecipe(new ItemStack(product, qty), params);
-    }
-
     public void newShapelessRecipe(Item product, int qty, Object... params) {
         newShapelessRecipe(new ItemStack(product, qty), params);
     }
 
     public void newShapelessRecipe(ItemStack product, Object... params) {
         GameRegistry.addRecipe(new ShapelessOreRecipe(product, params));
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Item input) {
-        newSmeltingRecipe(product, qty, input, 0);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Item input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Block input) {
-        newSmeltingRecipe(product, qty, input, 0);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Block input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, Enum id) {
-        addEntity(cls, name, id.ordinal());
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, int id) {
-        addEntity(cls, name, id, 1, true);
     }
 
     public void addEntity(Class<? extends Entity> cls, String name, Enum id, int updateFrequency,
@@ -463,10 +375,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return new ResourceLocation(assetKey, path);
     }
 
-    public String soundName(String name) {
-        return assetKey + ":" + name;
-    }
-
     public ResourceLocation textureLocation(String path) {
         return resourceLocation("textures/" + path);
     }
@@ -483,26 +391,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
             modelCache.put(loc, model);
         }
         return model;
-    }
-
-    public static void sendTileEntityUpdate(TileEntity te) {
-        Packet packet = te.getDescriptionPacket();
-        if (packet == null) {
-            return;
-        }
-
-        int x = te.xCoord >> 4;
-        int z = te.zCoord >> 4;
-        // SGCraft.log.trace(String.format("BaseMod.sendTileEntityUpdate: for chunk coords (%s, %s)", x, z));
-        WorldServer world = (WorldServer) te.getWorldObj();
-        ServerConfigurationManager cm = FMLCommonHandler.instance().getMinecraftServerInstance()
-                .getConfigurationManager();
-        PlayerManager pm = world.getPlayerManager();
-        for (EntityPlayerMP player : (List<EntityPlayerMP>) cm.playerEntityList)
-            if (pm.isPlayerWatchingChunk(player, x, z)) {
-                // SGCraft.log.trace(String.format("BaseMod.sendTileEntityUpdate: to %s", player));
-                player.playerNetServerHandler.sendPacket(packet);
-            }
     }
 
     protected int nextGuiId = 1000;
@@ -528,10 +416,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
     // (3) A constructor MyContainer(EntityPlayer player, MyTileEntity te [,int param]) where
     // MyTileEntity is the tile entity class registered with MyContainer
 
-    public int addContainer(Class<? extends Container> cls) {
-        return addContainer(cls, null);
-    }
-
     public int addContainer(Class<? extends Container> cls, Class<? extends TileEntity> teCls) {
         int id = nextGuiId++;
         addContainer(id, cls, teCls);
@@ -553,24 +437,8 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         }
     }
 
-    public void openGui(EntityPlayer player, Enum id, TileEntity te) {
-        openGui(player, id, te, 0);
-    }
-
     public void openGui(EntityPlayer player, Enum id, TileEntity te, int param) {
         openGui(player, id.ordinal(), te, param);
-    }
-
-    public void openGui(EntityPlayer player, TileEntity te) {
-        openGui(player, -1, te, 0);
-    }
-
-    public void openGui(EntityPlayer player, int id, TileEntity te) {
-        openGui(player, id, te, 0);
-    }
-
-    public void openGui(EntityPlayer player, TileEntity te, int param) {
-        openGui(player, -1, te, param);
     }
 
     public void openGui(EntityPlayer player, int id, TileEntity te, int param) {

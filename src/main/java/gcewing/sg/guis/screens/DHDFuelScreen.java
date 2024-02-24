@@ -6,9 +6,6 @@
 
 package gcewing.sg.guis.screens;
 
-import gcewing.sg.guis.DHDTE;
-import gcewing.sg.guis.SGScreen;
-import gcewing.sg.guis.containers.DHDFuelContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -16,6 +13,9 @@ import org.joml.Vector3i;
 import org.lwjgl.opengl.GL11;
 
 import gcewing.sg.SGCraft;
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.SGScreen;
+import gcewing.sg.guis.containers.DHDFuelContainer;
 
 public class DHDFuelScreen extends SGScreen {
 

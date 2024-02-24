@@ -1,9 +1,9 @@
 package gcewing.sg.utils.carthesian;
 
-import com.google.common.base.Function;
-
 import java.util.Arrays;
 import java.util.List;
+
+import com.google.common.base.Function;
 
 public class GetList<T> implements Function<Object[], List<T>> {
 

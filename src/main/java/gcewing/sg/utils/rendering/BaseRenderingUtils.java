@@ -10,10 +10,7 @@ import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import org.joml.Vector3i;
 

@@ -1,8 +1,8 @@
 package gcewing.sg.guis;
 
-import net.minecraft.util.ResourceLocation;
-
 import static gcewing.sg.guis.BaseGui.defaultTextColor;
+
+import net.minecraft.util.ResourceLocation;
 
 public class GState {
 
@@ -20,17 +20,4 @@ public class GState {
         textColor = defaultTextColor;
         textShadow = false;
     }
-
-    public GState(GState previous) {
-        this.previous = previous;
-        this.uscale = previous.uscale;
-        this.vscale = previous.vscale;
-        this.red = previous.red;
-        this.green = previous.green;
-        this.blue = previous.blue;
-        this.textColor = previous.textColor;
-        this.textShadow = previous.textShadow;
-        this.texture = previous.texture;
-    }
-
 }

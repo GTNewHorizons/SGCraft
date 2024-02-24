@@ -1,10 +1,10 @@
 package gcewing.sg.guis;
 
-import gcewing.sg.guis.screens.Screen;
-import gcewing.sg.interfaces.IWidget;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import gcewing.sg.guis.screens.Screen;
+import gcewing.sg.interfaces.IWidget;
 
 public class Root extends Group {
 
@@ -31,13 +31,6 @@ public class Root extends Group {
         IWidget w = topPopup();
         if (w == null) w = super.dispatchMousePress(x, y, button);
         return w;
-    }
-
-    @Override
-    public void addPopup(int x, int y, IWidget widget) {
-        add(x, y, widget);
-        popupStack.add(widget);
-        screen.focusOn(widget);
     }
 
     @Override

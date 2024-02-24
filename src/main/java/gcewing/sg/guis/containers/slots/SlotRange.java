@@ -6,12 +6,9 @@ public class SlotRange {
     public int numSlots;
     public boolean reverseMerge;
     private int inventorySlotSize;
-    public SlotRange(int inventorySlotsSize){
-        this.inventorySlotSize = inventorySlotsSize;
-    }
 
-    public SlotRange() {
-        firstSlot = inventorySlotSize;
+    public SlotRange(int inventorySlotsSize) {
+        this.inventorySlotSize = inventorySlotsSize;
     }
 
     public void end() {

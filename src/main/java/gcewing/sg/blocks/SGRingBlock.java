@@ -50,17 +50,11 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
         super(Material.rock, SGRingTE.class);
         setHardness(1.5F);
         setCreativeTab(CreativeTabs.tabMisc);
-        // registerSubItemNames();
     }
 
     protected void defineProperties() {
         super.defineProperties();
         addProperty(VARIANT);
-    }
-
-    @Override
-    public int getNumSubtypes() {
-        return VARIANT.getAllowedValues().size();
     }
 
     @Override

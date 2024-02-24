@@ -1,16 +1,13 @@
 package gcewing.sg.utils.blockstates;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import gcewing.sg.utils.carthesian.Cartesian;
 import net.minecraft.block.Block;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -18,13 +15,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import gcewing.sg.MapPopulator;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.utils.MapPopulator;
+import gcewing.sg.utils.carthesian.Cartesian;
 
 public class BlockState {
 
-    private static final Joiner COMMA_JOINER = Joiner.on(", ");
     private static final Function<IProperty, String> GET_NAME_FUNC = new Function<IProperty, String>() {
 
         public String apply(IProperty p_apply_1_) {
@@ -43,8 +40,6 @@ public class BlockState {
         return new StateImplementation(block, properties);
     }
 
-    // protected BlockState(Block blockIn, IProperty[] properties, ImmutableMap<IUnlistedProperty<?>,
-    // com.google.common.base.Optional<?>> unlistedProperties)
     public BlockState(Block blockIn, IProperty... properties) {
         this.block = blockIn;
         Arrays.sort(properties, new Comparator<IProperty>() {
@@ -54,7 +49,8 @@ public class BlockState {
             }
         });
         this.properties = ImmutableList.copyOf(properties);
-        Map<Map<IProperty, Comparable>, StateImplementation> map = Maps.<Map<IProperty, Comparable>, StateImplementation>newLinkedHashMap();
+        Map<Map<IProperty, Comparable>, StateImplementation> map = Maps
+                .<Map<IProperty, Comparable>, StateImplementation>newLinkedHashMap();
         List<StateImplementation> list = Lists.<StateImplementation>newArrayList();
 
         for (List<Comparable> list1 : Cartesian.cartesianProduct(this.getAllowedValues())) {
@@ -73,10 +69,6 @@ public class BlockState {
         this.validStates = ImmutableList.<IBlockState>copyOf(list);
     }
 
-    public ImmutableList<IBlockState> getValidStates() {
-        return this.validStates;
-    }
-
     private List<Iterable<Comparable>> getAllowedValues() {
         List<Iterable<Comparable>> list = Lists.<Iterable<Comparable>>newArrayList();
 
@@ -88,15 +80,11 @@ public class BlockState {
     }
 
     public IBlockState getBaseState() {
-        return (IBlockState) this.validStates.get(0);
+        return this.validStates.get(0);
     }
 
     public Block getBlock() {
         return this.block;
-    }
-
-    public Collection<IProperty> getProperties() {
-        return this.properties;
     }
 
     public String toString() {

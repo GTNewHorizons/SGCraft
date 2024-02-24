@@ -43,11 +43,11 @@ import gcewing.sg.compat.MystcraftIntegration;
 import gcewing.sg.compat.oc.OCIntegration;
 import gcewing.sg.entities.IrisEntity;
 import gcewing.sg.entities.SGEntity;
-import gcewing.sg.guis.containers.DHDFuelContainer;
 import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.guis.containers.DHDFuelContainer;
 import gcewing.sg.guis.containers.PowerContainer;
 import gcewing.sg.guis.containers.SGBaseContainer;
-import gcewing.sg.guis.SGGui;
 import gcewing.sg.interfaces.IIntegration;
 import gcewing.sg.items.SGChevronUpgradeItem;
 import gcewing.sg.items.SGIrisUpgradeItem;
@@ -178,10 +178,6 @@ public class SGCraft extends BaseMod<SGCraftClient> {
         if (isModLoaded("IC2") || (isModLoaded("CoFHCore") && !isModLoaded("ThermalExpansion"))) {
             ic2Capacitor = newItem("ic2Capacitor");
         }
-    }
-
-    public static boolean isValidStargateUpgrade(Item item) {
-        return item == sgChevronUpgrade || item == sgIrisUpgrade;
     }
 
     @Override

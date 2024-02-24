@@ -35,10 +35,6 @@ public class BaseConfiguration extends Configuration {
         return get(category, key, defaultValue).getDouble(defaultValue);
     }
 
-    public String getString(String category, String key, String defaultValue) {
-        return get(category, key, defaultValue).getString();
-    }
-
     public int getVillager(String key) {
         VillagerRegistry reg = VillagerRegistry.instance();
         Property prop = get("villagers", key, -1);

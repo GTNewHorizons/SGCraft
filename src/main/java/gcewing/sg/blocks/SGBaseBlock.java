@@ -10,7 +10,6 @@ import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
-import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,17 +25,20 @@ import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 import gcewing.sg.BaseConfiguration;
-import gcewing.sg.BaseOrientation;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGState;
+import gcewing.sg.blocks.orientation.Orient4WaysByState;
 import gcewing.sg.guis.SGGui;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IOrientationHandler;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.ModelSpec;
 import gcewing.sg.utils.Trans3;
 
 public class SGBaseBlock extends SGBlock<SGBaseTE> {
+
+    protected static IOrientationHandler orient4WaysByState = new Orient4WaysByState();
 
     public static boolean debugMerge = false;
     static int explosionRadius = 10;
@@ -68,7 +70,7 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
 
     @Override
     public IOrientationHandler getOrientationHandler() {
-        return BaseOrientation.orient4WaysByState;
+        return orient4WaysByState;
     }
 
     @Override

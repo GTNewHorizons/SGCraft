@@ -11,12 +11,10 @@ import net.minecraft.world.World;
 
 import org.joml.Vector3i;
 
-import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.guis.containers.slots.CamouflageSlot;
+import gcewing.sg.tileentities.SGBaseTE;
 
 public class SGBaseContainer extends BaseContainer {
-
-    static final int numFuelSlotColumns = 2;
 
     SGBaseTE te;
 

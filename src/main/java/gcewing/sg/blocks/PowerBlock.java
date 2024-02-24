@@ -8,7 +8,6 @@ package gcewing.sg.blocks;
 
 import java.util.ArrayList;
 
-import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,6 +24,7 @@ import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.guis.SGGui;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IOrientationHandler;
 import gcewing.sg.tileentities.PowerTE;
 
 public class PowerBlock<TE extends PowerTE> extends BaseBlock<TE> {

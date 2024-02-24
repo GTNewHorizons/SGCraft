@@ -6,38 +6,28 @@
 
 package gcewing.sg.blocks;
 
-import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import org.joml.Vector3i;
 
-import gcewing.sg.BaseOrientation;
 import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.tileentities.SGBaseTE;
-import gcewing.sg.tileentities.SGRingTE;
+import gcewing.sg.blocks.orientation.Orient4WaysByState;
+import gcewing.sg.interfaces.IOrientationHandler;
 
 public class SGInterfaceBlock<TE extends TileEntity> extends BaseBlock<TE> {
 
+    protected static IOrientationHandler orient4WaysByState = new Orient4WaysByState();
+
     public SGInterfaceBlock(Material material, Class<TE> teClass) {
-        super(material, BaseOrientation.orient4WaysByState, teClass);
+        super(material, orient4WaysByState, teClass);
     }
 
     @Override
     public IOrientationHandler getOrientationHandler() {
-        return BaseOrientation.orient4WaysByState;
-    }
-
-    SGBaseTE getBaseTE(World world, int x, int y, int z) {
-        for (ForgeDirection d : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity te = world.getTileEntity(x + d.offsetX, y + d.offsetY, z + d.offsetZ);
-            if (te instanceof SGRingTE) return ((SGRingTE) te).getBaseTE();
-        }
-        return null;
+        return orient4WaysByState;
     }
 
     @Override

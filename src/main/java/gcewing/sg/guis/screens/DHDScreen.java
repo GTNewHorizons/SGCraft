@@ -23,8 +23,6 @@ import static org.lwjgl.opengl.GL11.glPopAttrib;
 import static org.lwjgl.opengl.GL11.glPushAttrib;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
-import gcewing.sg.guis.DHDTE;
-import gcewing.sg.guis.SGScreen;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +37,8 @@ import org.lwjgl.opengl.GL11;
 import gcewing.sg.SGAddressing;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGState;
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.SGScreen;
 import gcewing.sg.packets.SGChannel;
 import gcewing.sg.tileentities.SGBaseTE;
 

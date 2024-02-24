@@ -8,8 +8,6 @@ package gcewing.sg.packets;
 
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 
-import gcewing.sg.interfaces.ChannelInput;
-import gcewing.sg.interfaces.ChannelOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -17,6 +15,8 @@ import org.joml.Vector3i;
 
 import gcewing.sg.SGCraft;
 import gcewing.sg.guis.DHDTE;
+import gcewing.sg.interfaces.ChannelInput;
+import gcewing.sg.interfaces.ChannelOutput;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
 

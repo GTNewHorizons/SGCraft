@@ -67,10 +67,6 @@ public class SGAddressing {
     final static long mdOld = dimensionRange + 2;
     final static long qdOld = 459;
 
-    protected static boolean isValidSymbolChar(char c) {
-        return isValidSymbolChar(String.valueOf(c));
-    }
-
     public static boolean isValidSymbolChar(String c) {
         return symbolChars.indexOf(c) >= 0;
     }
@@ -100,14 +96,6 @@ public class SGAddressing {
 
     public static String normalizeAddress(String address) {
         return address.replace("-", "").toUpperCase();
-    }
-
-    protected static String coordSymbolsOf(String address) {
-        return address.substring(0, numCoordSymbols);
-    }
-
-    protected static String dimensionSymbolsOf(String address) {
-        return address.substring(numCoordSymbols);
     }
 
     public static String addressForLocation(SGLocation loc) throws AddressingError {

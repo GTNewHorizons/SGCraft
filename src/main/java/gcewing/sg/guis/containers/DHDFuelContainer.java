@@ -6,13 +6,14 @@
 
 package gcewing.sg.guis.containers;
 
-import gcewing.sg.guis.screens.DHDFuelScreen;
-import gcewing.sg.guis.DHDTE;
 import net.minecraft.entity.player.EntityPlayer;
-import gcewing.sg.guis.containers.slots.FuelSlot;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
+
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.containers.slots.FuelSlot;
+import gcewing.sg.guis.screens.DHDFuelScreen;
 
 public class DHDFuelContainer extends BaseContainer {
 

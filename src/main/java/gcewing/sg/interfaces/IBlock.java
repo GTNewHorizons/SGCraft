@@ -16,10 +16,7 @@ public interface IBlock extends ITextureConsumer {
 
     ModelSpec getModelSpec(IBlockState state);
 
-    int getNumSubtypes();
-
     Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin);
 
-    // IBlockState getParticleState(IBlockAccess world, Vector3i pos);
     Class getDefaultItemClass();
 }

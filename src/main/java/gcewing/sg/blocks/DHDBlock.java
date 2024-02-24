@@ -6,7 +6,6 @@
 
 package gcewing.sg.blocks;
 
-import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,17 +18,19 @@ import net.minecraft.world.World;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import gcewing.sg.BaseOrientation;
 import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.blocks.orientation.Orient4WaysByState;
 import gcewing.sg.guis.DHDTE;
 import gcewing.sg.guis.SGGui;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IOrientationHandler;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.ModelSpec;
 
 public class DHDBlock extends BaseBlock<DHDTE> {
 
+    protected static IOrientationHandler orient4WaysByState = new Orient4WaysByState();
     protected static String[] textures = { "dhd_top", "dhd_side", "stargateBlock", "dhd_button_dim", };
     protected static ModelSpec model = new ModelSpec("dhd.smeg", new Vector3d(0, -0.5, 0), textures);
 
@@ -51,7 +52,7 @@ public class DHDBlock extends BaseBlock<DHDTE> {
 
     @Override
     public IOrientationHandler getOrientationHandler() {
-        return BaseOrientation.orient4WaysByState;
+        return orient4WaysByState;
     }
 
     @Override

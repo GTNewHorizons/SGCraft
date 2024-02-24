@@ -19,5 +19,4 @@ public class Product<T> implements Iterable<T[]> {
                 : new ProductIterator(this.clazz, this.iterables));
     }
 
-
 }

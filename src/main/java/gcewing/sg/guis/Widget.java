@@ -4,7 +4,6 @@ import gcewing.sg.SGCraft;
 import gcewing.sg.guis.screens.Screen;
 import gcewing.sg.interfaces.IWidget;
 import gcewing.sg.interfaces.IWidgetContainer;
-import net.minecraft.client.Minecraft;
 
 public class Widget implements IWidget {
 
@@ -13,11 +12,6 @@ public class Widget implements IWidget {
     public int left, top, width, height;
 
     public Widget() {}
-
-    public Widget(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
 
     public IWidgetContainer parent() {
         return parent;
@@ -71,41 +65,12 @@ public class Widget implements IWidget {
 
     public IWidget dispatchMousePress(int x, int y, int button) {
         SGCraft.log.trace(
-                String.format(
-                        "BaseGui.Widget.dispatchMousePress: (%s, %s) in %s",
-                        x,
-                        y,
-                        getClass().getSimpleName()));
+                String.format("BaseGui.Widget.dispatchMousePress: (%s, %s) in %s", x, y, getClass().getSimpleName()));
         return this;
     }
 
     public boolean dispatchKeyPress(char c, int key) {
         return this.keyPressed(c, key);
-    }
-
-    public static int stringWidth(String s) {
-        return Minecraft.getMinecraft().fontRenderer.getStringWidth(s);
-    }
-
-    public void addPopup(int x, int y, IWidget widget) {
-        IWidget w = this;
-        while (!(w instanceof Root)) {
-            x += w.left();
-            y += w.top();
-            w = w.parent();
-        }
-        ((Root) w).addPopup(x, y, widget);
-    }
-
-    public void removePopup() {
-        Root root = getRoot();
-        root.remove(this);
-    }
-
-    public Root getRoot() {
-        IWidget w = this;
-        while (w != null && !(w instanceof Root)) w = w.parent();
-        return (Root) w;
     }
 
 }

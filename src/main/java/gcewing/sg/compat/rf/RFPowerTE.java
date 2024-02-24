@@ -15,8 +15,6 @@ import gcewing.sg.tileentities.PowerTE;
 
 public class RFPowerTE extends PowerTE implements IEnergyHandler {
 
-    boolean debugInput = false;
-
     final static int maxEnergyBuffer = 4000000;
     final static double rfPerSGEnergyUnit = 80.0;
 

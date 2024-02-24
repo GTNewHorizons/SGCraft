@@ -17,8 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import gcewing.sg.blocks.orientation.Orient1Way;
-import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -49,25 +47,26 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.sg.BaseMod;
 import gcewing.sg.BaseModClient;
 import gcewing.sg.SGCraft;
+import gcewing.sg.blocks.orientation.Orient1Way;
 import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IOrientationHandler;
 import gcewing.sg.interfaces.IProperty;
 import gcewing.sg.interfaces.ITileEntity;
 import gcewing.sg.tileentities.InventoryHelper;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
-import gcewing.sg.utils.blockstates.BlockState;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.ModelSpec;
 import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.blockstates.BlockState;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
 
     public static boolean debugState = false;
 
     protected static Random RANDOM = new Random();
-    // private static TileEntity tileEntityHarvested;
 
     public Class getDefaultItemClass() {
         return BaseItemBlock.class;
@@ -135,11 +134,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     // --------------------------- Accessors ----------------------------
 
-    public BaseBlock setOpaque(boolean state) {
-        opaque = state;
-        return this;
-    }
-
     @Override
     public boolean isOpaqueCube() {
         return opaque;
@@ -197,10 +191,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
                 String.format("Block %s has %s combinations of property values (16 allowed)", getClass().getName(), n));
     }
 
-    public BlockState getBlockState() {
-        return this.blockState;
-    }
-
     public final IBlockState getDefaultState() {
         return this.defaultBlockState;
     }
@@ -241,10 +231,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         }
         if (debugState) SGCraft.log.debug(String.format("BaseBlock.getStateFromMeta: %s --> %s", meta, state));
         return state;
-    }
-
-    public int getNumSubtypes() {
-        return 1;
     }
 
     protected ThreadLocal<TileEntity> harvestingTileEntity = new ThreadLocal();
@@ -290,11 +276,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         this.modelSpec = new ModelSpec(modelName, textureNames);
     }
 
-    public void setModelAndTextures(String modelName, Vector3d origin, String... textureNames) {
-        this.textureNames = textureNames;
-        this.modelSpec = new ModelSpec(modelName, origin, textureNames);
-    }
-
     @Override
     public String[] getTextureNames() {
         return textureNames;
@@ -331,14 +312,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     protected String getRendererClassName() {
         return null;
-    }
-
-    public Trans3 localToGlobalRotation(IBlockAccess world, Vector3i pos) {
-        return localToGlobalRotation(world, pos, getWorldBlockState(world, pos));
-    }
-
-    public Trans3 localToGlobalRotation(IBlockAccess world, Vector3i pos, IBlockState state) {
-        return localToGlobalTransformation(world, pos, state, new Vector3d());
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos) {
@@ -422,7 +395,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         breakBlock(world, pos, getStateFromMeta(meta));
         if (hasTileEntity(meta)) {
             TileEntity te = world.getTileEntity(x, y, z);
-            if (te instanceof IInventory) InventoryHelper.dropInventoryItems(world, pos, (IInventory) te);
+            if (te instanceof IInventory) InventoryHelper.dropInventoryItems(world, x, y, z, (IInventory) te);
         }
         super.breakBlock(world, x, y, z, block, meta);
     }
@@ -650,12 +623,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         return getCollisionBoxes(world, pos, state, t, entity);
     }
 
-    protected List<AxisAlignedBB> getLocalCollisionBoxes(IBlockAccess world, Vector3i pos, IBlockState state,
-            Entity entity) {
-        Trans3 t = localToGlobalTransformation(world, pos, state, new Vector3d());
-        return getCollisionBoxes(world, pos, state, t, entity);
-    }
-
     protected List<AxisAlignedBB> getCollisionBoxes(IBlockAccess world, Vector3i pos, IBlockState state, Trans3 t,
             Entity entity) {
         List<AxisAlignedBB> list = new ArrayList<AxisAlignedBB>();
@@ -745,8 +712,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     @SideOnly(Side.CLIENT)
     @Override
     public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer er) {
-        Vector3i pos = new Vector3i(x, y, z);
-        IBlockState state = getParticleState(world, pos);
+        IBlockState state = getParticleState(world, x, y, z);
         Block block = state.getBlock();
         meta = getMetaFromBlockState(state);
         EntityDiggingFX fx;
@@ -754,17 +720,17 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         for (int i = 0; i < b0; ++i) {
             for (int j = 0; j < b0; ++j) {
                 for (int k = 0; k < b0; ++k) {
-                    double d0 = pos.x + (i + 0.5D) / b0;
-                    double d1 = pos.y + (j + 0.5D) / b0;
-                    double d2 = pos.z + (k + 0.5D) / b0;
+                    double d0 = x + (i + 0.5D) / b0;
+                    double d1 = y + (j + 0.5D) / b0;
+                    double d2 = z + (k + 0.5D) / b0;
                     fx = new EntityDiggingFX(
                             world,
                             d0,
                             d1,
                             d2,
-                            d0 - pos.x - 0.5D,
-                            d1 - pos.y - 0.5D,
-                            d2 - pos.z - 0.5D,
+                            d0 - x - 0.5D,
+                            d1 - y - 0.5D,
+                            d2 - z - 0.5D,
                             block,
                             meta);
                     er.addEffect(fx);
@@ -776,6 +742,10 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     public IBlockState getParticleState(IBlockAccess world, Vector3i pos) {
         return getWorldBlockState(world, pos);
+    }
+
+    public IBlockState getParticleState(IBlockAccess world, int x, int y, int z) {
+        return getWorldBlockState(world, x, y, z);
     }
 
     // This needs to return the MAXIMUM pass number that the block renders in.

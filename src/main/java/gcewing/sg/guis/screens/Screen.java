@@ -1,25 +1,8 @@
 package gcewing.sg.guis.screens;
 
-import gcewing.sg.BaseMod;
-import gcewing.sg.SGCraft;
-import gcewing.sg.guis.GState;
-import gcewing.sg.guis.MouseCoords;
-import gcewing.sg.guis.Root;
-import gcewing.sg.guis.containers.BaseContainer;
-import gcewing.sg.interfaces.ISetMod;
-import gcewing.sg.interfaces.IWidget;
-import gcewing.sg.interfaces.IWidgetContainer;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-
 import static gcewing.sg.guis.BaseGui.isFocused;
 import static gcewing.sg.guis.BaseGui.name;
 import static gcewing.sg.guis.BaseGui.tellFocusChanged;
-import static gcewing.sg.utils.BaseUtils.packedColor;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glBegin;
@@ -31,9 +14,23 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glTexCoord2d;
 import static org.lwjgl.opengl.GL11.glVertex3d;
 
-public class Screen extends GuiContainer implements ISetMod {
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
 
-    final static int defaultTextColor = 0x404040;
+import org.lwjgl.opengl.GL11;
+
+import gcewing.sg.BaseMod;
+import gcewing.sg.SGCraft;
+import gcewing.sg.guis.GState;
+import gcewing.sg.guis.MouseCoords;
+import gcewing.sg.guis.Root;
+import gcewing.sg.guis.containers.BaseContainer;
+import gcewing.sg.interfaces.ISetMod;
+import gcewing.sg.interfaces.IWidget;
+import gcewing.sg.interfaces.IWidgetContainer;
+
+public class Screen extends GuiContainer implements ISetMod {
 
     protected BaseMod mod;
 
@@ -112,10 +109,6 @@ public class Screen extends GuiContainer implements ISetMod {
 
     protected void onClose() {}
 
-    public void bindTexture(String path) {
-        bindTexture(path, 1, 1);
-    }
-
     public void bindTexture(String path, int usize, int vsize) {
         bindTexture(mod.client.textureLocation(path), usize, vsize);
     }
@@ -139,20 +132,6 @@ public class Screen extends GuiContainer implements ISetMod {
                         gstate.vscale));
     }
 
-    public void gSave() {
-        gstate = new GState(gstate);
-    }
-
-    public void gRestore() {
-        if (gstate.previous != null) {
-            gstate = gstate.previous;
-            mc.getTextureManager().bindTexture(gstate.texture);
-            return;
-        }
-
-        SGCraft.log.warn("BaseGui: Warning: Graphics state stack underflow");
-    }
-
     public void drawRect(double x, double y, double w, double h) {
         glDisable(GL_TEXTURE_2D);
         glColor3d(gstate.red, gstate.green, gstate.blue);
@@ -165,8 +144,8 @@ public class Screen extends GuiContainer implements ISetMod {
         glEnable(GL_TEXTURE_2D);
     }
 
-    public void drawBorderedRect(double x, double y, double w, double h, double u, double v, double uSize,
-                                 double vSize, double cornerWidth, double cornerHeight) {
+    public void drawBorderedRect(double x, double y, double w, double h, double u, double v, double uSize, double vSize,
+            double cornerWidth, double cornerHeight) {
         double cw = cornerWidth, ch = cornerHeight;
         double sw = w - 2 * cornerWidth; // side width
         double sh = h - 2 * cornerHeight; // side height
@@ -202,19 +181,10 @@ public class Screen extends GuiContainer implements ISetMod {
     }
 
     public void drawTexturedRect(double x, double y, double w, double h, double u, double v, double us, double vs) {
-        drawTexturedRectUV(
-                x,
-                y,
-                w,
-                h,
-                u * gstate.uscale,
-                v * gstate.vscale,
-                us * gstate.uscale,
-                vs * gstate.vscale);
+        drawTexturedRectUV(x, y, w, h, u * gstate.uscale, v * gstate.vscale, us * gstate.uscale, vs * gstate.vscale);
     }
 
-    public void drawTexturedRectUV(double x, double y, double w, double h, double u, double v, double us,
-                                   double vs) {
+    public void drawTexturedRectUV(double x, double y, double w, double h, double u, double v, double us, double vs) {
         SGCraft.log.trace(
                 String.format(
                         "BaseGuiContainer.drawTexturedRectUV: (%s, %s, %s, %s) (%s, %s, %s, %s)",
@@ -257,14 +227,6 @@ public class Screen extends GuiContainer implements ISetMod {
         gstate.textColor = hex;
     }
 
-    public void setTextColor(double red, double green, double blue) {
-        setTextColor(packedColor(red, green, blue));
-    }
-
-    public void setTextShadow(boolean state) {
-        gstate.textShadow = state;
-    }
-
     public void drawString(String s, int x, int y) {
         fontRendererObj.drawString(s, x, y, gstate.textColor, gstate.textShadow);
     }
@@ -275,30 +237,11 @@ public class Screen extends GuiContainer implements ISetMod {
     }
 
     public void drawRightAlignedString(String s, int x, int y) {
-        fontRendererObj
-                .drawString(s, x - fontRendererObj.getStringWidth(s), y, gstate.textColor, gstate.textShadow);
+        fontRendererObj.drawString(s, x - fontRendererObj.getStringWidth(s), y, gstate.textColor, gstate.textShadow);
     }
 
     public void drawTitle(String s) {
         drawCenteredString(s, xSize / 2, 4);
-    }
-
-    public void drawInventoryName(IInventory inv, int x, int y) {
-        drawString(inventoryName(inv), x, y);
-    }
-
-    public void drawPlayerInventoryName() {
-        drawString(playerInventoryName(), 8, ySize - 96 + 2);
-    }
-
-    public static String inventoryName(IInventory inv) {
-        String name = inv.getInventoryName();
-        if (!inv.hasCustomInventoryName()) name = StatCollector.translateToLocal(name);
-        return name;
-    }
-
-    public static String playerInventoryName() {
-        return StatCollector.translateToLocal("container.inventory");
     }
 
     @Override
@@ -393,7 +336,4 @@ public class Screen extends GuiContainer implements ISetMod {
         parent.setFocus(newFocus);
         focusOn(parent);
     }
-
-    public void focusChanged(boolean state) {}
-
 }
