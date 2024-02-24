@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.guis;
 
 public enum SGGui {
     SGBase,

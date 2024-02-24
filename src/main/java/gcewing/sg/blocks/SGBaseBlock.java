@@ -15,7 +15,7 @@ import gcewing.sg.BaseOrientation;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
-import gcewing.sg.SGGui;
+import gcewing.sg.guis.SGGui;
 import gcewing.sg.SGState;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;

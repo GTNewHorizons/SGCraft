@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.guis;
 
 import static gcewing.sg.utils.BaseUtils.packedColor;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
@@ -26,6 +26,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import gcewing.sg.BaseContainer;
+import gcewing.sg.BaseMod;
+import gcewing.sg.SGCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;

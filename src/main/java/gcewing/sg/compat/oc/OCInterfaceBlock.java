@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
-import gcewing.sg.SGGui;
+import gcewing.sg.guis.SGGui;
 import gcewing.sg.blocks.SGInterfaceBlock;
 import org.joml.Vector3i;
 

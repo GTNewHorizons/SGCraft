@@ -97,7 +97,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         void onAddedToWorld();
     }
 
-    interface ISetMod {
+    public interface ISetMod {
 
         void setMod(BaseMod mod);
     }

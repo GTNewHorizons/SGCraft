@@ -6,7 +6,7 @@
 
 package gcewing.sg.compat.oc;
 
-import gcewing.sg.BaseGui;
+import gcewing.sg.guis.BaseGui;
 
 public class OCInterfaceScreen extends BaseGui.Screen {
 

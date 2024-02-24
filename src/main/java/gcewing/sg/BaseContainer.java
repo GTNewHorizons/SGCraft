@@ -20,7 +20,8 @@ import net.minecraft.item.ItemStack;
 
 public class BaseContainer extends Container {
 
-    int xSize, ySize;
+    public int xSize;
+    public int ySize;
     SlotRange playerSlotRange; // Slots containing player inventory
     SlotRange containerSlotRange; // Default slot range for shift-clicking into from player inventory
 

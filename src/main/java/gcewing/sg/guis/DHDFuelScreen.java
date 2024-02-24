@@ -4,8 +4,10 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.guis;
 
+import gcewing.sg.DHDTE;
+import gcewing.sg.SGCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 

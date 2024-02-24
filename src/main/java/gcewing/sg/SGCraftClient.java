@@ -6,6 +6,11 @@
 
 package gcewing.sg;
 
+import gcewing.sg.guis.DHDFuelScreen;
+import gcewing.sg.guis.DHDScreen;
+import gcewing.sg.guis.PowerScreen;
+import gcewing.sg.guis.SGBaseScreen;
+import gcewing.sg.guis.SGGui;
 import gcewing.sg.renderers.DHDTERenderer;
 import gcewing.sg.renderers.IrisRenderer;
 import gcewing.sg.renderers.SGBaseTERenderer;

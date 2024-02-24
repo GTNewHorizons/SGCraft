@@ -4,8 +4,9 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.guis;
 
+import gcewing.sg.BaseContainer;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

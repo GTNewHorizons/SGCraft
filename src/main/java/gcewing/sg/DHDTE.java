@@ -47,9 +47,9 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
     IInventory inventory = new InventoryBasic("DHD", false, numSlots);
 
     public static AxisAlignedBB bounds;
-    static double maxEnergyBuffer;
+    public static double maxEnergyBuffer;
 
-    double energyInBuffer;
+    public double energyInBuffer;
 
     public static void configure(BaseConfiguration cfg) {
         linkRangeX = cfg.getInteger("dhd", "linkRangeX", linkRangeX);

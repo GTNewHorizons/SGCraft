@@ -4,10 +4,11 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.guis;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 
+import gcewing.sg.BaseContainer;
 import gcewing.sg.tileentities.PowerTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

@@ -14,7 +14,7 @@ import gcewing.sg.BaseConfiguration;
 import gcewing.sg.IntegrationBase;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.SGCraft;
-import gcewing.sg.SGGui;
+import gcewing.sg.guis.SGGui;
 
 public class OCIntegration extends IntegrationBase {
 

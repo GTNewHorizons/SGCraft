@@ -10,7 +10,7 @@ import gcewing.sg.BaseOrientation;
 import gcewing.sg.DHDTE;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
-import gcewing.sg.SGGui;
+import gcewing.sg.guis.SGGui;
 import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.material.Material;
