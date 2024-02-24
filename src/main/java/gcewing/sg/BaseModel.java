@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import gcewing.sg.utils.Face;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
@@ -30,15 +31,6 @@ public class BaseModel implements IModel {
     public double[] bounds;
     public Face[] faces;
     public double[][] boxes;
-
-    public static class Face {
-
-        int texture;
-        double[][] vertices;
-        int[][] triangles;
-        // Vector3 centroid;
-        Vector3d normal;
-    }
 
     static Gson gson = new Gson();
 

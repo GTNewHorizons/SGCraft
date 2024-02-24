@@ -6,9 +6,9 @@
 
 package gcewing.sg.compat.oc;
 
-import gcewing.sg.guis.BaseGui;
+import gcewing.sg.guis.Screen;
 
-public class OCInterfaceScreen extends BaseGui.Screen {
+public class OCInterfaceScreen extends Screen {
 
     final static int bgUSize = 256;
     final static int bgVSize = 128;

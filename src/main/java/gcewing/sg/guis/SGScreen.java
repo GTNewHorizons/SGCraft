@@ -19,7 +19,7 @@ import gcewing.sg.tileentities.SGBaseTE;
 
 // ------------------------------------------------------------------------------------------------
 
-public class SGScreen extends BaseGui.Screen {
+public class SGScreen extends Screen {
 
     final static String symbolTextureFile = "symbols48.png";
     final static int symbolsPerRowInTexture = 10;

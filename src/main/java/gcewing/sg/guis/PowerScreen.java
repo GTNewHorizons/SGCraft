@@ -19,7 +19,7 @@ import org.joml.Vector3i;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.PowerTE;
 
-public class PowerScreen extends BaseGui.Screen {
+public class PowerScreen extends Screen {
 
     final static int guiWidth = 128;
     final static int guiHeight = 64;
