@@ -20,7 +20,7 @@ public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
     protected int verticesPerFace;
     protected int vertexCount;
     protected ITexture texture;
-    protected Vector3d normal;
+    protected Vector3d normal = new Vector3d();
     protected EnumFacing face;
     protected float red = 1, green = 1, blue = 1, alpha = 1;
     protected float shade;
@@ -71,8 +71,8 @@ public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
     }
 
     public void setNormal(Vector3d n) {
-        normal = n;
-        face = Trans3.facing(new Vector3d(n.x, n.y, n.z));
+        normal.set(n);
+        face = Trans3.facing(n);
         shade = (float) (0.6 * n.x * n.x + 0.8 * n.z * n.z + (n.y > 0 ? 1 : 0.5) * n.y * n.y);
     }
 

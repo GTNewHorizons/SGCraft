@@ -126,11 +126,15 @@ public class Trans3 {
     }
 
     public void p(double x, double y, double z, Vector3d result) {
-        // return offset.add(rotation.mul(u.mul(scaling)));
-        Vector3d computation = new Vector3d(x, y, z).mul(scaling).mul(rotation).add(offset.x, offset.y, offset.z);
-        result.x = computation.x;
-        result.y = computation.y;
-        result.z = computation.z;
+        result.x = x * scaling * rotation.m00 + y * scaling * rotation.m01
+                + z * scaling * rotation.m02
+                + offset.x;
+        result.y = x * scaling * rotation.m10 + y * scaling * rotation.m11
+                + z * scaling * rotation.m12
+                + offset.y;
+        result.z = x * scaling * rotation.m20 + y * scaling * rotation.m21
+                + z * scaling * rotation.m22
+                + offset.z;
     }
 
     public Vector3d p(Vector3d u) {
@@ -143,10 +147,9 @@ public class Trans3 {
 
     public void v(double x, double y, double z, Vector3d result) {
         //return rotation.mul(u.mul(scaling));
-        Vector3d computation = new Vector3d(x, y, z).mul(scaling).mul(rotation);
-        result.x = computation.x;
-        result.y = computation.y;
-        result.z = computation.z;
+        result.x = x * scaling * rotation.m00 + y * scaling * rotation.m01 + z * scaling * rotation.m02;
+        result.y = x * scaling * rotation.m10 + y * scaling * rotation.m11 + z * scaling * rotation.m12;
+        result.z = x * scaling * rotation.m20 + y * scaling * rotation.m21 + z * scaling * rotation.m22;
     }
 
 
