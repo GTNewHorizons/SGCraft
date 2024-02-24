@@ -11,7 +11,7 @@ import static java.lang.Math.min;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
-import gcewing.sg.PowerTE;
+import gcewing.sg.tileentities.PowerTE;
 
 public class RFPowerTE extends PowerTE implements IEnergyHandler {
 

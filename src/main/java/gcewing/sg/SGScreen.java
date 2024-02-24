@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
+import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.inventory.Container;
 
 // ------------------------------------------------------------------------------------------------

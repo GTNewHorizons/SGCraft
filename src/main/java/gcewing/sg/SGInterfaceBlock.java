@@ -6,6 +6,8 @@
 
 package gcewing.sg;
 
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.tileentities.SGRingTE;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

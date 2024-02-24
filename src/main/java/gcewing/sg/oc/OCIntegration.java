@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 
 import gcewing.sg.BaseConfiguration;
 import gcewing.sg.IntegrationBase;
-import gcewing.sg.SGBaseTE;
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGGui;
 

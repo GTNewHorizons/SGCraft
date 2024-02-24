@@ -8,6 +8,7 @@ package gcewing.sg;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 
+import gcewing.sg.tileentities.PowerTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

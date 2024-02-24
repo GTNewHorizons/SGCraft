@@ -10,6 +10,8 @@ import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 import static java.lang.Math.min;
 
+import gcewing.sg.tileentities.BaseTileInventory;
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -120,7 +122,7 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         return null;
     }
 
-    void checkForLink() {
+    public void checkForLink() {
         if (debugLink) SGCraft.log.debug(
                 String.format("DHDTE.checkForLink at %s: isLinkedToStargate = %s", getPos(), isLinkedToStargate));
         if (isLinkedToStargate) {

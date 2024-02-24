@@ -8,6 +8,7 @@ package gcewing.sg;
 
 import java.util.ArrayList;
 
+import gcewing.sg.tileentities.PowerTE;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

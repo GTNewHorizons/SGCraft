@@ -13,6 +13,7 @@ import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
 import java.io.DataInput;
 import java.io.DataOutput;
 
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.nbt.NBTTagCompound;

@@ -4,11 +4,13 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.tileentities;
 
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
 
+import gcewing.sg.SGAddressing;
 import gcewing.sg.SGAddressing.AddressingError;
+import gcewing.sg.SGCraft;
 
 public class SGInterfaceTE extends BaseTileEntity {
 

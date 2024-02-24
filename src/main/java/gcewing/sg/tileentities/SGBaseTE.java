@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.tileentities;
 
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
@@ -25,6 +25,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.BaseInventoryUtils;
+import gcewing.sg.DHDTE;
+import gcewing.sg.IComputerInterface;
+import gcewing.sg.ISGEnergySource;
+import gcewing.sg.IrisEntity;
+import gcewing.sg.IrisState;
+import gcewing.sg.SGAddressing;
+import gcewing.sg.SGBaseBlock;
+import gcewing.sg.SGBaseTERenderer;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGLocation;
+import gcewing.sg.SGState;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.Trans3;
 import gcewing.sg.utils.Utils;
@@ -78,7 +91,7 @@ import org.joml.Vector3i;
 public class SGBaseTE extends BaseTileInventory {
 
     static boolean debugState = false;
-    static boolean debugEnergyUse = false;
+    public static boolean debugEnergyUse = false;
     static boolean debugConnect = false;
     static boolean debugTransientDamage = false;
     static boolean debugTeleport = false;
@@ -105,7 +118,7 @@ public class SGBaseTE extends BaseTileInventory {
     final static int maxIrisPhase = 60; // 3 seconds
 
     final static int firstCamouflageSlot = 0;
-    final static int numCamouflageSlots = 5;
+    public final static int numCamouflageSlots = 5;
     final static int numInventorySlots = numCamouflageSlots;
 
     static float defaultChevronAngle = 40f;
@@ -117,7 +130,7 @@ public class SGBaseTE extends BaseTileInventory {
 
     // Configuration options
     static double maxEnergyBuffer = 1000;
-    static double energyPerFuelItem = 96000;
+    public static double energyPerFuelItem = 96000;
     static double distanceFactorMultiplier = 1.0;
     static double interDimensionMultiplier = 4.0;
     static int gateOpeningsPerFuelItem = 24;
@@ -248,7 +261,7 @@ public class SGBaseTE extends BaseTileInventory {
         return SGBaseTE.at(world, pos);
     }
 
-    void setMerged(boolean state) {
+    public void setMerged(boolean state) {
         if (isMerged == state) {
             return;
         }
@@ -345,19 +358,19 @@ public class SGBaseTE extends BaseTileInventory {
         return state != SGState.Idle && state != SGState.Disconnecting;
     }
 
-    static boolean isValidSymbolChar(String c) {
+    public static boolean isValidSymbolChar(String c) {
         return SGAddressing.isValidSymbolChar(c);
     }
 
-    static char symbolToChar(int i) {
+    public static char symbolToChar(int i) {
         return SGAddressing.symbolToChar(i);
     }
 
-    static int charToSymbol(char c) {
+    public static int charToSymbol(char c) {
         return SGAddressing.charToSymbol(c);
     }
 
-    static int charToSymbol(String c) {
+    public static int charToSymbol(String c) {
         return SGAddressing.charToSymbol(c);
     }
 
@@ -478,7 +491,7 @@ public class SGBaseTE extends BaseTileInventory {
         return null;
     }
 
-    void checkForLink() {
+    public void checkForLink() {
         int rangeXY = max(DHDTE.linkRangeX, DHDTE.linkRangeY);
         int rangeZ = DHDTE.linkRangeZ;
         if (SGBaseBlock.debugMerge) SGCraft.log.debug(
@@ -604,7 +617,7 @@ public class SGBaseTE extends BaseTileInventory {
         return mess;
     }
 
-    static void sendChatMessage(EntityPlayer player, String mess) {
+    public static void sendChatMessage(EntityPlayer player, String mess) {
         player.addChatMessage(new ChatComponentText(mess));
     }
 
@@ -1468,7 +1481,7 @@ public class SGBaseTE extends BaseTileInventory {
         return (List<IrisEntity>) worldObj.getEntitiesWithinAABB(IrisEntity.class, box);
     }
 
-    ItemStack getCamouflageStack(Vector3i cpos) {
+    public ItemStack getCamouflageStack(Vector3i cpos) {
         Trans3 t = localToGlobalTransformation();
         Vector3d p = t.ip(new Vector3d(0.5+cpos.x, 0.5+cpos.y, 0.5+cpos.z));
         if (p.y == 0) {

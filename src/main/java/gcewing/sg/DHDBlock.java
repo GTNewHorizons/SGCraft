@@ -6,6 +6,7 @@
 
 package gcewing.sg;
 
+import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;

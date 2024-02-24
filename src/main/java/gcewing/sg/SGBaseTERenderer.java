@@ -36,12 +36,13 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 import static org.lwjgl.opengl.GL11.glVertex3d;
 import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
 
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseGLUtils;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.tileentity.TileEntity;
 import org.joml.Vector3d;
 
-class SGBaseTERenderer extends BaseTileEntityRenderer {
+public class SGBaseTERenderer extends BaseTileEntityRenderer {
 
     final static int numRingSegments = 32;
     final static double ringInnerRadius = 2.0;
@@ -72,8 +73,8 @@ class SGBaseTERenderer extends BaseTileEntityRenderer {
     final static double ringSymbolTextureHeight = 16.0; // 12;
     final static double ringSymbolSegmentWidth = ringSymbolTextureLength / numRingSegments;
 
-    final static int ehGridRadialSize = 5;
-    final static int ehGridPolarSize = numRingSegments;
+    public final static int ehGridRadialSize = 5;
+    public final static int ehGridPolarSize = numRingSegments;
     final static double ehBandWidth = ringInnerRadius / ehGridRadialSize;
 
     final static double numIrisBlades = 12;

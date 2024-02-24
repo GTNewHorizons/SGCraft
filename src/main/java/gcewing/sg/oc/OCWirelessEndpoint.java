@@ -9,7 +9,7 @@ package gcewing.sg.oc;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseConfiguration;
-import gcewing.sg.SGBaseTE;
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.SGCraft;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.network.Packet;

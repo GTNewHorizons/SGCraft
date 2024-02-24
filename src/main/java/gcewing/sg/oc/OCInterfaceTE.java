@@ -15,9 +15,9 @@ import net.minecraft.tileentity.TileEntity;
 
 import gcewing.sg.IComputerInterface;
 import gcewing.sg.ITickable;
-import gcewing.sg.SGBaseTE;
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.SGCraft;
-import gcewing.sg.SGInterfaceTE;
+import gcewing.sg.tileentities.SGInterfaceTE;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;

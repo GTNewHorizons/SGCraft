@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.tileentities;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.utils.BaseUtils.classForName;
@@ -17,6 +17,10 @@ import static gcewing.sg.utils.BaseUtils.setIntField;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import gcewing.sg.BaseMod;
+import gcewing.sg.IBlockState;
+import gcewing.sg.ITickable;
+import gcewing.sg.SGCraft;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

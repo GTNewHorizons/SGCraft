@@ -9,6 +9,7 @@ package gcewing.sg;
 import static gcewing.sg.utils.BaseUtils.horizontalFacings;
 import static gcewing.sg.utils.BaseUtils.iround;
 
+import gcewing.sg.tileentities.BaseTileEntity;
 import gcewing.sg.utils.PropertyTurn;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;

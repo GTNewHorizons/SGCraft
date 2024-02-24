@@ -12,6 +12,8 @@ import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 import java.util.List;
 
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.tileentities.SGRingTE;
 import gcewing.sg.utils.PropertyInteger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

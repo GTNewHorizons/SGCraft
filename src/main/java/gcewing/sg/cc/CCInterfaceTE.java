@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import gcewing.sg.IComputerInterface;
-import gcewing.sg.SGInterfaceTE;
+import gcewing.sg.tileentities.SGInterfaceTE;
 
 public class CCInterfaceTE extends SGInterfaceTE implements IComputerInterface {
 

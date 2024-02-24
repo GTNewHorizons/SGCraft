@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
 
-import gcewing.sg.BaseTileEntity;
+import gcewing.sg.tileentities.BaseTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

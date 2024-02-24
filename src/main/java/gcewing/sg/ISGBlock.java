@@ -6,6 +6,7 @@
 
 package gcewing.sg;
 
+import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3i;
 

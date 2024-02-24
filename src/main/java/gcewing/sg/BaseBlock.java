@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.tileentities.InventoryHelper;
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;

@@ -10,6 +10,7 @@ import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -28,7 +29,7 @@ import org.joml.Vector3i;
 
 public class SGBaseBlock extends SGBlock<SGBaseTE> {
 
-    static boolean debugMerge = false;
+    public static boolean debugMerge = false;
     static int explosionRadius = 10;
     static boolean fieryExplosion = true;
     static boolean smokyExplosion = true;

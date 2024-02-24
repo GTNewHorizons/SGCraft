@@ -8,6 +8,7 @@ package gcewing.sg;
 
 import java.util.List;
 
+import gcewing.sg.tileentities.BaseTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.ChunkCoordIntPair;

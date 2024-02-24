@@ -66,7 +66,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         String[] getTextureNames();
     }
 
-    interface IBlock extends ITextureConsumer {
+    public interface IBlock extends ITextureConsumer {
 
         void setRenderType(int id);
 
@@ -89,7 +89,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         int getNumSubtypes();
     }
 
-    interface ITileEntity {
+    public interface ITileEntity {
 
         void onAddedToWorld();
     }

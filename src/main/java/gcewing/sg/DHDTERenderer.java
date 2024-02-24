@@ -6,6 +6,8 @@
 
 package gcewing.sg;
 
+import gcewing.sg.tileentities.BaseTileEntity;
+import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.util.ResourceLocation;
 
