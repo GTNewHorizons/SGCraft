@@ -4,8 +4,9 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.renderers;
 
+import gcewing.sg.IrisEntity;
 import gcewing.sg.renderers.BaseEntityRenderer;
 
 public class IrisRenderer extends BaseEntityRenderer<IrisEntity> {

@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.items;
 
 import gcewing.sg.blocks.base.BaseItemBlock;
 import net.minecraft.block.Block;
