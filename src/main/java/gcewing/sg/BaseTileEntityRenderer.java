@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import gcewing.sg.BaseModClient.IRenderTarget;
+import org.joml.Vector3d;
 
 public abstract class BaseTileEntityRenderer extends TileEntitySpecialRenderer {
 
@@ -21,7 +22,7 @@ public abstract class BaseTileEntityRenderer extends TileEntitySpecialRenderer {
 
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float dt, int destroyStage) {
         BaseTileEntity bte = (BaseTileEntity) te;
-        Trans3 t = bte.localToGlobalTransformation(Vector3.blockCenter.add(new Vector3(x, y, z)));
+        Trans3 t = bte.localToGlobalTransformation(new Vector3d(0.5+x, 0.5+y, 0.5+z));
         target.start(true);
         render(bte, dt, destroyStage, t, target);
         target.finish();

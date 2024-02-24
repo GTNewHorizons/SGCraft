@@ -11,13 +11,14 @@ import java.nio.FloatBuffer;
 import net.minecraft.client.renderer.GLAllocation;
 
 import org.joml.Matrix3d;
+import org.joml.Vector3d;
 import org.lwjgl.opengl.GL11;
 
 class BaseGLUtils {
 
     public static void glMultMatrix(Trans3 t) {
         FloatBuffer b = GLAllocation.createDirectFloatBuffer(16);
-        Vector3 v = t.offset;
+        Vector3d v = t.offset;
         Matrix3d m = t.rotation;
 
         b.put(0, (float) m.m00);

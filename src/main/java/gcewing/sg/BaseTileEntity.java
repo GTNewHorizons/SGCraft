@@ -30,6 +30,7 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
 import gcewing.sg.BaseMod.IBlock;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
@@ -63,14 +64,15 @@ public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
     }
 
     public Trans3 localToGlobalRotation() {
-        return localToGlobalTransformation(Vector3.zero);
+        return localToGlobalTransformation(new Vector3d());
     }
 
     public Trans3 localToGlobalTransformation() {
-        return localToGlobalTransformation(Vector3.blockCenter.add(new Vector3(xCoord, yCoord, zCoord)));
+        return localToGlobalTransformation(new Vector3d(0.5+xCoord, 0.5+yCoord, 0.5+zCoord));
     }
 
-    public Trans3 localToGlobalTransformation(Vector3 origin) {
+
+    public Trans3 localToGlobalTransformation(Vector3d origin) {
         Vector3i pos = getPos();
         IBlockState state = getWorldBlockState(worldObj, pos);
         Block block = state.getBlock();

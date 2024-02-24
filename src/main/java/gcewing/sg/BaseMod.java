@@ -52,6 +52,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import gcewing.sg.BaseModClient.IModel;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends BaseSubsystem implements IGuiHandler {
@@ -73,7 +74,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
         int getNumSubtypes();
 
-        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin);
+        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin);
 
         // IBlockState getParticleState(IBlockAccess world, Vector3i pos);
         Class getDefaultItemClass();
@@ -110,13 +111,13 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
         public String modelName;
         public String[] textureNames;
-        public Vector3 origin;
+        public Vector3d origin;
 
         public ModelSpec(String model, String... textures) {
-            this(model, Vector3.zero, textures);
+            this(model, new Vector3d(), textures);
         }
 
-        public ModelSpec(String model, Vector3 origin, String... textures) {
+        public ModelSpec(String model, Vector3d origin, String... textures) {
             modelName = model;
             textureNames = textures;
             this.origin = origin;

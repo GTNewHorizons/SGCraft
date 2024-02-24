@@ -69,6 +69,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import gcewing.sg.oc.OCWirelessEndpoint;
 import io.netty.channel.ChannelFutureListener;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class SGBaseTE extends BaseTileInventory {
@@ -759,7 +760,7 @@ public class SGBaseTE extends BaseTileInventory {
         List<ISGEnergySource> result = new ArrayList<ISGEnergySource>();
         Trans3 t = localToGlobalTransformation();
         for (int i = -2; i <= 2; i++) {
-            Vector3i blockPos = Trans3.intVector(t.p(new Vector3(i, -1, 0)));
+            Vector3i blockPos = Trans3.intVector(t.p(new Vector3d(i, -1, 0)));
             if (debugEnergyUse) SGCraft.log.debug(String.format("SGBaseTE.findEnergySources: Checking %s", blockPos));
             TileEntity nte = getWorldTileEntity(worldObj, blockPos);
             if (nte instanceof ISGEnergySource) result.add((ISGEnergySource) nte);
@@ -805,10 +806,10 @@ public class SGBaseTE extends BaseTileInventory {
 
     void performTransientDamage() {
         Trans3 t = localToGlobalTransformation();
-        Vector3 p0 = t.p(new Vector3(-1.5, 0.5, 0.5));
-        Vector3 p1 = t.p(new Vector3(1.5, 3.5, 5.5));
-        Vector3 q0 = p0.min(p1);
-        Vector3 q1 = p0.max(p1);
+        Vector3d p0 = t.p(new Vector3d(-1.5, 0.5, 0.5));
+        Vector3d p1 = t.p(new Vector3d(1.5, 3.5, 5.5));
+        Vector3d q0 = p0.min(p1);
+        Vector3d q1 = p0.max(p1);
         AxisAlignedBB box = newAxisAlignedBB(q0.x, q0.y, q0.z, q1.x, q1.y, q1.z);
         if (debugTransientDamage) {
             SGCraft.log.debug("SGBaseTE.performTransientDamage: players in world:");
@@ -818,8 +819,8 @@ public class SGBaseTE extends BaseTileInventory {
         }
         List<EntityLivingBase> ents = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, box);
         for (EntityLivingBase ent : ents) {
-            Vector3 ep = new Vector3(ent.posX, ent.posY, ent.posZ);
-            Vector3 gp = t.p(new Vector3(0, 2, 0.5));
+            Vector3d ep = new Vector3d(ent.posX, ent.posY, ent.posZ);
+            Vector3d gp = t.p(new Vector3d(0, 2, 0.5));
             double dist = ep.distance(gp);
             if (debugTransientDamage)
                 SGCraft.log.debug(String.format("SGBaseTE.performTransientDamage: found %s", ent));
@@ -891,11 +892,11 @@ public class SGBaseTE extends BaseTileInventory {
     class TrackedEntity {
 
         public Entity entity;
-        public Vector3 lastPos;
+        public Vector3d lastPos;
 
         public TrackedEntity(Entity entity) {
             this.entity = entity;
-            this.lastPos = new Vector3(entity.posX, entity.posY, entity.posZ);
+            this.lastPos = new Vector3d(entity.posX, entity.posY, entity.posZ);
         }
 
     }
@@ -910,8 +911,8 @@ public class SGBaseTE extends BaseTileInventory {
 
         for (TrackedEntity trk : trackedEntities) entityInPortal(trk.entity, trk.lastPos);
         trackedEntities.clear();
-        Vector3 p0 = new Vector3(-1.5, 0.5, -3.5);
-        Vector3 p1 = new Vector3(1.5, 3.5, 3.5);
+        Vector3d p0 = new Vector3d(-1.5, 0.5, -3.5);
+        Vector3d p1 = new Vector3d(1.5, 3.5, 3.5);
         Trans3 t = localToGlobalTransformation();
         AxisAlignedBB box = t.box(p0, p1);
         List<Entity> ents = (List<Entity>) worldObj.getEntitiesWithinAABB(Entity.class, box);
@@ -924,7 +925,7 @@ public class SGBaseTE extends BaseTileInventory {
 
     }
 
-    public void entityInPortal(Entity entity, Vector3 prevPos) {
+    public void entityInPortal(Entity entity, Vector3d prevPos) {
         if (entity.isDead || state != SGState.Connected || !canTravelFromThisEnd()) {
             return;
         }
@@ -933,8 +934,8 @@ public class SGBaseTE extends BaseTileInventory {
         double vx = entity.posX - prevPos.x;
         double vy = entity.posY - prevPos.y;
         double vz = entity.posZ - prevPos.z;
-        Vector3 p1 = t.ip(new Vector3(entity.posX, entity.posY, entity.posZ));
-        Vector3 p0 = t.ip(new Vector3(2 * prevPos.x - entity.posX, 2 * prevPos.y - entity.posY, 2 * prevPos.z - entity.posZ));
+        Vector3d p1 = t.ip(new Vector3d(entity.posX, entity.posY, entity.posZ));
+        Vector3d p0 = t.ip(new Vector3d(2 * prevPos.x - entity.posX, 2 * prevPos.y - entity.posY, 2 * prevPos.z - entity.posZ));
         double z0 = 0.0;
         if (p0.z < z0 || p1.z >= z0 || p1.z <= z0 - 5.0) {
             return;
@@ -1010,24 +1011,25 @@ public class SGBaseTE extends BaseTileInventory {
                             entity.lastTickPosY,
                             entity.lastTickPosZ));
         }
-        Vector3 p = t1.ip(new Vector3(entity.posX, entity.posY, entity.posZ)); // local position
-        Vector3 v = t1.iv(new Vector3(entity.motionX, entity.motionY, entity.motionZ)); // local velocity
-        Vector3 r = t1.iv(yawVector(entity)); // local facing
-        Vector3 q = t2.p(new Vector3(-p.x, p.y, -p.z)); // new global position
-        Vector3 u = t2.v(new Vector3(-v.x, v.y, -v.z)); // new global velocity
-        Vector3 s = t2.v(r.mul(-1)); // new global facing
-        if (debugTeleport) SGCraft.log.debug(String.format("SGBaseTE.teleportEntity: Facing old %s new %s", r, s));
-        double a = yawAngle(s, entity); // new global yaw angle
+        Vector3d localPosition = t1.ip(new Vector3d(entity.posX, entity.posY, entity.posZ)); // local position
+        Vector3d localVelocity = t1.iv(new Vector3d(entity.motionX, entity.motionY, entity.motionZ)); // local velocity
+        Vector3d localFacing = t1.iv(yawVector(entity)); // local facing
+        Vector3d globalPosition = t2.p(new Vector3d(-localPosition.x, localPosition.y, -localPosition.z)); // new global position
+        Vector3d globalVelocity = t2.v(new Vector3d(-localVelocity.x, localVelocity.y, -localVelocity.z)); // new global velocity
+
+        Vector3d globalFacing = t2.v(localFacing.mul(-1)); // new global facing
+        if (debugTeleport) SGCraft.log.debug(String.format("SGBaseTE.teleportEntity: Facing old %s new %s", localFacing, globalFacing));
+        double a = yawAngle(globalFacing, entity); // new global yaw angle
         if (debugTeleport) SGCraft.log.debug(String.format("SGBaseTE.teleportEntity: new yaw %.2f", a));
         if (!destBlocked) {
-            if (entity.dimension == dimension) newEntity = teleportWithinDimension(entity, q, u, a, destBlocked);
+            if (entity.dimension == dimension) newEntity = teleportWithinDimension(entity, globalPosition, globalVelocity, a, destBlocked);
             else {
-                newEntity = teleportToOtherDimension(entity, q, u, a, dimension, destBlocked);
+                newEntity = teleportToOtherDimension(entity, globalPosition, globalVelocity, a, dimension, destBlocked);
                 if (newEntity != null) newEntity.dimension = dimension;
             }
         } else {
             terminateEntityByIrisImpact(entity);
-            playIrisHitSound(worldForDimension(dimension), q, entity);
+            playIrisHitSound(worldForDimension(dimension), globalPosition, entity);
         }
         return newEntity;
     }
@@ -1051,7 +1053,7 @@ public class SGBaseTE extends BaseTileInventory {
         return server.worldServerForDimension(dimension);
     }
 
-    static void playIrisHitSound(World world, Vector3 pos, Entity entity) {
+    static void playIrisHitSound(World world, Vector3d pos, Entity entity) {
         double volume = min(entity.width * entity.height, 1.0);
         double pitch = 2.0 - volume;
         if (debugTeleport) SGCraft.log.debug(
@@ -1065,23 +1067,23 @@ public class SGBaseTE extends BaseTileInventory {
         world.playSoundEffect(pos.x, pos.y, pos.z, "sgcraft:iris_hit", (float) volume, (float) pitch);
     }
 
-    static Entity teleportWithinDimension(Entity entity, Vector3 p, Vector3 v, double a, boolean destBlocked) {
+    static Entity teleportWithinDimension(Entity entity, Vector3d p, Vector3d v, double a, boolean destBlocked) {
         if (entity instanceof EntityPlayerMP) return teleportPlayerWithinDimension((EntityPlayerMP) entity, p, v, a);
         else return teleportEntityToWorld(entity, p, v, a, (WorldServer) entity.worldObj, destBlocked);
     }
 
-    static Entity teleportPlayerWithinDimension(EntityPlayerMP entity, Vector3 p, Vector3 v, double a) {
+    static Entity teleportPlayerWithinDimension(EntityPlayerMP entity, Vector3d p, Vector3d v, double a) {
         entity.rotationYaw = (float) a;
         entity.setPositionAndUpdate(p.x, p.y, p.z);
         entity.worldObj.updateEntityWithOptionalForce(entity, false);
         return entity;
     }
 
-    static Entity teleportToOtherDimension(Entity entity, Vector3 p, Vector3 v, double a, int dimension,
+    static Entity teleportToOtherDimension(Entity entity, Vector3d p, Vector3d v, double a, int dimension,
             boolean destBlocked) {
         if (entity instanceof EntityPlayerMP) {
             EntityPlayerMP player = (EntityPlayerMP) entity;
-            Vector3 q = p.add(yawVector(a));
+            Vector3d q = p.add(yawVector(a));
             transferPlayerToDimension(player, dimension, q, a);
             return player;
         }
@@ -1097,7 +1099,7 @@ public class SGBaseTE extends BaseTileInventory {
         channel.writeAndFlush(msg).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
     }
 
-    static void transferPlayerToDimension(EntityPlayerMP player, int newDimension, Vector3 p, double a) {
+    static void transferPlayerToDimension(EntityPlayerMP player, int newDimension, Vector3d p, double a) {
         MinecraftServer server = MinecraftServer.getServer();
         ServerConfigurationManager scm = server.getConfigurationManager();
         int oldDimension = player.dimension;
@@ -1134,14 +1136,14 @@ public class SGBaseTE extends BaseTileInventory {
         FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, oldDimension, newDimension);
     }
 
-    static Entity teleportEntityToDimension(Entity entity, Vector3 p, Vector3 v, double a, int dimension,
+    static Entity teleportEntityToDimension(Entity entity, Vector3d p, Vector3d v, double a, int dimension,
             boolean destBlocked) {
         MinecraftServer server = MinecraftServer.getServer();
         WorldServer world = server.worldServerForDimension(dimension);
         return teleportEntityToWorld(entity, p, v, a, world, destBlocked);
     }
 
-    static Entity teleportEntityToWorld(Entity oldEntity, Vector3 p, Vector3 v, double a, WorldServer newWorld,
+    static Entity teleportEntityToWorld(Entity oldEntity, Vector3d p, Vector3d v, double a, WorldServer newWorld,
             boolean destBlocked) {
         if (debugTeleport) SGCraft.log.debug(
                 String.format(
@@ -1204,7 +1206,7 @@ public class SGBaseTE extends BaseTileInventory {
         if (s != 0) newEntity.setAIMoveSpeed(s);
     }
 
-    static void setVelocity(Entity entity, Vector3 v) {
+    static void setVelocity(Entity entity, Vector3d v) {
         entity.motionX = v.x;
         entity.motionY = v.y;
         entity.motionZ = v.z;
@@ -1236,16 +1238,16 @@ public class SGBaseTE extends BaseTileInventory {
         return 1;
     }
 
-    static Vector3 yawVector(Entity entity) {
+    static Vector3d yawVector(Entity entity) {
         return yawVector(yawSign(entity) * entity.rotationYaw);
     }
 
-    static Vector3 yawVector(double yaw) {
+    static Vector3d yawVector(double yaw) {
         double a = Math.toRadians(yaw);
-        return new Vector3(-Math.sin(a), 0, Math.cos(a));
+        return new Vector3d(-Math.sin(a), 0, Math.cos(a));
     }
 
-    static double yawAngle(Vector3 v, Entity entity) {
+    static double yawAngle(Vector3d v, Entity entity) {
         double a = Math.atan2(-v.x, v.z);
         double d = Math.toDegrees(a);
         return yawSign(entity) * d;
@@ -1465,7 +1467,7 @@ public class SGBaseTE extends BaseTileInventory {
 
     ItemStack getCamouflageStack(Vector3i cpos) {
         Trans3 t = localToGlobalTransformation();
-        Vector3 p = t.ip(Vector3.blockCenter.add(new Vector3(cpos.x, cpos.y, cpos.z)));
+        Vector3d p = t.ip(new Vector3d(0.5+cpos.x, 0.5+cpos.y, 0.5+cpos.z));
         if (p.y == 0) {
             int i = 2 + (int) Math.round(p.x);
             if (i >= 0 && i < 5) return getStackInSlot(firstCamouflageSlot + i);
@@ -1515,7 +1517,7 @@ public class SGBaseTE extends BaseTileInventory {
         Collection<BlockRef> result = new ArrayList<BlockRef>();
         Trans3 t = localToGlobalTransformation();
         for (int i = -2; i <= 2; i++) {
-            Vector3i blockPos = Trans3.intVector(t.p(new Vector3(i, -1, 0)));
+            Vector3i blockPos = Trans3.intVector(t.p(new Vector3d(i, -1, 0)));
             TileEntity te = getWorldTileEntity(worldObj, blockPos);
             if (te != null) result.add(new BlockRef(te));
         }

@@ -18,11 +18,12 @@ import com.google.gson.Gson;
 import gcewing.sg.BaseModClient.IModel;
 import gcewing.sg.BaseModClient.IRenderTarget;
 import gcewing.sg.BaseModClient.ITexture;
+import org.joml.Vector3d;
 
 public class BaseModel implements IModel {
 
-    private Vector3 p = new Vector3(0, 0, 0);
-    private Vector3 n = new Vector3(0, 0, 0);
+    private Vector3d p = new Vector3d();
+    private Vector3d n = new Vector3d();
 
     public double[] bounds;
     public Face[] faces;
@@ -34,7 +35,7 @@ public class BaseModel implements IModel {
         double[][] vertices;
         int[][] triangles;
         // Vector3 centroid;
-        Vector3 normal;
+        Vector3d normal;
     }
 
     static Gson gson = new Gson();
@@ -58,10 +59,10 @@ public class BaseModel implements IModel {
             double[][] p = face.vertices;
             int[] t = face.triangles[0];
             // face.centroid = Vector3.average(p[t[0]], p[t[1]], p[t[2]]);
-            Vector3 vector0 = new Vector3(p[t[0]][0], p[t[0]][1], p[t[0]][2]);
-            Vector3 vector1 = new Vector3(p[t[1]][0], p[t[1]][1], p[t[1]][2]);
-            Vector3 vector2 = new Vector3(p[t[2]][0], p[t[2]][1], p[t[2]][2]);
-            face.normal = Vector3.unit(vector1.sub(vector0)).cross(vector2.sub(vector0));
+            Vector3d vector0 = new Vector3d(p[t[0]][0], p[t[0]][1], p[t[0]][2]);
+            Vector3d vector1 = new Vector3d(p[t[1]][0], p[t[1]][1], p[t[1]][2]);
+            Vector3d vector2 = new Vector3d(p[t[2]][0], p[t[2]][1], p[t[2]][2]);
+            face.normal = vector1.sub(vector0).normalize().cross(vector2.sub(vector0));
         }
     }
 

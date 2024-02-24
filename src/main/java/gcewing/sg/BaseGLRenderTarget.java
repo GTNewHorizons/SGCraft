@@ -31,6 +31,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
 
 import gcewing.sg.BaseModClient.ITexture;
+import org.joml.Vector3d;
 
 public class BaseGLRenderTarget extends BaseRenderTarget {
 
@@ -120,7 +121,7 @@ public class BaseGLRenderTarget extends BaseRenderTarget {
     }
 
     @Override
-    protected void rawAddVertex(Vector3 p, double u, double v) {
+    protected void rawAddVertex(Vector3d p, double u, double v) {
         if (debugGL) SGCraft.log.debug(
                 String.format(
                         "BaseGLRenderTarget: rawAddVertex: %s %s normal %s rgba (%.2f,%.2f.%.2f,%.2f) uv (%.4f,%.4f)",

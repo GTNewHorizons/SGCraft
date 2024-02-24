@@ -43,6 +43,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.sg.BaseMod.ModelSpec;
 import gcewing.sg.BaseModClient.IModel;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements BaseMod.IBlock {
@@ -65,7 +66,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX, float hitY,
                                   float hitZ, IBlockState baseState, EntityLivingBase placer);
 
-        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin);
+        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin);
     }
 
     public static class Orient1Way implements IOrientationHandler {
@@ -77,7 +78,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
             return baseState;
         }
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
             return new Trans3(origin);
         }
 
@@ -298,7 +299,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         this.modelSpec = new ModelSpec(modelName, textureNames);
     }
 
-    public void setModelAndTextures(String modelName, Vector3 origin, String... textureNames) {
+    public void setModelAndTextures(String modelName, Vector3d origin, String... textureNames) {
         this.textureNames = textureNames;
         this.modelSpec = new ModelSpec(modelName, origin, textureNames);
     }
@@ -346,7 +347,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     public Trans3 localToGlobalRotation(IBlockAccess world, Vector3i pos, IBlockState state) {
-        return localToGlobalTransformation(world, pos, state, Vector3.zero);
+        return localToGlobalTransformation(world, pos, state, new Vector3d());
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos) {
@@ -354,10 +355,10 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state) {
-        return localToGlobalTransformation(world, pos, state, Vector3.blockCenter.add(new Vector3(pos.x, pos.y, pos.z)));
+        return localToGlobalTransformation(world, pos, state, new Vector3d(0.5+pos.x, 0.5+pos.y, 0.5+pos.z));
     }
 
-    public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin) {
+    public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
         IOrientationHandler oh = getOrientationHandler();
         return oh.localToGlobalTransformation(world, pos, state, origin);
     }
@@ -620,7 +621,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         ModelSpec spec = getModelSpec(state);
         if (spec != null) {
             IModel model = mod.getModel(spec.modelName);
-            Trans3 t = localToGlobalTransformation(world, pos, state, Vector3.blockCenter).translate(spec.origin);
+            Trans3 t = localToGlobalTransformation(world, pos, state, new Vector3d(0.5, 0.5, 0.5)).translate(spec.origin);
             return t.t(model.getBounds());
         }
         return null;
@@ -659,7 +660,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     protected List<AxisAlignedBB> getLocalCollisionBoxes(IBlockAccess world, Vector3i pos, IBlockState state,
             Entity entity) {
-        Trans3 t = localToGlobalTransformation(world, pos, state, Vector3.zero);
+        Trans3 t = localToGlobalTransformation(world, pos, state, new Vector3d());
         return getCollisionBoxes(world, pos, state, t, entity);
     }
 

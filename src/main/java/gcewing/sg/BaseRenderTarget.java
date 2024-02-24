@@ -10,6 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 
 import gcewing.sg.BaseModClient.ITexture;
+import org.joml.Vector3d;
 
 public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
 
@@ -19,7 +20,7 @@ public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
     protected int verticesPerFace;
     protected int vertexCount;
     protected ITexture texture;
-    protected Vector3 normal;
+    protected Vector3d normal;
     protected EnumFacing face;
     protected float red = 1, green = 1, blue = 1, alpha = 1;
     protected float shade;
@@ -69,18 +70,18 @@ public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
         alpha = (float) a;
     }
 
-    public void setNormal(Vector3 n) {
+    public void setNormal(Vector3d n) {
         normal = n;
-        face = Vector3.facing(n);
+        face = Trans3.facing(new Vector3d(n.x, n.y, n.z));
         shade = (float) (0.6 * n.x * n.x + 0.8 * n.z * n.z + (n.y > 0 ? 1 : 0.5) * n.y * n.y);
     }
 
-    public void addVertex(Vector3 p, double u, double v) {
+    public void addVertex(Vector3d p, double u, double v) {
         if (texture.isProjected()) addProjectedVertex(p, face);
         else addUVVertex(p, u, v);
     }
 
-    public void addUVVertex(Vector3 p, double u, double v) {
+    public void addUVVertex(Vector3d p, double u, double v) {
         double iu, iv;
         if (verticesPerFace == 0) throw new IllegalStateException("No face active");
         if (vertexCount >= verticesPerFace) throw new IllegalStateException("Too many vertices in face");
@@ -106,7 +107,7 @@ public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
         if (vertexCount > 0) throw new IllegalStateException("Rendering ended with incomplete face");
     }
 
-    protected abstract void rawAddVertex(Vector3 p, double u, double v);
+    protected abstract void rawAddVertex(Vector3d p, double u, double v);
 
     public float r() {
         return (float) (red * texture.red());
@@ -125,7 +126,7 @@ public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
     }
 
     // Add vertex with texture coords projected from the given direction
-    public void addProjectedVertex(Vector3 p, EnumFacing face) {
+    public void addProjectedVertex(Vector3d p, EnumFacing face) {
         double x = p.x - blockX;
         double y = p.y - blockY;
         double z = p.z - blockZ;

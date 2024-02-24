@@ -16,12 +16,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseMod.ModelSpec;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class DHDBlock extends BaseBlock<DHDTE> {
 
     protected static String[] textures = { "dhd_top", "dhd_side", "stargateBlock", "dhd_button_dim", };
-    protected static ModelSpec model = new ModelSpec("dhd.smeg", new Vector3(0, -0.5, 0), textures);
+    protected static ModelSpec model = new ModelSpec("dhd.smeg", new Vector3d(0, -0.5, 0), textures);
 
     public DHDBlock() {
         super(Material.rock /* SGRingBlock.ringMaterial */, DHDTE.class);

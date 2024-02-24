@@ -22,6 +22,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseMod.ModelSpec;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class SGBaseBlock extends SGBlock<SGBaseTE> {
@@ -151,7 +152,7 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
         Trans3 t = localToGlobalTransformation(world, pos);
         for (int i = -2; i <= 2; i++) for (int j = 0; j <= 4; j++) if (!(i == 0 && j == 0)) {
             // BlockPos rp = pos.add(i * dx, j, i * dz);
-            Vector3i rp = Trans3.intVector(t.p(new Vector3(i, j, 0)));
+            Vector3i rp = Trans3.intVector(t.p(new Vector3d(i, j, 0)));
             int type = getRingBlockType(world, rp);
             int pat = pattern[4 - j][2 + i];
             if (pat != 0 && type != pat) {
@@ -165,7 +166,7 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
         te.setMerged(true);
         markWorldBlockForUpdate(world, pos);
         for (int i = -2; i <= 2; i++) for (int j = 0; j <= 4; j++) if (!(i == 0 && j == 0)) {
-            Vector3i rp = Trans3.intVector(t.p(new Vector3(i, j, 0)));
+            Vector3i rp = Trans3.intVector(t.p(new Vector3d(i, j, 0)));
             Block block = getWorldBlock(world, rp);
             if (block instanceof SGRingBlock) ((SGRingBlock) block).mergeWith(world, rp, pos);
         }
@@ -218,10 +219,10 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
             markWorldBlockForUpdate(world, pos);
             unmergeRing(world, pos);
         }
-        if (goBang && explosionRadius > 0) explode(world, new Vector3(pos.x, pos.y, pos.z).add(new Vector3(0.5, 2.5, 0.5)), explosionRadius);
+        if (goBang && explosionRadius > 0) explode(world, new Vector3d(0.5+pos.x, 2.5+pos.y, 0.5+pos.z), explosionRadius);
     }
 
-    void explode(World world, Vector3 p, double s) {
+    void explode(World world, Vector3d p, double s) {
         world.newExplosion(null, p.x, p.y, p.z, (float) s, fieryExplosion, smokyExplosion);
     }
 

@@ -16,6 +16,7 @@ import gcewing.sg.BaseModClient.ICustomRenderer;
 import gcewing.sg.BaseModClient.IModel;
 import gcewing.sg.BaseModClient.IRenderTarget;
 import gcewing.sg.BaseModClient.ITexture;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class BaseModelRenderer implements ICustomRenderer {
@@ -24,15 +25,15 @@ public class BaseModelRenderer implements ICustomRenderer {
 
     protected IModel model;
     protected ITexture[] textures;
-    protected Vector3 origin;
+    protected Vector3d origin;
 
     // private static Trans3 itemTrans = Trans3.blockCenterSideTurn(0, 0);
 
     public BaseModelRenderer(IModel model, ITexture... textures) {
-        this(model, Vector3.zero, textures);
+        this(model, new Vector3d(), textures);
     }
 
-    public BaseModelRenderer(IModel model, Vector3 origin, ITexture... textures) {
+    public BaseModelRenderer(IModel model, Vector3d origin, ITexture... textures) {
         this.model = model;
         this.textures = textures;
         this.origin = origin;
@@ -41,7 +42,7 @@ public class BaseModelRenderer implements ICustomRenderer {
     public void renderBlock(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
                             EnumWorldBlockLayer layer, Trans3 t) {
         IBlock block = (IBlock) state.getBlock();
-        Trans3 t2 = t.t(block.localToGlobalTransformation(world, pos, state, Vector3.zero)).translate(origin);
+        Trans3 t2 = t.t(block.localToGlobalTransformation(world, pos, state, new Vector3d())).translate(origin);
         model.render(t2, target, textures);
     }
 

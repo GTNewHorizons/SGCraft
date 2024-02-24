@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class BaseWorldRenderTarget extends BaseRenderTarget {
@@ -41,14 +42,14 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
     }
 
     @Override
-    public void setNormal(Vector3 n) {
+    public void setNormal(Vector3d n) {
         super.setNormal(n);
-        Vector3 vector = Vec3i.getDirectionVec(face);
+        Vector3d vector = Vec3i.getDirectionVec(face);
 
         axisAlignedNormal = n.dot(vector) >= 0.99;
     }
 
-    protected void rawAddVertex(Vector3 p, double u, double v) {
+    protected void rawAddVertex(Vector3d p, double u, double v) {
         lightVertex(p);
         tess.setColorRGBA_F(vr, vg, vb, va);
         tess.setTextureUV(u, v);
@@ -57,14 +58,14 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
         renderingOccurred = true;
     }
 
-    protected void lightVertex(Vector3 p) {
+    protected void lightVertex(Vector3d p) {
         // TODO: Colour multiplier
         if (ao) aoLightVertex(p);
         else brLightVertex(p);
     }
 
-    protected void aoLightVertex(Vector3 v) {
-        Vector3 n = normal;
+    protected void aoLightVertex(Vector3d v) {
+        Vector3d n = normal;
         double brSum1 = 0, brSum2 = 0, lvSum = 0, wt = 0;
         // Sample a unit cube offset half a block in the direction of the normal
         double vx = v.x + 0.5 * n.x;
@@ -119,8 +120,8 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
         setLight(shade * lvv, brv);
     }
 
-    protected void brLightVertex(Vector3 p) {
-        Vector3 n = normal;
+    protected void brLightVertex(Vector3d p) {
+        Vector3d n = normal;
         Vector3i pos;
         if (axisAlignedNormal) {
             pos = new Vector3i(

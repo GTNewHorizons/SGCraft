@@ -13,6 +13,7 @@ import gcewing.sg.BaseModClient.IRenderTarget;
 import gcewing.sg.BaseModClient.ITexture;
 import gcewing.sg.BaseModClient.ITiledTexture;
 import gcewing.sg.BaseTexture.Image;
+import org.joml.Vector3d;
 
 class DHDTERenderer extends BaseTileEntityRenderer {
 
@@ -47,7 +48,7 @@ class DHDTERenderer extends BaseTileEntityRenderer {
         else if (gte.isActive()) i = 2;
         else i = 1;
         textures[buttonTextureIndex] = buttonTextures[i];
-        model.render(t.translate(0, -0.5, 0), target, textures);
+        model.render(t.translate(new Vector3d(0, -0.5, 0)), target, textures);
     }
 
 }

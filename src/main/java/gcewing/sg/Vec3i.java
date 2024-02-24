@@ -2,14 +2,15 @@ package gcewing.sg;
 
 import com.google.common.base.Objects;
 import net.minecraft.util.EnumFacing;
+import org.joml.Vector3d;
 
 public class Vec3i implements Comparable<Vec3i> {
     // Workaround for EnumFacing.getDirectionVec being client-side only
     public static Vec3i[] directionVec = { new Vec3i(0, -1, 0), new Vec3i(0, 1, 0), new Vec3i(0, 0, -1),
             new Vec3i(0, 0, 1), new Vec3i(-1, 0, 0), new Vec3i(1, 0, 0) };
 
-    public static Vector3 getDirectionVec(EnumFacing f) {
-        return new Vector3(directionVec[f.ordinal()].x, directionVec[f.ordinal()].y, directionVec[f.ordinal()].z);
+    public static Vector3d getDirectionVec(EnumFacing f) {
+        return new Vector3d(directionVec[f.ordinal()].x, directionVec[f.ordinal()].y, directionVec[f.ordinal()].z);
     }
 
     /** The Null vector constant (0, 0, 0) */

@@ -38,6 +38,7 @@ import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
 
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.tileentity.TileEntity;
+import org.joml.Vector3d;
 
 class SGBaseTERenderer extends BaseTileEntityRenderer {
 
@@ -116,7 +117,7 @@ class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
     void renderStargate(SGBaseTE te, float t) {
-        BaseGLUtils.glMultMatrix(te.localToGlobalTransformation(Vector3.zero));
+        BaseGLUtils.glMultMatrix(te.localToGlobalTransformation(new Vector3d()));
         bindTexture(SGCraft.mod.resourceLocation("textures/tileentity/stargate.png"));
         glNormal3f(0, 1, 0);
         renderRing(ringMidRadius - ringOverlap, ringOuterRadius, RingType.Outer, ringZOffset);

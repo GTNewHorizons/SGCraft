@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class DHDTE extends BaseTileInventory implements ISGEnergySource {
@@ -128,7 +129,7 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         Trans3 t = localToGlobalTransformation();
         for (int i = -linkRangeX; i <= linkRangeX; i++) {
             for (int j = -linkRangeY; j <= linkRangeY; j++) for (int k = 1; k <= linkRangeZ; k++) {
-                Vector3 p = t.p(new Vector3(i, j, -k));
+                Vector3d p = t.p(new Vector3d(i, j, -k));
                 Vector3i blockPos = new Vector3i((int) Math.floor(p.x), (int) Math.floor(p.y), (int) Math.floor(p.z));
 
                 if (debugLink) SGCraft.log.debug(String.format("DHDTE.checkForLink: probing %s", blockPos));

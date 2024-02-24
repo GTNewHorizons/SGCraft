@@ -18,6 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import gcewing.sg.BaseBlock.IOrientationHandler;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class BaseOrientation {
@@ -51,7 +52,7 @@ public class BaseOrientation {
             return horizontalFacings[iround(entity.rotationYaw / 90.0) & 3];
         }
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
             EnumFacing f = (EnumFacing) state.getValue(FACING);
             if (debugOrientation) SGCraft.log.debug(
                     String.format(
@@ -84,11 +85,11 @@ public class BaseOrientation {
 
     public static class Orient24WaysByTE extends BaseBlock.Orient1Way {
 
-        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3 origin) {
+        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin) {
             TileEntity te = world.getTileEntity(pos.x, pos.y, pos.z);
             if (te instanceof BaseTileEntity) {
                 BaseTileEntity bte = (BaseTileEntity) te;
-                return Trans3.sideTurn(origin, bte.side, bte.turn);
+                return Trans3.sideTurn(new Vector3d(origin.x, origin.y, origin.z), bte.side, bte.turn);
             }
 
             return super.localToGlobalTransformation(world, pos, state, origin);
