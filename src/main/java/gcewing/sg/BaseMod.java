@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.renderers.BaseModel;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.Trans3;

@@ -10,6 +10,8 @@ import static gcewing.sg.utils.BaseUtils.horizontalFacings;
 import static gcewing.sg.utils.BaseUtils.iround;
 
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 import gcewing.sg.tileentities.BaseTileEntity;
 import gcewing.sg.utils.PropertyTurn;
 import gcewing.sg.utils.Trans3;

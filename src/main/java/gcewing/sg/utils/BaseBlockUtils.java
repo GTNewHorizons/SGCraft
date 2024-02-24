@@ -12,9 +12,8 @@ import static gcewing.sg.utils.BaseUtils.oppositeFacing;
 import java.util.Collection;
 
 import gcewing.sg.blocks.base.BaseBlock;
-import gcewing.sg.EnumWorldBlockLayer;
-import gcewing.sg.IBlockState;
-import gcewing.sg.IProperty;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

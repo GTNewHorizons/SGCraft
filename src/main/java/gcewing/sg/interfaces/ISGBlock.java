@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.interfaces;
 
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.world.IBlockAccess;

@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.interfaces;
 
 import net.minecraft.tileentity.TileEntity;
 

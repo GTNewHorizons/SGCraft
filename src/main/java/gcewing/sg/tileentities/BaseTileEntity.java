@@ -18,8 +18,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import gcewing.sg.BaseMod;
-import gcewing.sg.IBlockState;
-import gcewing.sg.ITickable;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ITickable;
 import gcewing.sg.SGCraft;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;

@@ -17,11 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.renderers.BaseGLRenderTarget;
 import gcewing.sg.renderers.BaseModelRenderer;
 import gcewing.sg.renderers.BaseTexture;
 import gcewing.sg.renderers.BaseWorldRenderTarget;
 import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -332,7 +334,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
     public interface ICustomRenderer {
 
         void renderBlock(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
-                EnumWorldBlockLayer layer, Trans3 t);
+                         EnumWorldBlockLayer layer, Trans3 t);
 
         void renderItemStack(ItemStack stack, IRenderTarget target, Trans3 t);
     }

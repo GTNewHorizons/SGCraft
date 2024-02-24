@@ -10,7 +10,7 @@ import static gcewing.sg.utils.BaseBlockUtils.getBlockStateFromMeta;
 import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
 import static gcewing.sg.utils.BaseUtils.facings;
 
-import gcewing.sg.IBlockState;
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;

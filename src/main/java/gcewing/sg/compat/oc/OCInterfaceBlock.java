@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import gcewing.sg.IBlockState;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGGui;
 import gcewing.sg.blocks.SGInterfaceBlock;

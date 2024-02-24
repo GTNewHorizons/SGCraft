@@ -15,6 +15,7 @@ import gcewing.sg.blocks.NaquadahOreBlock;
 import gcewing.sg.blocks.SGBaseBlock;
 import gcewing.sg.blocks.SGRingBlock;
 import gcewing.sg.compat.MystcraftIntegration;
+import gcewing.sg.interfaces.IIntegration;
 import gcewing.sg.items.SGChevronUpgradeItem;
 import gcewing.sg.items.SGIrisUpgradeItem;
 import gcewing.sg.items.SGRingItem;

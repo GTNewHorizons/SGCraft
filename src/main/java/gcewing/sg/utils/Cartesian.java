@@ -1,4 +1,4 @@
-package gcewing.sg;
+package gcewing.sg.utils;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

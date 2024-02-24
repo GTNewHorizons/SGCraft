@@ -12,9 +12,9 @@ import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 import java.util.List;
 
-import gcewing.sg.EnumWorldBlockLayer;
-import gcewing.sg.IBlockState;
-import gcewing.sg.IProperty;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.tileentities.SGRingTE;

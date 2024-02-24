@@ -10,9 +10,9 @@ import static gcewing.sg.utils.BaseBlockUtils.blockCanRenderInLayer;
 
 import gcewing.sg.BaseModClient;
 import gcewing.sg.utils.BaseRenderingUtils;
-import gcewing.sg.EnumWorldBlockLayer;
-import gcewing.sg.IBlockState;
-import gcewing.sg.ISGBlock;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseBlockUtils;

@@ -19,10 +19,10 @@ import java.util.Random;
 
 import gcewing.sg.BaseMod;
 import gcewing.sg.BaseModClient;
-import gcewing.sg.BlockState;
-import gcewing.sg.EnumWorldBlockLayer;
-import gcewing.sg.IBlockState;
-import gcewing.sg.IProperty;
+import gcewing.sg.utils.BlockState;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.InventoryHelper;
 import gcewing.sg.tileentities.SGBaseTE;

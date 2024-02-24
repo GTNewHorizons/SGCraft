@@ -1,4 +1,4 @@
-package gcewing.sg;
+package gcewing.sg.utils;
 
 public enum EnumWorldBlockLayer {
 

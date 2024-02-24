@@ -1,4 +1,4 @@
-package gcewing.sg;
+package gcewing.sg.interfaces;
 
 public interface IStringSerializable {
 

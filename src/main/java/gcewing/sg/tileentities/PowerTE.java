@@ -8,7 +8,7 @@ package gcewing.sg.tileentities;
 
 import static java.lang.Math.min;
 
-import gcewing.sg.ISGEnergySource;
+import gcewing.sg.interfaces.ISGEnergySource;
 import gcewing.sg.SGCraft;
 import net.minecraft.nbt.NBTTagCompound;
 

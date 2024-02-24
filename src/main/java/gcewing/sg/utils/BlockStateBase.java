@@ -1,9 +1,11 @@
-package gcewing.sg;
+package gcewing.sg.utils;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
 import net.minecraft.block.Block;
 
 import com.google.common.base.Function;

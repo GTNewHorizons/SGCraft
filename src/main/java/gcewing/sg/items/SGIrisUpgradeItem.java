@@ -8,7 +8,7 @@ package gcewing.sg.items;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 
-import gcewing.sg.ISGBlock;
+import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

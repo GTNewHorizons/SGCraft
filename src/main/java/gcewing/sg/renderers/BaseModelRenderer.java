@@ -8,8 +8,8 @@ package gcewing.sg.renderers;
 
 // import net.minecraft.block.state.IBlockState;
 
-import gcewing.sg.EnumWorldBlockLayer;
-import gcewing.sg.IBlockState;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.item.ItemStack;

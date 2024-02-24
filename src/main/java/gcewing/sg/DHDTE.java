@@ -11,6 +11,7 @@ import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 import static java.lang.Math.min;
 
 import gcewing.sg.blocks.DHDBlock;
+import gcewing.sg.interfaces.ISGEnergySource;
 import gcewing.sg.tileentities.BaseTileInventory;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
