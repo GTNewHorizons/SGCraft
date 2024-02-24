@@ -1,6 +1,5 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.BaseModClient;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.item.ItemStack;

@@ -9,7 +9,6 @@ package gcewing.sg.guis;
 import gcewing.sg.SGCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
 import org.joml.Vector3i;
 import org.lwjgl.opengl.GL11;
 

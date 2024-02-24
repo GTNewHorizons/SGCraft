@@ -6,6 +6,13 @@
 
 package gcewing.sg.renderers;
 
+import gcewing.sg.BaseModClient;
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.ITexture;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.util.ResourceLocation;
+import org.joml.Vector3d;
+
 import static org.lwjgl.opengl.GL11.GL_LIGHTING;
 import static org.lwjgl.opengl.GL11.GL_LIGHTING_BIT;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
@@ -26,14 +33,6 @@ import static org.lwjgl.opengl.GL11.glShadeModel;
 import static org.lwjgl.opengl.GL11.glTexCoord2d;
 import static org.lwjgl.opengl.GL11.glVertex3d;
 import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
-
-import gcewing.sg.BaseModClient;
-import gcewing.sg.SGCraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.util.ResourceLocation;
-
-import gcewing.sg.interfaces.ITexture;
-import org.joml.Vector3d;
 
 public class BaseGLRenderTarget extends BaseRenderTarget {
 

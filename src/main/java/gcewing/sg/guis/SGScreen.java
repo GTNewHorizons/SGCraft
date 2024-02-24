@@ -6,15 +6,15 @@
 
 package gcewing.sg.guis;
 
+import gcewing.sg.SGCraft;
+import gcewing.sg.tileentities.SGBaseTE;
+import net.minecraft.inventory.Container;
+
 import static org.lwjgl.opengl.GL11.GL_LINEAR;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
-
-import gcewing.sg.SGCraft;
-import gcewing.sg.tileentities.SGBaseTE;
-import net.minecraft.inventory.Container;
 
 // ------------------------------------------------------------------------------------------------
 

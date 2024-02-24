@@ -6,17 +6,8 @@
 
 package gcewing.sg.utils;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Map;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.sg.tileentities.BaseTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -40,10 +31,18 @@ import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapStorage;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import org.joml.Vector3i;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.Map;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class BaseUtils {
 

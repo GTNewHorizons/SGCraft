@@ -8,18 +8,17 @@ package gcewing.sg.renderers;
 
 // import net.minecraft.block.state.IBlockState;
 
-import gcewing.sg.utils.EnumWorldBlockLayer;
-import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
-import gcewing.sg.utils.Trans3;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.IBlockAccess;
-
 import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.ICustomRenderer;
 import gcewing.sg.interfaces.IModel;
 import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.Trans3;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 

@@ -6,13 +6,12 @@
 
 package gcewing.sg;
 
-import gcewing.sg.utils.BaseStringUtils;
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import gcewing.sg.utils.BaseStringUtils;
+import net.minecraft.item.Item;
 
 public class BaseSubsystem<MOD extends BaseMod, CLIENT extends BaseModClient> {
 

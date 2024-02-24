@@ -6,8 +6,6 @@
 
 package gcewing.sg.items;
 
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
-
 import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.Block;
@@ -16,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 
 public class SGIrisUpgradeItem extends BaseItem {
 

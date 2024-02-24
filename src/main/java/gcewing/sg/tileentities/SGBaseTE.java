@@ -6,41 +6,29 @@
 
 package gcewing.sg.tileentities;
 
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
-import static gcewing.sg.utils.BaseBlockUtils.notifyWorldNeighborsOfStateChange;
-import static gcewing.sg.utils.BaseUtils.getGameRuleBoolean;
-import static gcewing.sg.utils.BaseUtils.getWorldDifficulty;
-import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
-import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
-import static gcewing.sg.utils.BaseUtils.scmPreparePlayer;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import gcewing.sg.BaseConfiguration;
-import gcewing.sg.utils.BaseInventoryUtils;
-import gcewing.sg.guis.DHDTE;
-import gcewing.sg.interfaces.IComputerInterface;
-import gcewing.sg.interfaces.ISGEnergySource;
-import gcewing.sg.entities.IrisEntity;
 import gcewing.sg.IrisState;
 import gcewing.sg.SGAddressing;
-import gcewing.sg.blocks.SGBaseBlock;
-import gcewing.sg.renderers.SGBaseTERenderer;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGLocation;
 import gcewing.sg.SGState;
+import gcewing.sg.blocks.SGBaseBlock;
+import gcewing.sg.compat.oc.OCWirelessEndpoint;
+import gcewing.sg.entities.IrisEntity;
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.interfaces.IComputerInterface;
+import gcewing.sg.interfaces.ISGEnergySource;
+import gcewing.sg.renderers.SGBaseTERenderer;
 import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.BaseInventoryUtils;
 import gcewing.sg.utils.Trans3;
 import gcewing.sg.utils.Utils;
+import io.netty.channel.ChannelFutureListener;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.entity.Entity;
@@ -74,19 +62,29 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.network.ForgeMessage;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.FMLOutboundHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import gcewing.sg.compat.oc.OCWirelessEndpoint;
-import io.netty.channel.ChannelFutureListener;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
+import static gcewing.sg.utils.BaseBlockUtils.notifyWorldNeighborsOfStateChange;
+import static gcewing.sg.utils.BaseUtils.getGameRuleBoolean;
+import static gcewing.sg.utils.BaseUtils.getWorldDifficulty;
+import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
+import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
+import static gcewing.sg.utils.BaseUtils.scmPreparePlayer;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class SGBaseTE extends BaseTileInventory {
 

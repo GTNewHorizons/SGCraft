@@ -6,25 +6,24 @@
 
 package gcewing.sg.renderers;
 
-import static gcewing.sg.utils.BaseBlockUtils.blockCanRenderInLayer;
-
 import gcewing.sg.BaseModClient;
-import gcewing.sg.utils.BaseRenderingUtils;
-import gcewing.sg.utils.EnumWorldBlockLayer;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.BaseRenderingUtils;
+import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
-
-import gcewing.sg.interfaces.ICustomRenderer;
-import gcewing.sg.interfaces.IRenderTarget;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseBlockUtils.blockCanRenderInLayer;
 
 public class SGRingBlockRenderer implements ICustomRenderer {
 

@@ -6,10 +6,6 @@
 
 package gcewing.sg.renderers;
 
-import static gcewing.sg.utils.BaseUtils.ifloor;
-import static gcewing.sg.utils.BaseUtils.iround;
-import static java.lang.Math.floor;
-
 import gcewing.sg.SGCraft;
 import gcewing.sg.utils.Vec3i;
 import net.minecraft.block.Block;
@@ -19,6 +15,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseUtils.ifloor;
+import static gcewing.sg.utils.BaseUtils.iround;
+import static java.lang.Math.floor;
 
 public class BaseWorldRenderTarget extends BaseRenderTarget {
 

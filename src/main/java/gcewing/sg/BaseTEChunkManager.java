@@ -6,8 +6,6 @@
 
 package gcewing.sg;
 
-import java.util.List;
-
 import gcewing.sg.tileentities.BaseTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
+
+import java.util.List;
 
 public class BaseTEChunkManager implements ForgeChunkManager.LoadingCallback {
 

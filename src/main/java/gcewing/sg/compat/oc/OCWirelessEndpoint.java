@@ -6,14 +6,13 @@
 
 package gcewing.sg.compat.oc;
 
-import net.minecraft.world.World;
-
 import gcewing.sg.BaseConfiguration;
-import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.SGCraft;
+import gcewing.sg.tileentities.SGBaseTE;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.network.Packet;
 import li.cil.oc.api.network.WirelessEndpoint;
+import net.minecraft.world.World;
 
 public class OCWirelessEndpoint implements WirelessEndpoint {
 

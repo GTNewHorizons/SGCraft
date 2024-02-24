@@ -6,8 +6,8 @@
 
 package gcewing.sg.blocks;
 
-import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

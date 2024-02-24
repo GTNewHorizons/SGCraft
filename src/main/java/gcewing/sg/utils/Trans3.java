@@ -6,18 +6,18 @@
 
 package gcewing.sg.utils;
 
-import static java.lang.Math.PI;
-import static java.lang.Math.abs;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-
-import java.util.List;
-
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import org.joml.Matrix3d;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import java.util.List;
+
+import static java.lang.Math.PI;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class Trans3 {
     private static Vector3d zero = new Vector3d();

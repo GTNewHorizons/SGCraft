@@ -1,17 +1,5 @@
 package gcewing.sg.utils;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-
-import gcewing.sg.MapPopulator;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
-import net.minecraft.block.Block;
-
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -23,6 +11,17 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
+import gcewing.sg.MapPopulator;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IProperty;
+import net.minecraft.block.Block;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 public class BlockState {
 

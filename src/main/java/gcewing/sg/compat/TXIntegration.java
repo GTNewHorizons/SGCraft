@@ -6,13 +6,12 @@
 
 package gcewing.sg.compat;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import gcewing.sg.BaseSubsystem;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGCraftClient;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TXIntegration extends BaseSubsystem<SGCraft, SGCraftClient> {
 

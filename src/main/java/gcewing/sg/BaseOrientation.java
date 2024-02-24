@@ -6,10 +6,8 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.utils.BaseUtils.horizontalFacings;
-import static gcewing.sg.utils.BaseUtils.iround;
-
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.blocks.base.BaseBlock.IOrientationHandler;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IProperty;
 import gcewing.sg.tileentities.BaseTileEntity;
@@ -22,10 +20,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import gcewing.sg.blocks.base.BaseBlock.IOrientationHandler;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseUtils.horizontalFacings;
+import static gcewing.sg.utils.BaseUtils.iround;
 
 public class BaseOrientation {
 

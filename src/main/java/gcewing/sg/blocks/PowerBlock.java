@@ -6,12 +6,10 @@
 
 package gcewing.sg.blocks;
 
-import java.util.ArrayList;
-
-import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
-import gcewing.sg.guis.SGGui;
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.tileentities.PowerTE;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +21,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.joml.Vector3i;
+
+import java.util.ArrayList;
 
 public class PowerBlock<TE extends PowerTE> extends BaseBlock<TE> {
 

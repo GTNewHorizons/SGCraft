@@ -6,8 +6,6 @@
 
 package gcewing.sg.tileentities;
 
-import java.util.Random;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -16,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import org.joml.Vector3i;
+
+import java.util.Random;
 
 public class InventoryHelper {
 

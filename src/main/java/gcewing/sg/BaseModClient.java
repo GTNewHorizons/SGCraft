@@ -6,29 +6,35 @@
 
 package gcewing.sg;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.interfaces.IItem;
 import gcewing.sg.interfaces.IModel;
 import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.interfaces.ITextureConsumer;
 import gcewing.sg.renderers.BaseGLRenderTarget;
 import gcewing.sg.renderers.BaseModelRenderer;
 import gcewing.sg.renderers.BaseWorldRenderTarget;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.ModelSpec;
 import gcewing.sg.utils.TextureCache;
 import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.VSBinding;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -45,8 +51,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
@@ -56,25 +60,16 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.sg.interfaces.IBlock;
-import gcewing.sg.interfaces.IItem;
-import gcewing.sg.interfaces.ITextureConsumer;
-import gcewing.sg.utils.ModelSpec;
-import gcewing.sg.utils.VSBinding;
-import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 

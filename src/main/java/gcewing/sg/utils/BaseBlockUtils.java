@@ -6,11 +6,9 @@
 
 package gcewing.sg.utils;
 
-import static gcewing.sg.utils.BaseUtils.facings;
-import static gcewing.sg.utils.BaseUtils.oppositeFacing;
-
-import java.util.Collection;
-
+import com.google.common.collect.ImmutableMap;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IProperty;
@@ -25,12 +23,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import com.google.common.collect.ImmutableMap;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import org.joml.Vector3i;
+
+import java.util.Collection;
+
+import static gcewing.sg.utils.BaseUtils.facings;
+import static gcewing.sg.utils.BaseUtils.oppositeFacing;
 
 public class BaseBlockUtils {
 

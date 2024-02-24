@@ -6,14 +6,13 @@
 
 package gcewing.sg.compat.cc;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import net.minecraft.tileentity.TileEntity;
-
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import gcewing.sg.interfaces.IComputerInterface;
 import gcewing.sg.tileentities.SGInterfaceTE;
+import net.minecraft.tileentity.TileEntity;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class CCInterfaceTE extends SGInterfaceTE implements IComputerInterface {
 

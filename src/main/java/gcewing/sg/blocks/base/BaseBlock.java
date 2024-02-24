@@ -6,29 +6,23 @@
 
 package gcewing.sg.blocks.base;
 
-import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.utils.BaseUtils.facings;
-import static gcewing.sg.utils.BaseUtils.newMovingObjectPosition;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.sg.BaseMod;
 import gcewing.sg.BaseModClient;
-import gcewing.sg.interfaces.IBlock;
-import gcewing.sg.interfaces.ITileEntity;
-import gcewing.sg.utils.BlockState;
-import gcewing.sg.utils.EnumWorldBlockLayer;
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.interfaces.IProperty;
 import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.interfaces.ITileEntity;
 import gcewing.sg.tileentities.InventoryHelper;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
+import gcewing.sg.utils.BlockState;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.ModelSpec;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -50,14 +44,19 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.sg.utils.ModelSpec;
-import gcewing.sg.interfaces.IModel;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseUtils.facings;
+import static gcewing.sg.utils.BaseUtils.newMovingObjectPosition;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
 

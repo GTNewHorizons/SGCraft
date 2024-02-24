@@ -6,14 +6,13 @@
 
 package gcewing.sg.compat.oc;
 
+import gcewing.sg.SGCraft;
+import gcewing.sg.blocks.SGInterfaceBlock;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-
-import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.SGCraft;
-import gcewing.sg.guis.SGGui;
-import gcewing.sg.blocks.SGInterfaceBlock;
 import org.joml.Vector3i;
 
 public class OCInterfaceBlock extends SGInterfaceBlock<OCInterfaceTE> {

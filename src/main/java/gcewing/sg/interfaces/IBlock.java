@@ -1,6 +1,5 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.BaseMod;
 import gcewing.sg.utils.ModelSpec;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.world.IBlockAccess;

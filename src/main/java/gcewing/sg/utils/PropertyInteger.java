@@ -1,10 +1,10 @@
 package gcewing.sg.utils;
 
-import java.util.Collection;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+
+import java.util.Collection;
+import java.util.Set;
 
 public class PropertyInteger extends PropertyHelper<Integer> {
 

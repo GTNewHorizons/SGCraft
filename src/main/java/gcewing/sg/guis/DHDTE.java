@@ -6,10 +6,6 @@
 
 package gcewing.sg.guis;
 
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static java.lang.Math.min;
-
 import gcewing.sg.BaseConfiguration;
 import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.DHDBlock;
@@ -26,6 +22,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static java.lang.Math.min;
 
 public class DHDTE extends BaseTileInventory implements ISGEnergySource {
 

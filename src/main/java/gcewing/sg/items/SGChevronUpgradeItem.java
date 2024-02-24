@@ -6,10 +6,8 @@
 
 package gcewing.sg.items;
 
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
-
-import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.ISGBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 
 public class SGChevronUpgradeItem extends BaseItem {
 

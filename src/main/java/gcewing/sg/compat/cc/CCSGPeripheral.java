@@ -6,9 +6,6 @@
 
 package gcewing.sg.compat.cc;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
@@ -16,6 +13,8 @@ import dan200.computercraft.api.peripheral.IPeripheral;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGInterfaceTE;
 import gcewing.sg.tileentities.SGInterfaceTE.CIStargateState;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class CCSGPeripheral implements IPeripheral {
 

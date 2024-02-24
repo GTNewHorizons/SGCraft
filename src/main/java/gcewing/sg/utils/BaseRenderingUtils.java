@@ -6,8 +6,6 @@
 
 package gcewing.sg.utils;
 
-import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
-
 import gcewing.sg.BaseMod;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.IRenderTarget;
@@ -19,6 +17,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
 
 public class BaseRenderingUtils {
 

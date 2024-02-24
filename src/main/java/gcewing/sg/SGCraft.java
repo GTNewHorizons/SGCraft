@@ -6,15 +6,21 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.utils.BaseUtils.getChunkTileEntityMap;
-import static gcewing.sg.utils.BaseUtils.getChunkWorld;
-
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import gcewing.sg.blocks.DHDBlock;
 import gcewing.sg.blocks.NaquadahBlock;
 import gcewing.sg.blocks.NaquadahOreBlock;
 import gcewing.sg.blocks.SGBaseBlock;
 import gcewing.sg.blocks.SGRingBlock;
 import gcewing.sg.compat.MystcraftIntegration;
+import gcewing.sg.compat.oc.OCIntegration;
 import gcewing.sg.entities.IrisEntity;
 import gcewing.sg.entities.SGEntity;
 import gcewing.sg.guis.DHDFuelContainer;
@@ -45,19 +51,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import gcewing.sg.compat.oc.OCIntegration;
+import static gcewing.sg.utils.BaseUtils.getChunkTileEntityMap;
+import static gcewing.sg.utils.BaseUtils.getChunkWorld;
 
 @Mod(
         modid = Info.modID,

@@ -1,9 +1,9 @@
 package gcewing.sg.utils;
 
+import net.minecraft.util.EnumFacing;
+
 import java.util.Arrays;
 import java.util.Collection;
-
-import net.minecraft.util.EnumFacing;
 
 public class PropertyTurn extends PropertyEnum<EnumFacing> {
 

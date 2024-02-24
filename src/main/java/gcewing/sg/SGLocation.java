@@ -6,16 +6,16 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
-
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
 
 public class SGLocation {
 

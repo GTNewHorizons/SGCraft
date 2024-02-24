@@ -6,21 +6,10 @@
 
 package gcewing.sg.tileentities;
 
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.utils.BaseUtils.classForName;
-import static gcewing.sg.utils.BaseUtils.getFieldDef;
-import static gcewing.sg.utils.BaseUtils.getIntField;
-import static gcewing.sg.utils.BaseUtils.getMethodDef;
-import static gcewing.sg.utils.BaseUtils.invokeMethod;
-import static gcewing.sg.utils.BaseUtils.setIntField;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import gcewing.sg.BaseMod;
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.ITickable;
-import gcewing.sg.SGCraft;
 import gcewing.sg.interfaces.ITileEntity;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
@@ -34,10 +23,19 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-
-import gcewing.sg.interfaces.IBlock;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseUtils.classForName;
+import static gcewing.sg.utils.BaseUtils.getFieldDef;
+import static gcewing.sg.utils.BaseUtils.getIntField;
+import static gcewing.sg.utils.BaseUtils.getMethodDef;
+import static gcewing.sg.utils.BaseUtils.invokeMethod;
+import static gcewing.sg.utils.BaseUtils.setIntField;
 
 public class BaseTileEntity extends TileEntity implements ITileEntity {
 

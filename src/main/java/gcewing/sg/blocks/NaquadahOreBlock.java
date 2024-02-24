@@ -6,13 +6,13 @@
 
 package gcewing.sg.blocks;
 
-import java.util.Random;
-
-import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.base.BaseOreBlock;
+import gcewing.sg.interfaces.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+
+import java.util.Random;
 
 public class NaquadahOreBlock extends BaseOreBlock {
 

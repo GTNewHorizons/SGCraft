@@ -6,18 +6,17 @@
 
 package gcewing.sg.compat.ic2;
 
-import static java.lang.Math.min;
-
+import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.ITickable;
+import gcewing.sg.tileentities.PowerTE;
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergySink;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import gcewing.sg.interfaces.ITickable;
-import gcewing.sg.tileentities.PowerTE;
-import gcewing.sg.SGCraft;
-import ic2.api.energy.event.EnergyTileLoadEvent;
-import ic2.api.energy.event.EnergyTileUnloadEvent;
-import ic2.api.energy.tile.IEnergySink;
+import static java.lang.Math.min;
 
 public class IC2PowerTE extends PowerTE implements IEnergySink, ITickable {
 

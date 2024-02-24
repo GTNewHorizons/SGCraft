@@ -6,18 +6,15 @@
 
 package gcewing.sg.blocks;
 
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
-import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
-
 import gcewing.sg.BaseConfiguration;
 import gcewing.sg.BaseOrientation;
-import gcewing.sg.utils.EnumWorldBlockLayer;
-import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
-import gcewing.sg.guis.SGGui;
 import gcewing.sg.SGState;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.ModelSpec;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,10 +26,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import gcewing.sg.utils.ModelSpec;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
+
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 public class SGBaseBlock extends SGBlock<SGBaseTE> {
 
