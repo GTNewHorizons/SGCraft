@@ -25,7 +25,7 @@ import static org.lwjgl.opengl.GL11.glTexParameteri;
 
 import gcewing.sg.DHDTE;
 import gcewing.sg.SGAddressing;
-import gcewing.sg.SGChannel;
+import gcewing.sg.packets.SGChannel;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGState;
 import gcewing.sg.tileentities.SGBaseTE;

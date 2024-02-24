@@ -25,6 +25,7 @@ import gcewing.sg.interfaces.IIntegration;
 import gcewing.sg.items.SGChevronUpgradeItem;
 import gcewing.sg.items.SGIrisUpgradeItem;
 import gcewing.sg.items.SGRingItem;
+import gcewing.sg.packets.SGChannel;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
