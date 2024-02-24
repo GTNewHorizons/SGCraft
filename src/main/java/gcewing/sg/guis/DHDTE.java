@@ -4,12 +4,14 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.guis;
 
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 import static java.lang.Math.min;
 
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.DHDBlock;
 import gcewing.sg.interfaces.ISGEnergySource;
 import gcewing.sg.tileentities.BaseTileInventory;

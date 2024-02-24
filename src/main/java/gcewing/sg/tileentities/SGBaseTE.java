@@ -27,7 +27,7 @@ import java.util.Random;
 
 import gcewing.sg.BaseConfiguration;
 import gcewing.sg.utils.BaseInventoryUtils;
-import gcewing.sg.DHDTE;
+import gcewing.sg.guis.DHDTE;
 import gcewing.sg.interfaces.IComputerInterface;
 import gcewing.sg.interfaces.ISGEnergySource;
 import gcewing.sg.entities.IrisEntity;

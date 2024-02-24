@@ -26,7 +26,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import gcewing.sg.BaseContainer;
 import gcewing.sg.BaseMod;
 import gcewing.sg.SGCraft;
 import net.minecraft.client.Minecraft;

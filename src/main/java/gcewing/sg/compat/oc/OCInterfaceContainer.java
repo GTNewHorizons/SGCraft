@@ -14,7 +14,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import gcewing.sg.BaseContainer;
+import gcewing.sg.guis.BaseContainer;
 import org.joml.Vector3i;
 
 public class OCInterfaceContainer extends BaseContainer {

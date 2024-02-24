@@ -4,10 +4,12 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.worldgen;
 
 import java.util.Random;
 
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.SGCraft;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;

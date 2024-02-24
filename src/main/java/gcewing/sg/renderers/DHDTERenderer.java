@@ -6,7 +6,7 @@
 
 package gcewing.sg.renderers;
 
-import gcewing.sg.DHDTE;
+import gcewing.sg.guis.DHDTE;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.BaseTileEntity;
 import gcewing.sg.tileentities.SGBaseTE;

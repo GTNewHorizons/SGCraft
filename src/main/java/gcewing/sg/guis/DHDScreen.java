@@ -23,7 +23,6 @@ import static org.lwjgl.opengl.GL11.glPopAttrib;
 import static org.lwjgl.opengl.GL11.glPushAttrib;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
-import gcewing.sg.DHDTE;
 import gcewing.sg.SGAddressing;
 import gcewing.sg.packets.SGChannel;
 import gcewing.sg.SGCraft;

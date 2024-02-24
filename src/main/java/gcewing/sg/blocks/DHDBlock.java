@@ -7,7 +7,7 @@
 package gcewing.sg.blocks;
 
 import gcewing.sg.BaseOrientation;
-import gcewing.sg.DHDTE;
+import gcewing.sg.guis.DHDTE;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.SGCraft;
 import gcewing.sg.guis.SGGui;
