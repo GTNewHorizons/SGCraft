@@ -6,10 +6,10 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.BaseUtils.getWorldDimensionId;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

@@ -6,16 +6,16 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.BaseBlockUtils.markWorldBlockForUpdate;
-import static gcewing.sg.BaseBlockUtils.notifyWorldNeighborsOfStateChange;
-import static gcewing.sg.BaseUtils.getGameRuleBoolean;
-import static gcewing.sg.BaseUtils.getWorldDifficulty;
-import static gcewing.sg.BaseUtils.getWorldDimensionId;
-import static gcewing.sg.BaseUtils.newAxisAlignedBB;
-import static gcewing.sg.BaseUtils.scmPreparePlayer;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
+import static gcewing.sg.utils.BaseBlockUtils.notifyWorldNeighborsOfStateChange;
+import static gcewing.sg.utils.BaseUtils.getGameRuleBoolean;
+import static gcewing.sg.utils.BaseUtils.getWorldDifficulty;
+import static gcewing.sg.utils.BaseUtils.getWorldDimensionId;
+import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
+import static gcewing.sg.utils.BaseUtils.scmPreparePlayer;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -25,6 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.entity.Entity;

@@ -6,7 +6,7 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
 import static gcewing.sg.BaseModClient.IRenderTarget;
 
 import net.minecraft.block.Block;

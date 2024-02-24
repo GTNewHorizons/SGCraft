@@ -6,7 +6,7 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseUtils.facings;
+import static gcewing.sg.utils.BaseUtils.facings;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

@@ -6,8 +6,9 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 
+import gcewing.sg.utils.BaseUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import org.joml.Vector3i;

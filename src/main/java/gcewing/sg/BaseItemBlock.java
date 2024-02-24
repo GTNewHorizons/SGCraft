@@ -6,9 +6,9 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getBlockStateFromMeta;
-import static gcewing.sg.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.sg.BaseUtils.facings;
+import static gcewing.sg.utils.BaseBlockUtils.getBlockStateFromMeta;
+import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.sg.utils.BaseUtils.facings;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

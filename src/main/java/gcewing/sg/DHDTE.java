@@ -6,10 +6,11 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getTileEntityPos;
-import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 import static java.lang.Math.min;
 
+import gcewing.sg.utils.Trans3;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;

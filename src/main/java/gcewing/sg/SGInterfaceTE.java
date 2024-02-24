@@ -6,7 +6,7 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
 
 import gcewing.sg.SGAddressing.AddressingError;
 

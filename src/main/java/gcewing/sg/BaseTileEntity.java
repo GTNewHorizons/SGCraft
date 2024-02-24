@@ -6,17 +6,18 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.BaseUtils.classForName;
-import static gcewing.sg.BaseUtils.getFieldDef;
-import static gcewing.sg.BaseUtils.getIntField;
-import static gcewing.sg.BaseUtils.getMethodDef;
-import static gcewing.sg.BaseUtils.invokeMethod;
-import static gcewing.sg.BaseUtils.setIntField;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseUtils.classForName;
+import static gcewing.sg.utils.BaseUtils.getFieldDef;
+import static gcewing.sg.utils.BaseUtils.getIntField;
+import static gcewing.sg.utils.BaseUtils.getMethodDef;
+import static gcewing.sg.utils.BaseUtils.invokeMethod;
+import static gcewing.sg.utils.BaseUtils.setIntField;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

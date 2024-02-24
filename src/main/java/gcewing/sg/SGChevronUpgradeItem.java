@@ -6,7 +6,7 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getWorldBlock;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

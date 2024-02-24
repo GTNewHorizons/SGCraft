@@ -6,7 +6,7 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

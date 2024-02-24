@@ -6,8 +6,10 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.blockCanRenderInLayer;
+import static gcewing.sg.utils.BaseBlockUtils.blockCanRenderInLayer;
 
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.Trans3;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

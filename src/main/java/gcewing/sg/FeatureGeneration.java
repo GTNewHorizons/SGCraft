@@ -6,8 +6,8 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseUtils.getFieldDef;
-import static gcewing.sg.BaseUtils.setField;
+import static gcewing.sg.utils.BaseUtils.getFieldDef;
+import static gcewing.sg.utils.BaseUtils.setField;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
 
 import java.lang.reflect.Field;

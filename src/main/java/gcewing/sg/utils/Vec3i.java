@@ -1,4 +1,4 @@
-package gcewing.sg;
+package gcewing.sg.utils;
 
 import com.google.common.base.Objects;
 import net.minecraft.util.EnumFacing;

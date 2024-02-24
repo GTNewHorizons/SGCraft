@@ -6,17 +6,19 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.sg.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.sg.BaseUtils.facings;
-import static gcewing.sg.BaseUtils.newMovingObjectPosition;
+import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.sg.utils.BaseUtils.facings;
+import static gcewing.sg.utils.BaseUtils.newMovingObjectPosition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.utils.BaseUtils;
+import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;

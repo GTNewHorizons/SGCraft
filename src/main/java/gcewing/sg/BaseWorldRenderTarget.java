@@ -6,10 +6,11 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseUtils.ifloor;
-import static gcewing.sg.BaseUtils.iround;
+import static gcewing.sg.utils.BaseUtils.ifloor;
+import static gcewing.sg.utils.BaseUtils.iround;
 import static java.lang.Math.floor;
 
+import gcewing.sg.utils.Vec3i;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;

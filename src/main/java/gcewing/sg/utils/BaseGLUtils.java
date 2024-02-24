@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.utils;
 
 import java.nio.FloatBuffer;
 
@@ -14,7 +14,7 @@ import org.joml.Matrix3d;
 import org.joml.Vector3d;
 import org.lwjgl.opengl.GL11;
 
-class BaseGLUtils {
+public class BaseGLUtils {
 
     public static void glMultMatrix(Trans3 t) {
         FloatBuffer b = GLAllocation.createDirectFloatBuffer(16);

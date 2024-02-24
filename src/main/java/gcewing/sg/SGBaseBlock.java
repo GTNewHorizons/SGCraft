@@ -6,10 +6,11 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseBlockUtils.getWorldBlock;
-import static gcewing.sg.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.BaseBlockUtils.markWorldBlockForUpdate;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
+import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
+import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
+import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

@@ -4,13 +4,17 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.utils;
 
-import static gcewing.sg.BaseUtils.facings;
-import static gcewing.sg.BaseUtils.oppositeFacing;
+import static gcewing.sg.utils.BaseUtils.facings;
+import static gcewing.sg.utils.BaseUtils.oppositeFacing;
 
 import java.util.Collection;
 
+import gcewing.sg.BaseBlock;
+import gcewing.sg.EnumWorldBlockLayer;
+import gcewing.sg.IBlockState;
+import gcewing.sg.IProperty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

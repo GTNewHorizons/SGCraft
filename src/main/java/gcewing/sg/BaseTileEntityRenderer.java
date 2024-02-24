@@ -6,6 +6,7 @@
 
 package gcewing.sg;
 
+import gcewing.sg.utils.Trans3;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 

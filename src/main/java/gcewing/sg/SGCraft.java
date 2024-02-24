@@ -6,8 +6,8 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseUtils.getChunkTileEntityMap;
-import static gcewing.sg.BaseUtils.getChunkWorld;
+import static gcewing.sg.utils.BaseUtils.getChunkTileEntityMap;
+import static gcewing.sg.utils.BaseUtils.getChunkWorld;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -62,7 +64,7 @@ import gcewing.sg.BaseMod.ModelSpec;
 import gcewing.sg.BaseMod.VSBinding;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
-// import static gcewing.sg.BaseBlockUtils.*;
+// import static gcewing.sg.utils.BaseBlockUtils.*;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 
