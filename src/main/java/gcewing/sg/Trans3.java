@@ -6,6 +6,7 @@
 
 package gcewing.sg;
 
+import static java.lang.Math.PI;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -13,17 +14,36 @@ import java.util.List;
 
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+import org.joml.Matrix3d;
+import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 public class Trans3 {
 
-    public static Trans3 blockCenter = new Trans3(Vector3.blockCenter);
+    public static Matrix3d[] turnRotations = {
+            new Matrix3d(),
+            new Matrix3d().rotation(PI/2,0, 1, 0),
+            new Matrix3d().rotation(PI, 0, 1, 0),
+            new Matrix3d().rotation(3*PI/2, 0, 1, 0)
+    };
 
-    public static Trans3[][] sideTurnRotations = new Trans3[6][4];
+    public static Matrix3d[] sideRotations = {
+            /* 0, -Y, DOWN */ new Matrix3d(),
+            /* 1, +Y, UP */ new Matrix3d().rotation(PI, 1, 0, 0),
+            /* 2, -Z, NORTH */ new Matrix3d().rotation(PI/2, 1, 0, 0),
+            /* 3, +Z, SOUTH */ new Matrix3d().rotation(-PI/2, 1, 0, 0).rotation(PI,0, 1, 0),
+            /* 4, -X, WEST */ new Matrix3d().rotation(-PI/2, 0, 0, 1).rotation(PI/2,0, 1, 0),
+            /* 5, +X, EAST */ new Matrix3d().rotation(PI/2, 0, 0, 1).rotation(-PI/2,0, 1, 0)
+    };
+
+    public static Matrix3d[][] sideTurnRotations = new Matrix3d[6][4];
     static {
         for (int side = 0; side < 6; side++) for (int turn = 0; turn < 4; turn++)
-            sideTurnRotations[side][turn] = new Trans3(Vector3.zero, Matrix3.sideTurnRotations[side][turn]);
+            sideTurnRotations[side][turn] = new Matrix3d(sideRotations[side]).mul(turnRotations[turn]);
     }
+
+    public static Trans3 blockCenter = new Trans3(Vector3.blockCenter);
+
 
     public static Trans3 blockCenter(Vector3i pos) {
         return new Trans3(Vector3.blockCenter.add(new Vector3(pos.x, pos.y, pos.z)));
@@ -38,29 +58,29 @@ public class Trans3 {
     }
 
     public static Trans3 sideTurn(Vector3 v, int side, int turn) {
-        return new Trans3(v, Matrix3.sideTurnRotations[side][turn]);
+        return new Trans3(v, sideTurnRotations[side][turn]);
     }
 
     public Vector3 offset;
-    public Matrix3 rotation;
+    public Matrix3d rotation;
     public double scaling;
 
     public Trans3(Vector3 v) {
-        this(v, Matrix3.ident);
+        this(v, new Matrix3d());
     }
 
-    public Trans3(Vector3 v, Matrix3 m) {
+    public Trans3(Vector3 v, Matrix3d m) {
         this(v, m, 1.0);
     }
 
-    public Trans3(Vector3 v, Matrix3 m, double s) {
+    public Trans3(Vector3 v, Matrix3d m, double s) {
         offset = v;
         rotation = m;
         scaling = s;
     }
 
     public Trans3(double dx, double dy, double dz) {
-        this(new Vector3(dx, dy, dz), Matrix3.ident, 1.0);
+        this(new Vector3(dx, dy, dz));
     }
 
     public Trans3(Vector3i pos) {
@@ -73,11 +93,12 @@ public class Trans3 {
     }
 
     public Trans3 translate(double dx, double dy, double dz) {
-        return new Trans3(offset.add(rotation.mul(dx * scaling, dy * scaling, dz * scaling)), rotation, scaling);
+        Vector3d computation = new Vector3d(dx, dy, dz).mul(scaling).mul(rotation).add(offset.x, offset.y, offset.z);
+        return new Trans3(new Vector3(computation.x, computation.y, computation.z), rotation, scaling);
     }
 
-    public Trans3 rotate(Matrix3 m) {
-        return new Trans3(offset, rotation.mul(m), scaling);
+    public Trans3 rotate(Matrix3d m) {
+        return new Trans3(offset, new Matrix3d(rotation).mul(m), scaling);
     }
 
 
@@ -90,52 +111,55 @@ public class Trans3 {
     }
 
     public Trans3 side(int i) {
-        return rotate(Matrix3.sideRotations[i]);
+        return rotate(sideRotations[i]);
     }
 
     public Trans3 turn(int i) {
-        return rotate(Matrix3.turnRotations[i]);
+        return rotate(turnRotations[i]);
     }
 
     public Trans3 t(Trans3 t) {
+        Vector3d computation = new Vector3d(t.offset.x, t.offset.y, t.offset.z).mul(rotation).mul(scaling).add(offset.x, offset.y, offset.z);
         return new Trans3(
-                offset.add(rotation.mul(t.offset).mul(scaling)),
-                rotation.mul(t.rotation),
+                new Vector3(computation.x, computation.y, computation.z),
+                new Matrix3d(rotation).mul(t.rotation),
                 scaling * t.scaling);
     }
 
     public void p(double x, double y, double z, Vector3 result) {
-        result.x = x * scaling * rotation.m[0][0] + y * scaling * rotation.m[0][1]
-                + z * scaling * rotation.m[0][2]
-                + offset.x;
-        result.y = x * scaling * rotation.m[1][0] + y * scaling * rotation.m[1][1]
-                + z * scaling * rotation.m[1][2]
-                + offset.y;
-        result.z = x * scaling * rotation.m[2][0] + y * scaling * rotation.m[2][1]
-                + z * scaling * rotation.m[2][2]
-                + offset.z;
+        // return offset.add(rotation.mul(u.mul(scaling)));
+        Vector3d computation = new Vector3d(x, y, z).mul(scaling).mul(rotation).add(offset.x, offset.y, offset.z);
+        result.x = computation.x;
+        result.y = computation.y;
+        result.z = computation.z;
     }
 
     public Vector3 p(Vector3 u) {
-        return offset.add(rotation.mul(u.mul(scaling)));
+        Vector3d computation = new Vector3d(u.x, u.y, u.z).mul(scaling).mul(rotation).add(offset.x, offset.y, offset.z);
+        return new Vector3(computation.x, computation.y, computation.z);
     }
 
     public Vector3 ip(Vector3 u) {
-        return rotation.imul(u.sub(offset)).mul(1.0 / scaling);
+        Vector3d computation = new Vector3d(u.x, u.y, u.z).sub(offset.x, offset.y, offset.z).mul(new Matrix3d(rotation).transpose()).mul(1.0/scaling);
+        return  new Vector3(computation.x, computation.y, computation.z);
     }
 
     public void v(double x, double y, double z, Vector3 result) {
-        result.x = x * scaling * rotation.m[0][0] + y * scaling * rotation.m[0][1] + z * scaling * rotation.m[0][2];
-        result.y = x * scaling * rotation.m[1][0] + y * scaling * rotation.m[1][1] + z * scaling * rotation.m[1][2];
-        result.z = x * scaling * rotation.m[2][0] + y * scaling * rotation.m[2][1] + z * scaling * rotation.m[2][2];
+        //return rotation.mul(u.mul(scaling));
+        Vector3d computation = new Vector3d(x, y, z).mul(scaling).mul(rotation);
+        result.x = computation.x;
+        result.y = computation.y;
+        result.z = computation.z;
     }
 
     public Vector3 v(Vector3 u) {
-        return rotation.mul(u.mul(scaling));
+        Vector3d computation = new Vector3d(u.x, u.y, u.z).mul(scaling).mul(rotation);
+        return new Vector3(computation.x, computation.y, computation.z);
     }
 
     public Vector3 iv(Vector3 u) {
-        return rotation.imul(u).mul(1.0 / scaling);
+        Vector3d computation = new Vector3d(u.x, u.y, u.z).mul(new Matrix3d(rotation).transpose()).mul(1.0/scaling);
+        return new Vector3(computation.x, computation.y, computation.z);
     }
 
 

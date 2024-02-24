@@ -10,6 +10,7 @@ import java.nio.FloatBuffer;
 
 import net.minecraft.client.renderer.GLAllocation;
 
+import org.joml.Matrix3d;
 import org.lwjgl.opengl.GL11;
 
 class BaseGLUtils {
@@ -17,21 +18,21 @@ class BaseGLUtils {
     public static void glMultMatrix(Trans3 t) {
         FloatBuffer b = GLAllocation.createDirectFloatBuffer(16);
         Vector3 v = t.offset;
-        double[][] m = t.rotation.m;
+        Matrix3d m = t.rotation;
 
-        b.put(0, (float) m[0][0]);
-        b.put(1, (float) m[1][0]);
-        b.put(2, (float) m[2][0]);
+        b.put(0, (float) m.m00);
+        b.put(1, (float) m.m10);
+        b.put(2, (float) m.m20);
         b.put(3, 0);
 
-        b.put(4, (float) m[0][1]);
-        b.put(5, (float) m[1][1]);
-        b.put(6, (float) m[2][1]);
+        b.put(4, (float) m.m01);
+        b.put(5, (float) m.m11);
+        b.put(6, (float) m.m21);
         b.put(7, 0);
 
-        b.put(8, (float) m[0][2]);
-        b.put(9, (float) m[1][2]);
-        b.put(10, (float) m[2][2]);
+        b.put(8, (float) m.m02);
+        b.put(9, (float) m.m12);
+        b.put(10, (float) m.m22);
         b.put(11, 0);
 
         b.put(12, (float) v.x);
