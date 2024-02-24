@@ -17,6 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.renderers.BaseGLRenderTarget;
+import gcewing.sg.renderers.BaseModelRenderer;
+import gcewing.sg.renderers.BaseTexture;
+import gcewing.sg.renderers.BaseWorldRenderTarget;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;

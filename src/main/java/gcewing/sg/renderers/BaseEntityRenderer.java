@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.renderers;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

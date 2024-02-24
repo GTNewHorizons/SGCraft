@@ -4,8 +4,10 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.renderers;
 
+import gcewing.sg.DHDTE;
+import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.BaseTileEntity;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
@@ -15,10 +17,10 @@ import gcewing.sg.BaseModClient.IModel;
 import gcewing.sg.BaseModClient.IRenderTarget;
 import gcewing.sg.BaseModClient.ITexture;
 import gcewing.sg.BaseModClient.ITiledTexture;
-import gcewing.sg.BaseTexture.Image;
+import gcewing.sg.renderers.BaseTexture.Image;
 import org.joml.Vector3d;
 
-class DHDTERenderer extends BaseTileEntityRenderer {
+public class DHDTERenderer extends BaseTileEntityRenderer {
 
     IModel model;
     ITexture mainTexture;

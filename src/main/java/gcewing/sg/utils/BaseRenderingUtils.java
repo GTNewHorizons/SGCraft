@@ -4,11 +4,14 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.utils;
 
 import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
 import static gcewing.sg.BaseModClient.IRenderTarget;
 
+import gcewing.sg.BaseMod;
+import gcewing.sg.IBlockState;
+import gcewing.sg.renderers.BaseWorldRenderTarget;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;

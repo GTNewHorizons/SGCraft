@@ -4,12 +4,13 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.renderers;
 
 import static gcewing.sg.utils.BaseUtils.ifloor;
 import static gcewing.sg.utils.BaseUtils.iround;
 import static java.lang.Math.floor;
 
+import gcewing.sg.SGCraft;
 import gcewing.sg.utils.Vec3i;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

@@ -34,7 +34,7 @@ import gcewing.sg.IrisEntity;
 import gcewing.sg.IrisState;
 import gcewing.sg.SGAddressing;
 import gcewing.sg.blocks.SGBaseBlock;
-import gcewing.sg.SGBaseTERenderer;
+import gcewing.sg.renderers.SGBaseTERenderer;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGLocation;
 import gcewing.sg.SGState;

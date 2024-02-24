@@ -4,10 +4,13 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.renderers;
 
 // import net.minecraft.block.state.IBlockState;
 
+import gcewing.sg.EnumWorldBlockLayer;
+import gcewing.sg.IBlockState;
+import gcewing.sg.SGCraft;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;

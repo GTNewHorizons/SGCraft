@@ -4,8 +4,9 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.renderers;
 
+import gcewing.sg.SGCraft;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 

@@ -6,6 +6,7 @@
 
 package gcewing.sg;
 
+import gcewing.sg.utils.BaseStringUtils;
 import net.minecraft.item.Item;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;

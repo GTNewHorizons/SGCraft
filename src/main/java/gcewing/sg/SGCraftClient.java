@@ -6,6 +6,8 @@
 
 package gcewing.sg;
 
+import gcewing.sg.renderers.DHDTERenderer;
+import gcewing.sg.renderers.SGBaseTERenderer;
 import gcewing.sg.tileentities.SGBaseTE;
 
 public class SGCraftClient extends BaseModClient<SGCraft> {

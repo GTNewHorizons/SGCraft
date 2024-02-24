@@ -4,8 +4,9 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.renderers;
 
+import gcewing.sg.BaseModClient;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;

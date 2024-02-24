@@ -9,6 +9,7 @@ package gcewing.sg;
 import java.io.File;
 import java.util.Collection;
 
+import gcewing.sg.utils.BaseStringUtils;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 

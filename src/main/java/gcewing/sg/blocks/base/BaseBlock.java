@@ -345,7 +345,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     public String getQualifiedRendererClassName() {
         String name = getRendererClassName();
-        if (name != null) name = getClass().getPackage().getName() + "." + name;
+        if (name != null) name = "gcewing.sg.renderers." + name;
         return name;
     }
 
