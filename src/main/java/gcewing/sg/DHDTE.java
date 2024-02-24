@@ -10,6 +10,7 @@ import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 import static java.lang.Math.min;
 
+import gcewing.sg.blocks.DHDBlock;
 import gcewing.sg.tileentities.BaseTileInventory;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
@@ -114,7 +115,7 @@ public class DHDTE extends BaseTileInventory implements ISGEnergySource {
         nbt.setString("enteredAddress", enteredAddress);
     }
 
-    SGBaseTE getLinkedStargateTE() {
+    public SGBaseTE getLinkedStargateTE() {
         if (isLinkedToStargate) {
             TileEntity gte = getWorldTileEntity(worldObj, linkedPos);
             if (gte instanceof SGBaseTE) return (SGBaseTE) gte;

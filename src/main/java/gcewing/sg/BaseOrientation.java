@@ -9,6 +9,7 @@ package gcewing.sg;
 import static gcewing.sg.utils.BaseUtils.horizontalFacings;
 import static gcewing.sg.utils.BaseUtils.iround;
 
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.tileentities.BaseTileEntity;
 import gcewing.sg.utils.PropertyTurn;
 import gcewing.sg.utils.Trans3;
@@ -20,7 +21,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import gcewing.sg.BaseBlock.IOrientationHandler;
+import gcewing.sg.blocks.base.BaseBlock.IOrientationHandler;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 

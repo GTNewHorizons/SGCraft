@@ -4,12 +4,19 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.blocks;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
+import gcewing.sg.BaseConfiguration;
+import gcewing.sg.BaseOrientation;
+import gcewing.sg.EnumWorldBlockLayer;
+import gcewing.sg.IBlockState;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGGui;
+import gcewing.sg.SGState;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;

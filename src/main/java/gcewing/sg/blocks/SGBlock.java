@@ -4,8 +4,10 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.blocks;
 
+import gcewing.sg.ISGBlock;
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

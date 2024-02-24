@@ -6,6 +6,7 @@
 
 package gcewing.sg;
 
+import gcewing.sg.blocks.base.BaseItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

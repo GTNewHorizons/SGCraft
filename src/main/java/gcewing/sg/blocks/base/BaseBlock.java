@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.blocks.base;
 
 import static gcewing.sg.utils.BaseBlockUtils.getMetaFromBlockState;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
@@ -17,6 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.BaseMod;
+import gcewing.sg.BaseModClient;
+import gcewing.sg.BlockState;
+import gcewing.sg.EnumWorldBlockLayer;
+import gcewing.sg.IBlockState;
+import gcewing.sg.IProperty;
+import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.InventoryHelper;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
@@ -103,7 +110,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     protected IOrientationHandler orientationHandler = orient1Way;
     protected String[] textureNames;
     protected ModelSpec modelSpec;
-    protected BaseMod mod;
+    public BaseMod mod;
     protected AxisAlignedBB boxHit;
 
     // --------------------------- Constructors -------------------------------
@@ -170,7 +177,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         getOrientationHandler().defineProperties(this);
     }
 
-    protected void addProperty(IProperty property) {
+    public void addProperty(IProperty property) {
         if (debugState)
             SGCraft.log.debug(String.format("BaseBlock.addProperty: %s to %s", property, getClass().getName()));
         if (numProperties < 4) {

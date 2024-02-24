@@ -9,6 +9,11 @@ package gcewing.sg;
 import static gcewing.sg.utils.BaseUtils.getChunkTileEntityMap;
 import static gcewing.sg.utils.BaseUtils.getChunkWorld;
 
+import gcewing.sg.blocks.DHDBlock;
+import gcewing.sg.blocks.NaquadahBlock;
+import gcewing.sg.blocks.NaquadahOreBlock;
+import gcewing.sg.blocks.SGBaseBlock;
+import gcewing.sg.blocks.SGRingBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

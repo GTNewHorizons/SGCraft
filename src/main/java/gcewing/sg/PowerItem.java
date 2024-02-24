@@ -8,6 +8,7 @@ package gcewing.sg;
 
 import java.util.List;
 
+import gcewing.sg.blocks.base.BaseItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

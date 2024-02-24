@@ -4,8 +4,14 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.blocks;
 
+import gcewing.sg.BaseOrientation;
+import gcewing.sg.DHDTE;
+import gcewing.sg.IBlockState;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGGui;
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.tileentities.SGBaseTE;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

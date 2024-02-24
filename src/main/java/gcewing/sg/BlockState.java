@@ -44,7 +44,7 @@ public class BlockState {
 
     // protected BlockState(Block blockIn, IProperty[] properties, ImmutableMap<IUnlistedProperty<?>,
     // com.google.common.base.Optional<?>> unlistedProperties)
-    protected BlockState(Block blockIn, IProperty... properties) {
+    public BlockState(Block blockIn, IProperty... properties) {
         this.block = blockIn;
         Arrays.sort(properties, new Comparator<IProperty>() {
 

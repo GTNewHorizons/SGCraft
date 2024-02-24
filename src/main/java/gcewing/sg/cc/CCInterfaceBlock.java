@@ -7,7 +7,7 @@
 package gcewing.sg.cc;
 
 import gcewing.sg.SGCraft;
-import gcewing.sg.SGInterfaceBlock;
+import gcewing.sg.blocks.SGInterfaceBlock;
 
 public class CCInterfaceBlock extends SGInterfaceBlock<CCInterfaceTE> {
 

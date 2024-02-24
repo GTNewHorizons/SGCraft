@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
@@ -82,7 +83,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         Class getDefaultItemClass();
     }
 
-    interface IItem extends ITextureConsumer {
+    public interface IItem extends ITextureConsumer {
 
         ModelSpec getModelSpec(ItemStack stack);
 

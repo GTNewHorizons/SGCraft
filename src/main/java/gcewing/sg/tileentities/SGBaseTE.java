@@ -26,14 +26,14 @@ import java.util.List;
 import java.util.Random;
 
 import gcewing.sg.BaseConfiguration;
-import gcewing.sg.BaseInventoryUtils;
+import gcewing.sg.utils.BaseInventoryUtils;
 import gcewing.sg.DHDTE;
 import gcewing.sg.IComputerInterface;
 import gcewing.sg.ISGEnergySource;
 import gcewing.sg.IrisEntity;
 import gcewing.sg.IrisState;
 import gcewing.sg.SGAddressing;
-import gcewing.sg.SGBaseBlock;
+import gcewing.sg.blocks.SGBaseBlock;
 import gcewing.sg.SGBaseTERenderer;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGLocation;

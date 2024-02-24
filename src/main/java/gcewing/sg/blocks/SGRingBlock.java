@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.blocks;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
@@ -12,6 +12,10 @@ import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 import java.util.List;
 
+import gcewing.sg.EnumWorldBlockLayer;
+import gcewing.sg.IBlockState;
+import gcewing.sg.IProperty;
+import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.tileentities.SGRingTE;
 import gcewing.sg.utils.PropertyInteger;

@@ -4,10 +4,14 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.blocks;
 
 import java.util.ArrayList;
 
+import gcewing.sg.IBlockState;
+import gcewing.sg.SGCraft;
+import gcewing.sg.SGGui;
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.tileentities.PowerTE;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

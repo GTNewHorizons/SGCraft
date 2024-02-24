@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import gcewing.sg.IBlockState;
 import gcewing.sg.SGCraft;
 import gcewing.sg.SGGui;
-import gcewing.sg.SGInterfaceBlock;
+import gcewing.sg.blocks.SGInterfaceBlock;
 import org.joml.Vector3i;
 
 public class OCInterfaceBlock extends SGInterfaceBlock<OCInterfaceTE> {

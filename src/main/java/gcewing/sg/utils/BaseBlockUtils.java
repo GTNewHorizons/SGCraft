@@ -11,7 +11,7 @@ import static gcewing.sg.utils.BaseUtils.oppositeFacing;
 
 import java.util.Collection;
 
-import gcewing.sg.BaseBlock;
+import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.EnumWorldBlockLayer;
 import gcewing.sg.IBlockState;
 import gcewing.sg.IProperty;
