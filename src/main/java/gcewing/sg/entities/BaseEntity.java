@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;

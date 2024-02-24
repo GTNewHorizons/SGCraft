@@ -15,6 +15,8 @@ import gcewing.sg.blocks.NaquadahOreBlock;
 import gcewing.sg.blocks.SGBaseBlock;
 import gcewing.sg.blocks.SGRingBlock;
 import gcewing.sg.compat.MystcraftIntegration;
+import gcewing.sg.entities.IrisEntity;
+import gcewing.sg.entities.SGEntity;
 import gcewing.sg.guis.DHDFuelContainer;
 import gcewing.sg.guis.PowerContainer;
 import gcewing.sg.guis.SGBaseContainer;

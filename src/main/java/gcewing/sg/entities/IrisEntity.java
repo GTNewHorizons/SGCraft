@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg;
+package gcewing.sg.entities;
 
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
@@ -13,6 +13,7 @@ import static gcewing.sg.utils.BaseUtils.newAxisAlignedBB;
 import java.io.DataInput;
 import java.io.DataOutput;
 
+import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
 import gcewing.sg.utils.Trans3;

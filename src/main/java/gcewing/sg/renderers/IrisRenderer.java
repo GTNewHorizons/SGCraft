@@ -6,8 +6,7 @@
 
 package gcewing.sg.renderers;
 
-import gcewing.sg.IrisEntity;
-import gcewing.sg.renderers.BaseEntityRenderer;
+import gcewing.sg.entities.IrisEntity;
 
 public class IrisRenderer extends BaseEntityRenderer<IrisEntity> {
 

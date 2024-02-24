@@ -30,7 +30,7 @@ import gcewing.sg.utils.BaseInventoryUtils;
 import gcewing.sg.DHDTE;
 import gcewing.sg.interfaces.IComputerInterface;
 import gcewing.sg.interfaces.ISGEnergySource;
-import gcewing.sg.IrisEntity;
+import gcewing.sg.entities.IrisEntity;
 import gcewing.sg.IrisState;
 import gcewing.sg.SGAddressing;
 import gcewing.sg.blocks.SGBaseBlock;

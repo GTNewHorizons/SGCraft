@@ -6,6 +6,7 @@
 
 package gcewing.sg;
 
+import gcewing.sg.entities.IrisEntity;
 import gcewing.sg.guis.DHDFuelScreen;
 import gcewing.sg.guis.DHDScreen;
 import gcewing.sg.guis.PowerScreen;
