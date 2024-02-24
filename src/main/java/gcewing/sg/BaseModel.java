@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.renderers;
+package gcewing.sg;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,9 +16,9 @@ import net.minecraft.util.ResourceLocation;
 
 import com.google.gson.Gson;
 
-import gcewing.sg.BaseModClient.IModel;
-import gcewing.sg.BaseModClient.IRenderTarget;
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
 import org.joml.Vector3d;
 
 public class BaseModel implements IModel {

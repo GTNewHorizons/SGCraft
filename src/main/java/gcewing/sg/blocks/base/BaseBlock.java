@@ -19,6 +19,8 @@ import java.util.Random;
 
 import gcewing.sg.BaseMod;
 import gcewing.sg.BaseModClient;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.ITileEntity;
 import gcewing.sg.utils.BlockState;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.interfaces.IBlockState;
@@ -52,12 +54,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.sg.BaseMod.ModelSpec;
-import gcewing.sg.BaseModClient.IModel;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.interfaces.IModel;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-public class BaseBlock<TE extends TileEntity> extends BlockContainer implements BaseMod.IBlock {
+public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
 
     public static boolean debugState = false;
 
@@ -419,7 +421,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         int meta = world.getBlockMetadata(x, y, z);
         if (hasTileEntity(meta)) {
             TileEntity te = getTileEntity(world, pos);
-            if (te instanceof BaseMod.ITileEntity) ((BaseMod.ITileEntity) te).onAddedToWorld();
+            if (te instanceof ITileEntity) ((ITileEntity) te).onAddedToWorld();
         }
         onBlockAdded(world, pos, getStateFromMeta(meta));
     }

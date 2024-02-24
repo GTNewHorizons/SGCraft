@@ -18,12 +18,16 @@ import java.util.Map;
 
 import gcewing.sg.blocks.base.BaseBlock;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
 import gcewing.sg.renderers.BaseGLRenderTarget;
 import gcewing.sg.renderers.BaseModelRenderer;
-import gcewing.sg.renderers.BaseTexture;
 import gcewing.sg.renderers.BaseWorldRenderTarget;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.TextureCache;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -64,14 +68,13 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.sg.BaseMod.IBlock;
-import gcewing.sg.BaseMod.IItem;
-import gcewing.sg.BaseMod.ITextureConsumer;
-import gcewing.sg.BaseMod.ModelSpec;
-import gcewing.sg.BaseMod.VSBinding;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IItem;
+import gcewing.sg.interfaces.ITextureConsumer;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.VSBinding;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
-// import static gcewing.sg.utils.BaseBlockUtils.*;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 
@@ -329,85 +332,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         SGCraft.log.debug(
                 String.format("%s: BaseModClient.getGuiScreen: No GuiScreen class found for gui id %d", this, id));
         return null;
-    }
-
-    public interface ICustomRenderer {
-
-        void renderBlock(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
-                         EnumWorldBlockLayer layer, Trans3 t);
-
-        void renderItemStack(ItemStack stack, IRenderTarget target, Trans3 t);
-    }
-
-    public interface ITexture {
-
-        ResourceLocation location();
-
-        int tintIndex();
-
-        double red();
-
-        double green();
-
-        double blue();
-
-        double interpolateU(double u);
-
-        double interpolateV(double v);
-
-        boolean isEmissive();
-
-        boolean isProjected();
-
-        boolean isSolid();
-
-        ITexture tinted(int index);
-
-        ITexture colored(double red, double green, double blue);
-
-        ITexture projected();
-
-        ITexture emissive();
-
-        ITiledTexture tiled(int numRows, int numCols);
-    }
-
-    public interface ITiledTexture extends ITexture {
-
-        ITexture tile(int row, int col);
-    }
-
-    public interface IRenderTarget {
-
-        boolean isRenderingBreakEffects();
-
-        void setTexture(ITexture texture);
-
-        void setColor(double r, double g, double b, double a);
-
-        void setNormal(Vector3d n);
-
-        void beginTriangle();
-
-        void beginQuad();
-
-        void addVertex(Vector3d p, double u, double v);
-
-        void addProjectedVertex(Vector3d p, EnumFacing face);
-
-        void endFace();
-    }
-
-    public interface IModel {
-
-        AxisAlignedBB getBounds();
-
-        void addBoxesToList(Trans3 t, List list);
-
-        void render(Trans3 t, IRenderTarget renderer, ITexture... textures);
-    }
-
-    public static class TextureCache extends HashMap<ResourceLocation, ITexture> {
     }
 
     protected Map<IBlock, ICustomRenderer> blockRenderers = new HashMap<IBlock, ICustomRenderer>();

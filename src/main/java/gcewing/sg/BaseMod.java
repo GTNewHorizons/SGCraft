@@ -17,10 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.IBlockState;
-import gcewing.sg.renderers.BaseModel;
+import gcewing.sg.interfaces.ISetMod;
+import gcewing.sg.interfaces.ITextureConsumer;
 import gcewing.sg.utils.BaseBlockUtils;
 import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.VSBinding;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -56,7 +59,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
-import gcewing.sg.BaseModClient.IModel;
+import gcewing.sg.interfaces.IModel;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
@@ -64,69 +67,9 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
     protected Map<ResourceLocation, IModel> modelCache = new HashMap<ResourceLocation, IModel>();
 
-    interface ITextureConsumer {
-
-        String[] getTextureNames();
-    }
-
-    public interface IBlock extends ITextureConsumer {
-
-        void setRenderType(int id);
-
-        String getQualifiedRendererClassName();
-
-        ModelSpec getModelSpec(IBlockState state);
-
-        int getNumSubtypes();
-
-        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin);
-
-        // IBlockState getParticleState(IBlockAccess world, Vector3i pos);
-        Class getDefaultItemClass();
-    }
-
-    public interface IItem extends ITextureConsumer {
-
-        ModelSpec getModelSpec(ItemStack stack);
-
-        int getNumSubtypes();
-    }
-
-    public interface ITileEntity {
-
-        void onAddedToWorld();
-    }
-
-    public interface ISetMod {
-
-        void setMod(BaseMod mod);
-    }
 
     public void setModOf(Object obj) {
         if (obj instanceof ISetMod) ((ISetMod) obj).setMod(this);
-    }
-
-    static class IDBinding<T> {
-
-        public int id;
-        public T object;
-    }
-
-    public static class ModelSpec {
-
-        public String modelName;
-        public String[] textureNames;
-        public Vector3d origin;
-
-        public ModelSpec(String model, String... textures) {
-            this(model, new Vector3d(), textures);
-        }
-
-        public ModelSpec(String model, Vector3d origin, String... textures) {
-            modelName = model;
-            textureNames = textures;
-            this.origin = origin;
-        }
     }
 
     public String modID;
@@ -501,8 +444,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         EntityRegistry.registerModEntity(cls, name, id, /* base */this, 256, updateFrequency, sendVelocityUpdates);
     }
 
-    static class VSBinding extends IDBinding<ResourceLocation> {
-    }
 
     public List<VSBinding> registeredVillagers = new ArrayList<VSBinding>();
 

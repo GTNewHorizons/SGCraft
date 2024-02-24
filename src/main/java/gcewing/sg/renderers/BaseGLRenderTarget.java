@@ -32,7 +32,7 @@ import gcewing.sg.SGCraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
 
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.ITexture;
 import org.joml.Vector3d;
 
 public class BaseGLRenderTarget extends BaseRenderTarget {

@@ -7,14 +7,16 @@
 package gcewing.sg.renderers;
 
 import gcewing.sg.BaseModClient;
+import gcewing.sg.BaseTexture;
+import gcewing.sg.interfaces.IRenderTarget;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.ITexture;
 import org.joml.Vector3d;
 
-public abstract class BaseRenderTarget implements BaseModClient.IRenderTarget {
+public abstract class BaseRenderTarget implements IRenderTarget {
 
     // Position of block in rendering coordinates (may be different from world coordinates)
     protected double blockX, blockY, blockZ;

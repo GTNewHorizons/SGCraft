@@ -21,6 +21,7 @@ import gcewing.sg.BaseMod;
 import gcewing.sg.interfaces.IBlockState;
 import gcewing.sg.interfaces.ITickable;
 import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.ITileEntity;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -34,11 +35,11 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
-import gcewing.sg.BaseMod.IBlock;
+import gcewing.sg.interfaces.IBlock;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-public class BaseTileEntity extends TileEntity implements BaseMod.ITileEntity {
+public class BaseTileEntity extends TileEntity implements ITileEntity {
 
     public byte side, turn;
     public Ticket chunkTicket;

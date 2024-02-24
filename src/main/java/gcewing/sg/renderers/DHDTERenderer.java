@@ -6,6 +6,7 @@
 
 package gcewing.sg.renderers;
 
+import gcewing.sg.BaseModel;
 import gcewing.sg.guis.DHDTE;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.BaseTileEntity;
@@ -13,11 +14,11 @@ import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.Trans3;
 import net.minecraft.util.ResourceLocation;
 
-import gcewing.sg.BaseModClient.IModel;
-import gcewing.sg.BaseModClient.IRenderTarget;
-import gcewing.sg.BaseModClient.ITexture;
-import gcewing.sg.BaseModClient.ITiledTexture;
-import gcewing.sg.renderers.BaseTexture.Image;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.interfaces.ITiledTexture;
+import gcewing.sg.BaseTexture.Image;
 import org.joml.Vector3d;
 
 public class DHDTERenderer extends BaseTileEntityRenderer {

@@ -11,7 +11,7 @@ import gcewing.sg.utils.Trans3;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-import gcewing.sg.BaseModClient.IRenderTarget;
+import gcewing.sg.interfaces.IRenderTarget;
 import org.joml.Vector3d;
 
 public abstract class BaseTileEntityRenderer extends TileEntitySpecialRenderer {

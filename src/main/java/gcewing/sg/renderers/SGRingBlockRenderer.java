@@ -22,8 +22,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
-import gcewing.sg.BaseModClient.ICustomRenderer;
-import gcewing.sg.BaseModClient.IRenderTarget;
+import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.interfaces.IRenderTarget;
 import org.joml.Vector3i;
 
 public class SGRingBlockRenderer implements ICustomRenderer {

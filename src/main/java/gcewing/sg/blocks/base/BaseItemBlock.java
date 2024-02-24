@@ -18,8 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import gcewing.sg.BaseMod.IItem;
-import gcewing.sg.BaseMod.ModelSpec;
+import gcewing.sg.interfaces.IItem;
+import gcewing.sg.utils.ModelSpec;
 import org.joml.Vector3i;
 
 public class BaseItemBlock extends ItemBlock implements IItem {

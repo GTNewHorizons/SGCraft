@@ -28,6 +28,7 @@ import java.util.List;
 
 import gcewing.sg.BaseMod;
 import gcewing.sg.SGCraft;
+import gcewing.sg.interfaces.ISetMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
@@ -43,7 +44,7 @@ public class BaseGui {
 
     public final static int defaultTextColor = 0x404040;
 
-    public static class Screen extends GuiContainer implements BaseMod.ISetMod {
+    public static class Screen extends GuiContainer implements ISetMod {
 
         final static int defaultTextColor = 0x404040;
 

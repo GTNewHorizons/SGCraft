@@ -22,7 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import gcewing.sg.BaseMod.ModelSpec;
+import gcewing.sg.utils.ModelSpec;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
