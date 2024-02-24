@@ -4,12 +4,12 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.guis;
+package gcewing.sg.guis.containers;
 
+import gcewing.sg.guis.screens.DHDFuelScreen;
+import gcewing.sg.guis.DHDTE;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
+import gcewing.sg.guis.containers.slots.FuelSlot;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
@@ -47,20 +47,6 @@ public class DHDFuelContainer extends BaseContainer {
             int y = fuelSlotsY + row * 18;
             addSlotToContainer(new FuelSlot(te, b + i, x, y));
         }
-    }
-
-}
-
-// ------------------------------------------------------------------------------------------------
-
-class FuelSlot extends Slot {
-
-    public FuelSlot(IInventory inv, int i, int x, int y) {
-        super(inv, i, x, y);
-    }
-
-    public boolean isItemValid(ItemStack stack) {
-        return DHDTE.isValidFuelItem(stack);
     }
 
 }

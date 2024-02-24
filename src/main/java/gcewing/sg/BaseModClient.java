@@ -15,6 +15,8 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
+import gcewing.sg.textures.BaseTexture;
+import gcewing.sg.textures.Sprite;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -603,7 +605,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
     }
 
     public IIcon getIcon(int type, String name) {
-        return ((BaseTexture.Sprite) getTexture(type, name)).icon;
+        return ((Sprite) getTexture(type, name)).icon;
     }
 
     @SubscribeEvent

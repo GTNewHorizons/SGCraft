@@ -52,7 +52,7 @@ public class BaseGui {
 
     public final static int defaultTextColor = 0x404040;
 
-    static boolean isFocused(IWidget widget) {
+    public static boolean isFocused(IWidget widget) {
         if (widget == null) return false;
         else if (widget instanceof Root) return true;
         else {
@@ -61,7 +61,7 @@ public class BaseGui {
         }
     }
 
-    static void tellFocusChanged(IWidget widget, boolean state) {
+    public static void tellFocusChanged(IWidget widget, boolean state) {
         SGCraft.log.trace(String.format("BaseGui.tellFocusChanged: to %s for %s", state, name(widget)));
         if (widget == null) {
             return;
@@ -73,7 +73,7 @@ public class BaseGui {
         }
     }
 
-    static String name(Object obj) {
+    public static String name(Object obj) {
         if (obj != null) return obj.getClass().getSimpleName();
         else return "null";
     }

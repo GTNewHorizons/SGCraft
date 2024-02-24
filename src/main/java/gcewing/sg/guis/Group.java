@@ -1,6 +1,7 @@
 package gcewing.sg.guis;
 
 import gcewing.sg.SGCraft;
+import gcewing.sg.guis.screens.Screen;
 import gcewing.sg.interfaces.IWidget;
 import gcewing.sg.interfaces.IWidgetContainer;
 

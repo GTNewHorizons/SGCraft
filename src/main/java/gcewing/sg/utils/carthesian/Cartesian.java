@@ -1,4 +1,4 @@
-package gcewing.sg.utils;
+package gcewing.sg.utils.carthesian;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

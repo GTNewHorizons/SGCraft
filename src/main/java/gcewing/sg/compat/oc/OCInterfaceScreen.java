@@ -6,7 +6,7 @@
 
 package gcewing.sg.compat.oc;
 
-import gcewing.sg.guis.Screen;
+import gcewing.sg.guis.screens.Screen;
 
 public class OCInterfaceScreen extends Screen {
 

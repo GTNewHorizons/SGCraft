@@ -6,6 +6,7 @@
 
 package gcewing.sg.guis;
 
+import gcewing.sg.guis.containers.SGBaseContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 

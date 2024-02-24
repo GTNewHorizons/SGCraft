@@ -4,10 +4,11 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.guis;
+package gcewing.sg.guis.containers;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 
+import gcewing.sg.guis.screens.PowerScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -18,7 +19,7 @@ import gcewing.sg.tileentities.PowerTE;
 
 public class PowerContainer extends BaseContainer {
 
-    PowerTE te;
+    public PowerTE te;
 
     public static PowerContainer create(EntityPlayer player, World world, Vector3i pos) {
         TileEntity te = getWorldTileEntity(world, pos);

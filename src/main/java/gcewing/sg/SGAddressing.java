@@ -33,17 +33,11 @@ import net.minecraft.world.chunk.Chunk;
 
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
+import gcewing.sg.utils.exceptions.AddressingError;
 
 public class SGAddressing {
 
     static boolean debugAddressing = false;
-
-    public static class AddressingError extends Exception {
-
-        AddressingError(String s) {
-            super(s);
-        }
-    }
 
     static AddressingError malformedAddressError = new AddressingError("Malformed stargate address");
     static AddressingError coordRangeError = new AddressingError("Coordinates out of stargate range");

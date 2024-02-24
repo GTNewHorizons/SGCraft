@@ -7,10 +7,10 @@
 package gcewing.sg;
 
 import gcewing.sg.entities.IrisEntity;
-import gcewing.sg.guis.DHDFuelScreen;
-import gcewing.sg.guis.DHDScreen;
+import gcewing.sg.guis.screens.DHDFuelScreen;
+import gcewing.sg.guis.screens.DHDScreen;
 import gcewing.sg.guis.DHDTE;
-import gcewing.sg.guis.PowerScreen;
+import gcewing.sg.guis.screens.PowerScreen;
 import gcewing.sg.guis.SGBaseScreen;
 import gcewing.sg.guis.SGGui;
 import gcewing.sg.renderers.DHDTERenderer;

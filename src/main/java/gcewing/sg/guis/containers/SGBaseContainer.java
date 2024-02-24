@@ -4,16 +4,15 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.guis;
+package gcewing.sg.guis.containers;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
 
 import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.guis.containers.slots.CamouflageSlot;
 
 public class SGBaseContainer extends BaseContainer {
 
@@ -36,19 +35,6 @@ public class SGBaseContainer extends BaseContainer {
 
     void addCamouflageSlots() {
         addSlots(te, 0, SGBaseTE.numCamouflageSlots, 48, 104, 1, CamouflageSlot.class);
-    }
-
-}
-
-class CamouflageSlot extends Slot {
-
-    public CamouflageSlot(IInventory inventory, int index, int x, int y) {
-        super(inventory, index, x, y);
-    }
-
-    @Override
-    public int getSlotStackLimit() {
-        return 1;
     }
 
 }

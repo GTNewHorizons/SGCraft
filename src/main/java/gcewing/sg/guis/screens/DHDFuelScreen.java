@@ -4,8 +4,11 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.guis;
+package gcewing.sg.guis.screens;
 
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.SGScreen;
+import gcewing.sg.guis.containers.DHDFuelContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -17,8 +20,8 @@ import gcewing.sg.SGCraft;
 public class DHDFuelScreen extends SGScreen {
 
     static String screenTitle = "Stargate Controller";
-    static final int guiWidth = 256;
-    static final int guiHeight = 208;
+    public static final int guiWidth = 256;
+    public static final int guiHeight = 208;
     static final int fuelGaugeWidth = 16;
     static final int fuelGaugeHeight = 34;
     static final int fuelGaugeX = 214;

@@ -1,5 +1,6 @@
 package gcewing.sg.guis;
 
+import gcewing.sg.guis.screens.Screen;
 import gcewing.sg.interfaces.IWidget;
 
 import java.util.ArrayList;

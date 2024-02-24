@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 import org.joml.Vector3i;
 
-import gcewing.sg.guis.BaseContainer;
+import gcewing.sg.guis.containers.BaseContainer;
 
 public class OCInterfaceContainer extends BaseContainer {
 
@@ -32,24 +32,6 @@ public class OCInterfaceContainer extends BaseContainer {
         te = (OCInterfaceTE) getWorldTileEntity(world, pos);
         addPlayerSlots(player);
         addSlots(te, slotsLeft, slotsTop, 1, UpgradeSlot.class);
-    }
-
-    public static class UpgradeSlot extends Slot {
-
-        public UpgradeSlot(IInventory inv, int i, int x, int y) {
-            super(inv, i, x, y);
-        }
-
-        @Override
-        public boolean isItemValid(ItemStack stack) {
-            return OCInterfaceTE.isNetworkCard(stack);
-        }
-
-        @Override
-        public int getSlotStackLimit() {
-            return 1;
-        }
-
     }
 
 }

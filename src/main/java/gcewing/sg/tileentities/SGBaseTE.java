@@ -83,9 +83,10 @@ import gcewing.sg.interfaces.IComputerInterface;
 import gcewing.sg.interfaces.ISGEnergySource;
 import gcewing.sg.renderers.SGBaseTERenderer;
 import gcewing.sg.utils.BaseBlockUtils;
-import gcewing.sg.utils.BaseInventoryUtils;
+import gcewing.sg.utils.inventories.BaseInventoryUtils;
 import gcewing.sg.utils.Trans3;
 import gcewing.sg.utils.Utils;
+import gcewing.sg.utils.exceptions.AddressingError;
 import io.netty.channel.ChannelFutureListener;
 
 public class SGBaseTE extends BaseTileInventory {
@@ -283,7 +284,7 @@ public class SGBaseTE extends BaseTileInventory {
     String tryToGetHomeAddress() {
         try {
             return getHomeAddress();
-        } catch (SGAddressing.AddressingError e) {
+        } catch (AddressingError e) {
             return null;
         }
     }
@@ -416,7 +417,7 @@ public class SGBaseTE extends BaseTileInventory {
         return stack != null ? stack.getItem() : null;
     }
 
-    public String getHomeAddress() throws SGAddressing.AddressingError {
+    public String getHomeAddress() throws AddressingError {
         return SGAddressing.addressForLocation(new SGLocation(this));
     }
 
@@ -557,7 +558,7 @@ public class SGBaseTE extends BaseTileInventory {
         if (homeAddress.equals("")) return diallingFailure(player, "Coordinates of dialling stargate are out of range");
         try {
             dte = SGAddressing.findAddressedStargate(address, worldObj);
-        } catch (SGAddressing.AddressingError e) {
+        } catch (AddressingError e) {
             return diallingFailure(player, e.getMessage());
         }
         if (dte == null || !dte.isMerged) return diallingFailure(player, "No stargate at address " + address);
@@ -625,7 +626,7 @@ public class SGBaseTE extends BaseTileInventory {
         String homeAddress;
         try {
             return getHomeAddress();
-        } catch (SGAddressing.AddressingError e) {
+        } catch (AddressingError e) {
             SGCraft.log.error(String.format("SGBaseTE.findHomeAddress: %s", e));
             return "";
         }
@@ -670,7 +671,7 @@ public class SGBaseTE extends BaseTileInventory {
             try {
                 homeAddress = getHomeAddress();
                 addressError = "";
-            } catch (SGAddressing.AddressingError e) {
+            } catch (AddressingError e) {
                 homeAddress = null;
                 addressError = e.getMessage();
             }

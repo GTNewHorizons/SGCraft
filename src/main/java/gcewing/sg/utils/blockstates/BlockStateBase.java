@@ -1,4 +1,4 @@
-package gcewing.sg.utils;
+package gcewing.sg.utils.blockstates;
 
 import java.util.Collection;
 import java.util.Iterator;

@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import org.joml.Vector3d;
 
 import gcewing.sg.BaseModel;
-import gcewing.sg.BaseTexture.Image;
+import gcewing.sg.textures.Image;
 import gcewing.sg.SGCraft;
 import gcewing.sg.guis.DHDTE;
 import gcewing.sg.interfaces.IModel;

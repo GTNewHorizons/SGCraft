@@ -9,7 +9,8 @@ package gcewing.sg.tileentities;
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityWorld;
 
 import gcewing.sg.SGAddressing;
-import gcewing.sg.SGAddressing.AddressingError;
+import gcewing.sg.utils.exceptions.AddressingError;
+import gcewing.sg.utils.CIStargateState;
 import gcewing.sg.SGCraft;
 
 public class SGInterfaceTE extends BaseTileEntity {
@@ -30,19 +31,6 @@ public class SGInterfaceTE extends BaseTileEntity {
     }
 
     public void rebroadcastNetworkPacket(Object packet) {}
-
-    public static class CIStargateState {
-
-        public String state;
-        public int chevrons;
-        public String direction;
-
-        public CIStargateState(String state, int chevrons, String direction) {
-            this.state = state;
-            this.chevrons = chevrons;
-            this.direction = direction;
-        }
-    }
 
     public SGBaseTE requireBaseTE() {
         SGBaseTE te = getBaseTE();

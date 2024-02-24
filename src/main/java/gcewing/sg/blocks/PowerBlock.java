@@ -8,6 +8,7 @@ package gcewing.sg.blocks;
 
 import java.util.ArrayList;
 
+import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

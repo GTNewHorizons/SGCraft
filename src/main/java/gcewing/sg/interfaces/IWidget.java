@@ -1,8 +1,7 @@
 package gcewing.sg.interfaces;
 
-import gcewing.sg.guis.BaseGui;
 import gcewing.sg.guis.MouseCoords;
-import gcewing.sg.guis.Screen;
+import gcewing.sg.guis.screens.Screen;
 
 public interface IWidget {
 

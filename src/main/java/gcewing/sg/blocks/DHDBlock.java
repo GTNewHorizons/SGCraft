@@ -6,6 +6,7 @@
 
 package gcewing.sg.blocks;
 
+import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;

@@ -8,6 +8,8 @@ package gcewing.sg.packets;
 
 import static gcewing.sg.utils.BaseBlockUtils.getTileEntityPos;
 
+import gcewing.sg.interfaces.ChannelInput;
+import gcewing.sg.interfaces.ChannelOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 

@@ -12,6 +12,8 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
+import gcewing.sg.guis.containers.BaseContainer;
+import gcewing.sg.guis.screens.Screen;
 import net.minecraft.inventory.Container;
 
 import gcewing.sg.SGCraft;
@@ -43,7 +45,7 @@ public class SGScreen extends Screen {
         super(container, width, height);
     }
 
-    void drawAddressSymbols(int x, int y, String address) {
+    protected void drawAddressSymbols(int x, int y, String address) {
         int x0 = x - address.length() * cellSize / 2;
         int y0 = y + frameHeight / 2 - cellSize / 2;
         bindSGTexture(
@@ -61,7 +63,7 @@ public class SGScreen extends Screen {
         }
     }
 
-    void drawAddressString(int x, int y, String address) {
+    protected void drawAddressString(int x, int y, String address) {
         drawCenteredString(this.fontRendererObj, address, x, y, 0xffffff);
     }
 

@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.guis;
+package gcewing.sg.guis.screens;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldTileEntity;
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
@@ -23,6 +23,8 @@ import static org.lwjgl.opengl.GL11.glPopAttrib;
 import static org.lwjgl.opengl.GL11.glPushAttrib;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.SGScreen;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.EntityPlayer;

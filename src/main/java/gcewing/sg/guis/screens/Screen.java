@@ -1,7 +1,11 @@
-package gcewing.sg.guis;
+package gcewing.sg.guis.screens;
 
 import gcewing.sg.BaseMod;
 import gcewing.sg.SGCraft;
+import gcewing.sg.guis.GState;
+import gcewing.sg.guis.MouseCoords;
+import gcewing.sg.guis.Root;
+import gcewing.sg.guis.containers.BaseContainer;
 import gcewing.sg.interfaces.ISetMod;
 import gcewing.sg.interfaces.IWidget;
 import gcewing.sg.interfaces.IWidgetContainer;

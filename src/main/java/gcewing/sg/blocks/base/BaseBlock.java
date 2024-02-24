@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.blocks.orientation.Orient1Way;
+import gcewing.sg.interfaces.IOrientationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -55,7 +57,7 @@ import gcewing.sg.interfaces.ITileEntity;
 import gcewing.sg.tileentities.InventoryHelper;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.BaseUtils;
-import gcewing.sg.utils.BlockState;
+import gcewing.sg.utils.blockstates.BlockState;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.ModelSpec;
 import gcewing.sg.utils.Trans3;
@@ -72,32 +74,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     // --------------------------- Orientation -------------------------------
-
-    public interface IOrientationHandler {
-
-        void defineProperties(BaseBlock block);
-
-        IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX, float hitY,
-                float hitZ, IBlockState baseState, EntityLivingBase placer);
-
-        Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state, Vector3d origin);
-    }
-
-    public static class Orient1Way implements IOrientationHandler {
-
-        public void defineProperties(BaseBlock block) {}
-
-        public IBlockState onBlockPlaced(Block block, World world, Vector3i pos, EnumFacing side, float hitX,
-                float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
-            return baseState;
-        }
-
-        public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos, IBlockState state,
-                Vector3d origin) {
-            return new Trans3(origin);
-        }
-
-    }
 
     public static IOrientationHandler orient1Way = new Orient1Way();
 

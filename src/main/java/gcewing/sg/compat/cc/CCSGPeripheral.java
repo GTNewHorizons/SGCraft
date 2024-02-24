@@ -15,7 +15,7 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import gcewing.sg.SGCraft;
 import gcewing.sg.tileentities.SGInterfaceTE;
-import gcewing.sg.tileentities.SGInterfaceTE.CIStargateState;
+import gcewing.sg.utils.CIStargateState;
 
 public class CCSGPeripheral implements IPeripheral {
 

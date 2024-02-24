@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.sg.guis;
+package gcewing.sg.guis.containers;
 
 import static java.lang.Math.min;
 
@@ -17,6 +17,8 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import gcewing.sg.guis.containers.slots.SlotRange;
 
 public class BaseContainer extends Container {
 
@@ -39,7 +41,7 @@ public class BaseContainer extends Container {
     // containerSlotRange.
 
     protected void beginContainerSlots() {
-        containerSlotRange = new SlotRange();
+        containerSlotRange = new SlotRange(inventorySlots.size());
     }
 
     protected void endContainerSlots() {
@@ -47,7 +49,7 @@ public class BaseContainer extends Container {
     }
 
     protected void beginPlayerSlots() {
-        playerSlotRange = new SlotRange();
+        playerSlotRange = new SlotRange(inventorySlots.size());
     }
 
     protected void endPlayerSlots() {
@@ -96,7 +98,7 @@ public class BaseContainer extends Container {
 
     public SlotRange addSlots(IInventory inventory, int firstSlot, int numSlots, int x, int y, int numRows,
             Class slotClass) {
-        SlotRange range = new SlotRange();
+        SlotRange range = new SlotRange(inventorySlots.size());
         try {
             Constructor slotCon = slotClass.getConstructor(IInventory.class, int.class, int.class, int.class);
             int numCols = (numSlots + numRows - 1) / numRows;
@@ -205,29 +207,5 @@ public class BaseContainer extends Container {
     void sendStateTo(ICrafting crafter) {}
 
     public void updateProgressBar(int i, int value) {}
-
-    public class SlotRange {
-
-        public int firstSlot;
-        public int numSlots;
-        public boolean reverseMerge;
-
-        public SlotRange() {
-            firstSlot = inventorySlots.size();
-        }
-
-        public void end() {
-            numSlots = inventorySlots.size() - firstSlot;
-        }
-
-        public boolean contains(int slot) {
-            return slot >= firstSlot && slot < firstSlot + numSlots;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("SlotRange(%s to %s)", firstSlot, firstSlot + numSlots - 1);
-        }
-    }
 
 }
