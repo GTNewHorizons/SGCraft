@@ -6,12 +6,9 @@
 
 package gcewing.sg;
 
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BaseSubsystem<MOD extends BaseMod, CLIENT extends BaseModClient> {
 
@@ -61,22 +58,5 @@ public class BaseSubsystem<MOD extends BaseMod, CLIENT extends BaseModClient> {
     protected void registerModelLocations() {}
 
     protected void registerOtherClient() {}
-
-    public Item searchForItem(String... names) {
-        Item result = null;
-        for (String name : names) {
-            result = findItem(name);
-            if (result != null) return result;
-        }
-        SGCraft.log.debug(
-                String.format("%s: Unable to find an item with any of the following names:", getClass().getName()));
-        for (String name : names) SGCraft.log.debug(String.format(" %s", name));
-        return null;
-    }
-
-    public static Item findItem(String name) {
-        String[] parts = BaseStringUtils.split(":", name);
-        return GameRegistry.findItem(parts[0], parts[1]);
-    }
 
 }

@@ -16,6 +16,8 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
 
+import gcewing.sg.tileentities.BaseTileEntity;
+
 public class BaseTEChunkManager implements ForgeChunkManager.LoadingCallback {
 
     public boolean debug = false;
@@ -127,21 +129,5 @@ public class BaseTEChunkManager implements ForgeChunkManager.LoadingCallback {
         te.chunkTicket = ticket;
         forceChunkRangeOnTicket(te, ticket);
         return true;
-    }
-
-    public void dumpChunkLoadingState(BaseTileEntity te, String label) {
-        StringBuilder chunks = new StringBuilder();
-        SGCraft.log.debug(String.format("%s: Chunk loading state:", label));
-        SGCraft.log.debug(String.format("Chunk ticket = %s", te.chunkTicket));
-        if (te.chunkTicket == null) {
-            return;
-        }
-
-        SGCraft.log.debug("Loaded chunks:");
-        for (Object item : te.chunkTicket.getChunkList()) {
-            ChunkCoordIntPair coords = (ChunkCoordIntPair) item;
-            chunks.append(String.format(" (%d,%d)", coords.chunkXPos, coords.chunkZPos));
-        }
-        SGCraft.log.debug(chunks.toString());
     }
 }

@@ -1,0 +1,39 @@
+// ------------------------------------------------------------------------------------------------
+//
+// SG Craft - Naquadah ore block
+//
+// ------------------------------------------------------------------------------------------------
+
+package gcewing.sg.blocks;
+
+import java.util.Random;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+
+import gcewing.sg.SGCraft;
+import gcewing.sg.blocks.base.BaseOreBlock;
+import gcewing.sg.interfaces.IBlockState;
+
+public class NaquadahOreBlock extends BaseOreBlock {
+
+    public NaquadahOreBlock() {
+        super();
+        setHardness(5.0F);
+        setResistance(10.0F);
+        setStepSound(soundTypeStone);
+        setHarvestLevel("pickaxe", 3);
+        setCreativeTab(CreativeTabs.tabBlock);
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return SGCraft.naquadah;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 2 + random.nextInt(5);
+    }
+
+}

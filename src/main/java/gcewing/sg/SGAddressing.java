@@ -31,16 +31,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.utils.BaseUtils;
+import gcewing.sg.utils.exceptions.AddressingError;
+
 public class SGAddressing {
 
     static boolean debugAddressing = false;
-
-    static class AddressingError extends Exception {
-
-        AddressingError(String s) {
-            super(s);
-        }
-    }
 
     static AddressingError malformedAddressError = new AddressingError("Malformed stargate address");
     static AddressingError coordRangeError = new AddressingError("Coordinates out of stargate range");
@@ -70,23 +67,19 @@ public class SGAddressing {
     final static long mdOld = dimensionRange + 2;
     final static long qdOld = 459;
 
-    protected static boolean isValidSymbolChar(char c) {
-        return isValidSymbolChar(String.valueOf(c));
-    }
-
-    protected static boolean isValidSymbolChar(String c) {
+    public static boolean isValidSymbolChar(String c) {
         return symbolChars.indexOf(c) >= 0;
     }
 
-    protected static char symbolToChar(int i) {
+    public static char symbolToChar(int i) {
         return symbolChars.charAt(i);
     }
 
-    protected static int charToSymbol(char c) {
+    public static int charToSymbol(char c) {
         return charToSymbol(String.valueOf(c));
     }
 
-    protected static int charToSymbol(String c) {
+    public static int charToSymbol(String c) {
         return symbolChars.indexOf(c);
     }
 
@@ -105,19 +98,11 @@ public class SGAddressing {
         return address.replace("-", "").toUpperCase();
     }
 
-    protected static String coordSymbolsOf(String address) {
-        return address.substring(0, numCoordSymbols);
-    }
-
-    protected static String dimensionSymbolsOf(String address) {
-        return address.substring(numCoordSymbols);
-    }
-
     public static String addressForLocation(SGLocation loc) throws AddressingError {
         if (debugAddressing) SGCraft.log
                 .debug(String.format("SGAddressing.addressForLocation: coord range = %d to %d", minCoord, maxCoord));
-        int chunkx = loc.pos.getX() >> 4;
-        int chunkz = loc.pos.getZ() >> 4;
+        int chunkx = loc.pos.x >> 4;
+        int chunkz = loc.pos.z >> 4;
         if (!inCoordRange(chunkx) || !inCoordRange(chunkz)) throw coordRangeError;
         Integer di = SGDimensionMap.indexForDimension(loc.dimension);
         if (di > maxDimensionIndex) throw dimensionRangeError;

@@ -1,7 +1,6 @@
 package gcewing.sg;
 
 import java.util.Iterator;
-import java.util.Random;
 
 import net.minecraft.util.EnumFacing;
 
@@ -29,14 +28,6 @@ public enum Plane implements Predicate<EnumFacing>, Iterable<EnumFacing> {
     }
 
     private int[] axes = { 1, 1, 0, 0, 0, 0 };
-
-    /**
-     * Choose a random Facing from this Plane using the given Random
-     */
-    public EnumFacing random(Random rand) {
-        EnumFacing[] aenumfacing = this.facings();
-        return aenumfacing[rand.nextInt(aenumfacing.length)];
-    }
 
     public boolean apply(EnumFacing dir) {
         return dir != null && axes[dir.ordinal()] == this.ordinal();

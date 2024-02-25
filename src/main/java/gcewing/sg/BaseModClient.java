@@ -13,7 +13,6 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.minecraft.block.Block;
@@ -32,8 +31,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
@@ -44,7 +41,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import org.joml.Vector3i;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -55,12 +53,25 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.sg.BaseMod.IBlock;
-import gcewing.sg.BaseMod.IItem;
-import gcewing.sg.BaseMod.ITextureConsumer;
-import gcewing.sg.BaseMod.ModelSpec;
-import gcewing.sg.BaseMod.VSBinding;
-// import static gcewing.sg.BaseBlockUtils.*;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.interfaces.IItem;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.interfaces.ITextureConsumer;
+import gcewing.sg.renderers.BaseGLRenderTarget;
+import gcewing.sg.renderers.BaseModelRenderer;
+import gcewing.sg.renderers.BaseWorldRenderTarget;
+import gcewing.sg.textures.BaseTexture;
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.EnumWorldBlockLayer;
+import gcewing.sg.utils.ModelSpec;
+import gcewing.sg.utils.TextureCache;
+import gcewing.sg.utils.Trans3;
+import gcewing.sg.utils.VSBinding;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 
@@ -68,7 +79,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     MOD base;
     boolean customRenderingRequired;
-    boolean debugSound = false;
 
     Map<Integer, Class<? extends GuiScreen>> screenClasses = new HashMap<Integer, Class<? extends GuiScreen>>();
 
@@ -231,16 +241,8 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         }
     }
 
-    public static void openClientGui(GuiScreen gui) {
-        FMLClientHandler.instance().getClient().displayGuiScreen(gui);
-    }
-
     public ResourceLocation textureLocation(String path) {
         return base.resourceLocation("textures/" + path);
-    }
-
-    public void bindTexture(String path) {
-        bindTexture(textureLocation(path));
     }
 
     public static void bindTexture(ResourceLocation rsrc) {
@@ -266,10 +268,10 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        return getClientGuiElement(id, player, world, new BlockPos(x, y, z));
+        return getClientGuiElement(id, player, world, new Vector3i(x, y, z));
     }
 
-    public Object getClientGuiElement(int id, EntityPlayer player, World world, BlockPos pos) {
+    public Object getClientGuiElement(int id, EntityPlayer player, World world, Vector3i pos) {
         int param = id >> 16;
         id = id & 0xffff;
         Object result = null;
@@ -313,90 +315,11 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         return result;
     }
 
-    GuiScreen getGuiScreen(int id, EntityPlayer player, World world, BlockPos pos, int param) {
+    GuiScreen getGuiScreen(int id, EntityPlayer player, World world, Vector3i pos, int param) {
         // Called when screen id not found in registry
         SGCraft.log.debug(
                 String.format("%s: BaseModClient.getGuiScreen: No GuiScreen class found for gui id %d", this, id));
         return null;
-    }
-
-    public interface ICustomRenderer {
-
-        void renderBlock(IBlockAccess world, BlockPos pos, IBlockState state, IRenderTarget target,
-                EnumWorldBlockLayer layer, Trans3 t);
-
-        void renderItemStack(ItemStack stack, IRenderTarget target, Trans3 t);
-    }
-
-    public interface ITexture {
-
-        ResourceLocation location();
-
-        int tintIndex();
-
-        double red();
-
-        double green();
-
-        double blue();
-
-        double interpolateU(double u);
-
-        double interpolateV(double v);
-
-        boolean isEmissive();
-
-        boolean isProjected();
-
-        boolean isSolid();
-
-        ITexture tinted(int index);
-
-        ITexture colored(double red, double green, double blue);
-
-        ITexture projected();
-
-        ITexture emissive();
-
-        ITiledTexture tiled(int numRows, int numCols);
-    }
-
-    public interface ITiledTexture extends ITexture {
-
-        ITexture tile(int row, int col);
-    }
-
-    public interface IRenderTarget {
-
-        boolean isRenderingBreakEffects();
-
-        void setTexture(ITexture texture);
-
-        void setColor(double r, double g, double b, double a);
-
-        void setNormal(Vector3 n);
-
-        void beginTriangle();
-
-        void beginQuad();
-
-        void addVertex(Vector3 p, double u, double v);
-
-        void addProjectedVertex(Vector3 p, EnumFacing face);
-
-        void endFace();
-    }
-
-    public interface IModel {
-
-        AxisAlignedBB getBounds();
-
-        void addBoxesToList(Trans3 t, List list);
-
-        void render(Trans3 t, IRenderTarget renderer, ITexture... textures);
-    }
-
-    public static class TextureCache extends HashMap<ResourceLocation, ITexture> {
     }
 
     protected Map<IBlock, ICustomRenderer> blockRenderers = new HashMap<IBlock, ICustomRenderer>();
@@ -459,7 +382,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
                 RenderBlocks rb) {
             boolean result = false;
-            BlockPos pos = new BlockPos(x, y, z);
+            Vector3i pos = new Vector3i(x, y, z);
             int meta = world.getBlockMetadata(x, y, z);
             BaseBlock baseBlock = (BaseBlock) block;
             IBlockState state = baseBlock.getStateFromMeta(meta);
@@ -586,7 +509,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     // ------------------------------------------------------------------------------------------------
 
-    protected ICustomRenderer getCustomBlockRenderer(IBlockAccess world, BlockPos pos, IBlockState state) {
+    protected ICustomRenderer getCustomBlockRenderer(IBlockAccess world, Vector3i pos, IBlockState state) {
         BaseBlock block = (BaseBlock) state.getBlock();
         ICustomRenderer rend = blockRenderers.get(block);
         if (rend == null && block != null) {
@@ -646,7 +569,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
     }
 
     // Call this from renderBlock of an ICustomRenderer to fall back to model spec
-    public void renderBlockUsingModelSpec(IBlockAccess world, BlockPos pos, IBlockState state, IRenderTarget target,
+    public void renderBlockUsingModelSpec(IBlockAccess world, Vector3i pos, IBlockState state, IRenderTarget target,
             EnumWorldBlockLayer layer, Trans3 t) {
         ICustomRenderer rend = getModelRendererForState(state);
         if (rend != null) rend.renderBlock(world, pos, state, target, layer, t);
@@ -668,10 +591,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         // Cache is keyed by texture name without "textures/"
         ResourceLocation loc = base.resourceLocation(name);
         return textureCaches[type].get(loc);
-    }
-
-    public IIcon getIcon(int type, String name) {
-        return ((BaseTexture.Sprite) getTexture(type, name)).icon;
     }
 
     @SubscribeEvent

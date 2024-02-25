@@ -20,24 +20,20 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
-import net.minecraft.server.management.PlayerManager;
-import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import org.joml.Vector3i;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -51,75 +47,19 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
-import gcewing.sg.BaseModClient.IModel;
+import gcewing.sg.blocks.base.BaseBlock;
+import gcewing.sg.interfaces.IBlock;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.ISetMod;
+import gcewing.sg.utils.BaseBlockUtils;
+import gcewing.sg.utils.VSBinding;
 
 public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends BaseSubsystem implements IGuiHandler {
 
     protected Map<ResourceLocation, IModel> modelCache = new HashMap<ResourceLocation, IModel>();
 
-    interface ITextureConsumer {
-
-        String[] getTextureNames();
-    }
-
-    interface IBlock extends ITextureConsumer {
-
-        void setRenderType(int id);
-
-        String getQualifiedRendererClassName();
-
-        ModelSpec getModelSpec(IBlockState state);
-
-        int getNumSubtypes();
-
-        Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin);
-
-        // IBlockState getParticleState(IBlockAccess world, BlockPos pos);
-        Class getDefaultItemClass();
-    }
-
-    interface IItem extends ITextureConsumer {
-
-        ModelSpec getModelSpec(ItemStack stack);
-
-        int getNumSubtypes();
-    }
-
-    interface ITileEntity {
-
-        void onAddedToWorld();
-    }
-
-    interface ISetMod {
-
-        void setMod(BaseMod mod);
-    }
-
     public void setModOf(Object obj) {
         if (obj instanceof ISetMod) ((ISetMod) obj).setMod(this);
-    }
-
-    static class IDBinding<T> {
-
-        public int id;
-        public T object;
-    }
-
-    public static class ModelSpec {
-
-        public String modelName;
-        public String[] textureNames;
-        public Vector3 origin;
-
-        public ModelSpec(String model, String... textures) {
-            this(model, Vector3.zero, textures);
-        }
-
-        public ModelSpec(String model, Vector3 origin, String... textures) {
-            modelName = model;
-            textureNames = textures;
-            this.origin = origin;
-        }
     }
 
     public String modID;
@@ -143,14 +83,9 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
     public boolean debugBlockRegistration = false;
     public boolean debugCreativeTabs = false;
 
-    public String resourcePath(String fileName) {
-        return resourceDir + fileName;
-    }
-
     public BaseMod() {
         Class modClass = getClass();
         modPackage = modClass.getPackage().getName();
-        // assetKey = modPackage.replace(".", "_");
         modID = getModID(modClass);
         assetKey = modID.toLowerCase();
         blockDomain = assetKey;
@@ -227,10 +162,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         if (config.extended) config.save();
     }
 
-    String qualifiedName(String name) {
-        return modPackage + "." + name;
-    }
-
     @Override
     protected void registerScreens() {
         if (client != null) client.registerScreens();
@@ -272,11 +203,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return null;
     }
 
-    public BaseSubsystem integrateWithClass(String className, String subsystemClassName) {
-        if (classAvailable(className)) return loadSubsystem(subsystemClassName);
-        return null;
-    }
-
     public BaseSubsystem loadSubsystem(String className) {
         BaseSubsystem sub = newSubsystem(className);
         sub.mod = this;
@@ -290,17 +216,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
             return (BaseSubsystem) Class.forName(className).newInstance();
         } catch (Exception exc) {
             throw new RuntimeException(exc);
-        }
-    }
-
-    public static boolean classAvailable(String name) {
-        try {
-            Class.forName(name);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -335,10 +250,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return item;
     }
 
-    public Block newBlock(String name) {
-        return newBlock(name, Block.class);
-    }
-
     public <BLOCK extends Block> BLOCK newBlock(String name, Class<BLOCK> cls) {
         return newBlock(name, cls, null);
     }
@@ -352,10 +263,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
             throw new RuntimeException(e);
         }
         return addBlock(block, name, itemClass);
-    }
-
-    public <BLOCK extends Block> BLOCK addBlock(String name, BLOCK block) {
-        return addBlock(block, name);
     }
 
     public <BLOCK extends Block> BLOCK addBlock(BLOCK block, String name) {
@@ -407,28 +314,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         OreDictionary.registerOre(name, item);
     }
 
-    public void addOre(String name, ItemStack stack) {
-        OreDictionary.registerOre(name, stack);
-    }
-
-    public static boolean blockMatchesOre(Block block, String name) {
-        return stackMatchesOre(new ItemStack(block), name);
-    }
-
-    public static boolean itemMatchesOre(Item item, String name) {
-        return stackMatchesOre(new ItemStack(item), name);
-    }
-
-    public static boolean stackMatchesOre(ItemStack stack, String name) {
-        int id2 = OreDictionary.getOreID(name);
-        for (int id1 : OreDictionary.getOreIDs(stack)) {
-            if (id1 == id2) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void newRecipe(Item product, int qty, Object... params) {
         newRecipe(new ItemStack(product, qty), params);
     }
@@ -441,40 +326,12 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         GameRegistry.addRecipe(new ShapedOreRecipe(product, params));
     }
 
-    public void newShapelessRecipe(Block product, int qty, Object... params) {
-        newShapelessRecipe(new ItemStack(product, qty), params);
-    }
-
     public void newShapelessRecipe(Item product, int qty, Object... params) {
         newShapelessRecipe(new ItemStack(product, qty), params);
     }
 
     public void newShapelessRecipe(ItemStack product, Object... params) {
         GameRegistry.addRecipe(new ShapelessOreRecipe(product, params));
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Item input) {
-        newSmeltingRecipe(product, qty, input, 0);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Item input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Block input) {
-        newSmeltingRecipe(product, qty, input, 0);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Block input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, Enum id) {
-        addEntity(cls, name, id.ordinal());
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, int id) {
-        addEntity(cls, name, id, 1, true);
     }
 
     public void addEntity(Class<? extends Entity> cls, String name, Enum id, int updateFrequency,
@@ -492,9 +349,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
                         name,
                         id));
         EntityRegistry.registerModEntity(cls, name, id, /* base */this, 256, updateFrequency, sendVelocityUpdates);
-    }
-
-    static class VSBinding extends IDBinding<ResourceLocation> {
     }
 
     public List<VSBinding> registeredVillagers = new ArrayList<VSBinding>();
@@ -521,10 +375,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return new ResourceLocation(assetKey, path);
     }
 
-    public String soundName(String name) {
-        return assetKey + ":" + name;
-    }
-
     public ResourceLocation textureLocation(String path) {
         return resourceLocation("textures/" + path);
     }
@@ -541,26 +391,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
             modelCache.put(loc, model);
         }
         return model;
-    }
-
-    public static void sendTileEntityUpdate(TileEntity te) {
-        Packet packet = te.getDescriptionPacket();
-        if (packet == null) {
-            return;
-        }
-
-        int x = te.xCoord >> 4;
-        int z = te.zCoord >> 4;
-        // SGCraft.log.trace(String.format("BaseMod.sendTileEntityUpdate: for chunk coords (%s, %s)", x, z));
-        WorldServer world = (WorldServer) te.getWorldObj();
-        ServerConfigurationManager cm = FMLCommonHandler.instance().getMinecraftServerInstance()
-                .getConfigurationManager();
-        PlayerManager pm = world.getPlayerManager();
-        for (EntityPlayerMP player : (List<EntityPlayerMP>) cm.playerEntityList)
-            if (pm.isPlayerWatchingChunk(player, x, z)) {
-                // SGCraft.log.trace(String.format("BaseMod.sendTileEntityUpdate: to %s", player));
-                player.playerNetServerHandler.sendPacket(packet);
-            }
     }
 
     protected int nextGuiId = 1000;
@@ -581,14 +411,10 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
     // Container classes registered using addContainer() must implement one of:
     //
-    // (1) A static method create(EntityPlayer player, World world, BlockPos pos [,int param])
-    // (2) A constructor MyContainer(EntityPlayer player, World world, BlockPos pos [, int param])
+    // (1) A static method create(EntityPlayer player, World world, Vector3i pos [,int param])
+    // (2) A constructor MyContainer(EntityPlayer player, World world, Vector3i pos [, int param])
     // (3) A constructor MyContainer(EntityPlayer player, MyTileEntity te [,int param]) where
     // MyTileEntity is the tile entity class registered with MyContainer
-
-    public int addContainer(Class<? extends Container> cls) {
-        return addContainer(cls, null);
-    }
 
     public int addContainer(Class<? extends Container> cls, Class<? extends TileEntity> teCls) {
         int id = nextGuiId++;
@@ -611,45 +437,29 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         }
     }
 
-    public void openGui(EntityPlayer player, Enum id, TileEntity te) {
-        openGui(player, id, te, 0);
-    }
-
     public void openGui(EntityPlayer player, Enum id, TileEntity te, int param) {
         openGui(player, id.ordinal(), te, param);
     }
 
-    public void openGui(EntityPlayer player, TileEntity te) {
-        openGui(player, -1, te, 0);
-    }
-
-    public void openGui(EntityPlayer player, int id, TileEntity te) {
-        openGui(player, id, te, 0);
-    }
-
-    public void openGui(EntityPlayer player, TileEntity te, int param) {
-        openGui(player, -1, te, param);
-    }
-
     public void openGui(EntityPlayer player, int id, TileEntity te, int param) {
         if (id < 0) id = getGuiId(te);
-        openGui(player, id, te.getWorldObj(), new BlockPos(te), param);
+        openGui(player, id, te.getWorldObj(), new Vector3i(te.xCoord, te.yCoord, te.zCoord), param);
     }
 
-    public void openGui(EntityPlayer player, Enum id, World world, BlockPos pos) {
+    public void openGui(EntityPlayer player, Enum id, World world, Vector3i pos) {
         openGui(player, id, world, pos, 0);
     }
 
-    public void openGui(EntityPlayer player, Enum id, World world, BlockPos pos, int param) {
+    public void openGui(EntityPlayer player, Enum id, World world, Vector3i pos, int param) {
         openGui(player, id.ordinal(), world, pos, param);
     }
 
-    public void openGui(EntityPlayer player, int id, World world, BlockPos pos, int param) {
+    public void openGui(EntityPlayer player, int id, World world, Vector3i pos, int param) {
         openGui(player, id | (param << 16), world, pos);
     }
 
-    public void openGui(EntityPlayer player, int id, World world, BlockPos pos) {
-        int x = pos.getX(), y = pos.getY(), z = pos.getZ();
+    public void openGui(EntityPlayer player, int id, World world, Vector3i pos) {
+        int x = pos.x, y = pos.y, z = pos.z;
         if (debugGui) SGCraft.log.debug(
                 String.format("BaseMod.openGui: for %s with id 0x%x in %s at (%s, %s, %s)", this, id, world, x, y, z));
         player.openGui(this, id, world, x, y, z);
@@ -672,10 +482,10 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        return getServerGuiElement(id, player, world, new BlockPos(x, y, z));
+        return getServerGuiElement(id, player, world, new Vector3i(x, y, z));
     }
 
-    public Object getServerGuiElement(int id, EntityPlayer player, World world, BlockPos pos) {
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, Vector3i pos) {
         if (debugGui) SGCraft.log.debug(String.format("BaseMod.getServerGuiElement: for id 0x%x", id));
         int param = id >> 16;
         id = id & 0xffff;
@@ -688,7 +498,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return result;
     }
 
-    Container getGuiContainer(int id, EntityPlayer player, World world, BlockPos pos, int param) {
+    Container getGuiContainer(int id, EntityPlayer player, World world, Vector3i pos, int param) {
         // Called when container id not found in registry
         if (debugGui) SGCraft.log
                 .debug(String.format("%s: BaseMod.getGuiContainer: No Container class found for gui id %d", this, id));
@@ -700,7 +510,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return null;
     }
 
-    Object createGuiElement(Class cls, EntityPlayer player, World world, BlockPos pos, int param) {
+    Object createGuiElement(Class cls, EntityPlayer player, World world, Vector3i pos, int param) {
         try {
             if (debugGui) {
                 SGCraft.log.debug(
@@ -710,22 +520,22 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
                                 player,
                                 world));
             }
-            Method m = getMethod(cls, "create", EntityPlayer.class, World.class, BlockPos.class, int.class);
+            Method m = getMethod(cls, "create", EntityPlayer.class, World.class, Vector3i.class, int.class);
             if (m != null) {
                 return m.invoke(null, player, world, pos, param);
             }
-            m = getMethod(cls, "create", EntityPlayer.class, World.class, BlockPos.class);
+            m = getMethod(cls, "create", EntityPlayer.class, World.class, Vector3i.class);
             if (m != null) {
                 return m.invoke(null, player, world, pos);
             }
             if (debugGui) {
                 SGCraft.log.debug(String.format("BaseMod.createGuiElement: Looking for constructor on %s", cls));
             }
-            Constructor c = getConstructor(cls, EntityPlayer.class, World.class, BlockPos.class, int.class);
+            Constructor c = getConstructor(cls, EntityPlayer.class, World.class, Vector3i.class, int.class);
             if (c != null) {
                 return c.newInstance(player, world, pos, param);
             }
-            c = getConstructor(cls, EntityPlayer.class, World.class, BlockPos.class);
+            c = getConstructor(cls, EntityPlayer.class, World.class, Vector3i.class);
             if (c != null) {
                 return c.newInstance(player, world, pos);
             }

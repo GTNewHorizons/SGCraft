@@ -6,8 +6,8 @@
 
 package gcewing.sg;
 
-import static gcewing.sg.BaseUtils.getChunkTileEntityMap;
-import static gcewing.sg.BaseUtils.getChunkWorld;
+import static gcewing.sg.utils.BaseUtils.getChunkTileEntityMap;
+import static gcewing.sg.utils.BaseUtils.getChunkWorld;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -34,13 +34,36 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import gcewing.sg.oc.OCIntegration;
+import gcewing.sg.blocks.DHDBlock;
+import gcewing.sg.blocks.NaquadahBlock;
+import gcewing.sg.blocks.NaquadahOreBlock;
+import gcewing.sg.blocks.SGBaseBlock;
+import gcewing.sg.blocks.SGRingBlock;
+import gcewing.sg.compat.MystcraftIntegration;
+import gcewing.sg.compat.oc.OCIntegration;
+import gcewing.sg.entities.IrisEntity;
+import gcewing.sg.entities.SGEntity;
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.guis.containers.DHDFuelContainer;
+import gcewing.sg.guis.containers.PowerContainer;
+import gcewing.sg.guis.containers.SGBaseContainer;
+import gcewing.sg.interfaces.IIntegration;
+import gcewing.sg.items.SGChevronUpgradeItem;
+import gcewing.sg.items.SGIrisUpgradeItem;
+import gcewing.sg.items.SGRingItem;
+import gcewing.sg.packets.SGChannel;
+import gcewing.sg.tileentities.SGBaseTE;
+import gcewing.sg.worldgen.FeatureGeneration;
+import gcewing.sg.worldgen.FeatureUnderDesertPyramid;
+import gcewing.sg.worldgen.NaquadahOreWorldGen;
+import gcewing.sg.worldgen.SGChunkData;
 
 @Mod(
         modid = Info.modID,
         name = Info.modName,
         version = Info.versionNumber,
-        dependencies = "after:OpenComputers",
+        dependencies = "after:OpenComputers;" + " required-after:gtnhlib@[0.2.4,);",
         acceptableRemoteVersions = Info.versionBounds)
 public class SGCraft extends BaseMod<SGCraftClient> {
 
@@ -91,12 +114,14 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
         FMLCommonHandler.instance().bus().register(this);
-        ic2Integration = integrateWithMod("IC2", "gcewing.sg.ic2.IC2Integration"); // [IC2]
-        rfIntegration = integrateWithMod("CoFHCore", "gcewing.sg.rf.RFIntegration"); // [RF]
-        txIntegration = integrateWithMod("ThermalExpansion", "gcewing.sg.TXIntegration"); // [TX]
-        ccIntegration = integrateWithMod("ComputerCraft", "gcewing.sg.cc.CCIntegration"); // [CC]
-        ocIntegration = (OCIntegration) integrateWithMod("OpenComputers", "gcewing.sg.oc.OCIntegration"); // [OC]
-        mystcraftIntegration = (MystcraftIntegration) integrateWithMod("Mystcraft", "gcewing.sg.MystcraftIntegration"); // [MYST]
+        ic2Integration = integrateWithMod("IC2", "gcewing.sg.compat.ic2.IC2Integration"); // [IC2]
+        rfIntegration = integrateWithMod("CoFHCore", "gcewing.sg.compat.rf.RFIntegration"); // [RF]
+        txIntegration = integrateWithMod("ThermalExpansion", "gcewing.sg.compat.TXIntegration"); // [TX]
+        ccIntegration = integrateWithMod("ComputerCraft", "gcewing.sg.compat.cc.CCIntegration"); // [CC]
+        ocIntegration = (OCIntegration) integrateWithMod("OpenComputers", "gcewing.sg.compat.oc.OCIntegration"); // [OC]
+        mystcraftIntegration = (MystcraftIntegration) integrateWithMod(
+                "Mystcraft",
+                "gcewing.sg.compat.MystcraftIntegration"); // [MYST]
         super.preInit(e);
     }
 
@@ -153,10 +178,6 @@ public class SGCraft extends BaseMod<SGCraftClient> {
         if (isModLoaded("IC2") || (isModLoaded("CoFHCore") && !isModLoaded("ThermalExpansion"))) {
             ic2Capacitor = newItem("ic2Capacitor");
         }
-    }
-
-    public static boolean isValidStargateUpgrade(Item item) {
-        return item == sgChevronUpgrade || item == sgIrisUpgrade;
     }
 
     @Override

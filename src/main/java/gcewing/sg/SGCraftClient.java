@@ -6,6 +6,18 @@
 
 package gcewing.sg;
 
+import gcewing.sg.entities.IrisEntity;
+import gcewing.sg.guis.DHDTE;
+import gcewing.sg.guis.SGBaseScreen;
+import gcewing.sg.guis.SGGui;
+import gcewing.sg.guis.screens.DHDFuelScreen;
+import gcewing.sg.guis.screens.DHDScreen;
+import gcewing.sg.guis.screens.PowerScreen;
+import gcewing.sg.renderers.DHDTERenderer;
+import gcewing.sg.renderers.IrisRenderer;
+import gcewing.sg.renderers.SGBaseTERenderer;
+import gcewing.sg.tileentities.SGBaseTE;
+
 public class SGCraftClient extends BaseModClient<SGCraft> {
 
     public SGCraftClient(SGCraft mod) {

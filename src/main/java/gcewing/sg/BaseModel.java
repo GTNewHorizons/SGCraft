@@ -13,29 +13,24 @@ import java.util.List;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
+import org.joml.Vector3d;
+
 import com.google.gson.Gson;
 
-import gcewing.sg.BaseModClient.IModel;
-import gcewing.sg.BaseModClient.IRenderTarget;
-import gcewing.sg.BaseModClient.ITexture;
+import gcewing.sg.interfaces.IModel;
+import gcewing.sg.interfaces.IRenderTarget;
+import gcewing.sg.interfaces.ITexture;
+import gcewing.sg.utils.Face;
+import gcewing.sg.utils.Trans3;
 
 public class BaseModel implements IModel {
 
-    private Vector3 p = new Vector3(0, 0, 0);
-    private Vector3 n = new Vector3(0, 0, 0);
+    private Vector3d p = new Vector3d();
+    private Vector3d n = new Vector3d();
 
     public double[] bounds;
     public Face[] faces;
     public double[][] boxes;
-
-    public static class Face {
-
-        int texture;
-        double[][] vertices;
-        int[][] triangles;
-        // Vector3 centroid;
-        Vector3 normal;
-    }
 
     static Gson gson = new Gson();
 
@@ -57,8 +52,10 @@ public class BaseModel implements IModel {
         for (Face face : faces) {
             double[][] p = face.vertices;
             int[] t = face.triangles[0];
-            // face.centroid = Vector3.average(p[t[0]], p[t[1]], p[t[2]]);
-            face.normal = Vector3.unit(Vector3.sub(p[t[1]], p[t[0]]).cross(Vector3.sub(p[t[2]], p[t[0]])));
+            Vector3d vector0 = new Vector3d(p[t[0]][0], p[t[0]][1], p[t[0]][2]);
+            Vector3d vector1 = new Vector3d(p[t[1]][0], p[t[1]][1], p[t[1]][2]);
+            Vector3d vector2 = new Vector3d(p[t[2]][0], p[t[2]][1], p[t[2]][2]);
+            face.normal = vector1.sub(vector0).normalize().cross(vector2.sub(vector0));
         }
     }
 
