@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import gcewing.sg.interfaces.ICustomRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -51,6 +50,7 @@ import gcewing.sg.SGCraft;
 import gcewing.sg.blocks.orientation.Orient1Way;
 import gcewing.sg.interfaces.IBlock;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
 import gcewing.sg.interfaces.IModel;
 import gcewing.sg.interfaces.IOrientationHandler;
 import gcewing.sg.interfaces.IProperty;
@@ -312,7 +312,7 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     @Override
-    public ICustomRenderer getCustomRenderer(){
+    public ICustomRenderer getCustomRenderer() {
         return RENDERER_INSTANCE;
     }
 

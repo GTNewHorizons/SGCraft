@@ -190,14 +190,8 @@ public class Trans3 {
         return dz < 0 ? EnumFacing.NORTH : EnumFacing.SOUTH;
     }
 
-    public static Vector3d[] directionVec = {
-            new Vector3d(0, -1, 0),
-            new Vector3d(0, 1, 0),
-            new Vector3d(0, 0, -1),
-            new Vector3d(0, 0, 1),
-            new Vector3d(-1, 0, 0),
-            new Vector3d(1, 0, 0)
-    };
+    public static Vector3d[] directionVec = { new Vector3d(0, -1, 0), new Vector3d(0, 1, 0), new Vector3d(0, 0, -1),
+            new Vector3d(0, 0, 1), new Vector3d(-1, 0, 0), new Vector3d(1, 0, 0) };
 
     public static Vector3d getDirectionVec(EnumFacing f) {
         return new Vector3d().add(directionVec[f.ordinal()]);

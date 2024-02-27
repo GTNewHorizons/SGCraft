@@ -173,7 +173,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
                                 block,
                                 block.getUnlocalizedName()));
                 if (!blockRenderers.containsKey(block)) {
-                    if (((IBlock) block).getCustomRenderer()!=null){
+                    if (((IBlock) block).getCustomRenderer() != null) {
                         addBlockRenderer((IBlock) block, ((IBlock) block).getCustomRenderer());
                     }
                 }
@@ -251,9 +251,9 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
      * @param id     The Gui ID Number
      * @param player The player viewing the Gui
      * @param world  The current world
-     * @param x    x coordinate in world
-     * @param y    y coordinate in world
-     * @param z    z coordinate in world
+     * @param x      x coordinate in world
+     * @param y      y coordinate in world
+     * @param z      z coordinate in world
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
     @Override

@@ -12,8 +12,6 @@ import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 import java.util.List;
 
-import gcewing.sg.interfaces.ICustomRenderer;
-import gcewing.sg.renderers.SGRingBlockRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,7 +27,9 @@ import org.joml.Vector3i;
 
 import gcewing.sg.SGCraft;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
 import gcewing.sg.interfaces.IProperty;
+import gcewing.sg.renderers.SGRingBlockRenderer;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.tileentities.SGRingTE;
 import gcewing.sg.utils.EnumWorldBlockLayer;
@@ -75,8 +75,8 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
     }
 
     @Override
-    public ICustomRenderer getCustomRenderer(){
-        if (RENDERER_INSTANCE == null){
+    public ICustomRenderer getCustomRenderer() {
+        if (RENDERER_INSTANCE == null) {
             RENDERER_INSTANCE = new SGRingBlockRenderer();
         }
         return RENDERER_INSTANCE;

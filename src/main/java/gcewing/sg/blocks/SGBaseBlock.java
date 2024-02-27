@@ -10,8 +10,6 @@ import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
-import gcewing.sg.interfaces.ICustomRenderer;
-import gcewing.sg.renderers.SGRingBlockRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,7 +30,9 @@ import gcewing.sg.SGState;
 import gcewing.sg.blocks.orientation.Orient4WaysByState;
 import gcewing.sg.guis.SGGui;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
 import gcewing.sg.interfaces.IOrientationHandler;
+import gcewing.sg.renderers.SGRingBlockRenderer;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.ModelSpec;
@@ -100,8 +100,8 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
     }
 
     @Override
-    public ICustomRenderer getCustomRenderer(){
-        if (RENDERER_INSTANCE == null){
+    public ICustomRenderer getCustomRenderer() {
+        if (RENDERER_INSTANCE == null) {
             RENDERER_INSTANCE = new SGRingBlockRenderer();
         }
         return RENDERER_INSTANCE;
@@ -251,7 +251,7 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
     }
 
     void unmergeRing(World world, Vector3i pos) {
-        for (int i = -2; i <= 2; i++){
+        for (int i = -2; i <= 2; i++) {
             for (int j = 0; j <= 4; j++) {
                 for (int k = -2; k <= 2; k++) {
                     unmergeRingBlock(world, new Vector3i(pos), new Vector3i(pos).add(i, j, k));
