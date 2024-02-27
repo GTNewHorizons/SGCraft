@@ -10,6 +10,8 @@ import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
 import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
+import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.renderers.SGRingBlockRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -95,6 +97,14 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
     @Override
     protected String getRendererClassName() {
         return "SGRingBlockRenderer";
+    }
+
+    @Override
+    public ICustomRenderer getCustomRenderer(){
+        if (RENDERER_INSTANCE == null){
+            RENDERER_INSTANCE = new SGRingBlockRenderer();
+        }
+        return RENDERER_INSTANCE;
     }
 
     @Override

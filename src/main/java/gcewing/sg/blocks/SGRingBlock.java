@@ -12,6 +12,8 @@ import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 import java.util.List;
 
+import gcewing.sg.interfaces.ICustomRenderer;
+import gcewing.sg.renderers.SGRingBlockRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -70,6 +72,14 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
     @Override
     protected String getRendererClassName() {
         return "SGRingBlockRenderer";
+    }
+
+    @Override
+    public ICustomRenderer getCustomRenderer(){
+        if (RENDERER_INSTANCE == null){
+            RENDERER_INSTANCE = new SGRingBlockRenderer();
+        }
+        return RENDERER_INSTANCE;
     }
 
     @Override

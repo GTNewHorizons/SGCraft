@@ -173,14 +173,8 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
                                 block,
                                 block.getUnlocalizedName()));
                 if (!blockRenderers.containsKey(block)) {
-                    String name = ((IBlock) block).getQualifiedRendererClassName();
-                    if (name != null) {
-                        try {
-                            Class cls = Class.forName(name);
-                            addBlockRenderer((IBlock) block, (ICustomRenderer) cls.newInstance());
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
+                    if (((IBlock) block).getCustomRenderer()!=null){
+                        addBlockRenderer((IBlock) block, ((IBlock) block).getCustomRenderer());
                     }
                 }
                 if (blockNeedsCustomRendering(block)) {

@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import gcewing.sg.interfaces.ICustomRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -63,6 +64,8 @@ import gcewing.sg.utils.Trans3;
 import gcewing.sg.utils.blockstates.BlockState;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
+
+    protected ICustomRenderer RENDERER_INSTANCE;
 
     public static boolean debugState = false;
 
@@ -304,14 +307,13 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         renderID = id;
     }
 
-    public String getQualifiedRendererClassName() {
-        String name = getRendererClassName();
-        if (name != null) name = "gcewing.sg.renderers." + name;
-        return name;
-    }
-
     protected String getRendererClassName() {
         return null;
+    }
+
+    @Override
+    public ICustomRenderer getCustomRenderer(){
+        return RENDERER_INSTANCE;
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, Vector3i pos) {
