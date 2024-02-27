@@ -193,7 +193,7 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
         if (SGBaseBlock.debugMerge) SGCraft.log
                 .debug(String.format("SGRingBlock.updateBaseBlocks: merged = %s, base = %s", te.isMerged, te.basePos));
         for (int i = -2; i <= 2; i++) for (int j = -4; j <= 0; j++) for (int k = -2; k <= 2; k++) {
-            Vector3i blockPos = pos.add(i, j, k);
+            Vector3i blockPos = new Vector3i(pos).add(i, j, k);
             Block block = getWorldBlock(world, blockPos);
             if (block instanceof SGBaseBlock) {
                 if (SGBaseBlock.debugMerge)

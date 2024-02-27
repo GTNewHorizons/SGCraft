@@ -251,8 +251,13 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
     }
 
     void unmergeRing(World world, Vector3i pos) {
-        for (int i = -2; i <= 2; i++)
-            for (int j = 0; j <= 4; j++) for (int k = -2; k <= 2; k++) unmergeRingBlock(world, pos, pos.add(i, j, k));
+        for (int i = -2; i <= 2; i++){
+            for (int j = 0; j <= 4; j++) {
+                for (int k = -2; k <= 2; k++) {
+                    unmergeRingBlock(world, new Vector3i(pos), new Vector3i(pos).add(i, j, k));
+                }
+            }
+        }
     }
 
     void unmergeRingBlock(World world, Vector3i pos, Vector3i ringPos) {
