@@ -254,13 +254,14 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
      * Returns a Container to be displayed to the user. On the client side, this needs to return an instance of
      * GuiScreen On the server side, this needs to return an instance of Container
      *
-     * @param ID     The Gui ID Number
+     * @param id     The Gui ID Number
      * @param player The player viewing the Gui
      * @param world  The current world
-     * @param pos    Position in world
+     * @param x    x coordinate in world
+     * @param y    y coordinate in world
+     * @param z    z coordinate in world
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
-
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         return base.getServerGuiElement(id, player, world, x, y, z);
