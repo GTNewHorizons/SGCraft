@@ -166,12 +166,12 @@ public class Trans3 {
     }
 
     public EnumFacing t(EnumFacing f) {
-        Vector3d v = v(Vec3i.getDirectionVec(f));
+        Vector3d v = v(Trans3.getDirectionVec(f));
         return facing(new Vector3d(v.x, v.y, v.z));
     }
 
     public EnumFacing it(EnumFacing f) {
-        Vector3d vectorFromFacing = Vec3i.getDirectionVec(f);
+        Vector3d vectorFromFacing = Trans3.getDirectionVec(f);
         return facing(iv(vectorFromFacing));
     }
 
@@ -188,6 +188,13 @@ public class Trans3 {
         if (ay >= ax && ay >= az) return dy < 0 ? EnumFacing.DOWN : EnumFacing.UP;
         else if (ax >= az) return dx > 0 ? EnumFacing.WEST : EnumFacing.EAST; // E/W are swapped between 1.7 and 1.8
         return dz < 0 ? EnumFacing.NORTH : EnumFacing.SOUTH;
+    }
+
+    public static Vector3d[] directionVec = { new Vector3d(0, -1, 0), new Vector3d(0, 1, 0), new Vector3d(0, 0, -1),
+            new Vector3d(0, 0, 1), new Vector3d(-1, 0, 0), new Vector3d(1, 0, 0) };
+
+    public static Vector3d getDirectionVec(EnumFacing f) {
+        return new Vector3d().add(directionVec[f.ordinal()]);
     }
 
 }

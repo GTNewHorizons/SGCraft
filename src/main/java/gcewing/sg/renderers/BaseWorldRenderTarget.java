@@ -20,7 +20,7 @@ import org.joml.Vector3d;
 import org.joml.Vector3i;
 
 import gcewing.sg.SGCraft;
-import gcewing.sg.utils.Vec3i;
+import gcewing.sg.utils.Trans3;
 
 public class BaseWorldRenderTarget extends BaseRenderTarget {
 
@@ -48,7 +48,7 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
     @Override
     public void setNormal(Vector3d n) {
         super.setNormal(n);
-        Vector3d vector = Vec3i.getDirectionVec(face);
+        Vector3d vector = Trans3.getDirectionVec(face);
 
         axisAlignedNormal = n.dot(vector) >= 0.99;
     }

@@ -12,7 +12,7 @@ public interface IBlock extends ITextureConsumer {
 
     void setRenderType(int id);
 
-    String getQualifiedRendererClassName();
+    ICustomRenderer getCustomRenderer();
 
     ModelSpec getModelSpec(IBlockState state);
 

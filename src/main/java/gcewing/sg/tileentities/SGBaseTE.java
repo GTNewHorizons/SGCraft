@@ -1072,7 +1072,7 @@ public class SGBaseTE extends BaseTileInventory {
             boolean destBlocked) {
         if (entity instanceof EntityPlayerMP) {
             EntityPlayerMP player = (EntityPlayerMP) entity;
-            Vector3d q = p.add(yawVector(a));
+            Vector3d q = yawVector(a).add(p);
             transferPlayerToDimension(player, dimension, q, a);
             return player;
         }

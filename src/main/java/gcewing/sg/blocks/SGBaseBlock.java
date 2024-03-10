@@ -30,7 +30,9 @@ import gcewing.sg.SGState;
 import gcewing.sg.blocks.orientation.Orient4WaysByState;
 import gcewing.sg.guis.SGGui;
 import gcewing.sg.interfaces.IBlockState;
+import gcewing.sg.interfaces.ICustomRenderer;
 import gcewing.sg.interfaces.IOrientationHandler;
+import gcewing.sg.renderers.SGRingBlockRenderer;
 import gcewing.sg.tileentities.SGBaseTE;
 import gcewing.sg.utils.EnumWorldBlockLayer;
 import gcewing.sg.utils.ModelSpec;
@@ -95,6 +97,14 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
     @Override
     protected String getRendererClassName() {
         return "SGRingBlockRenderer";
+    }
+
+    @Override
+    public ICustomRenderer getCustomRenderer() {
+        if (RENDERER_INSTANCE == null) {
+            RENDERER_INSTANCE = new SGRingBlockRenderer();
+        }
+        return RENDERER_INSTANCE;
     }
 
     @Override
@@ -241,8 +251,13 @@ public class SGBaseBlock extends SGBlock<SGBaseTE> {
     }
 
     void unmergeRing(World world, Vector3i pos) {
-        for (int i = -2; i <= 2; i++)
-            for (int j = 0; j <= 4; j++) for (int k = -2; k <= 2; k++) unmergeRingBlock(world, pos, pos.add(i, j, k));
+        for (int i = -2; i <= 2; i++) {
+            for (int j = 0; j <= 4; j++) {
+                for (int k = -2; k <= 2; k++) {
+                    unmergeRingBlock(world, new Vector3i(pos), new Vector3i(pos).add(i, j, k));
+                }
+            }
+        }
     }
 
     void unmergeRingBlock(World world, Vector3i pos, Vector3i ringPos) {
