@@ -25,6 +25,7 @@ import static org.lwjgl.opengl.GL11.glTexParameteri;
 
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -39,20 +40,21 @@ import gcewing.sg.SGCraft;
 import gcewing.sg.SGState;
 import gcewing.sg.guis.DHDTE;
 import gcewing.sg.guis.SGScreen;
+import gcewing.sg.guis.widgets.DHDCentreButton;
+import gcewing.sg.guis.widgets.DHDSymbolButton;
 import gcewing.sg.packets.SGChannel;
 import gcewing.sg.tileentities.SGBaseTE;
 
 public class DHDScreen extends SGScreen {
 
-    final static int dhdWidth = 320;
-    final static int dhdHeight = 120;
-    final static double dhdRadius1 = dhdWidth * 0.1;
-    final static double dhdRadius2 = dhdWidth * 0.275;
-    final static double dhdRadius3 = dhdWidth * 0.45;
+    final static int dhdWidth = 192;
+    final static int dhdHeight = 192;
 
+    final static int BaseId = 10;
+    ResourceLocation background = SGCraft.mod.resourceLocation("textures/gui/dhd/classic_dhd_background.png");
     World world;
     Vector3i pos;
-    int dhdTop, dhdCentreX, dhdCentreY;
+    public int centreX, centreY;
     int closingDelay = 0;
     int addressLength;
     DHDTE cte;
@@ -76,7 +78,7 @@ public class DHDScreen extends SGScreen {
         return null;
     }
 
-    String getEnteredAddress() {
+    public String getEnteredAddress() {
         return cte.enteredAddress;
     }
 
@@ -87,9 +89,89 @@ public class DHDScreen extends SGScreen {
 
     @Override
     public void initGui() {
-        dhdTop = height - dhdHeight;
-        dhdCentreX = width / 2;
-        dhdCentreY = dhdTop + dhdHeight / 2;
+        this.centreX = width / 2;
+        this.centreY = height / 2;
+
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 1, centreX - 88, centreY - 28, 0, 0, 28, 27, 1, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 2, centreX - 82, centreY - 53, 28, 0, 31, 31, 2, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 3, centreX - 69, centreY - 73, 59, 0, 34, 34, 3, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 4, centreX - 46, centreY - 85, 93, 0, 29, 31, 4, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 5, centreX - 21, centreY - 88, 122, 0, 28, 26, 5, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 6, centreX + 7, centreY - 87, 150, 0, 28, 29, 6, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 7, centreX + 26, centreY - 80, 178, 0, 33, 33, 7, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 8, centreX + 44, centreY - 64, 211, 0, 33, 33, 8, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 9, centreX + 56, centreY - 40, 0, 93, 30, 28, 9, true, 0, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 10, centreX + 62, centreY - 14, 30, 93, 26, 28, 10, true, 0, this));
+
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 11, centreX + 56, centreY + 12, 0, 0, 30, 28, 11, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 12, centreX + 44, centreY + 31, 30, 0, 33, 33, 12, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 13, centreX + 26, centreY + 47, 63, 0, 33, 33, 13, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 14, centreX + 7, centreY + 58, 96, 0, 28, 29, 14, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 15, centreX - 21, centreY + 62, 124, 0, 28, 26, 15, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 16, centreX - 46, centreY + 54, 152, 0, 29, 31, 16, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 17, centreX - 69, centreY + 39, 181, 0, 34, 34, 17, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 18, centreX - 82, centreY + 22, 215, 0, 31, 31, 18, true, 1, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 19, centreX - 88, centreY + 1, 0, 84, 28, 27, 19, true, 1, this));
+
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 20, centreX - 61, centreY - 19, 0, 0, 29, 18, 20, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 21, centreX - 57, centreY - 36, 29, 0, 30, 25, 21, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 22, centreX - 47, centreY - 49, 59, 0, 28, 29, 22, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 23, centreX - 32, centreY - 58, 87, 0, 22, 30, 23, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 24, centreX - 14, centreY - 60, 109, 0, 18, 29, 24, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 25, centreX + 3, centreY - 61, 127, 0, 20, 30, 25, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 26, centreX + 14, centreY - 55, 147, 0, 27, 30, 26, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 27, centreX + 23, centreY - 44, 174, 0, 30, 27, 27, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 28, centreX + 30, centreY - 28, 204, 0, 30, 22, 28, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 29, centreX + 33, centreY - 9, 0, 90, 28, 18, 29, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 30, centreX + 30, centreY + 6, 28, 90, 30, 22, 30, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 31, centreX + 23, centreY + 18, 58, 90, 30, 27, 31, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 32, centreX + 14, centreY + 25, 88, 90, 27, 30, 32, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 33, centreX + 3, centreY + 31, 115, 90, 20, 30, 33, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 34, centreX - 14, centreY + 32, 135, 90, 18, 29, 34, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 35, centreX - 32, centreY + 28, 153, 90, 22, 30, 35, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 36, centreX - 47, centreY + 21, 175, 90, 28, 29, 36, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 37, centreX - 57, centreY + 12, 203, 90, 30, 25, 37, false, 2, this));
+        this.buttonList
+                .add(new DHDSymbolButton(BaseId + 38, centreX - 61, centreY + 1, 0, 180, 29, 18, 38, false, 2, this));
+
+        this.buttonList.add(new DHDCentreButton(90, centreX - 54 / 2, centreY - 54 / 2, 54, 54, this));
     }
 
     @Override
@@ -104,14 +186,9 @@ public class DHDScreen extends SGScreen {
     }
 
     @Override
-    protected void mousePressed(int x, int y, int mouseButton) {
-        if (mouseButton != 0) {
-            return;
-        }
-
-        int i = findDHDButton(x, y);
-        if (i >= 0) {
-            dhdButtonPressed(i);
+    protected void actionPerformed(GuiButton button) {
+        if (button.enabled && button.id == 90) {
+            orangeButtonPressed(false);
         }
     }
 
@@ -119,33 +196,9 @@ public class DHDScreen extends SGScreen {
         closingDelay = ticks;
     }
 
-    int findDHDButton(int mx, int my) {
-        int x = -(mx - dhdCentreX);
-        int y = -(my - dhdCentreY);
-        // Check top half of orange dome
-        if (y > 0 && Math.hypot(x, y) <= dhdRadius1) return 0;
-        // Scale to circular coords and check rest of buttons
-        y = y * dhdWidth / dhdHeight;
-        double r = Math.hypot(x, y);
-        if (r > dhdRadius3) return -1;
-        if (r <= dhdRadius1) return 0;
-        double a = Math.toDegrees(Math.atan2(y, x));
-        if (a < 0) a += 360;
-        int i0, nb;
-        if (r > dhdRadius2) {
-            i0 = 1;
-            nb = 26;
-        } else {
-            i0 = 27;
-            nb = 11;
-        }
-        return i0 + (int) Math.floor(a * nb / 360);
-    }
-
-    void dhdButtonPressed(int i) {
+    public void dhdButtonPressed(int i) {
         buttonSound();
-        if (i == 0) orangeButtonPressed(false);
-        else if (i >= 37) backspace();
+        if (i >= 37) backspace();
         else enterCharacter(SGBaseTE.symbolToChar(i - 1));
     }
 
@@ -209,14 +262,14 @@ public class DHDScreen extends SGScreen {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
+    protected void drawGuiContainerBackgroundLayer(float var1, int mouseX, int mouseY) {
         SGBaseTE te = getStargateTE();
         glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT);
         glEnable(GL11.GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glDisable(GL_ALPHA_TEST);
         drawBackgroundImage();
-        drawOrangeButton();
+
         if (te != null) {
             if (te.state == SGState.Idle) {
                 drawEnteredSymbols();
@@ -227,39 +280,32 @@ public class DHDScreen extends SGScreen {
     }
 
     void drawBackgroundImage() {
-        bindTexture(SGCraft.mod.resourceLocation("textures/gui/dhd_gui.png"));
+        bindTexture(background);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        drawTexturedRect((width - dhdWidth) / 2, height - dhdHeight, dhdWidth, dhdHeight);
+        drawTexturedRect(
+                (double) (width - dhdWidth) / 2,
+                (double) (height - dhdHeight) / 2,
+                dhdWidth,
+                dhdHeight,
+                0,
+                0,
+                (double) dhdWidth / 256,
+                (double) dhdHeight / 256);
+
     }
 
-    void drawOrangeButton() {
-        bindTexture(SGCraft.mod.resourceLocation("textures/gui/dhd_centre.png"), 128, 64);
+    public boolean getConnected() {
         SGBaseTE te = getStargateTE();
-        boolean connected = te != null && te.isActive();
-        if (te == null || !te.isMerged) setColor(0.2, 0.2, 0.2);
-        else if (connected) setColor(1.0, 0.5, 0.0);
-        else setColor(0.5, 0.25, 0.0);
-        double rx = dhdWidth * 48 / 512.0;
-        double ry = dhdHeight * 48 / 256.0;
-        drawTexturedRect(dhdCentreX - rx, dhdCentreY - ry - 6, 2 * rx, 1.5 * ry, 64, 0, 64, 48);
-        resetColor();
-        if (connected) {
-            GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-            double d = 5;
-            drawTexturedRect(dhdCentreX - rx - d, dhdCentreY - ry - d - 6, 2 * (rx + d), ry + d, 0, 0, 64, 32);
-            drawTexturedRect(dhdCentreX - rx - d, dhdCentreY - 6, 2 * (rx + d), 0.5 * ry + d, 0, 32, 64, 32);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        }
+        return te != null && te.isActive();
     }
 
     void drawEnteredSymbols() {
-        drawAddressSymbols(width / 2, dhdTop - 80, getEnteredAddress());
+        drawAddressSymbols(centreX, 1, getEnteredAddress());
     }
 
     void drawEnteredString() {
         String address = SGAddressing.padAddress(getEnteredAddress(), "|", addressLength);
-        drawAddressString(width / 2, dhdTop - 20, address);
+        drawAddressString(centreX, height - 30, address);
     }
-
 }
