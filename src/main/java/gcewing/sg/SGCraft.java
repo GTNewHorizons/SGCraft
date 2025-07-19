@@ -100,6 +100,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     public static OCIntegration ocIntegration; // [OC]
     public static MystcraftIntegration mystcraftIntegration; // [MYST]
     public EventHandler handler;
+
     public SGCraft() {
         mod = this;
         blockDomain = itemDomain = "gcewing_sg";
