@@ -84,8 +84,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     public BaseModClient(MOD mod) {
         base = mod;
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
     }
 
     public void preInit(FMLPreInitializationEvent e) {
@@ -588,23 +587,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         return textureCaches[type].get(loc);
     }
 
-    @SubscribeEvent
-    public void onTextureStitchEventPre(TextureStitchEvent.Pre e) {
-        int type = e.map.getTextureType();
-        if (type >= 0 && type <= 1) {
-            TextureCache cache = textureCaches[type];
-            cache.clear();
-            switch (type) {
-                case 0:
-                    for (Block block : base.registeredBlocks) registerSprites(e.map, cache, block);
-                    break;
-                case 1:
-                    for (Item item : base.registeredItems) registerSprites(e.map, cache, item);
-                    break;
-            }
-        }
-    }
-
     protected void registerSprites(TextureMap reg, TextureCache cache, Object obj) {
         if (debugModelRegistration) SGCraft.log.debug(String.format("BaseModClient.registerSprites: for %s", obj));
 
@@ -630,6 +612,25 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
             IIcon icon = reg.registerIcon(loc.toString());
             ITexture texture = BaseTexture.fromSprite(icon);
             cache.put(loc, texture);
+        }
+    }
+
+    public class EventHandler {
+        @SubscribeEvent
+        public void onTextureStitchEventPre(TextureStitchEvent.Pre e) {
+            int type = e.map.getTextureType();
+            if (type >= 0 && type <= 1) {
+                TextureCache cache = textureCaches[type];
+                cache.clear();
+                switch (type) {
+                    case 0:
+                        for (Block block : base.registeredBlocks) registerSprites(e.map, cache, block);
+                        break;
+                    case 1:
+                        for (Item item : base.registeredItems) registerSprites(e.map, cache, item);
+                        break;
+                }
+            }
         }
     }
 }
