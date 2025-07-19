@@ -46,7 +46,6 @@ import org.joml.Vector3i;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -616,6 +615,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
     }
 
     public class EventHandler {
+
         @SubscribeEvent
         public void onTextureStitchEventPre(TextureStitchEvent.Pre e) {
             int type = e.map.getTextureType();

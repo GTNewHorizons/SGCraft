@@ -350,6 +350,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     }
 
     public class EventHandler {
+
         @SubscribeEvent
         public void onChunkLoad(ChunkDataEvent.Load e) {
             Chunk chunk = e.getChunk();
