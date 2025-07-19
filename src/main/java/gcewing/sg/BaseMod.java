@@ -135,8 +135,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
     }
 
     public void init(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLCommonHandler.instance().bus().register(this);
         if (client != null) client.init(e);
         for (BaseSubsystem sub : subsystems) if (sub != this) sub.init(e);
     }
