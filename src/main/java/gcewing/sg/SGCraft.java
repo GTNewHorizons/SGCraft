@@ -99,7 +99,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     public static BaseSubsystem ccIntegration; // [CC]
     public static OCIntegration ocIntegration; // [OC]
     public static MystcraftIntegration mystcraftIntegration; // [MYST]
-
+    public EventHandler handler;
     public SGCraft() {
         mod = this;
         blockDomain = itemDomain = "gcewing_sg";
@@ -109,11 +109,12 @@ public class SGCraft extends BaseMod<SGCraftClient> {
                 return Item.getItemFromBlock(sgBaseBlock);
             }
         };
+        handler = new EventHandler();
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
-        FMLCommonHandler.instance().bus().register(new EventHandler());
+        FMLCommonHandler.instance().bus().register(handler);
         ic2Integration = integrateWithMod("IC2", "gcewing.sg.compat.ic2.IC2Integration"); // [IC2]
         rfIntegration = integrateWithMod("CoFHCore", "gcewing.sg.compat.rf.RFIntegration"); // [RF]
         txIntegration = integrateWithMod("ThermalExpansion", "gcewing.sg.compat.TXIntegration"); // [TX]
@@ -154,7 +155,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
 
     @Override
     protected void registerOther() {
-        MinecraftForge.TERRAIN_GEN_BUS.register(this);
+        MinecraftForge.TERRAIN_GEN_BUS.register(handler);
     }
 
     @Override
