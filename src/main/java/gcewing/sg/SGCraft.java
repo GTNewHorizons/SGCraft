@@ -99,6 +99,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     public static BaseSubsystem ccIntegration; // [CC]
     public static OCIntegration ocIntegration; // [OC]
     public static MystcraftIntegration mystcraftIntegration; // [MYST]
+    private EventHandler handler;
 
     public SGCraft() {
         mod = this;
@@ -109,11 +110,13 @@ public class SGCraft extends BaseMod<SGCraftClient> {
                 return Item.getItemFromBlock(sgBaseBlock);
             }
         };
+        handler = new EventHandler();
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
-        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(handler);
+        FMLCommonHandler.instance().bus().register(handler);
         ic2Integration = integrateWithMod("IC2", "gcewing.sg.compat.ic2.IC2Integration"); // [IC2]
         rfIntegration = integrateWithMod("CoFHCore", "gcewing.sg.compat.rf.RFIntegration"); // [RF]
         txIntegration = integrateWithMod("ThermalExpansion", "gcewing.sg.compat.TXIntegration"); // [TX]
@@ -154,7 +157,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
 
     @Override
     protected void registerOther() {
-        MinecraftForge.TERRAIN_GEN_BUS.register(this);
+        MinecraftForge.TERRAIN_GEN_BUS.register(handler);
     }
 
     @Override
@@ -349,44 +352,47 @@ public class SGCraft extends BaseMod<SGCraftClient> {
         addEntity(IrisEntity.class, "Stargate Iris", SGEntity.Iris, 1000000, false);
     }
 
-    @SubscribeEvent
-    public void onChunkLoad(ChunkDataEvent.Load e) {
-        Chunk chunk = e.getChunk();
-        // SGCraft.log.trace("SGCraft.onChunkLoad: " + chunk.xPosition + "," + chunk.zPosition);
-        SGChunkData.onChunkLoad(e);
-    }
+    public class EventHandler {
 
-    @SubscribeEvent
-    public void onChunkSave(ChunkDataEvent.Save e) {
-        Chunk chunk = e.getChunk();
-        // SGCraft.log.trace("SGCraft.onChunkSave: " + chunk.xPosition + "," + chunk.zPosition);
-        SGChunkData.onChunkSave(e);
-    }
-
-    @SubscribeEvent
-    public void onInitMapGen(InitMapGenEvent e) {
-        FeatureGeneration.onInitMapGen(e);
-    }
-
-    @SubscribeEvent
-    public void onServerTick(TickEvent.ServerTickEvent e) {
-        if (e.phase == TickEvent.Phase.START) {
-            for (BaseSubsystem om : subsystems) if (om instanceof IIntegration) ((IIntegration) om).onServerTick();
-        }
-    }
-
-    @SubscribeEvent
-    public void onChunkUnload(ChunkEvent.Unload e) {
-        Chunk chunk = e.getChunk();
-        if (getChunkWorld(chunk).isRemote) {
-            return;
+        @SubscribeEvent
+        public void onChunkLoad(ChunkDataEvent.Load e) {
+            Chunk chunk = e.getChunk();
+            // SGCraft.log.trace("SGCraft.onChunkLoad: " + chunk.xPosition + "," + chunk.zPosition);
+            SGChunkData.onChunkLoad(e);
         }
 
-        // SGCraft.log.trace("SGCraft.onChunkUnload: " + chunk.xPosition + "," + chunk.zPosition);
-        for (Object obj : getChunkTileEntityMap(chunk).values()) {
-            if (obj instanceof SGBaseTE) {
-                SGBaseTE te = (SGBaseTE) obj;
-                te.disconnect();
+        @SubscribeEvent
+        public void onChunkSave(ChunkDataEvent.Save e) {
+            Chunk chunk = e.getChunk();
+            // SGCraft.log.trace("SGCraft.onChunkSave: " + chunk.xPosition + "," + chunk.zPosition);
+            SGChunkData.onChunkSave(e);
+        }
+
+        @SubscribeEvent
+        public void onInitMapGen(InitMapGenEvent e) {
+            FeatureGeneration.onInitMapGen(e);
+        }
+
+        @SubscribeEvent
+        public void onServerTick(TickEvent.ServerTickEvent e) {
+            if (e.phase == TickEvent.Phase.START) {
+                for (BaseSubsystem om : subsystems) if (om instanceof IIntegration) ((IIntegration) om).onServerTick();
+            }
+        }
+
+        @SubscribeEvent
+        public void onChunkUnload(ChunkEvent.Unload e) {
+            Chunk chunk = e.getChunk();
+            if (getChunkWorld(chunk).isRemote) {
+                return;
+            }
+
+            // SGCraft.log.trace("SGCraft.onChunkUnload: " + chunk.xPosition + "," + chunk.zPosition);
+            for (Object obj : getChunkTileEntityMap(chunk).values()) {
+                if (obj instanceof SGBaseTE) {
+                    SGBaseTE te = (SGBaseTE) obj;
+                    te.disconnect();
+                }
             }
         }
     }
