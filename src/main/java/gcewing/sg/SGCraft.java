@@ -99,7 +99,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     public static BaseSubsystem ccIntegration; // [CC]
     public static OCIntegration ocIntegration; // [OC]
     public static MystcraftIntegration mystcraftIntegration; // [MYST]
-    public EventHandler handler;
+    private EventHandler handler;
 
     public SGCraft() {
         mod = this;
@@ -115,6 +115,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
+        MinecraftForge.EVENT_BUS.register(handler);
         FMLCommonHandler.instance().bus().register(handler);
         ic2Integration = integrateWithMod("IC2", "gcewing.sg.compat.ic2.IC2Integration"); // [IC2]
         rfIntegration = integrateWithMod("CoFHCore", "gcewing.sg.compat.rf.RFIntegration"); // [RF]
