@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glEnable;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
@@ -49,10 +50,17 @@ public class PowerScreen extends Screen {
         int cx = xSize / 2;
         // textColor = 0x004c66;
         drawCenteredString(te.getScreenTitle(), cx, 8);
-        drawRightAlignedString(te.getUnitName(), 72, 28);
-        drawRightAlignedString(String.format("%.0f", te.energyBuffer), 121, 28);
-        drawRightAlignedString("Max", 72, 42);
-        drawRightAlignedString(String.format("%.0f", te.energyMax), 121, 42);
+        String unitName = te.getUnitName();
+        String unitFormat = unitName
+                .replace(net.minecraft.util.EnumChatFormatting.getTextWithoutFormattingCodes(unitName), "");
+        drawRightAlignedString(unitName, 72, 28);
+        drawRightAlignedString(unitFormat + String.format("%.0f", te.energyBuffer), 121, 28);
+
+        String maxValue = String.format("%.0f", te.energyMax);
+        drawRightAlignedString(
+                StatCollector.translateToLocalFormatted("gui.gcewing_sg:ic2PowerUnit.max", maxValue),
+                121,
+                42);
         drawPowerGauge();
     }
 

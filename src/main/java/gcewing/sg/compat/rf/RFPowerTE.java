@@ -8,6 +8,7 @@ package gcewing.sg.compat.rf;
 
 import static java.lang.Math.min;
 
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
@@ -24,12 +25,12 @@ public class RFPowerTE extends PowerTE implements IEnergyHandler {
 
     @Override
     public String getScreenTitle() {
-        return "RF SGPU";
+        return StatCollector.translateToLocal("gui.gcewing_sg:rfPowerUnit.title");
     }
 
     @Override
     public String getUnitName() {
-        return "RF";
+        return StatCollector.translateToLocal("gui.gcewing_sg:rfPowerUnit.rf");
     }
 
     // ------------------------- IEnergyConnection -------------------------

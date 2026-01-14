@@ -6,6 +6,8 @@
 
 package gcewing.sg.compat.oc;
 
+import net.minecraft.util.StatCollector;
+
 import gcewing.sg.guis.screens.Screen;
 
 public class OCInterfaceScreen extends Screen {
@@ -21,7 +23,7 @@ public class OCInterfaceScreen extends Screen {
     protected void drawBackgroundLayer() {
         bindTexture("gui/oc_sg_interface_gui.png", bgUSize, bgVSize);
         drawTexturedRect(0, 0, xSize, ySize, 0, 0);
-        drawCenteredString("OC Stargate Interface", xSize / 2, 5);
+        drawCenteredString(StatCollector.translateToLocal("gui.gcewing_sg:ocInterface.title"), xSize / 2, 5);
     }
 
 }
