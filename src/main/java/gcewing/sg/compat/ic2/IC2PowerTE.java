@@ -9,6 +9,7 @@ package gcewing.sg.compat.ic2;
 import static java.lang.Math.min;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -36,12 +37,12 @@ public class IC2PowerTE extends PowerTE implements IEnergySink, ITickable {
 
     @Override
     public String getScreenTitle() {
-        return "IC2 SGPU";
+        return StatCollector.translateToLocal("gui.gcewing_sg:ic2PowerUnit.title");
     }
 
     @Override
     public String getUnitName() {
-        return "EU";
+        return StatCollector.translateToLocal("gui.gcewing_sg:ic2PowerUnit.eu");
     }
 
     @Override
