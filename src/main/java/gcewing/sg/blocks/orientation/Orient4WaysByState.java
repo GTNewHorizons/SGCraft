@@ -55,13 +55,13 @@ public class Orient4WaysByState implements IOrientationHandler {
             case NORTH:
                 i = 0;
                 break;
-            case WEST:
+            case EAST:
                 i = 1;
                 break;
             case SOUTH:
                 i = 2;
                 break;
-            case EAST:
+            case WEST:
                 i = 3;
                 break;
             default:
