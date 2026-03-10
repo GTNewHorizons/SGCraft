@@ -7,6 +7,7 @@
 package gcewing.sg.guis;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
@@ -18,7 +19,7 @@ import gcewing.sg.tileentities.SGBaseTE;
 
 public class SGBaseScreen extends SGScreen {
 
-    static String screenTitle = "Stargate Address";
+    static String screenTitleKey = "gui.gcewing_sg:baseScreen.title";
     static final int guiWidth = 256;
     static final int guiHeight = 208; // 92;
 
@@ -53,9 +54,10 @@ public class SGBaseScreen extends SGScreen {
         int cx = xSize / 2;
         if (addressValid) drawAddressSymbols(cx, 22, address);
         setTextColor(0x004c66);
-        drawCenteredString(screenTitle, cx, 8);
+        drawCenteredString(StatCollector.translateToLocal(screenTitleKey), cx, 8);
         drawCenteredString(formattedAddress, cx, 72);
-        if (SGBaseTE.numCamouflageSlots > 0) drawCenteredString("Base Camouflage", 92, 92);
+        if (SGBaseTE.numCamouflageSlots > 0)
+            drawCenteredString(StatCollector.translateToLocal("gui.gcewing_sg:baseScreen.camo"), 92, 92);
     }
 
     void getAddress() {
