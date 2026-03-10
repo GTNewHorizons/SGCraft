@@ -7,6 +7,7 @@
 package gcewing.sg.guis.screens;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.joml.Vector3i;
@@ -19,7 +20,7 @@ import gcewing.sg.guis.containers.DHDFuelContainer;
 
 public class DHDFuelScreen extends SGScreen {
 
-    static String screenTitle = "Stargate Controller";
+    static String screenTitleKey = "gui.gcewing_sg:dhdFuel.title";
     public static final int guiWidth = 256;
     public static final int guiHeight = 208;
     static final int fuelGaugeWidth = 16;
@@ -49,8 +50,10 @@ public class DHDFuelScreen extends SGScreen {
         drawFuelGauge();
         int cx = xSize / 2;
         setTextColor(0x004c66);
-        drawCenteredString(screenTitle, cx, 8);
-        if (DHDTE.numFuelSlots > 0) drawString("Fuel", 150, 96);
+        drawCenteredString(StatCollector.translateToLocal(screenTitleKey), cx, 8);
+        if (DHDTE.numFuelSlots > 0) {
+            drawString(StatCollector.translateToLocal("gui.gcewing_sg:dhdFuel.fuel"), 150, 96);
+        }
     }
 
     void drawFuelGauge() {
