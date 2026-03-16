@@ -14,8 +14,8 @@ public class Product<T> implements Iterable<T[]> {
     }
 
     public Iterator<T[]> iterator() {
-        return this.iterables.length <= 0 ? Collections.singletonList(Cartesian.createArray(this.clazz, 0)).iterator()
-                : new ProductIterator(this.clazz, this.iterables);
+        return this.iterables.length == 0 ? Collections.singletonList(Cartesian.createArray(this.clazz, 0)).iterator()
+                : new ProductIterator<>(this.clazz, this.iterables);
     }
 
 }
