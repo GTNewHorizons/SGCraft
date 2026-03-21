@@ -8,7 +8,6 @@ package gcewing.sg.blocks;
 
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlock;
 import static gcewing.sg.utils.BaseBlockUtils.getWorldBlockState;
-import static gcewing.sg.utils.BaseBlockUtils.markWorldBlockForUpdate;
 
 import java.util.List;
 
@@ -155,8 +154,7 @@ public class SGRingBlock extends SGBlock<SGRingTE> {
         SGRingTE te = getRingTE(world, pos);
         te.isMerged = true;
         te.basePos = basePos;
-        // te.onInventoryChanged();
-        markWorldBlockForUpdate(world, pos);
+        te.markBlockChanged();
     }
 
     public void unmergeFrom(World world, Vector3i pos, Vector3i basePos) {
