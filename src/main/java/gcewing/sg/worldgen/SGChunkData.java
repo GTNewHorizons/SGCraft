@@ -13,6 +13,7 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.world.ChunkDataEvent;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import gcewing.sg.SGCraft;
 
 public class SGChunkData {
@@ -65,6 +66,23 @@ public class SGChunkData {
         Chunk chunk = e.getChunk();
         SGChunkData data = SGChunkData.forChunk(chunk);
         data.writeToNBT(e.getData());
+    }
+
+    public static class EventHandler {
+
+        @SubscribeEvent
+        public void onChunkLoad(ChunkDataEvent.Load e) {
+            // Chunk chunk = e.getChunk();
+            // SGCraft.log.trace("SGCraft.onChunkLoad: " + chunk.xPosition + "," + chunk.zPosition);
+            SGChunkData.onChunkLoad(e);
+        }
+
+        @SubscribeEvent
+        public void onChunkSave(ChunkDataEvent.Save e) {
+            // Chunk chunk = e.getChunk();
+            // SGCraft.log.trace("SGCraft.onChunkSave: " + chunk.xPosition + "," + chunk.zPosition);
+            SGChunkData.onChunkSave(e);
+        }
     }
 
 }
