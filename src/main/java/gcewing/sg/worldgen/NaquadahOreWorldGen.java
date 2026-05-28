@@ -108,7 +108,7 @@ public class NaquadahOreWorldGen implements IWorldGenerator {
     }
 
     void generateChunk() {
-        SGChunkData.forChunk(chunk).oresGenerated = true;
+        SGChunkData.setChunk(chunk, true);
         if (odds(genUnderLavaOdds)) {
             int n = random.nextInt(maxNodesUnderLava) + 1;
             for (int i = 0; i < n; i++) {

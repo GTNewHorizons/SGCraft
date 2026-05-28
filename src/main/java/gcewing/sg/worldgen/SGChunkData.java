@@ -18,71 +18,44 @@ import gcewing.sg.SGCraft;
 
 public class SGChunkData {
 
-    static boolean debug = false;
+    private static final boolean DEBUG = false;
+    private static final HashMap<ChunkCoordIntPair, Boolean> map = new HashMap<>();
 
-    static HashMap<ChunkCoordIntPair, SGChunkData> map = new HashMap<>();
-
-    public boolean oresGenerated;
-
-    public static SGChunkData forChunk(Chunk chunk) {
-        return forChunk(chunk, null);
-    }
-
-    public static SGChunkData forChunk(Chunk chunk, NBTTagCompound nbt) {
+    public static boolean forChunk(Chunk chunk, NBTTagCompound nbt) {
         ChunkCoordIntPair coords = new ChunkCoordIntPair(chunk.xPosition, chunk.zPosition);
-        SGChunkData data = map.get(coords);
-        if (data == null) {
-            data = new SGChunkData();
-            if (nbt != null) {
-                data.readFromNBT(nbt);
-            }
-            map.put(coords, data);
+        Boolean isPresent = map.get(coords);
+        if (isPresent == null) {
+            isPresent = nbt != null && nbt.getBoolean("gcewing.sg.oresGenerated");
+            map.put(coords, isPresent);
         }
-        return data;
+        return isPresent;
     }
 
-    public void readFromNBT(NBTTagCompound nbt) {
-        oresGenerated = nbt.getBoolean("gcewing.sg.oresGenerated");
-    }
-
-    public void writeToNBT(NBTTagCompound nbt) {
-        nbt.setBoolean("gcewing.sg.oresGenerated", oresGenerated);
-    }
-
-    public static void onChunkLoad(ChunkDataEvent.Load e) {
-        Chunk chunk = e.getChunk();
-        SGChunkData data = SGChunkData.forChunk(chunk, e.getData());
-        if (!data.oresGenerated && SGCraft.addOresToExistingWorlds) {
-            if (debug) SGCraft.log.debug(
-                    String.format(
-                            "SGChunkData.onChunkLoad: Adding ores to chunk (%d, %d)",
-                            chunk.xPosition,
-                            chunk.zPosition));
-            SGCraft.naquadahOreGenerator.regenerate(chunk);
-        }
-    }
-
-    public static void onChunkSave(ChunkDataEvent.Save e) {
-        Chunk chunk = e.getChunk();
-        SGChunkData data = SGChunkData.forChunk(chunk);
-        data.writeToNBT(e.getData());
+    public static void setChunk(Chunk chunk, boolean isPresent) {
+        ChunkCoordIntPair coords = new ChunkCoordIntPair(chunk.xPosition, chunk.zPosition);
+        map.put(coords, isPresent);
     }
 
     public static class EventHandler {
 
         @SubscribeEvent
         public void onChunkLoad(ChunkDataEvent.Load e) {
-            // Chunk chunk = e.getChunk();
-            // SGCraft.log.trace("SGCraft.onChunkLoad: " + chunk.xPosition + "," + chunk.zPosition);
-            SGChunkData.onChunkLoad(e);
+            final Chunk chunk = e.getChunk();
+            final boolean isPresent = SGChunkData.forChunk(chunk, e.getData());
+            if (!isPresent && SGCraft.addOresToExistingWorlds) {
+                if (DEBUG) SGCraft.log.debug(
+                        "SGChunkData.onChunkLoad: Adding ores to chunk ({}, {})",
+                        chunk.xPosition,
+                        chunk.zPosition);
+                SGCraft.naquadahOreGenerator.regenerate(chunk);
+            }
         }
 
         @SubscribeEvent
         public void onChunkSave(ChunkDataEvent.Save e) {
-            // Chunk chunk = e.getChunk();
-            // SGCraft.log.trace("SGCraft.onChunkSave: " + chunk.xPosition + "," + chunk.zPosition);
-            SGChunkData.onChunkSave(e);
+            final Chunk chunk = e.getChunk();
+            final boolean isPresent = forChunk(chunk, null);
+            e.getData().setBoolean("gcewing.sg.oresGenerated", isPresent);
         }
     }
-
 }
