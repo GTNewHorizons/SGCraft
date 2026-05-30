@@ -20,7 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 
 import org.apache.logging.log4j.LogManager;
@@ -337,6 +336,7 @@ public class SGCraft extends BaseMod<SGCraftClient> {
             SGCraft.log.debug("SGCraft: Registering NaquadahOreWorldGen");
             naquadahOreGenerator = new NaquadahOreWorldGen();
             GameRegistry.registerWorldGenerator(naquadahOreGenerator, 0);
+            MinecraftForge.EVENT_BUS.register(new SGChunkData.EventHandler());
         }
         registerStructureComponent(FeatureUnderDesertPyramid.class, "SGCraft:FeatureUnderDesertPyramid");
     }
@@ -353,20 +353,6 @@ public class SGCraft extends BaseMod<SGCraftClient> {
     }
 
     public class EventHandler {
-
-        @SubscribeEvent
-        public void onChunkLoad(ChunkDataEvent.Load e) {
-            Chunk chunk = e.getChunk();
-            // SGCraft.log.trace("SGCraft.onChunkLoad: " + chunk.xPosition + "," + chunk.zPosition);
-            SGChunkData.onChunkLoad(e);
-        }
-
-        @SubscribeEvent
-        public void onChunkSave(ChunkDataEvent.Save e) {
-            Chunk chunk = e.getChunk();
-            // SGCraft.log.trace("SGCraft.onChunkSave: " + chunk.xPosition + "," + chunk.zPosition);
-            SGChunkData.onChunkSave(e);
-        }
 
         @SubscribeEvent
         public void onInitMapGen(InitMapGenEvent e) {
