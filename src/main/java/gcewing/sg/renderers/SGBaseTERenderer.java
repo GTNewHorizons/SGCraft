@@ -106,11 +106,10 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
     static final ResourceLocation stargateTexture = SGCraft.mod.resourceLocation("textures/tileentity/stargate.png");
-    static final ResourceLocation eventHorizonTexture = SGCraft.mod
-            .resourceLocation("textures/tileentity/eventhorizon.png");
+    static final ResourceLocation eventHorizonTexture = SGCraft.mod.resourceLocation("textures/tileentity/eventhorizon.png");
     static final ResourceLocation irisTexture = SGCraft.mod.resourceLocation("textures/tileentity/iris.png");
 
-    // Display lists for the static geometry, compiled lazily on first render
+    // static data for display lists
     static final int LIST_OUTER_RING = 0;
     static final int LIST_INNER_RING = 1;
     static final int LIST_CHEVRON_BODY = 2;
@@ -147,18 +146,28 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
         if (SGBaseTE.transparency) {
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        } else glDisable(GL_BLEND);
+        } else {
+            glDisable(GL_BLEND);
+        }
+
         glEnable(GL_RESCALE_NORMAL);
         glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         glTranslated(x + 0.5, y + 2.5, z + 0.5);
+
         renderStargate(tesg, t);
+
         glDisable(GL_RESCALE_NORMAL);
         glPopMatrix();
     }
 
     void renderStargate(SGBaseTE te, float t) {
         BaseGLUtils.glMultMatrix(te.localToGlobalTransformation(new Vector3d()));
-        if (listBase < 0) compileDisplayLists();
+
+        if (listBase < 0) {
+            // lazily generate vertices once
+            compileDisplayLists();
+        }
+
         bindTexture(stargateTexture);
         glNormal3f(0, 1, 0);
         glCallList(listBase + LIST_OUTER_RING);
@@ -248,15 +257,21 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
     void chevron(boolean engaged) {
-        if (engaged) glTranslated(-chevronMotionDistance, 0, 0);
+        if (engaged) {
+            glTranslated(-chevronMotionDistance, 0, 0);
+        }
         glCallList(listBase + LIST_CHEVRON_BODY);
 
-        if (!engaged) glColor3d(0.5, 0.5, 0.5);
-        else {
+        // Draw light
+        if (engaged) {
             glDisable(GL_LIGHTING);
             setLightingDisabled(true);
+        } else {
+            glColor3d(0.5, 0.5, 0.5);
         }
         glCallList(listBase + LIST_CHEVRON_LIGHT);
+
+        // Reset state
         glColor3f(1, 1, 1);
         glEnable(GL_LIGHTING);
         setLightingDisabled(false);
