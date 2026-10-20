@@ -106,7 +106,8 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
     static final ResourceLocation stargateTexture = SGCraft.mod.resourceLocation("textures/tileentity/stargate.png");
-    static final ResourceLocation eventHorizonTexture = SGCraft.mod.resourceLocation("textures/tileentity/eventhorizon.png");
+    static final ResourceLocation eventHorizonTexture = SGCraft.mod
+            .resourceLocation("textures/tileentity/eventhorizon.png");
     static final ResourceLocation irisTexture = SGCraft.mod.resourceLocation("textures/tileentity/iris.png");
 
     // static data for display lists
