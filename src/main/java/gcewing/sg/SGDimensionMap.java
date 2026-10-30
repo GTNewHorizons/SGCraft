@@ -5,20 +5,27 @@
 // ------------------------------------------------------------------------------------------------
 package gcewing.sg;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
+import net.minecraft.world.storage.MapStorage;
 
 import com.google.common.primitives.Ints;
 
 import gcewing.sg.utils.BaseUtils;
 
 public class SGDimensionMap extends WorldSavedData {
+
+    private static final String NAME = "sgcraft_dimension_map";
+    private static final String LEGACY_NAME = "sgcraft:dimension_map";
 
     public static boolean debugDimensionMap = false;
 
@@ -31,7 +38,29 @@ public class SGDimensionMap extends WorldSavedData {
 
     public static SGDimensionMap get() {
         World world = BaseUtils.getWorldForDimension(0);
-        return BaseUtils.getWorldData(world, SGDimensionMap.class, "sgcraft:dimension_map");
+        MapStorage storage = world.perWorldStorage;
+        SGDimensionMap result = (SGDimensionMap) storage.loadData(SGDimensionMap.class, NAME);
+        if (result == null) {
+            result = new SGDimensionMap(NAME);
+            loadLegacy(world, result);
+            storage.setData(NAME, result);
+        }
+        return result;
+    }
+
+    // ':' is not a valid filename char on Windows, migrate data saved under the old name
+    private static void loadLegacy(World world, SGDimensionMap map) {
+        try {
+            File file = world.getSaveHandler().getMapFileFromName(LEGACY_NAME);
+            if (file == null || !file.exists()) return;
+            try (FileInputStream in = new FileInputStream(file)) {
+                map.readFromNBT(CompressedStreamTools.readCompressed(in).getCompoundTag("data"));
+            }
+            map.markDirty();
+            SGCraft.log.info("SGDimensionMap: Migrated " + LEGACY_NAME + " to " + NAME);
+        } catch (Exception e) {
+            SGCraft.log.error("SGDimensionMap: Failed to read legacy " + LEGACY_NAME, e);
+        }
     }
 
     public static Integer dimensionForIndex(int index) {
