@@ -8,6 +8,7 @@ package gcewing.sg.renderers;
 
 import static java.lang.Math.min;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_COMPILE;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_LIGHTING;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
@@ -18,6 +19,7 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLE_FAN;
 import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glCallList;
 import static org.lwjgl.opengl.GL11.glColor3d;
 import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glColor4f;
@@ -25,6 +27,8 @@ import static org.lwjgl.opengl.GL11.glDepthMask;
 import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glEndList;
+import static org.lwjgl.opengl.GL11.glNewList;
 import static org.lwjgl.opengl.GL11.glNormal3d;
 import static org.lwjgl.opengl.GL11.glNormal3f;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
@@ -36,8 +40,10 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 import static org.lwjgl.opengl.GL11.glVertex3d;
 import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
 
+import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 import org.joml.Vector3d;
 
@@ -99,7 +105,36 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
         }
     }
 
+    static final ResourceLocation stargateTexture = SGCraft.mod.resourceLocation("textures/tileentity/stargate.png");
+    static final ResourceLocation eventHorizonTexture = SGCraft.mod
+            .resourceLocation("textures/tileentity/eventhorizon.png");
+    static final ResourceLocation irisTexture = SGCraft.mod.resourceLocation("textures/tileentity/iris.png");
+
+    // static data for display lists
+    static final int LIST_OUTER_RING = 0;
+    static final int LIST_INNER_RING = 1;
+    static final int LIST_CHEVRON_BODY = 2;
+    static final int LIST_CHEVRON_LIGHT = 3;
+    static final int NUM_LISTS = 4;
+    static int listBase = -1;
+
     double u0, v0;
+
+    void compileDisplayLists() {
+        listBase = GLAllocation.generateDisplayLists(NUM_LISTS);
+        glNewList(listBase + LIST_OUTER_RING, GL_COMPILE);
+        renderRing(ringMidRadius - ringOverlap, ringOuterRadius, RingType.Outer, ringZOffset);
+        glEndList();
+        glNewList(listBase + LIST_INNER_RING, GL_COMPILE);
+        renderRing(ringInnerRadius, ringMidRadius, RingType.Inner, 0);
+        glEndList();
+        glNewList(listBase + LIST_CHEVRON_BODY, GL_COMPILE);
+        chevronBody();
+        glEndList();
+        glNewList(listBase + LIST_CHEVRON_LIGHT, GL_COMPILE);
+        chevronLight();
+        glEndList();
+    }
 
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float t, int destroyStage) {
@@ -112,20 +147,31 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
         if (SGBaseTE.transparency) {
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        } else glDisable(GL_BLEND);
+        } else {
+            glDisable(GL_BLEND);
+        }
+
         glEnable(GL_RESCALE_NORMAL);
         glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         glTranslated(x + 0.5, y + 2.5, z + 0.5);
+
         renderStargate(tesg, t);
+
         glDisable(GL_RESCALE_NORMAL);
         glPopMatrix();
     }
 
     void renderStargate(SGBaseTE te, float t) {
         BaseGLUtils.glMultMatrix(te.localToGlobalTransformation(new Vector3d()));
-        bindTexture(SGCraft.mod.resourceLocation("textures/tileentity/stargate.png"));
+
+        if (listBase < 0) {
+            // lazily generate vertices once
+            compileDisplayLists();
+        }
+
+        bindTexture(stargateTexture);
         glNormal3f(0, 1, 0);
-        renderRing(ringMidRadius - ringOverlap, ringOuterRadius, RingType.Outer, ringZOffset);
+        glCallList(listBase + LIST_OUTER_RING);
         renderInnerRing(te, t);
         renderChevrons(te);
         if (te.hasIrisUpgrade) renderIris(te, t);
@@ -135,7 +181,7 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     void renderInnerRing(SGBaseTE te, float t) {
         glPushMatrix();
         glRotatef((float) (te.interpolatedRingAngle(t) + SGBaseTE.ringSymbolAngle / 2), 0, 0, 1);
-        renderRing(ringInnerRadius, ringMidRadius, RingType.Inner, 0);
+        glCallList(listBase + LIST_INNER_RING);
         glPopMatrix();
     }
 
@@ -212,6 +258,27 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
     void chevron(boolean engaged) {
+        if (engaged) {
+            glTranslated(-chevronMotionDistance, 0, 0);
+        }
+        glCallList(listBase + LIST_CHEVRON_BODY);
+
+        // Draw light
+        if (engaged) {
+            glDisable(GL_LIGHTING);
+            setLightingDisabled(true);
+        } else {
+            glColor3d(0.5, 0.5, 0.5);
+        }
+        glCallList(listBase + LIST_CHEVRON_LIGHT);
+
+        // Reset state
+        glColor3f(1, 1, 1);
+        glEnable(GL_LIGHTING);
+        setLightingDisabled(false);
+    }
+
+    void chevronBody() {
         double r1 = chevronInnerRadius;
         double r2 = chevronOuterRadius;
         double z2 = ringDepth / 2;
@@ -221,7 +288,6 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
         double x1 = r1, y1 = chevronWidth / 4;
         double x2 = r2, y2 = chevronWidth / 2;
 
-        if (engaged) glTranslated(-chevronMotionDistance, 0, 0);
         glBegin(GL_QUADS);
 
         selectTile(chevronTextureIndex);
@@ -281,13 +347,19 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
         vertex(x2, y2, z2, 16, 0);
 
         glEnd();
+    }
+
+    void chevronLight() {
+        double r1 = chevronInnerRadius;
+        double r2 = chevronOuterRadius;
+        double z2 = ringDepth / 2;
+        double z1 = z2 + chevronDepth;
+        double w1 = chevronBorderWidth;
+        double w2 = w1 * 1.25;
+        double x1 = r1, y1 = chevronWidth / 4;
+        double x2 = r2, y2 = chevronWidth / 2;
 
         selectTile(chevronLitTextureIndex);
-        if (!engaged) glColor3d(0.5, 0.5, 0.5);
-        else {
-            glDisable(GL_LIGHTING);
-            setLightingDisabled(true);
-        }
         glBegin(GL_QUADS);
 
         // Face 4
@@ -307,10 +379,7 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
         vertex(x2, -y2 + w2, z1, 16, 4);
         vertex(x2, -y2 + w2, z2, 16, 0);
 
-        glColor3f(1, 1, 1);
         glEnd();
-        glEnable(GL_LIGHTING);
-        setLightingDisabled(false);
     }
 
     protected static void setLightingDisabled(boolean off) {
@@ -321,7 +390,7 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
     void renderEventHorizon(SGBaseTE te) {
-        bindTexture(SGCraft.mod.resourceLocation("textures/tileentity/eventhorizon.png"));
+        bindTexture(eventHorizonTexture);
         glDisable(GL_CULL_FACE);
         glNormal3d(0, 0, 1);
         double[][] grid = te.getEventHorizonGrid()[0];
@@ -358,7 +427,7 @@ public class SGBaseTERenderer extends BaseTileEntityRenderer {
     }
 
     void renderIris(SGBaseTE te, double t) {
-        bindTexture(SGCraft.mod.resourceLocation("textures/tileentity/iris.png"));
+        bindTexture(irisTexture);
         double a = 0.8 * te.getIrisAperture(t);
         for (int i = 0; i < numIrisBlades; i++) {
             glPushMatrix();

@@ -16,8 +16,10 @@ import org.lwjgl.opengl.GL11;
 
 public class BaseGLUtils {
 
+    private static final FloatBuffer matrixBuffer = GLAllocation.createDirectFloatBuffer(16);
+
     public static void glMultMatrix(Trans3 t) {
-        FloatBuffer b = GLAllocation.createDirectFloatBuffer(16);
+        FloatBuffer b = matrixBuffer;
         Vector3d v = t.offset;
         Matrix3d m = t.rotation;
 
