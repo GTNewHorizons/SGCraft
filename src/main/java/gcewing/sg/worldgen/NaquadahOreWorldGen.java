@@ -55,7 +55,12 @@ public class NaquadahOreWorldGen implements IWorldGenerator {
         x0 = chunkX * 16;
         z0 = chunkZ * 16;
         chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
-        generateChunk();
+        try {
+            generateChunk();
+        } finally {
+            this.world = null;
+            this.chunk = null;
+        }
     }
 
     public void regenerate(Chunk chunk) {
@@ -70,7 +75,12 @@ public class NaquadahOreWorldGen implements IWorldGenerator {
         random.setSeed((xSeed * chunkX + zSeed * chunkZ) ^ worldSeed);
         x0 = chunkX * 16;
         z0 = chunkZ * 16;
-        generateChunk();
+        try {
+            generateChunk();
+        } finally {
+            this.world = null;
+            this.chunk = null;
+        }
     }
 
     Block getBlock(int x, int y, int z) {
